@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="恒星系统的引力势分为两部分，遥远恒星的背景平滑势，以及恒星附近的深势阱。平滑势的积累作用对恒星的运动起主导作用。3.2.1 强近交会强交会：两颗恒星碰撞，完全改变速度，$\delta V\sim V$假设恒星质量都为$m$，以平均速度$V$运动。两颗恒星相距无穷远时势能为零，靠近到势能的改变和动能相当时，">
+<meta name="keywords" content="天文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二体弛豫">
+<meta property="og:url" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;two-body-relaxtion&#x2F;index.html">
+<meta property="og:site_name" content="Y&#39;s Personal Blog">
+<meta property="og:description" content="恒星系统的引力势分为两部分，遥远恒星的背景平滑势，以及恒星附近的深势阱。平滑势的积累作用对恒星的运动起主导作用。3.2.1 强近交会强交会：两颗恒星碰撞，完全改变速度，$\delta V\sim V$假设恒星质量都为$m$，以平均速度$V$运动。两颗恒星相距无穷远时势能为零，靠近到势能的改变和动能相当时，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-24T10:40:38.235Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://li-mz.github.io/2019/11/16/two-body-relaxtion/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>二体弛豫 | Y's Personal Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Y's Personal Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://li-mz.github.io/2019/11/16/two-body-relaxtion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Y">
+      <meta itemprop="description" content="宇宙的最不可理解之处在于它是可以被理解的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Y's Personal Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          二体弛豫
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-16 00:00:00" itemprop="dateCreated datePublished" datetime="2019-11-16T00:00:00+08:00">2019-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-24 18:40:38" itemprop="dateModified" datetime="2019-11-24T18:40:38+08:00">2019-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/%E6%98%9F%E7%B3%BB%E5%A4%A9%E6%96%87%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">星系天文学笔记</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>恒星系统的引力势分为两部分，遥远恒星的背景平滑势，以及恒星附近的深势阱。平滑势的积累作用对恒星的运动起主导作用。</p><h3 id="3-2-1-强近交会"><a href="#3-2-1-强近交会" class="headerlink" title="3.2.1 强近交会"></a>3.2.1 强近交会</h3><p>强交会：两颗恒星碰撞，完全改变速度，$\delta V\sim V$</p><p>假设恒星质量都为$m$，以平均速度$V$运动。两颗恒星相距无穷远时势能为零，靠近到势能的改变和动能相当时，</p><a id="more"></a>
+
+
+<script type="math/tex; mode=display">\frac{Gm^2}{r}\geq\frac{mV^2}{2}，即r\leq r_s=\frac{2Gm}{V^2}</script><p>$r_s$称为<strong>强交会半径</strong>。</p>
+<p>现在计算在时间$t$内发生强交会的平均次数：恒星的速度$V$，会与距离在$r_s$内的其他恒星发生强交会。可能与恒星发生强交会的其他恒星构成一个半径$r_s$，长$Vt$的圆柱。即，交会次数$N$为：</p>
+<script type="math/tex; mode=display">N=n\cdot Vt\cdot\pi r_s^2</script><p>发生一次交会的时间称为<strong>强交会时间</strong>：</p>
+<script type="math/tex; mode=display">t_s=\frac{1}{n\pi Vr_s^2}=\frac{V^3}{4\pi G^2m^2n}</script><p>太阳附近，$t_s\sim 10^6Gyr$，远超过宇宙年龄。这说明强近交会并不常见，一般发生在球状星团中。</p>
+<h2 id="3-2-2-弱远交会"><a href="#3-2-2-弱远交会" class="headerlink" title="3.2.2 弱远交会"></a>3.2.2 弱远交会</h2><p>交会时恒星<strong>几乎不会偏离轨道</strong>，脉冲近似$\delta V/V\ll 1$。</p>
+<p>质量$M$的恒星，距质量$m$的恒星垂直距离为$b$。在轨道上积分，垂直方向速度改变：</p>
+<script type="math/tex; mode=display">\Delta V_{\perp}=\frac{1}{M}\int_{-\infty}^{\infty}\frac{GmMb}{(b^2+V^2t^2)^{3/2}}dt=\frac{2Gm}{bV}</script><p>运动方向上速度改变为严格零。</p>
+<p>由于动量守恒，$m$在垂直方向上速度也将偏移$2GM/bV$。要使脉冲近似成立，则应有：</p>
+<script type="math/tex; mode=display">b\gg\frac{2G(m+M)}{V}</script><p>恒星和一个恒星系统发生弱交会，若脉冲近似成立，可以看做每个恒星独自贡献一部分$\Delta V_{\perp}$。恒星获得的垂直速度即为：</p>
+<script type="math/tex; mode=display">\left<V_{\perp}^2\right>=\int_{b_{min}}^{b_{max}}nVt\left(\frac{2Gm}{bV}\right)^2db=\frac{8\pi Gm^2nt}{V}\ln\frac{b_{max}}{b_{min}}</script><p>一般$b_{min}$取$r_s$，$b_{max}$取恒星系统的尺度。</p>
+<p>弛豫时标：原有的有规律的运动被散射至完全随机的，即失去原有运动状态，$\left<v_{\perp}^2\right>=V^2$，需要的时间为<strong>弛豫时间</strong>：</v_{\perp}^2\right></p>
+<script type="math/tex; mode=display">t_{relax}=\frac{V^3}{8\pi Gm^2n\ln \Lambda}=\frac{t_s}{2\ln \Lambda}</script><p>在$N$颗恒星组成的尺度为$R$的孤立星团中，穿越时间$t_{cross}\sim R/V$。恒星间的平均距离约为$R/2$，由位力定理，</p>
+<script type="math/tex; mode=display">NmV^2\sim\frac{G(Nm)^2}{R}</script><p>从而$\Lambda=\frac{R}{r_S}\sim\frac{N}{2}$，另外$N\sim\frac{4}{3}\pi R^3n$，则有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{t_{relax}}{t_{cross}}&=\frac{1}{n\pi Vr_s^2\cdot 2\ln\Lambda}\frac{V}{R}
+\\\\ &\sim\frac{1}{(3/4)N(r_s^2/R^2)2\ln\Lambda}\sim\frac{N}{6\ln\Lambda}
+\end{aligned}</script><p>这说明$N$越大，两种时标的差距更明显。在球状星团中，$t_{relax}$远大于$t_{cross}$，而在疏散星团中二者相当。</p>
+<p>直接碰撞时标$t_{direct}$，恒星半径$r_d$，直接碰撞的散射截面为$\sigma=\pi r_d^2$。</p>
+<h2 id="3-2-3-二体弛豫效应"><a href="#3-2-3-二体弛豫效应" class="headerlink" title="3.2.3 二体弛豫效应"></a>3.2.3 二体弛豫效应</h2><p>弛豫：处于平衡态的系统受扰动后在一段时间后形成新的平衡态。只在平滑势中运动的恒星的能量不变（若平滑势不随时间改变），而恒星间发生二体弛豫（碰撞）会交换能量和动量。经过足够的二体弛豫过程之后，恒星的动能趋向于均分状态，速度分布倾向于<strong>Maxwell分布</strong>。</p>
+<p>Maxwell分布的形式：</p>
+<script type="math/tex; mode=display">f_M(\mathcal{E})\propto \exp(\frac{-\mathcal{E}}{k_BT})</script><p>在速度$v$和$v+dv$间的恒星分数为$fdv=f_M(\mathcal{E})4\pi v^2dv$。</p>
+<p>对质量$m$的恒星，有：</p>
+<script type="math/tex; mode=display">\frac{1}{2}m\left<\mathbf v^2\right>=\frac{3}{2}k_BT</script><p>质量较大的恒星运动的较慢。</p>
+<p>服从Maxwell分布的恒星系统，将会有一部分速度较大的恒星，以至于达到体系的逃逸速度$v_e$，将会逃离星团。这一过程称为<strong>恒星蒸发</strong>。</p>
+<p>恒星脱离恒星系统的另一种方式是通过强近交会赋予一颗恒星超过逃逸速度的速度，称为<strong>恒星抛射</strong>。由于强近交会的概率很小，恒星抛射相对恒星蒸发可以忽略。一部分恒星逃逸后，经过弛豫时间，重新形成Maxwell分布，一部分恒星将进一步逃逸。星团由于恒星蒸发失去大部分恒星的时标称为<strong>逃逸时间</strong>$t_{evap}$。球状星团的逃逸时间超过宇宙年龄，疏散星团的逃逸时间则只有几十亿年，这也就是为什么没有年龄太大的疏散星团，也说明球状星团不会由疏散星团演化而来。</p>
+<p>在星团中，还会由二体弛豫效应产生<strong>质量层化</strong>效应：质量大的恒星聚集在中心，而小质量恒星分布在外围（空间层化）。在速度空间上，也有大质量恒星速度弥散较小，而小质量恒星速度弥散较大（速度层化）。这是由于二体弛豫导致不同质量恒星的能均分，大质量恒星的速度更小，沉入低轨道，而小质量恒星获得更大速度，在高轨道。</p>
+<p>另一个效应是<strong>核塌缩</strong>。晚期的球状星团中大质量恒星演化结束，只剩质量相近的小质量恒星。在较低轨道上的恒星速度较大，更容易失去能量，而高轨道上恒星更容易获得能量。从而经过弛豫过程，将有一部分恒星获得能量被排出核，进入外围扩展的晕，而核进一步塌缩，变得更加致密。在$t\sim12-20t_{relax}$核半径收缩至零，这一过程即为核塌缩。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A9%E6%96%87/" rel="tag"># 天文</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/22/Docker-Jupyter/" rel="next" title="在Docker上部署Jupyter Notebook">
+                  <i class="fa fa-chevron-left"></i> 在Docker上部署Jupyter Notebook
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/16/motion-under-gravity/" rel="prev" title="Motion under gravity">
+                  Motion under gravity <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-强近交会"><span class="nav-number">1.</span> <span class="nav-text">3.2.1 强近交会</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-2-弱远交会"><span class="nav-number"></span> <span class="nav-text">3.2.2 弱远交会</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-3-二体弛豫效应"><span class="nav-number"></span> <span class="nav-text">3.2.3 二体弛豫效应</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Y"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Y</p>
+  <div class="site-description" itemprop="description">宇宙的最不可理解之处在于它是可以被理解的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Y</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22077,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'a689a162e6bf693f09ef',
+      clientSecret: '6aeddd5e4a137ac862f95f4b014c96912779357f',
+      repo: 'Li-mz.github.io',
+      owner: 'Li-mz',
+      admin: ['Li-mz'],
+      id: 'aa996aaabc35468200ace8bf02a0dc46',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+</body>
+</html>

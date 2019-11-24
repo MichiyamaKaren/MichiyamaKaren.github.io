@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="NoneBotNoneBot是基于酷Q的一个QQ机器人框架，其基本介绍和使用参见其文档。本段旨在补充一些目前在文档中还未点出的有关NoneBot的一些性质，它们在NG词语游戏插件的编写中是不可或缺的。当QQ机器人接收到一条消息时，它会首先对消息进行parsing，解析出当前消息对应的指令和参数。随后，它会根据上下文——即CoolQ HTTP API中事件上报的数据的字典，包含消息和发信人的信息——">
+<meta name="keywords" content="技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于NoneBot的NG词语游戏插件">
+<meta property="og:url" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2019&#x2F;07&#x2F;07&#x2F;NGWordGame-with-Nonebot&#x2F;index.html">
+<meta property="og:site_name" content="Y&#39;s Personal Blog">
+<meta property="og:description" content="NoneBotNoneBot是基于酷Q的一个QQ机器人框架，其基本介绍和使用参见其文档。本段旨在补充一些目前在文档中还未点出的有关NoneBot的一些性质，它们在NG词语游戏插件的编写中是不可或缺的。当QQ机器人接收到一条消息时，它会首先对消息进行parsing，解析出当前消息对应的指令和参数。随后，它会根据上下文——即CoolQ HTTP API中事件上报的数据的字典，包含消息和发信人的信息——">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-24T10:40:12.825Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://li-mz.github.io/2019/07/07/NGWordGame-with-Nonebot/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>基于NoneBot的NG词语游戏插件 | Y's Personal Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Y's Personal Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://li-mz.github.io/2019/07/07/NGWordGame-with-Nonebot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Y">
+      <meta itemprop="description" content="宇宙的最不可理解之处在于它是可以被理解的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Y's Personal Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于NoneBot的NG词语游戏插件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-07 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-07T00:00:00+08:00">2019-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-24 18:40:12" itemprop="dateModified" datetime="2019-11-24T18:40:12+08:00">2019-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="NoneBot"><a href="#NoneBot" class="headerlink" title="NoneBot"></a>NoneBot</h1><p>NoneBot是基于酷Q的一个QQ机器人框架，其基本介绍和使用参见其<a href="https://none.rclab.tk/" target="_blank" rel="noopener">文档</a>。本段旨在补充一些目前在文档中还未点出的有关NoneBot的一些性质，它们在NG词语游戏插件的编写中是不可或缺的。</p><p>当QQ机器人接收到一条消息时，它会首先对消息进行parsing，解析出当前消息对应的指令和参数。随后，它会根据上下文——即CoolQ HTTP API中<a href="https://cqhttp.cc/docs/4.10/#/Post?id=%E4%BA%8B%E4%BB%B6%E5%88%97%E8%A1%A8" target="_blank" rel="noopener">事件上报</a>的数据的字典，包含消息和发信人的信息——中的发信人信息来生成一个唯一的<code>ctx_id</code>。这个<code>ctx_id</code>的作用是标记仍然有效的命令会话（如果是开始运行收到的第一条信息，那么不会有可用的命令会话）。NoneBot指令是要通过命令会话和用户进行数据交互的，而这里的意义是让同一个命令会话只响应<code>ctx_id</code>相同的用户的输入，也就是说两个<code>ctx_id</code>不同的用户调用同一条指令的时候会产生两个命令会话分别根据他们输入的参数实现不同的操作，从而不会互相干扰。默认的<code>ctx_id</code>是对每个用户都唯一的，这显然不利于我们的实现——我们希望多个玩家参与到这个游戏中来，要让同一个命令会话响应所有人发出的消息。好在<code>ctx_id</code>的实现中允许我们给来自同一个群的所有消息赋予同样的<code>ctx_id</code>，这需要更改NoneBot的源码，将<code>nonebot\command\__init__.py</code>中525行：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ctx_id</span> = context_id(ctx)</span><br></pre></td></tr></table></figure><br>改为：<br><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx_id = context<span class="constructor">_id(<span class="params">ctx</span>, <span class="params">mode</span>='<span class="params">group</span>')</span></span><br></pre></td></tr></table></figure></p><a id="more"></a>
+
+<p>如果没有获取到可用的命令会话，并且解析出来了消息对应的指令的话，那么将会创建一个新的命令会话，然后进行处理。至此我们可以暂时离开消息的解析和响应的层面，在处理命令的层面考虑机器人的逻辑。对于一个已经被正确识别的命令，命令会话将首先进入参数解析器arg_parser（没有arg_parser也可以），然后进入命令处理器。命令会话类<code>CommandSession</code>有几个属性和方法是需要用到的：</p>
+<ul>
+<li><code>_current_arg_text</code>：字符串，消息的纯文本部分，剥离了命令部分并去除前部分空格的消息。</li>
+<li><code>_state</code>：字典类型，用于存储希望被保存在会话中的局部变量。</li>
+<li><code>send()</code>：文档中也介绍过，向当前会话发送信息（群聊或私聊），传入参数<code>at_sender=True</code>可以在消息首部@发送者。</li>
+<li><code>pause()</code>：正常情况下一个命令会话会在响应完用户的一条消息后就过期，但是如果调用了<code>pause()</code>，那么命令会话会被暂停并保存，接收到下一条<code>ctx_id</code>相同的用户（考虑到上一段的修改，即同一个群里的下一条消息或来自同一个人的私聊）时会被重新运行一次。</li>
+<li><code>is_first_run</code>：bool类型，如果会话是第一次创建则为<code>True</code>，如果会话是调用了<code>pause()</code>被重新调起则为<code>False</code>。</li>
+</ul>
+<p>以上并非是<code>CommandSession</code>提供的全部接口，但是对于实现NG词语游戏的插件已足够。</p>
+<h1 id="NG词语游戏的实现——基于状态机"><a href="#NG词语游戏的实现——基于状态机" class="headerlink" title="NG词语游戏的实现——基于状态机"></a>NG词语游戏的实现——基于状态机</h1><p>NG词语游戏出自漫画《辉夜大小姐想让我告白～天才们的恋爱头脑战～》，规则为参与游戏的每个玩家为下一个玩家设置一个“NG词”， 设置完成后展示之，使得除了自己的每个人都能知道自己的NG词。之后所有玩家进行自由谈话，说出自己的NG词的玩家判负，退场。直至只剩一人为止。</p>
+<p>在命令会话中实现的操作是获取局部变量-&gt;根据不同的游戏进程对用户的输入做出不同的回应-&gt;写回局部变量，这很容易让人联想到状态机，而NoneBot提供的框架对于基于状态机的实现也是很方便的，因此我们选择基于状态机实现。</p>
+<p>游戏状态有三个：玩家注册状态，设置NG词状态，监听状态；状态跳转也是很简单的注册-&gt;设置-&gt;监听。状态机类<code>NGFSM</code>存储所有玩家的列表，每次接收发送者的信息，然后把要向会话（也就是群聊）和要私聊发送的信息返回给命令处理器。最初我是把状态机直接写在了命令处理器里，相比之下这样的交互方式可能有些冗杂，但是我认为游戏的逻辑实现部分和更底层一些的通信部分不应该耦合在一起，因此花了一些功夫把状态机单独提出来一个类。下面介绍每个状态的实现：</p>
+<h2 id="注册状态"><a href="#注册状态" class="headerlink" title="注册状态"></a>注册状态</h2><p>这个状态要接收每个希望参与游戏的玩家的注册，规定注册需要回复<code>sign in</code>，响应所有注册的用户的回复，根据上下文记录QQ号、称呼信息，加到玩家列表中。另外，响应超级用户发出的<code>stop signing</code>，结束注册，状态跳到设置状态。</p>
+<h2 id="设置状态"><a href="#设置状态" class="headerlink" title="设置状态"></a>设置状态</h2><p>由于游戏性质，设置NG词不能在群聊中进行，而是要和机器人私聊设置。这为实现带来了一个难点——设置NG词的命令会话和游戏的会话不能是一个，那么它们之间该如何通信呢？我的解决方法是单独设置另外一个命令用于设置NG词，这个命令响应玩家的设置之后将NG词存储在磁盘上，当所有玩家设置完成之后，由超级用户手动在群聊中发出<code>check</code>指令通知游戏会话已设置完毕，然后从磁盘中读取设置的数据，从而实现IO的同步。当然，这一过程可以足够用户友好——只要在进入设置状态前把群聊的号码记录到磁盘上，就可以在所有玩家都设置完之后主动调用CQHTTP API，自动向群聊里发送一条提醒消息。<code>check</code>之后，读出所有玩家的NG词，进入监听状态。</p>
+<h2 id="监听状态"><a href="#监听状态" class="headerlink" title="监听状态"></a>监听状态</h2><p>这一状态中只需要监听玩家发出的消息，只要有人的消息中包含自己的NG词就向会话发出提醒信息，判该玩家出局，然后继续监听，直至只剩一人。</p>
+<p>项目代码已上传到GitHub仓库<a href="https://github.com/Li-mz/NGWordGame" target="_blank" rel="noopener">NGWordGame</a>。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/05/28/EM-field-equation/" rel="next" title="电磁场方程">
+                  <i class="fa fa-chevron-left"></i> 电磁场方程
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/10/22/Docker-Jupyter/" rel="prev" title="在Docker上部署Jupyter Notebook">
+                  在Docker上部署Jupyter Notebook <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NoneBot"><span class="nav-number">1.</span> <span class="nav-text">NoneBot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NG词语游戏的实现——基于状态机"><span class="nav-number">2.</span> <span class="nav-text">NG词语游戏的实现——基于状态机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注册状态"><span class="nav-number">2.1.</span> <span class="nav-text">注册状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置状态"><span class="nav-number">2.2.</span> <span class="nav-text">设置状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监听状态"><span class="nav-number">2.3.</span> <span class="nav-text">监听状态</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Y"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Y</p>
+  <div class="site-description" itemprop="description">宇宙的最不可理解之处在于它是可以被理解的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Y</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22077,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'a689a162e6bf693f09ef',
+      clientSecret: '6aeddd5e4a137ac862f95f4b014c96912779357f',
+      repo: 'Li-mz.github.io',
+      owner: 'Li-mz',
+      admin: ['Li-mz'],
+      id: '92da8bff0208e3578816e9d679663271',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+</body>
+</html>
