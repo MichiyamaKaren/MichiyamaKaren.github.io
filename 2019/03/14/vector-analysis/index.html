@@ -50,15 +50,15 @@
   };
 </script>
 
-  <meta name="description" content="1.矢量分析1.1 矢量的定义这里不深究矢量的定义，我们只考虑三维欧式空间$\mathbb{R}^3$中的矢量，它们有三个分量，并且分量在任意的坐标变换下与$\mathbf r=(x,y,z)$具有相同的变换形式。形象地说，“矢量应该像矢量那样变换”。关于微分几何中介绍的矢量和张量的定义参见这篇文章。">
+  <meta name="description" content="电动力学笔记（一）">
 <meta name="keywords" content="物理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="矢量和分析和曲线坐标系">
 <meta property="og:url" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2019&#x2F;03&#x2F;14&#x2F;vector-analysis&#x2F;index.html">
 <meta property="og:site_name" content="Y&#39;s Personal Blog">
-<meta property="og:description" content="1.矢量分析1.1 矢量的定义这里不深究矢量的定义，我们只考虑三维欧式空间$\mathbb{R}^3$中的矢量，它们有三个分量，并且分量在任意的坐标变换下与$\mathbf r=(x,y,z)$具有相同的变换形式。形象地说，“矢量应该像矢量那样变换”。关于微分几何中介绍的矢量和张量的定义参见这篇文章。">
+<meta property="og:description" content="电动力学笔记（一）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-24T10:40:45.563Z">
+<meta property="og:updated_time" content="2019-11-25T04:51:12.139Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://li-mz.github.io/2019/03/14/vector-analysis/">
@@ -214,7 +214,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-24 18:40:45" itemprop="dateModified" datetime="2019-11-24T18:40:45+08:00">2019-11-24</time>
+                <time title="修改时间：2019-11-25 12:51:12" itemprop="dateModified" datetime="2019-11-25T12:51:12+08:00">2019-11-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -235,6 +235,7 @@
             </span>
 
           
+            <div class="post-description">电动力学笔记（一）</div>
 
         </div>
       </header>
@@ -262,7 +263,7 @@
 <li>矢量$\mathbf A$用分量表示为$\mathbf A=A_i\mathbf e_i$</li>
 <li>从而矢量的点乘为：<script type="math/tex; mode=display">
 \mathbf A \cdot \mathbf B = A_i\mathbf e_i \cdot B_j \mathbf e_j = A_iB_j \mathbf e_i \cdot \mathbf e_j = A_iB_j \delta_{ij} = A_iB_i</script>其中克罗内克$\delta$函数定义为：<script type="math/tex; mode=display">
-\delta_{ij} = \left\\{
+\delta_{ij} = \left\{
 \begin{matrix}
 1 & (i=j)
 \\0 & (i \neq j)
@@ -271,7 +272,7 @@
 <li>根据定义，矢量叉乘：<script type="math/tex; mode=display">
 \mathbf A \times \mathbf B = (A_2B_3-A_3B_2)\mathbf e_1 + (A_3B_1-A_1B_3)\mathbf e_2 + (A_1B_2-A_2B_1)\mathbf e_3</script>可以使用爱因斯坦求和标记记为：<script type="math/tex; mode=display">
 \mathbf A \times \mathbf B = \epsilon_{ijk}A_jB_k\mathbf e_i</script>其中Levi-Civita符号$\epsilon_{ijk}$定义为：<script type="math/tex; mode=display">
-\epsilon_{ijk}=\left\\{
+\epsilon_{ijk}=\left\{
 \begin{matrix}
 1 & (i,j,k)\mbox{是}(1,2,3)\mbox{的偶置换}
 \\-1 & (i,j,k)\mbox{是}(1,2,3)\mbox{的奇置换}
