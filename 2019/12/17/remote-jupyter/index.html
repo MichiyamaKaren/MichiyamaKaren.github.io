@@ -50,20 +50,20 @@
   };
 </script>
 
-  <meta name="description" content="星系天文学课程笔记 2.3">
-<meta name="keywords" content="天文">
+  <meta name="description" content="配置Anaconda和Jupyter Notebook在清华tuna镜像上下载anaconda的linux安装包，上传到服务器上，使用命令：1bash Anaconda3-2019.10-Linux-x86_64.sh安装。（直接用.&#x2F;xxx.sh运行会提示权限不够，但并不需要sudo）安装过程中可以指定安装到的目录，我这里指定了~&#x2F;data&#x2F;。">
+<meta name="keywords" content="技术">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Galactic Rotation">
-<meta property="og:url" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;galactic-rotation&#x2F;galactic-rotation&#x2F;index.html">
+<meta property="og:title" content="在Linux远程服务器上搭建Jupyter服务">
+<meta property="og:url" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2019&#x2F;12&#x2F;17&#x2F;remote-jupyter&#x2F;index.html">
 <meta property="og:site_name" content="Y&#39;s Personal Blog">
-<meta property="og:description" content="星系天文学课程笔记 2.3">
+<meta property="og:description" content="配置Anaconda和Jupyter Notebook在清华tuna镜像上下载anaconda的linux安装包，上传到服务器上，使用命令：1bash Anaconda3-2019.10-Linux-x86_64.sh安装。（直接用.&#x2F;xxx.sh运行会提示权限不够，但并不需要sudo）安装过程中可以指定安装到的目录，我这里指定了~&#x2F;data&#x2F;。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;galactic-rotation&#x2F;galactic-rotation&#x2F;star-rotation.png">
-<meta property="og:updated_time" content="2019-11-25T04:53:40.177Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2019&#x2F;12&#x2F;17&#x2F;remote-jupyter&#x2F;forwarding-with-Xshell.png">
+<meta property="og:updated_time" content="2019-12-17T11:34:41.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;galactic-rotation&#x2F;galactic-rotation&#x2F;star-rotation.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2019&#x2F;12&#x2F;17&#x2F;remote-jupyter&#x2F;forwarding-with-Xshell.png">
 
-<link rel="canonical" href="http://li-mz.github.io/2019/11/16/galactic-rotation/galactic-rotation/">
+<link rel="canonical" href="http://li-mz.github.io/2019/12/17/remote-jupyter/">
 
 
 <script id="page-configurations">
@@ -77,7 +77,7 @@
   };
 </script>
 
-  <title>Galactic Rotation | Y's Personal Blog</title>
+  <title>在Linux远程服务器上搭建Jupyter服务 | Y's Personal Blog</title>
   
 
 
@@ -186,7 +186,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://li-mz.github.io/2019/11/16/galactic-rotation/galactic-rotation/">
+    <link itemprop="mainEntityOfPage" href="http://li-mz.github.io/2019/12/17/remote-jupyter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/kirin.gif">
@@ -199,7 +199,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Galactic Rotation
+          在Linux远程服务器上搭建Jupyter服务
         </h1>
 
         <div class="post-meta">
@@ -208,36 +208,23 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-11-16 00:00:00" itemprop="dateCreated datePublished" datetime="2019-11-16T00:00:00+08:00">2019-11-16</time>
+              <time title="创建时间：2019-12-17 14:07:43 / 修改时间：19:34:41" itemprop="dateCreated datePublished" datetime="2019-12-17T14:07:43+08:00">2019-12-17</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-25 12:53:40" itemprop="dateModified" datetime="2019-11-25T12:53:40+08:00">2019-11-25</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">笔记</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AC%94%E8%AE%B0/%E6%98%9F%E7%B3%BB%E5%A4%A9%E6%96%87%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">星系天文学笔记</span>
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
             </span>
 
           
-            <div class="post-description">星系天文学课程笔记 2.3</div>
 
         </div>
       </header>
@@ -248,35 +235,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>银盘上恒星、气体在绕银心近圆轨道上运动，线速度$V$为常数，角速度：$\omega=\frac{V}{R}$。内部的角速度、线速度大于外部。——银河系的<strong>较差自转</strong>（不同部位角速度不相同）。<br>较差自转导致星系的悬臂越缠越紧，需要用密度波理论解释。</p><h3 id="2-3-1-测量银河系转动曲线"><a href="#2-3-1-测量银河系转动曲线" class="headerlink" title="2.3.1 测量银河系转动曲线"></a>2.3.1 测量银河系转动曲线</h3><p>假设是圆轨道。太阳在半径$R_0$处，速度$V_0$，半径$R$处恒星速度$V$，银经为$l$。可观测的量是恒星的视向速度$V_r$。<br><img src="star-rotation.png" alt="相对转动"></p><a id="more"></a>
-
-<script type="math/tex; mode=display">
-\left\{\begin{matrix}
-V_r = V\cos\alpha - V_0\sin l
-\\ \frac{\sin l}{R} = \frac{\sin(90^{\circ}+\alpha)}{R_0}
-\end{matrix}\right.  \qquad\Rightarrow
-\\ V_r = R_0 \sin l \left(\frac{V}{R} - \frac{V_0}{R_0}\right) = R_0 \sin l (\omega - \omega_0)</script><p>固定$l$：</p>
-<ul>
-<li>在固定的$l$线上，从银心引垂线的恒星A：$R$最小，有最快的$\omega$，从而最大的$V_r$。</li>
-<li>关于A对称的BC有相同的$R$，且$R<r_0$。从而$\omega>\omega_0$，$V_r&gt;0$（红移）。BC具有相同的红移。</r_0$。从而$\omega></li>
-<li>对$R&gt;R_0$，蓝移。</li>
-</ul>
-<p>$l$改变：</p>
-<ul>
-<li>$0&lt;l&lt;90^{\circ}$</li>
-<li>$90^{\circ}<l<180^{\circ}$，总有$r>R_0,\sin l&gt;0$，从而$V_r&lt;0$</l<180^{\circ}$，总有$r></li>
-<li>$180^{\circ}<l<270^{\circ}$，总有$r>R_0,\sin l<0$，从而$v_r>0$</0$，从而$v_r></l<270^{\circ}$，总有$r></li>
-<li>$270^{\circ}&lt;l&lt;360^{\circ}$，同第一象限类似</li>
-</ul>
-<p>转动曲线：星系转动速度和转动轴距离的关系，由星系质量分布决定。盘星和星团的辐射受尘埃消光影响大，测量氢21cm辐射。用切点法测量发射气体的距离：固定$l$，$V_r$最大对应的气体离银心最近，可定出$R$：$R=R_0\sin l$。<br>切点法只对$R&lt;R_0$有效，对太阳系之外，采用球状星团分光视差法测距。</p>
-<h3 id="2-3-2-银河系中的暗物质"><a href="#2-3-2-银河系中的暗物质" class="headerlink" title="2.3.2 银河系中的暗物质"></a>2.3.2 银河系中的暗物质</h3><p>转动曲线表明，距银心足够远时，旋转速度不再下降，而是趋于平坦——表明<strong>暗物质</strong>的存在。</p>
-<p>暗物质分为重子暗物质和非重子暗物质。重子暗物质参与电磁相互作用，但是缺乏发光条件。称为晕族大质量天体(MACHO)，黑洞、中子星、衰老白矮星、褐矮星、恒星。MACHO质量占比非常小。非重子暗物质不参与电磁相互作用，统称为弱相互作用大质量粒子(WIMP)。热暗物质——快中微子，冷暗物质——大质量、速度慢，温暗物质——温度介于二者之间。</p>
-<p>暗物质探测：</p>
-<ul>
-<li>模拟宇宙大爆炸</li>
-<li>直接探测：暗物质粒子与普通原子核碰撞产生信号</li>
-<li>间接探测：空间中暗物质粒子相互碰撞产生信号</li>
-</ul>
+        <h2 id="配置Anaconda和Jupyter-Notebook"><a href="#配置Anaconda和Jupyter-Notebook" class="headerlink" title="配置Anaconda和Jupyter Notebook"></a>配置Anaconda和Jupyter Notebook</h2><p>在清华tuna镜像上下载anaconda的linux安装包，上传到服务器上，使用命令：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">bash</span> <span class="selector-tag">Anaconda3-2019</span><span class="selector-class">.10-Linux-x86_64</span><span class="selector-class">.sh</span></span><br></pre></td></tr></table></figure><br>安装。（直接用<code>./xxx.sh</code>运行会提示权限不够，但并不需要sudo）安装过程中可以指定安装到的目录，我这里指定了<code>~/data/</code>。</p><a id="more"></a>
+<p>安装完成后还不能找到conda指令，需要运行命令：<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> 'export PATH=<span class="string">"~/data/anaconda3/bin:$PATH"</span>' &gt;&gt; ~<span class="string">/.bashrc</span></span><br><span class="line">source ~<span class="string">/.bashrc</span></span><br></pre></td></tr></table></figure><br>添加环境变量。现在就可以使用conda命令了。</p>
+<p>接下来需要配置Jupyter，生成并修改配置文件，其方法和<a href="https://li-mz.github.io/2019/10/22/Docker-Jupyter/">这篇博客</a>的第二节一样（不必用pip安装jupyter，anaconda已经含了）。</p>
+<h2 id="在本地浏览器访问"><a href="#在本地浏览器访问" class="headerlink" title="在本地浏览器访问"></a>在本地浏览器访问</h2><p>配置好环境之后，让jupyter服务器端在后台运行：<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup jupyter notebook --allow-root &gt; ~/<span class="keyword">data</span>/jupyter.<span class="built_in">log</span></span><br></pre></td></tr></table></figure><br>如果不输出日志，可以设置为：<br><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup jupyter notebook &gt;/dev/<span class="literal">null</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></table></figure><br><code>nohup</code>表示不挂起，在退出ssh终端后也会继续运行。jupyter的终端输出会记录在<code>~/data/jupyter.log</code>中。</p>
+<p>在本地运行：<br><code>ssh -N -f -L localhost:8888:localhost:8888 -p 22 remote_user@remote_host</code><br>把远程主机的8888端口映射到本地的8888端口。在浏览器中输入<code>localhost:8888</code>即可访问jupyter服务。</p>
+<p>（也可以使用Xshell，连接上远程主机后在文件-属性中选择类别：连接-SSH-隧道，如下添加：<br><img src="forwarding-with-Xshell.png" alt><br>之后在浏览器中输入<code>localhost:8888</code>访问。</p>
 
     </div>
 
@@ -286,7 +250,7 @@ V_r = V\cos\alpha - V_0\sin l
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%A4%A9%E6%96%87/" rel="tag"># 天文</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
           </div>
 
         
@@ -298,17 +262,14 @@ V_r = V\cos\alpha - V_0\sin l
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/11/16/interstellar-gas/interstellar-gas/" rel="next" title="星际气体">
-                  <i class="fa fa-chevron-left"></i> 星际气体
+                <a href="/2019/11/28/position-and-momentum/" rel="next" title="位置算符、动量算符和波函数">
+                  <i class="fa fa-chevron-left"></i> 位置算符、动量算符和波函数
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/16/two-body-relaxtion/" rel="prev" title="二体弛豫">
-                  二体弛豫 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
@@ -348,7 +309,7 @@ V_r = V\cos\alpha - V_0\sin l
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-测量银河系转动曲线"><span class="nav-number">1.</span> <span class="nav-text">2.3.1 测量银河系转动曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-银河系中的暗物质"><span class="nav-number">2.</span> <span class="nav-text">2.3.2 银河系中的暗物质</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Anaconda和Jupyter-Notebook"><span class="nav-number">1.</span> <span class="nav-text">配置Anaconda和Jupyter Notebook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在本地浏览器访问"><span class="nav-number">2.</span> <span class="nav-text">在本地浏览器访问</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -364,7 +325,7 @@ V_r = V\cos\alpha - V_0\sin l
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -492,54 +453,6 @@ V_r = V\cos\alpha - V_0\sin l
   
 
   
-      
-<script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
 
   
 
@@ -553,7 +466,7 @@ V_r = V\cos\alpha - V_0\sin l
       repo: 'Li-mz.github.io',
       owner: 'Li-mz',
       admin: ['Li-mz'],
-      id: '5c1246035fd00647b117de75b8727600',
+      id: '15238c81320af2be1c9c201ce7249ff6',
         language: 'zh-CN',
       distractionFreeMode: 'true'
     });
