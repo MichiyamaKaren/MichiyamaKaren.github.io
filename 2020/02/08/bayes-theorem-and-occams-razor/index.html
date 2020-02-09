@@ -50,18 +50,22 @@
   };
 </script>
 
-  <meta name="description" content="$n$维向量$\mathbf x=(x_1,\cdots,x_n)$满足正态分布，概率密度函数为：p(\mathbf x) = \frac{1}{(2\pi)^{n&#x2F;2}|\mathbf C|^{1&#x2F;2}} \exp\left( -\frac 1 2 \sum_{i,j=1}^n (x_i-m_i)C^{-1}\_{ij}(x_j-m_j) \right)">
-<meta name="keywords" content="数学">
+  <meta name="description" content="主体内容是贝叶斯定理和奥卡姆剃刀的缝合怪科普">
+<meta name="keywords" content="科普">
 <meta property="og:type" content="article">
-<meta property="og:title" content="n维正态分布的似然估计">
-<meta property="og:url" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2019&#x2F;04&#x2F;08&#x2F;n-dim-normal-distribution&#x2F;index.html">
+<meta property="og:title" content="为什么我们不该相信阴谋论">
+<meta property="og:url" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2020&#x2F;02&#x2F;08&#x2F;bayes-theorem-and-occams-razor&#x2F;index.html">
 <meta property="og:site_name" content="Y&#39;s Personal Blog">
-<meta property="og:description" content="$n$维向量$\mathbf x=(x_1,\cdots,x_n)$满足正态分布，概率密度函数为：p(\mathbf x) = \frac{1}{(2\pi)^{n&#x2F;2}|\mathbf C|^{1&#x2F;2}} \exp\left( -\frac 1 2 \sum_{i,j=1}^n (x_i-m_i)C^{-1}\_{ij}(x_j-m_j) \right)">
+<meta property="og:description" content="主体内容是贝叶斯定理和奥卡姆剃刀的缝合怪科普">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-25T04:51:12.129Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2020&#x2F;02&#x2F;08&#x2F;bayes-theorem-and-occams-razor&#x2F;Flat_earth.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2020&#x2F;02&#x2F;08&#x2F;bayes-theorem-and-occams-razor&#x2F;polaris_altitude.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2020&#x2F;02&#x2F;08&#x2F;bayes-theorem-and-occams-razor&#x2F;flat_earth_polaris.png">
+<meta property="og:updated_time" content="2020-02-09T05:58:51.199Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;li-mz.github.io&#x2F;2020&#x2F;02&#x2F;08&#x2F;bayes-theorem-and-occams-razor&#x2F;Flat_earth.png">
 
-<link rel="canonical" href="http://li-mz.github.io/2019/04/08/n-dim-normal-distribution/">
+<link rel="canonical" href="http://li-mz.github.io/2020/02/08/bayes-theorem-and-occams-razor/">
 
 
 <script id="page-configurations">
@@ -75,7 +79,7 @@
   };
 </script>
 
-  <title>n维正态分布的似然估计 | Y's Personal Blog</title>
+  <title>为什么我们不该相信阴谋论 | Y's Personal Blog</title>
   
 
 
@@ -184,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://li-mz.github.io/2019/04/08/n-dim-normal-distribution/">
+    <link itemprop="mainEntityOfPage" href="http://li-mz.github.io/2020/02/08/bayes-theorem-and-occams-razor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/kirin.gif">
@@ -197,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          n维正态分布的似然估计
+          为什么我们不该相信阴谋论
         </h1>
 
         <div class="post-meta">
@@ -207,17 +211,29 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-04-08 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-08T00:00:00+08:00">2019-04-08</time>
+              <time title="创建时间：2020-02-08 11:38:08" itemprop="dateCreated datePublished" datetime="2020-02-08T11:38:08+08:00">2020-02-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-25 12:51:12" itemprop="dateModified" datetime="2019-11-25T12:51:12+08:00">2019-11-25</time>
+                <time title="修改时间：2020-02-09 13:58:51" itemprop="dateModified" datetime="2020-02-09T13:58:51+08:00">2020-02-09</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A7%91%E6%99%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">科普</span>
+                  </a>
+                </span>
+            </span>
 
           
+            <div class="post-description">主体内容是贝叶斯定理和奥卡姆剃刀的缝合怪科普</div>
 
         </div>
       </header>
@@ -228,36 +244,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>$n$维向量$\mathbf x=(x_1,\cdots,x_n)$满足正态分布，概率密度函数为：</p><script type="math/tex; mode=display">p(\mathbf x) = \frac{1}{(2\pi)^{n/2}|\mathbf C|^{1/2}} \exp\left( -\frac 1 2 \sum_{i,j=1}^n (x_i-m_i)C^{-1}\_{ij}(x_j-m_j) \right)</script><a id="more"></a>
-<p>均值$\mathbf m$和协方差矩阵$\mathbf C$的定义为：</p>
-<script type="math/tex; mode=display">
-\mathbf m = E(\mathbf x)
-\\ \mathbf C = E((\mathbf x-\mathbf m)(\mathbf x-\mathbf m)^T)</script><p>现有$N$个样本$\mathbf x_1,\cdots,\mathbf x_N$，使用极大似然估计来估计$\mathbf m$和$\mathbf C$。似然函数为：</p>
-<script type="math/tex; mode=display">
-\begin{align*}
-H(\mathbf m, \mathbf C) &= \sum_{k=1}^N \ln p(\mathbf x_k)
-\\&= -\frac 1 2 \sum_{k=1}^N\sum_{i,j=1}^n (x_{ki}-m_i)C^{-1}\_{ij}(x_{kj}-m_j) -\frac N 2 \ln |\mathbf C| -\frac{nN}2\ln 2\pi
-\end{align*}</script><p>估计的参数应使$H$取极值。</p>
-<p>对$\mathbf m$：</p>
-<script type="math/tex; mode=display">
-\begin{align*}
-\frac{\partial H}{\partial m_l} &= \frac 1 2 \sum_{k=1}^N\sum_{i,j=1}^n C^{-1}\_{ij}[\delta\_{li}(x_{kj}-m_j)+\delta_{lj}(x_{ki}-m_i)]
-\\&= \frac 1 2\sum_{k=1}^N[\sum_{j=1}^n C^{-1}\_{lj}(x_{kj}-m_j)+\sum_{i=1}^n C^{-1}\_{il}(x_{ki}-m_i)]
-\\&= \sum_{k=1}^N\sum_{i=1}^n C^{-1}\_{il}(x_{ki}-m_i) = 0
-\end{align*}</script><p>最后一步是因为$\mathbf C$是对称矩阵（由定义显然）。从而有：</p>
-<script type="math/tex; mode=display">\sum_{i=1}^nC^{-1}\_{il}(\sum_{k=1}^N x_{ki} - Nm_i) =0</script><p>对$l=0,\cdots,n$成立。写成矩阵形式，即为：</p>
-<script type="math/tex; mode=display">\mathbf C^{-1} (\sum_{k=1}^N \mathbf x_k - N\mathbf m) =0</script><p>由于$\mathbf C^{-1}$是可逆矩阵，要使上式成立，应有：</p>
-<script type="math/tex; mode=display">\mathbf{\hat m}=\frac 1 N \sum_{k=1}^N \mathbf x_k</script><p>即为$\mathbf m$的极大似然估计值。</p>
-<p>对$\mathbf C$，首先考虑$\mathbf C^{-1}$的行列式$|\mathbf C^{-1}|$对$C^{-1}_{lm}$的偏导数$\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}_{lm}}$：<br>将$|\mathbf C^{-1}|$按第$l$行展开，有：</p>
-<script type="math/tex; mode=display">|\mathbf C^{-1}|=\sum_{i=1}^n C^{-1}\_{li}c_{li}</script><p>其中$c_{li}$是$C^{-1}_{li}$的代数余子式，同时也是$\mathbf C^{-1}$的伴随矩阵的$l,i$元素。对任意矩阵$\mathbf A$，其伴随矩阵$\mathbf A^* = |\mathbf A| \mathbf A^{-1} $，因此$c_{li} = |\mathbf C^{-1}|(C^{-1})^{-1}_{li} = |\mathbf C^{-1}|C_{li} $。<br>$l$行的代数余子式不显含$C^{-1}_{lm}$，从而有：</p>
-<script type="math/tex; mode=display">\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}\_{lm}} = c\_{lm} = |\mathbf C^{-1}|C_{lm}</script><p>故：</p>
-<script type="math/tex; mode=display">
-\begin{align*}
-\frac{\partial H}{\partial C^{-1}\_{lm}} &= -\frac 1 2 \sum\_{k=1}^N (x_{kl}-m_l)(x_{km}-m_m) +\frac N {2|\mathbf C^{-1}|}\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}\_{lm}}
-\\&= -\frac 1 2 \sum\_{k=1}^N (x_{kl}-m_l)(x_{km}-m_m)  + \frac N 2 C_{lm} =0
-\end{align*}</script><p>从而有$C_{lm}$的极大似然估计值：</p>
-<script type="math/tex; mode=display">\hat{C}\_{lm} = \frac 1 N \sum\_{k=1}^N (x_{kl}-\hat m_l)(x_{km}-\hat m_m)</script><p>写成矩阵形式：</p>
-<script type="math/tex; mode=display">\hat{\mathbf C} = \frac 1 N \sum_{k=1}^N (\mathbf x_k - \hat{\mathbf m})(\mathbf x_k - \hat{\mathbf m})^T</script>
+        <p>最近在B站偶然看到了一个介绍地平论的视频，这倒不是什么新鲜事，地平论也不是我第一次听说，不过下面称赞他们的独立思考能力和质疑精神的评论还是让我惊掉了下巴。地平论，顾名思义，主张地球不是个球体而是个圆盘，“地盘”的中心是北极，而南极洲是环绕圆盘外围的一圈冰墙。日月是在地盘上面绕转的两道光束，万有引力也不存在，地球在以$9.8m/s^2$的加速度向上加速运动，重力其实是地球系中的惯性力（草）。至于那些地球的照片等等，也都是伪造出来的。至于各国政府为什么要这么做，这大概隐藏着不可告人的惊 天 阴 谋吧（大草原）。</p><a id="more"></a>
+<p><img src="Flat_earth.png" alt="“地盘”图示"></p>
+<div align="center">     
+    所谓“地盘”
+</div>
+
+<p>当然这种not even wrong的东西倒并不值得太认真对待，不过我们可以带着些“质疑精神”，试试仅凭自己的眼睛能不能反驳地平论。答案是可以的。我们知道不同纬度处看到的北极星的高度角是不同的，且高度角就等于地理纬度。（当然，这要基于地球是个球）</p>
+<p><img src="polaris_altitude.png" alt="北极星高度角图示"></p>
+<div align="center">     
+    遥远的星光可近似看作平行光，北极星处于天北极附近，根据简单的几何推导就能看出北极星的高度角和地理纬度l相等
+    <br><br>
+</div>
+
+<p>地平论无法解释为什么不同纬度看到的星空是不一样的。就算他们可以声称星星其实离我们非常近，以至于在地盘上不同位置观测就会有不同的高度角，但在有限大小的地盘上高度角一定有一个大于零的最小值。换言之，只要地平论者愿意花钱去赤道看看高度角为零的北极星，他这套理论自然会不攻自破。</p>
+<p><img src="flat_earth_polaris.png" alt="地盘上北极星的高度角"></p>
+<div align="center">     
+    在地盘上的任何地点观测北极星，其高度角都不可能为零
+    <br><br>
+</div>
+
+<p>当然反驳地平论本身并不是这篇文章主要要说的事。我们的确有方法仅凭自己的观测的推理证实地球是圆的，但真的有必要持怀疑精神到这种程度吗？或者说，即使我们没法靠自己证实地球是圆的，在拥有相同的信息的前提下，我们是否有依据选择一种理论而排斥另一种呢？</p>
+<p>我们先来复习一下概率论。条件概率$P(A|B)$指的是事件B发生的前提下A发生的概率。显然我们有A和B同时发生和“B发生且B发生的前提下A发生”是一个意思，那么我们有：</p>
+<script type="math/tex; mode=display">P(A|B)P(B)=P(AB)=P(B|A)P(A)</script><p>稍微变换一下就有<strong>贝叶斯定理</strong>：</p>
+<script type="math/tex; mode=display">P(A|B)=\frac{P(B|A)P(A)}{P(B)}</script><p>我们把它写得物理一点：</p>
+<script type="math/tex; mode=display">P(M|D)=\frac{P(D|M)P(M)}{P(D)}</script><p>$M$代表模型，而$D$代表观测到的数据。这时贝叶斯公式中各项的意义就明了了：  </p>
+<ul>
+<li>左边的$P(M|D)$称作<strong>后验</strong>(posterior)，表示在分析了观测数据后我们得出的模型$M$正确的概率</li>
+<li>$P(D|M)$称作<strong>似然</strong>(likelihood)，代表模型$M$下预测的观测数据的分布</li>
+<li>$P(M)$称作<strong>先验</strong>(prior)，代表我们在观测之前已有的对模型的知识</li>
+<li>$P(D)$称作evidence，描述的是观测到数据$D$的概率，这一项作为归一化系数出现，在贝叶斯分析中通常不被考虑（因为我们感兴趣的是不同模型的后验，这时evidence总是个常数）。</li>
+</ul>
+<p>一般情况下贝叶斯公式会被用作估计模型的参数的后验分布$P(M,\boldsymbol{\theta}|D)$，这时上面的$P(M)$可以看做$P(M,\boldsymbol{\theta})$把参数$\boldsymbol{\theta}$积分掉的边缘分布。</p>
+<p>现在我们假设有了数据$D$，模型$M_1$和$M_2$都可以用于解释它。对$M_1$和$M_2$我们没有主观的偏好，因此取相同的先验$P(M_1)=P(M_2)$。它们的<strong>概率比</strong>(odds ratio)就成为：</p>
+<script type="math/tex; mode=display">O_{21}=\frac{P(M_2|D)}{P(M_1|D)}=\frac{P(D|M_2)}{P(D|M_1)}</script><p>如果模型$M_1$只有一个参数$\mu$，可以取$\mu$的先验为在$-\Delta_{\mu}/2$到$\Delta_{\mu}/2$之间的均匀分布。假设似然函数可以用中心为使似然取最大值的$\mu=\mu^0$，方差为$\sigma_\mu^2$的高斯分布来描述。一般情况下先验只能给出一个大致的范围，而数据能告诉我们更多关于参数的信息，也就是说$\sigma_{\mu}\ll\Delta_{\mu}$。我们就有：</p>
+<script type="math/tex; mode=display">P(D|M_1)=\int P(D|M_1,\mu)p(\mu) \mathrm{d}\mu \sim L^0(M_1)\frac{\sigma_\mu}{\Delta_\mu}</script><p>这里$L^0(M_1)=\max(P(D|M_1,\mu))$。</p>
+<p>注意到$\sigma_\mu/\Delta_\mu \ll 1$，这表明我们<strong>每在模型中增加一个独立参数，都会在$P(D|M)$中乘上一个远小于1的系数</strong>。如果$M_2$有两个独立参数$p$和$q$，那么：</p>
+<script type="math/tex; mode=display">O_{21} \sim \frac{L^0(M_2)}{L^0(M_1)}\frac{(\sigma_p/\Delta_p)(\sigma_q/\Delta_q)}{\sigma_\mu/\Delta_\mu}</script><p>如果$M_1$和$M_2$对数据的解释能力相近，即$L^0(M_1)\sim L^0(M_2)$，那么就有$O_{21}\ll 1$，我们就有很大把握选择$M_1$而拒绝$M_2$。</p>
+<p>这一原则可以被简单地概括为，<strong>对同样能解释观测到的现象的模型，我们总是选择所作的假设更少的的那个</strong>。或者说，“若非必要，勿增实体”——没错，这正是大名鼎鼎的<strong>奥卡姆剃刀</strong>。</p>
+<p>现在回到标题，为什么我们不该相信阴谋论？答案不证自明——阴谋论并没有提供更符合的解释，却凭空多出了相当多的假设，这也就使它的后验概率变得低得多。阴谋论最多做到自圆其说，但这并不是终点，为了质疑而产生的质疑也不会更能解释问题。</p>
+
     </div>
 
     
@@ -266,7 +292,7 @@ H(\mathbf m, \mathbf C) &= \sum_{k=1}^N \ln p(\mathbf x_k)
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E7%A7%91%E6%99%AE/" rel="tag"># 科普</a>
           </div>
 
         
@@ -278,17 +304,14 @@ H(\mathbf m, \mathbf C) &= \sum_{k=1}^N \ln p(\mathbf x_k)
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/03/30/motion-in-EM-field/" rel="next" title="电磁场中运动的粒子">
-                  <i class="fa fa-chevron-left"></i> 电磁场中运动的粒子
+                <a href="/2020/01/01/2019-review/" rel="next" title="2019年度总结">
+                  <i class="fa fa-chevron-left"></i> 2019年度总结
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/05/06/distance-ladder/" rel="prev" title="宇宙距离阶梯">
-                  宇宙距离阶梯 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
@@ -532,7 +555,7 @@ H(\mathbf m, \mathbf C) &= \sum_{k=1}^N \ln p(\mathbf x_k)
       repo: 'Li-mz.github.io',
       owner: 'Li-mz',
       admin: ['Li-mz'],
-      id: '0ddc05965280c851c7518755bedeb8e5',
+      id: '0356974437217adec5d6a6c9c7b252e9',
         language: 'zh-CN',
       distractionFreeMode: 'true'
     });
