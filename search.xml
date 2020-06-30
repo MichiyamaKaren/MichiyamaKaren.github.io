@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>电磁场方程</title>
+    <url>/2019/05/28/EM-field-equation/</url>
+    <content><![CDATA[<h1 id="1-拉氏量密度"><a href="#1-拉氏量密度" class="headerlink" title="1.拉氏量密度"></a>1.拉氏量密度</h1><p>电磁场体系完整的拉氏量为:</p><script type="math/tex; mode=display">L = L_p + L_{pf} + L_f</script><p>这三项分别为粒子、粒子与场耦合和场的拉氏量。上一节只讨论了粒子在电磁场中的运动，故只涉及前两项，而现在要讨论的则是电磁场的方程，因此要关注的是后两项。</p><p>我们之前接触的拉氏量使用来描述粒子的运动的，那么如何使用拉氏量描述场呢？简单起见，我们先来考虑一个标量场$\phi(t,\mathbf x)$：我们可以把$\phi$看做广义坐标，时空坐标为作为参量，那么可以找到一个合适的拉氏量，用最小作用量原理推出场的方程$f(\phi, \partial_{\mu}\phi, x^{\mu}) = 0$。与粒子不同的一点是，场具有无穷的自由度——$\phi$作为广义坐标，需要空间中每个点的$\phi$值才能确定场的分布；而在每个点上，自由度是有限的。这相当于系统中存在连续分布的粒子，多粒子体系的拉氏量是单独的粒子的拉氏量之和，那么对于在空间中连续分布的场，拉氏量应为：</p><a id="more"></a>
+
+
+<script type="math/tex; mode=display">L = \int \mathscr L dxdydz</script><p>$\mathscr L$为<strong>拉氏量密度</strong>。从上面的讨论也可以看出，在考虑场的方程时，应给出的是拉氏量密度。</p>
+<p>对拉氏量密度为$\mathscr L = \mathscr L(\phi, \partial_{\mu}\phi)$，则根据定义，作用量为：</p>
+<script type="math/tex; mode=display">S = \int\int \mathscr L d^3xdt = \int \mathscr L d\Omega</script><p>$d\Omega=dtdxdydz$是洛伦兹不变量，因此$\mathscr L$也应为洛伦兹不变量。下面用变分法推出场的E-L方程：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\delta S &= \int \left[\left( \frac{\partial \mathscr L}{\partial \phi} \right)\delta\phi + \frac{\partial \mathscr L}{\partial (\partial_{\mu}\phi)}\delta(\partial_{\mu}\phi) \right] d\Omega
+\\&= \int \left[\left( \frac{\partial \mathscr L}{\partial \phi} \right)\delta\phi + \frac{\partial \mathscr L}{\partial (\partial_{\mu}\phi)}\partial_{\mu}\delta\phi \right] d\Omega
+\\&= \int \left[\frac{\partial \mathscr L}{\partial \phi} - \frac{\partial}{\partial x^{\mu}}\frac{\partial \mathscr L}{\partial (\partial_{\mu}\phi)} \right] \delta\phi d\Omega
+\end{align*}</script><p>其中用到了分部积分，$\delta\phi$在边界上为0。场的E-L方程和粒子的E-L方程具有类似的形式：</p>
+<script type="math/tex; mode=display">\frac{\partial \mathscr L}{\partial \phi} - \frac{\partial}{\partial x^{\mu}}\frac{\partial \mathscr L}{\partial (\partial_{\mu}\phi)}=0</script><h1 id="2-电磁场的拉氏量密度"><a href="#2-电磁场的拉氏量密度" class="headerlink" title="2.电磁场的拉氏量密度"></a>2.电磁场的拉氏量密度</h1><h2 id="2-1-猜测电磁场的拉氏量密度"><a href="#2-1-猜测电磁场的拉氏量密度" class="headerlink" title="2.1 猜测电磁场的拉氏量密度"></a>2.1 猜测电磁场的拉氏量密度</h2><p>电磁场是矢量场，虽然和前面讨论的标量场不一样，但是E-L方程也有相同的形式：</p>
+<script type="math/tex; mode=display">\frac{\partial \mathscr L}{\partial A^{\nu}} - \frac{\partial}{\partial x^{\mu}}\frac{\partial \mathscr L}{\partial (\partial_{\mu}A^{\nu})}=0</script><p>即E-L方程对$A^{\nu}$的每个分量仍然成立。</p>
+<p>我们可以猜测一下电磁场的拉氏量密度$\mathscr L_f$的形式。它应该满足以下性质：</p>
+<ol>
+<li>如1小节所述，$\mathscr L_f$应该是洛伦兹不变量</li>
+<li>应该具有规范对称性</li>
+<li>电磁场应该满足叠加原理，即电磁场方程应该是线性的，则应该有$\mathscr L_f \sim (\partial_{\mu}A^{\nu})^2$</li>
+</ol>
+<p>事实上人们发现$\mathscr L_f$的形式是：</p>
+<script type="math/tex; mode=display">\mathscr L_f = -\frac 1 {4\mu_0 c} F^{\alpha\beta}F_{\alpha\beta}</script><p>很容易验证它是满足以上的要求的。</p>
+<h2 id="2-2-真空电磁场方程"><a href="#2-2-真空电磁场方程" class="headerlink" title="2.2 真空电磁场方程"></a>2.2 真空电磁场方程</h2><p>将电磁场的拉氏量带入E-L方程，求得真空中的（即只考虑$\mathscr L_f$，不考虑$\mathscr L_{pf}$）电磁场方程为：</p>
+<script type="math/tex; mode=display">\frac 1 {\mu_0 c} \frac{\partial F_{\nu}^{\cdot\mu}}{\partial x^{\mu}}=0</script><p>也可以乘$\eta_{\mu\gamma}$并改变自由指标得到：</p>
+<script type="math/tex; mode=display">\frac 1 {\mu_0 c} \frac{\partial F_{\nu\mu}}{\partial x^{\mu}}=0</script><p>将电磁场张量按照定义展开，得到：</p>
+<script type="math/tex; mode=display">\frac{\partial}{\partial x^{\nu}}\frac{\partial A^{\mu}}{\partial x^{\mu}}-\frac{\partial^2}{\partial x_{\mu}\partial x^{\mu}}A^{\nu}=0</script><p>选取洛伦兹规范：</p>
+<script type="math/tex; mode=display">\frac{\partial A^{\mu}}{\partial x^{\mu}}=0</script><p>则有：</p>
+<script type="math/tex; mode=display">\frac{\partial^2}{\partial x_{\mu}\partial x^{\mu}}A^{\nu}=0</script><p>这就是真空中的电磁场方程。</p>
+<p>写成分量的形式为：</p>
+<script type="math/tex; mode=display">
+\left(\frac 1 {c^2} \frac{\partial^2}{\partial t^2} - \nabla^2 \right)\phi=0
+\\ \left(\frac 1 {c^2} \frac{\partial^2}{\partial t^2} - \nabla^2 \right)\mathbf A=0</script><p>再利用洛伦兹规范：</p>
+<script type="math/tex; mode=display">\frac{\partial A^{\alpha}}{\partial x^{\alpha}} = \frac 1 {c^2} \frac{\partial \phi}{\partial t} + \nabla\cdot\mathbf A =0</script><p>则有：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\left(\frac 1 {c^2} \frac{\partial^2}{\partial t^2} - \nabla^2 \right)\phi &= \frac{\partial}{\partial t}(-\nabla\cdot\mathbf A) - \nabla^2\phi
+\\ &= \nabla\cdot(-\frac{\partial \mathbf A}{\partial t} - \nabla \phi) 
+\\ &= \nabla\cdot\mathbf E=0
+\end{align*}</script><p>以及：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\left(\frac 1 {c^2} \frac{\partial^2}{\partial t^2} - \nabla^2 \right)\mathbf A &= \frac 1 {c^2} \frac{\partial^2 \mathbf A}{\partial t^2} + \nabla\times(\nabla\times\mathbf A) - \nabla(\nabla\cdot\mathbf A)
+\\ &= \frac 1 {c^2} \frac{\partial^2 \mathbf A}{\partial t^2} + \nabla\times\mathbf B + \nabla\left(\frac 1 {c^2} \frac{\partial \phi}{\partial t} \right)
+\\ &= \nabla\times\mathbf B - \frac 1 {c^2}\frac{\partial \mathbf E}{\partial t} =0
+\end{align*}</script><p>我们得到了真空中的麦克斯韦方程组中的两个方程：</p>
+<script type="math/tex; mode=display">
+\nabla\cdot\mathbf E=0
+\\ \nabla\times\mathbf B = \frac 1 {c^2}\frac{\partial \mathbf E}{\partial t}</script><p>结合上一节中的两个方程，我们得到了全部真空中的麦克斯韦方程。</p>
+<h1 id="3-与粒子耦合的电磁场"><a href="#3-与粒子耦合的电磁场" class="headerlink" title="3.与粒子耦合的电磁场"></a>3.与粒子耦合的电磁场</h1><h2 id="3-1-电流密度"><a href="#3-1-电流密度" class="headerlink" title="3.1 电流密度"></a>3.1 电流密度</h2><p>我们下一步要做的事自然是考虑$S_{pf}$和$S_f$的耦合，但是在此之前，由于电磁场的项是用拉氏量密度表示的，所以我们也需要将$S_{pf}$也用拉氏量密度表示。</p>
+<p>对多个粒子的系统：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+S_{pf} &= -\int\sum_i q_iA_{\alpha}(t,\mathbf x_i)dx^{\alpha}
+\\ &= -\int \sum_i q_iA_{\alpha}(t,\mathbf{x})\delta(\mathbf x-\mathbf x_i) dVdx^{\alpha}
+\\ &= \int \mathscr L_{pf} d\Omega dt
+\end{align*}</script><p>在进行下一步之前需要说明，这里的$S_{pf}$是场与所有粒子的耦合项的作用量，求和的每一项中$A_{\alpha}$采用的是在粒子的位置上的值。其原因是电磁场的作用是局域的，即$A_{\alpha}$只有沿着粒子的运动轨迹取值才会对运动方程有贡献。</p>
+<p>我们可以定义电荷密度：</p>
+<script type="math/tex; mode=display">\rho(t,\mathbf x)=\sum_i q_i\delta(\mathbf x-\mathbf x_i)</script><p>注意到$\int \rho dV=Q$，为系统中电荷总量，是洛伦兹不变量。这说明$\rho$与体积微元$dV$相乘为洛伦兹不变量，即它可以作为某个4-矢量的时间分量。再考虑$S_{pf}$：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
+\\ &= -\int \rho A_{\alpha}\frac{dx^{\alpha}}{dt}\frac 1 c d\Omega dt 
+\end{align*}</script><p>对比上面的$\mathscr L_{pf}$定义，我们有：</p>
+<script type="math/tex; mode=display">\mathscr L_{pf} = -\frac 1 c \rho A_{\alpha}\frac{dx^{\alpha}}{dt} = -\frac 1 c A_{\alpha}j^{\alpha}</script><p>其中</p>
+<script type="math/tex; mode=display">j^{\alpha}=\rho\frac{dx^{\alpha}}{dt} = (\rho c,\mathbf j)</script><p>为四维电流密度矢量。由于$\rho$与时间具有相同变换规则，因此从其定义式可以得知四维电流密度矢量的确是一个4-矢量。其空间分量为$\mathbf j=\rho \mathbf v$，其物理意义为单位时间内通过单位截面的电荷量，即电流密度。需要说明的是，这里的速度$\mathbf v$并不是一定是某个单一粒子的速度，因为这里用的是点粒子的模型，并不阻止有多于一个粒子处在相同的位置而具有不同的速度。下面的推导可以说明$\mathbf v$的物理意义：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\rho \mathbf v &= \sum_i q_i\delta(\mathbf x-\mathbf x_i)\mathbf v
+\\ &= \sum_i q_i\delta(\mathbf x-\mathbf x_i)\mathbf v_i
+\\ &= \rho \frac{\sum q_i\delta(\mathbf x-\mathbf x_i)\mathbf v_i}{\sum q_i\delta(\mathbf x-\mathbf x_i)}
+\\ &= \rho \frac{\sum q_i\mathbf v_i}{\sum q_i} \tag{on one point}
+\end{align*}</script><p>这表明，$\mathbf v(\mathbf x_i)$实际上是这一点上速度关于电荷的加权平均。当然，实际上的粒子并不是点电荷，我们实际上是近似地取一个宏观小、微观大的邻域，在其中做加权平均。</p>
+<h2 id="3-2-电磁场方程"><a href="#3-2-电磁场方程" class="headerlink" title="3.2 电磁场方程"></a>3.2 电磁场方程</h2><p>我们有了电磁场的拉氏量密度：</p>
+<script type="math/tex; mode=display">\mathscr L = \mathscr L_f + \mathscr L_{pf} = -\frac 1 {4\mu_0c}F_{\alpha\beta}F^{\alpha\beta} - \frac 1 c j^{\alpha}A_{\alpha}</script><p>带入E-L方程，得到电磁场方程为：</p>
+<script type="math/tex; mode=display">\frac{\partial F_{\mu\nu}}{\partial x_{\mu}} = \mu_0 j_{\nu}</script><p>（也可以像前两节一样用变分导出，结果是一样的）</p>
+<p>利用电磁场张量的定义：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\frac{\partial F_{\mu\nu}}{\partial x_{\mu}} &=\partial^{\mu}(\partial_{\nu}A_{\mu}-\partial_{\mu}A_{\nu})
+\\ &= \partial_{\nu}\partial^{\mu}A_{\mu}-\partial^{\mu}\partial_{\mu}A_{\nu}
+\\ &= -\partial^{\mu}\partial_{\mu}A_{\nu} =\mu_0 j_{\nu}
+\end{align*}</script><p>（使用了洛伦兹规范）写成分量的形式：</p>
+<script type="math/tex; mode=display">
+\left(\frac 1 {c^2} \frac{\partial^2}{\partial t^2} - \nabla^2 \right)\phi = \frac{\rho}{\epsilon_0}
+\\ \left(\frac 1 {c^2} \frac{\partial^2}{\partial t^2} - \nabla^2 \right)\mathbf A = \mu_0\mathbf j</script><p>用电场和磁场的表示为：</p>
+<script type="math/tex; mode=display">
+\nabla\cdot\mathbf E = \frac{\rho}{\epsilon_0}
+\\ \nabla\times\mathbf B = \frac 1 {c^2}\frac{\partial \mathbf E}{\partial t} + \mu_0\mathbf j</script><p>至此，我们得到了麦克斯韦方程组中的全部方程。</p>
+<h2 id="3-3-电荷连续性方程"><a href="#3-3-电荷连续性方程" class="headerlink" title="3.3 电荷连续性方程"></a>3.3 电荷连续性方程</h2><p>考虑电荷密度的定义：</p>
+<script type="math/tex; mode=display">\rho = \sum_i q_i\delta(\mathbf x-\mathbf x_i(t))</script><p>我们有：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\frac{\partial \rho}{\partial t} &= \sum_i q_i \cdot -\frac{\partial \delta(\mathbf x-\mathbf x_i)}{\partial (\mathbf x-\mathbf x_i)}\frac{\partial \mathbf x}{\partial t}
+\\ &= -\sum_i q_i \nabla\delta(\mathbf x-\mathbf x_i) \mathbf v_i
+\\ &= -\nabla\left(\sum_i q_i\delta(\mathbf x-\mathbf x_i)\right)
+\\ &= -\nabla\cdot\mathbf j
+\end{align*}</script><p>即：</p>
+<script type="math/tex; mode=display">\frac{\partial \rho}{\partial t} + \nabla\cdot\mathbf j = 0</script><p>这就是<strong>电荷连续性方程</strong>。它有明确的物理意义：<br>在一个小的区域$\Delta V$内，电荷量的变化率等于单位时间流入的电荷，即:</p>
+<script type="math/tex; mode=display">\frac{dQ}{dt} = \int \frac{\partial \rho}{\partial t} dV = -\oint \mathbf j \cdot d\mathbf S = \int \nabla\cdot\mathbf j dV</script><p>满足电荷连续性方程表明电荷是守恒的，不会凭空出现或消失。</p>
+<p>一般情况下，物理量$A$不一定守恒，其连续性方程为：</p>
+<script type="math/tex; mode=display">\frac{\partial \rho_A}{\partial t} + \nabla\cdot\mathbf F_A = S_A</script><p>等式右边的$S_A$项表示$A$的源，即单位时间内产生的量。对矢量$\mathbf g$，则为：</p>
+<script type="math/tex; mode=display">\frac{\partial \mathbf g}{\partial t} + \nabla\cdot\mathsf G = \mathbf{S_g}</script><p>此时矢量的通量$\mathsf G = \mathbf{vg}$为一个二阶张量。</p>
+<h1 id="4-电磁场的能量和动量"><a href="#4-电磁场的能量和动量" class="headerlink" title="4.电磁场的能量和动量"></a>4.电磁场的能量和动量</h1><p>可以根据拉氏量密度，由诺特定理直接推出电磁场能量密度和动量密度，但是这里使用另一种方法。由能量守恒和动量守恒，电磁场的能量和动量的源就等于负的在电磁场中运动的粒子的能量和动量变化，由3.3节给出的连续性方程的一般形式，也可以得到能量和动量的表达式。</p>
+<h2 id="4-1-能量密度与能流密度"><a href="#4-1-能量密度与能流密度" class="headerlink" title="4.1 能量密度与能流密度"></a>4.1 能量密度与能流密度</h2><p>在$\Delta V$区域内粒子的能量：</p>
+<script type="math/tex; mode=display">\frac{dE}{dt} = \rho \Delta V(\mathbf E\cdot \mathbf v) = (\mathbf E\cdot \mathbf j)\Delta V</script><p>从而对电磁场：</p>
+<script type="math/tex; mode=display">\frac{d\epsilon}{dt} + \nabla\cdot\mathbf P = -\mathbf E\cdot \mathbf j</script><p>而由麦克斯韦方程，</p>
+<script type="math/tex; mode=display">\mathbf j = \frac 1 {\mu_0}\nabla\times\mathbf B - \epsilon_0\frac{\partial \mathbf E}{\partial t}</script><p>有：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+-\mathbf E\cdot \mathbf j &= -\frac 1 {\mu_0}[\mathbf B\cdot(\nabla\times\mathbf E) - \nabla\cdot(\mathbf E\times\mathbf B)] + \frac 1 2 \epsilon_0\frac{\partial E^2}{\partial t}
+\\ &= \frac 1 {\mu_0}\nabla\cdot(\mathbf E\times\mathbf B) + \frac 1 2 \epsilon_0\frac{\partial E^2}{\partial t} + \frac 1 {2\mu_0}\frac{\partial B^2}{\partial t}
+\\ &= \frac{d\epsilon}{dt} + \nabla\cdot\mathbf P
+\end{align*}</script><p>从而，电磁场的能量密度和能量通量（能流密度）为：</p>
+<script type="math/tex; mode=display">
+\epsilon = \frac 1 2 \epsilon_0 E^2 + \frac 1 {2\mu_0}B^2
+\\ \mathbf P = \frac 1 {\mu_0} \mathbf E\times\mathbf B</script><h2 id="4-2-动量密度与应力张量"><a href="#4-2-动量密度与应力张量" class="headerlink" title="4.2 动量密度与应力张量"></a>4.2 动量密度与应力张量</h2><p>粒子的动量变化率即为其在电磁场中受的力，为：</p>
+<script type="math/tex; mode=display">\frac{d\mathbf p}{dt} = (\rho\mathbf E + \rho\mathbf v\times\mathbf B)\Delta V = (\rho\mathbf E + \mathbf j\times\mathbf B)\Delta V</script><p>从而有：</p>
+<script type="math/tex; mode=display">\frac{\partial \mathbf g}{\partial t} + \nabla\cdot\mathsf G = -(\rho\mathbf E + \mathbf j\times\mathbf B)</script><p>经过类似的推导，可以得到：</p>
+<script type="math/tex; mode=display">
+\mathbf g = \epsilon_0\mathbf E\times\mathbf B
+\\ \mathsf G = -\mathsf T = -(\epsilon_0\mathbf E\mathbf E+\frac 1 {\mu_0}\mathbf B\mathbf B - \frac 1 2(\epsilon_0 E^2 + \frac 1 {\mu_0}B^2)\mathsf I)</script><p>（其中$\mathsf I$为单位张量）$\mathsf T$称为麦克斯韦应力张量。</p>
+<p>我们可以考虑一下$\mathsf G$的物理意义：它表示电磁场的动量通量，即单位时间内通过单位面积的动量大小。而动量在时间上的变化率正是力，也就是说它可以被理解为作用在各方向的单位面积上的力，即压强和切向应力。<br><br>对稳恒电磁场，$\frac{\partial \mathbf g}{\partial t}=0$，则一个区域内带电粒子的受力（动量变化率）即为流入该区域的动量流，为：</p>
+<script type="math/tex; mode=display">\mathbf F = -\int \nabla\cdot\mathsf G dV = \oint \mathsf T\cdot d\mathbf S</script><p>这一公式也可以用来计算电磁场之中的粒子的受力——前提是稳恒电磁场，且粒子并非是测试粒子，其自身产生的电磁场也必须计入考虑。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>电动力学笔记</category>
+      </categories>
+      <tags>
+        <tag>物理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于NoneBot的NG词语游戏插件</title>
+    <url>/2019/07/07/NGWordGame-with-Nonebot/</url>
+    <content><![CDATA[<h1 id="NoneBot"><a href="#NoneBot" class="headerlink" title="NoneBot"></a>NoneBot</h1><p>NoneBot是基于酷Q的一个QQ机器人框架，其基本介绍和使用参见其<a href="https://none.rclab.tk/" target="_blank" rel="noopener">文档</a>。本段旨在补充一些目前在文档中还未点出的有关NoneBot的一些性质，它们在NG词语游戏插件的编写中是不可或缺的。</p><p>当QQ机器人接收到一条消息时，它会首先对消息进行parsing，解析出当前消息对应的指令和参数。随后，它会根据上下文——即CoolQ HTTP API中<a href="https://cqhttp.cc/docs/4.10/#/Post?id=%E4%BA%8B%E4%BB%B6%E5%88%97%E8%A1%A8" target="_blank" rel="noopener">事件上报</a>的数据的字典，包含消息和发信人的信息——中的发信人信息来生成一个唯一的<code>ctx_id</code>。这个<code>ctx_id</code>的作用是标记仍然有效的命令会话（如果是开始运行收到的第一条信息，那么不会有可用的命令会话）。NoneBot指令是要通过命令会话和用户进行数据交互的，而这里的意义是让同一个命令会话只响应<code>ctx_id</code>相同的用户的输入，也就是说两个<code>ctx_id</code>不同的用户调用同一条指令的时候会产生两个命令会话分别根据他们输入的参数实现不同的操作，从而不会互相干扰。默认的<code>ctx_id</code>是对每个用户都唯一的，这显然不利于我们的实现——我们希望多个玩家参与到这个游戏中来，要让同一个命令会话响应所有人发出的消息。好在<code>ctx_id</code>的实现中允许我们给来自同一个群的所有消息赋予同样的<code>ctx_id</code>，这需要更改NoneBot的源码，将<code>nonebot\command\__init__.py</code>中525行：<br><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">ctx_id</span> = context_id(ctx)</span><br></pre></td></tr></table></figure><br>改为：<br><figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">ctx_id = context<span class="constructor">_id(<span class="params">ctx</span>, <span class="params">mode</span>='<span class="params">group</span>')</span></span><br></pre></td></tr></table></figure></p><a id="more"></a>
+
+<p>如果没有获取到可用的命令会话，并且解析出来了消息对应的指令的话，那么将会创建一个新的命令会话，然后进行处理。至此我们可以暂时离开消息的解析和响应的层面，在处理命令的层面考虑机器人的逻辑。对于一个已经被正确识别的命令，命令会话将首先进入参数解析器arg_parser（没有arg_parser也可以），然后进入命令处理器。命令会话类<code>CommandSession</code>有几个属性和方法是需要用到的：</p>
+<ul>
+<li><code>_current_arg_text</code>：字符串，消息的纯文本部分，剥离了命令部分并去除前部分空格的消息。</li>
+<li><code>_state</code>：字典类型，用于存储希望被保存在会话中的局部变量。</li>
+<li><code>send()</code>：文档中也介绍过，向当前会话发送信息（群聊或私聊），传入参数<code>at_sender=True</code>可以在消息首部@发送者。</li>
+<li><code>pause()</code>：正常情况下一个命令会话会在响应完用户的一条消息后就过期，但是如果调用了<code>pause()</code>，那么命令会话会被暂停并保存，接收到下一条<code>ctx_id</code>相同的用户（考虑到上一段的修改，即同一个群里的下一条消息或来自同一个人的私聊）时会被重新运行一次。</li>
+<li><code>is_first_run</code>：bool类型，如果会话是第一次创建则为<code>True</code>，如果会话是调用了<code>pause()</code>被重新调起则为<code>False</code>。</li>
+</ul>
+<p>以上并非是<code>CommandSession</code>提供的全部接口，但是对于实现NG词语游戏的插件已足够。</p>
+<h1 id="NG词语游戏的实现——基于状态机"><a href="#NG词语游戏的实现——基于状态机" class="headerlink" title="NG词语游戏的实现——基于状态机"></a>NG词语游戏的实现——基于状态机</h1><p>NG词语游戏出自漫画《辉夜大小姐想让我告白～天才们的恋爱头脑战～》，规则为参与游戏的每个玩家为下一个玩家设置一个“NG词”， 设置完成后展示之，使得除了自己的每个人都能知道自己的NG词。之后所有玩家进行自由谈话，说出自己的NG词的玩家判负，退场。直至只剩一人为止。</p>
+<p>在命令会话中实现的操作是获取局部变量-&gt;根据不同的游戏进程对用户的输入做出不同的回应-&gt;写回局部变量，这很容易让人联想到状态机，而NoneBot提供的框架对于基于状态机的实现也是很方便的，因此我们选择基于状态机实现。</p>
+<p>游戏状态有三个：玩家注册状态，设置NG词状态，监听状态；状态跳转也是很简单的注册-&gt;设置-&gt;监听。状态机类<code>NGFSM</code>存储所有玩家的列表，每次接收发送者的信息，然后把要向会话（也就是群聊）和要私聊发送的信息返回给命令处理器。最初我是把状态机直接写在了命令处理器里，相比之下这样的交互方式可能有些冗杂，但是我认为游戏的逻辑实现部分和更底层一些的通信部分不应该耦合在一起，因此花了一些功夫把状态机单独提出来一个类。下面介绍每个状态的实现：</p>
+<h2 id="注册状态"><a href="#注册状态" class="headerlink" title="注册状态"></a>注册状态</h2><p>这个状态要接收每个希望参与游戏的玩家的注册，规定注册需要回复<code>sign in</code>，响应所有注册的用户的回复，根据上下文记录QQ号、称呼信息，加到玩家列表中。另外，响应超级用户发出的<code>stop signing</code>，结束注册，状态跳到设置状态。</p>
+<h2 id="设置状态"><a href="#设置状态" class="headerlink" title="设置状态"></a>设置状态</h2><p>由于游戏性质，设置NG词不能在群聊中进行，而是要和机器人私聊设置。这为实现带来了一个难点——设置NG词的命令会话和游戏的会话不能是一个，那么它们之间该如何通信呢？我的解决方法是单独设置另外一个命令用于设置NG词，这个命令响应玩家的设置之后将NG词存储在磁盘上，当所有玩家设置完成之后，由超级用户手动在群聊中发出<code>check</code>指令通知游戏会话已设置完毕，然后从磁盘中读取设置的数据，从而实现IO的同步。当然，这一过程可以足够用户友好——只要在进入设置状态前把群聊的号码记录到磁盘上，就可以在所有玩家都设置完之后主动调用CQHTTP API，自动向群聊里发送一条提醒消息。<code>check</code>之后，读出所有玩家的NG词，进入监听状态。</p>
+<h2 id="监听状态"><a href="#监听状态" class="headerlink" title="监听状态"></a>监听状态</h2><p>这一状态中只需要监听玩家发出的消息，只要有人的消息中包含自己的NG词就向会话发出提醒信息，判该玩家出局，然后继续监听，直至只剩一人。</p>
+<p>项目代码已上传到GitHub仓库<a href="https://github.com/Li-mz/NGWordGame" target="_blank" rel="noopener">NGWordGame</a>。</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>态矢和表象</title>
+    <url>/2019/11/17/brackets-and-representation/</url>
+    <content><![CDATA[<h2 id="1-1-The-Stern-Gerlach-Experiment"><a href="#1-1-The-Stern-Gerlach-Experiment" class="headerlink" title="1.1 The Stern-Gerlach Experiment"></a>1.1 The Stern-Gerlach Experiment</h2><p>第一节从一个稍微不同的角度介绍了一下Stern-Gerlach实验。其基本原理如原子物理中所介绍的，银原子的唯一一个处在非满壳层的电子自旋方向不同使银原子有不同的磁矩，通过空间上均匀变化的磁场后会在变化的方向上被分成两束。</p><p>书中讨论了这样的sequential S-G experiment：<br><img src="sequential-sg-experiment.png" alt><br>在a中，连续布置两个z方向的SG装置，只让$S_z+$通过第一个装置，最后从第二个装置射出的也只有一束$S_z+$。这容易理解，因为第一个装置起了“滤掉”$S_z-$的作用。<br>在b中，第二个装置是x方向的，最后出射的原子有$S_x+$和$S_z-$两束。这似乎说明了$S_z+$的原子在x方向的磁矩也是均匀分布的，一半是$S_x+$，另一半是$S_x-$。让我们继续看第三个序列。<br>在c中，在b的后面再增加一个z方向的装置，并只让$S_x+$方向的原子进入第三个装置。而最后出射的原子中既有$S_z+$又有$S_z-$。这是个惊人的结果——$S_z-$的原子本应在第一个装置就被滤掉了，却再次出现在第三个装置的出射。这似乎是说，仅仅在中间加入一个x方向的装置，就使我们失去了对磁矩在z方向分布的信息（对比a）<del>全部木大</del>。</p><a id="more"></a>
+
+<p>这让人想到另一个经典物理中的现象——光的偏振。我们可以让$S_x$和$S_z$对应xy方向和与xy方向夹角$45^\circ$的x’y’方向的偏振光，SG装置对应相应的偏振片，得到的就是上面的结果。而考虑我们对偏振光的描述，x’方向的偏振是x和y方向偏振的线性组合，我们推断这里原子的状态也应该由某种抽象的二维线性空间中的矢量来表示：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left|S_x;+\right>=\frac{1}{\sqrt{2}}\left|S_z;+\right>+\frac{1}{\sqrt{2}}\left|S_z;-\right>
+    \\
+    \left|S_x;-\right>=-\frac{1}{\sqrt{2}}\left|S_z;+\right>+\frac{1}{\sqrt{2}}\left|S_z;-\right>
+\end{aligned}</script><p>书中接下来讨论了$S_y$态的表示，它也应该是$S_z$的线性组合，且要和$S_x$区分开来。为此，书中将$S_y$对应成左旋和右旋偏振，相应的线性组合的系数则变成了$\frac{1}{\sqrt{2}}$和$ \pm\frac{i}{\sqrt{2}}$。书中进一步说明这个线性空间应该是定义在复数域上的。<em>（这里我存有一些疑问，如果是在二维空间中的话，是否就不必要引入复数了？如果在更高维的空间，是否还需要定义在其他的数域上？这只是数学巧合还是蕴含了物理上三维空间中的某种对称性？）</em></p>
+<h2 id="1-2-Kets-Bras-and-Operators"><a href="#1-2-Kets-Bras-and-Operators" class="headerlink" title="1.2 Kets, Bras, and Operators"></a>1.2 Kets, Bras, and Operators</h2><p>延续上一节的思路，我们认为物理系统的状态被<strong>右矢</strong>(ket)描述，它定义在复数域上的线性空间，形如$\left|\alpha\right&gt;$。右矢空间具有线性空间的诸多性质，这里不再赘述。</p>
+<p>接下来需要介绍的是<strong>左矢</strong>(bra)空间。左矢空间是右矢空间的对偶空间，它和右矢一一对应。和右矢$\left|\alpha\right&gt;$对应的左矢就记作$\left&lt;\alpha\right|$。左矢和右矢的对偶映射保留了加法。需要注意的是，$c\left|\alpha\right&gt;$对应的左矢应该是$c^*\left&lt;\alpha\right|$。</p>
+<p>一个左矢和一个右矢可以定义<strong>内积</strong>：$\left&lt;\beta|\alpha\right&gt;$。内积是一个线性运算，且满足：</p>
+<ul>
+<li>共轭对称性：<script type="math/tex">\left<\beta|\alpha\right>=\left<\alpha|\beta\right>^*</script></li>
+<li>正定性：<script type="math/tex; mode=display">\left<\alpha|\alpha\right>\geq0</script>取等号仅当$\left|\alpha\right&gt;$是右矢空间的零矢量。</li>
+</ul>
+<p><strong>算符</strong>是一个双线性映射，将右矢映成右矢，或将左矢映成左矢。被相同的算符作用的互相对偶的左矢和右矢通常并不对偶，而$X\left|\alpha\right&gt;$对偶的左矢是$\left&lt;\alpha\right|X^\dagger$。$X^\dagger$称为算符$X$的厄米共轭。和自己的厄米共轭相等的算符称为厄米算符。<em>（这里的描述有些不清晰，因为仅凭上面的定义，$X$作用在左矢和右矢上原则上可以完全不相关。不过事实上并非如此，参见下面的结合公理）</em></p>
+<p>算符也可以定义乘法，和映射的乘法类似。显然有：</p>
+<script type="math/tex; mode=display">(XY)^\dagger=Y^\dagger X^\dagger</script><p>至此我们定义了这样几种“乘法”：内积、算符作用在（“乘”）左矢或右矢，算符的乘法。再定义外积：$\left|\alpha\right&gt;\left&lt;\beta\right|$。这些“乘法”是我们会涉及到的全部合法的乘法式。</p>
+<p>结合公理说的是，对于任何合法的乘法式，结合的顺序是任意的。比如：</p>
+<script type="math/tex; mode=display">(\left|\alpha\right>\left<\beta\right|)\left|\gamma\right>=\left|\alpha\right>(\left<\beta|\gamma\right>)</script><p>这告诉我们，可以根据外积定义算符：</p>
+<script type="math/tex; mode=display">X=\left|\alpha\right>\left<\beta\right|</script><p>根据结合公理，$X$确是将一个右矢映成另一个右矢。<em>（事实上，结合公理无非是说算符在作用于左矢和作用于右矢上时，应该满足$(\left&lt;\alpha|X)|\beta\right&gt;=\left&lt;\alpha|(X|\beta\right&gt;)）$。只是给出了这一限制，以及让外积拥有算符的性质，其他的结合律都是显然的）</em> 可以证明：</p>
+<script type="math/tex; mode=display">X^\dagger= \left|\beta\right>\left<\alpha\right|</script><p>另一个常用的公式是：</p>
+<script type="math/tex; mode=display">\left<\beta|X|\alpha\right>=\left<\alpha|X^\dagger|\beta\right>^*</script><h2 id="1-3-Base-Kets-and-Matrix-Representations"><a href="#1-3-Base-Kets-and-Matrix-Representations" class="headerlink" title="1.3 Base Kets and Matrix Representations"></a>1.3 Base Kets and Matrix Representations</h2><p>定义算符的本征右矢和本征值，对算符$A$，本征右矢是这样的右矢$\left|\alpha\right&gt;$，使得$A\left|\alpha\right&gt;=a’\left|\alpha\right&gt;$。其中$a’$是常数，称为本征值。书中将本征值为a’的本征右矢记为$\left|a’\right&gt;$。</p>
+<p>若$A$是厄米的，我们有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left<a''|A|a'\right>&=a'\left<a''|a'\right>
+    \\ &=(\left<a'|A|a''\right>)^*=a''^*(\left<a'|a'\right>)^*
+    \\ &=a''^*\left<a''|a'\right>
+\end{aligned}</script><p>即：</p>
+<script type="math/tex; mode=display">(a'-a''^*)\left<a''|a'\right>=0</script><p>取$a’=a’’$，有厄米算符的本征值都是实数；取$a’\neq a’’$，有厄米算符不同的本征右矢是相互正交的。</p>
+<p>我们假设$A$的本征右矢是完备的，可以通过其线性组合表示右矢空间中任意的右矢：</p>
+<script type="math/tex; mode=display">\left|\alpha\right>=\sum_{a'}c_{a'}\left|a'\right></script><p>考虑$\left&lt;a’\right|$和$\left|\alpha\right&gt;$的内积，我们可以得出$c_{a’}=\left&lt;a’|\alpha\right&gt;$。即：</p>
+<script type="math/tex; mode=display">\left|\alpha\right>=\sum_{a'}\left|a'\right>\left<a'|\alpha\right> \tag{1.3.1}</script><p>我们的结论是，<strong>$A$的所有归一化的本征右矢构成了右矢空间中的一组单位正交完备基。</strong></p>
+<p>1.3.1中也定义了<strong>完备性关系</strong>：</p>
+<script type="math/tex; mode=display">\sum_{a'}\left|a'\right>\left<a'\right|=\sum_{a'}\Lambda_{a'}=1 \tag{1.3.2}</script><p>其中$\Lambda_{a’}$是<strong>投影算符</strong>，其几何意义是将右矢投影到平行于$\left|a’\right&gt;$的方向。</p>
+<p>根据完备性关系，算符$X$可写为：</p>
+<script type="math/tex; mode=display">X=\sum_{a''}\sum_{a'}\left|a''\right>\left<a''\right|X\left|a'\right>\left<a'\right|</script><p>我们用一个$N\times N$的矩阵来表示$X$：$X_{ij}=\left&lt; a^{(i)} \right| X \left| a^{(j)} \right&gt;$。</p>
+<p>可以证明，厄米共轭对应的矩阵表示就是共轭转置，算符相乘对应的就是矩阵乘法。后者的证明如下：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    XY&=\sum_{a''}\sum_{a'}\left|a''\right>\left<a''\right|XY\left|a'\right>\left<a'\right|
+    \\ &=\sum_{a''}\sum_{a'}\left|a''\right>\left(\sum_{a'''}\left<a''\right|X\left|a'''\right>\left<a'''\right|Y\left|a'\right>\right)\left<a'\right|
+\end{aligned}</script><p>在中间插入一个单位算符的技巧十分常用，用相同的技巧，将左矢和右矢对应到分量组成的行矢量和列矢量，算符作用到左矢和右矢上就也成了矩阵乘法。内积和外积也同样。</p>
+<h2 id="1-4-Measurements-Observables-and-the-Uncertainty-Relations"><a href="#1-4-Measurements-Observables-and-the-Uncertainty-Relations" class="headerlink" title="1.4 Measurements, Observables, and the Uncertainty Relations"></a>1.4 Measurements, Observables, and the Uncertainty Relations</h2><h3 id="测量"><a href="#测量" class="headerlink" title="测量"></a>测量</h3><p>让我们回到物理的讨论上来。右矢用于表示物理系统的状态，而算符代表的是<strong>观测量</strong>。这代表的是，对某个观测量进行测量，让系统的状态成为了对应的算符的某个本征态。我们无法确定的给出具体会变成哪个本征态，但可以给出归一化的态$\left|\alpha\right&gt;$变成本征态$\left|a’\right&gt;$的<strong>概率</strong>为$\left|\left&lt;a’|\alpha\right&gt;\right|^2$。此时测量的结果就是对应的<strong>本征值</strong>。这被称为<strong>测量公理</strong>。</p>
+<p>定义态$\left|\alpha\right&gt;$下观测量的平均值：</p>
+<script type="math/tex; mode=display">\left<A\right>=\left<\alpha|A|\alpha\right></script><p>可以将其写成下面的形式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left<A\right>&=\left<\alpha|A|\alpha\right>
+    \\&=\sum_{a''}\sum_{a'}\left<\alpha|a''\right>\left<a''\right|A\left|a'\right>\left<a'|\alpha\right>
+    \\&=\sum_{a'}a'\left|\left<a'|\alpha\right>\right|^2
+\end{aligned}</script><p>这说明观测量平均值的物理意义即为对含有大量相同态矢的粒子进行测量，测量的结果的平均值，亦即测量结果的期望。</p>
+<h3 id="1-2自旋系统"><a href="#1-2自旋系统" class="headerlink" title="1/2自旋系统"></a>1/2自旋系统</h3><p>现在再来看1.1中的SG实验，记$S_z+$的态矢为$\left|+\right&gt;$，$S_z-$的态矢为$\left|-\right&gt;$。由sequential S-G experiment的b，应该有：</p>
+<script type="math/tex; mode=display">
+\left|\left<+|S_x;+\right>\right|^2=\left|\left<-|S_x;+\right>\right|^2=\frac{1}{2}</script><p>对$\left|S_x;-\right&gt;$也同样，考虑到$\left|S_x;+\right&gt;$和$\left|S_x;-\right&gt;$应正交，从而有：</p>
+<script type="math/tex; mode=display">
+\left|S_x;\pm\right>=\frac{1}{\sqrt{2}}\left|+\right>\pm\frac{1}{\sqrt{2}}e^{i\delta_1}\left|-\right></script><p>$S_x$在本征态$\left|S_x;\pm\right&gt;$上的本征值为$\pm\hbar/2$，则可以构造算符$S_x$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    S_x&=\frac{\hbar}{2}\left|S_x;+\right>\left<S_x;+\right|-\frac{\hbar}{2}\left|S_x;-\right>\left<S_x;-\right|
+    \\ &=\frac{\hbar}{2}(e^{-i\delta_1}\left|+\right>\left<-\right|+e^{i\delta_1}\left|-\right>\left<+\right|)
+\end{aligned}</script><p>在y方向也同样：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left|S_y;\pm\right>=\frac{1}{\sqrt{2}}\left|+\right>\pm\frac{1}{\sqrt{2}}e^{i\delta_2}\left|-\right>
+    \\
+    S_y=\frac{\hbar}{2}(e^{-i\delta_2}\left|+\right>\left<-\right|+e^{i\delta_2}\left|-\right>\left<+\right|)
+\end{aligned}</script><p>考虑到xy方向也并不相关，也应该有：</p>
+<script type="math/tex; mode=display">
+\left|\left<S_x;+|S_y;\pm\right>\right|^2=\left|\left<S_x;-|S_y;\pm\right>\right|^2=\frac{1}{2}</script><p>我们得到：</p>
+<script type="math/tex; mode=display">\delta_2-\delta_1=\pm\frac{\pi}{2}</script><p>不妨取$\delta_1=0$（$\left|+\right&gt;$定义的任意性给出了这个自由度），$\delta_2=\pi/2$（这个自由度则由空间坐标的左手系/右手系的选取给出），这就对应了我们之前基于偏振光的猜测，也说明了三个方向上线性组合的系数不能全是实数。</p>
+<p>我们有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    S_x=\frac{\hbar}{2}(\left|+\right>\left<-\right|+\left|-\right>\left<+\right|)
+    \\
+    S_y=\frac{\hbar}{2}(-i\left|+\right>\left<-\right|+i\left|-\right>\left<+\right|)
+    \\
+    S_z=\frac{\hbar}{2}(\left|+\right>\left<+\right|+\left|-\right>\left<-\right|)
+\end{aligned}</script><p>得到它们的对易关系：</p>
+<script type="math/tex; mode=display">[S_i,S_j]=i\epsilon_{ijk}\hbar S_k</script><p>其中对易子的定义为：$[A,B]=AB-BA$。定义$S^2=S_x^2+S_y^2+S_z^2$，也有：</p>
+<script type="math/tex; mode=display">[S^2,S_i]=0</script><p>这具有角动量的对易关系的性质。</p>
+<h3 id="相容观测量"><a href="#相容观测量" class="headerlink" title="相容观测量"></a>相容观测量</h3><p>对应的算符的对易子为零的两个观测量称为相容观测量。对相容观测量$A$和$B$，有：</p>
+<script type="math/tex; mode=display">\left<a''\right|[A,B]\left|a'\right>=(a''-a')\left<a''\right|B\left|a'\right>=0</script><p>则应有（不考虑简并，即不同的本征右矢对应同一个本征值，因为一般来说总可以选取另外一个观测量来区分简并的右矢）：</p>
+<script type="math/tex; mode=display">\left<a''\right|B\left|a'\right>=\left<a''\right|B\left|a'\right>\delta_{a'a''}</script><p>从而，</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    B\left|a'\right>&=\sum_{a''}\left|a''\right>\left<a''\right|B\left|a'\right>
+    \\&=\left<a'\right|B\left|a'\right>\left|a'\right>
+\end{aligned}</script><p>这说明$A$和$B$具有相同的本征右矢，可以将其记作$\left|a’,b’\right&gt;$。这也是“相容”的含义——对B的测量不会破坏A的信息，因为它们的本征态是相同的，先测量A再测量B，第二次测量不会改变态矢（以1的概率塌缩到原本的态）。</p>
+<p>与相容观测量相反的是不相容观测量，即对易子非零的观测量。对不相容观测量，后面的测量会破坏前面的测量的信息（因为塌缩到了不同的本征态上）。</p>
+<h3 id="不确定性关系"><a href="#不确定性关系" class="headerlink" title="不确定性关系"></a>不确定性关系</h3><p>对观测量$A$，定义这样一个算符：</p>
+<script type="math/tex; mode=display">\Delta A=A-\left<A\right></script><p>$A$的弥散度定义为$\Delta A$的平均值：</p>
+<script type="math/tex; mode=display">\left<(\Delta A)^2\right>=\left<A^2-2A\left<A\right>+\left<A\right>^2\right>=\left<A^2\right>-\left<A\right>^2</script><p>和方差类似。</p>
+<p>现在我们可以证明<strong>不确定性关系</strong>：</p>
+<script type="math/tex; mode=display">\left<(\Delta A)^2\right>\left<(\Delta B)^2\right>\geq \frac{1}{4}\left|\left<[A,B]\right>\right|^2</script><p>首先，需要以下引理：</p>
+<ul>
+<li>Schwarz不等式：<script type="math/tex; mode=display">\left<\alpha|\alpha\right>\left<\beta|\beta\right>\geq\left|\left<\alpha|\beta\right>\right|^2</script>（考虑$\left|\alpha+\lambda\beta\right&gt;$的模长的非负性）</li>
+<li>厄米算符的平均值是实数</li>
+<li>反厄米算符（$C=-C^\dagger$）的平均值是纯虚数</li>
+</ul>
+<p>对任意右矢$\left|\gamma\right&gt;$，取$\left|\alpha\right&gt;=\Delta A\left|\gamma\right&gt;,\left|\beta\right&gt;=\Delta B\left|\gamma\right&gt;$，带入Schwarz不等式，有：</p>
+<script type="math/tex; mode=display">\left<(\Delta A)^2\right>\left<(\Delta B)^2\right>\geq\left|\left<\Delta A\Delta B\right>\right|^2</script><p>（其中利用到了$A$和$B$的厄米性），而$\Delta A\Delta B$可以写为厄米部分和反厄米部分之和：</p>
+<script type="math/tex; mode=display">\Delta A\Delta B=\frac{1}{2}[\Delta A,\Delta B]+\frac{1}{2}\{\Delta A,\Delta B\}</script><p>对上式求平均值，第一项是实数，第二项是纯虚数。求模长则有不确定性关系。</p>
+<h2 id="1-5-基的变换"><a href="#1-5-基的变换" class="headerlink" title="1.5 基的变换"></a>1.5 基的变换</h2><p>基的选取不是唯一的，这节主要讨论不同基之间的变换，或被称为<strong>表象变换</strong>。</p>
+<p>首先，任意两组基$\{\left|a’\right&gt;\}$和$\{\left|b’\right&gt;\}$之间，都可以通过一个幺正算符联系起来：$\left|b^{(k)}\right&gt;=U\left|a^{(k)}\right&gt;$。</p>
+<p>所谓幺正算符，是这样的算符$U$，$UU^\dagger=U^\dagger U=1$。这里的坐标变换算符可以这样定义：</p>
+<script type="math/tex; mode=display">U=\sum_k\left|b^{(k)}\right>\left<a^{(k)}\right|</script><p>在b表象上，分量的值为：</p>
+<script type="math/tex; mode=display">\left<b^{(k)}|\alpha\right>=\sum_l \left<b^{(k)}|a^{(l)}\right>\left<a^{(l)}|\alpha\right>=\sum_l \left<a^{(k)}|U^\dagger|a^{(l)}\right>\left<a^{(l)}|\alpha\right></script><p>在新表象下的分量即为$U^{\dagger}$在旧表象下的矩阵乘旧表象下的分量。</p>
+<p>类似的方法可以证明，算符在新表象下的矩阵为：</p>
+<script type="math/tex; mode=display">X'=U^\dagger XU</script><p>是一个相似变换。</p>
+<p>不同表象下的算符的变换启发我们，如果根据算符$A$定义一个新算符$B$，它在新表象下的矩阵表示和旧表象下相同，那它应该和$A$有相同的本征值，其本征态的分量也和$A$在旧表象的分量相同。也就是说，它们的<strong>观测值之间具有相同的概率分布。</strong></p>
+<p><strong>幺正等效观测量</strong>定义为：</p>
+<script type="math/tex; mode=display">B=UAU^{-1}</script><p>我们有：</p>
+<script type="math/tex; mode=display">UAU^{-1}(U\left|a'\right>)=B(U\left|a'\right>)=a'(U\left|a'\right>)</script><p>这符合上面的论述。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Sakurai量子力学笔记</category>
+      </categories>
+      <tags>
+        <tag>物理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在Docker上部署Jupyter Notebook</title>
+    <url>/2019/10/22/Docker-Jupyter/</url>
+    <content><![CDATA[<p>由于要用到只能在Linux上运行的python包，又懒得装双系统，就了解了一下Docker，配置了一个能在Windows上用的Jupyter Notebook环境。</p><h2 id="Docker上Ubuntu的基础配置"><a href="#Docker上Ubuntu的基础配置" class="headerlink" title="Docker上Ubuntu的基础配置"></a>Docker上Ubuntu的基础配置</h2><p>去官网上下载一个Docker Desktop，然后pull一个ubuntu镜像。刚pull下来的ubuntu镜像里什么必要的工具也没有，需要自己apt-get安装。（改软件源的配置文件时需要注意按照对应的系统版本去搜索配置文件的写法，否则apt-get会报错）</p><a id="more"></a>
+
+<p>安装python, python3, pip, pip3, vim等必要软件。</p>
+<h2 id="配置Jupyter-Notebook"><a href="#配置Jupyter-Notebook" class="headerlink" title="配置Jupyter Notebook"></a>配置Jupyter Notebook</h2><p>参考了<a href="https://www.jianshu.com/p/21d5afc1c079" target="_blank" rel="noopener">这篇博客</a>。</p>
+<p>首先安装Jupyter（我的电脑上pip3 config似乎有问题）：<br><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pip3 install -i <span class="string">https:</span><span class="comment">//pypi.tuna.tsinghua.edu.cn/simple jupyter</span></span><br></pre></td></tr></table></figure><br>以及其他必要的第三方库。<br>然后生成Jupyter配置文件：<br><figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">jupyter notebook --<span class="keyword">generate</span>-<span class="keyword">config</span></span><br></pre></td></tr></table></figure><br>修改配置文件<code>~/.jupyter/jupyter_notebook_config.py</code>中的如下几项：<br><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">c.NotebookApp.open_browser</span> = <span class="literal">False</span></span><br><span class="line"><span class="attr">c.NotebookApp.ip</span> = <span class="string">'*'</span></span><br><span class="line"><span class="attr">c.NotebookApp.port</span> = <span class="number">8888</span></span><br></pre></td></tr></table></figure><br>设置密码：<br><figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">jupyter notebook password</span></span><br></pre></td></tr></table></figure><br>然后把当前容器commit到notebook镜像。</p>
+<p>需要启动Jupyter Notebook时，用如下命令启动notebook容器：<br><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">docker run -d --name jupyter_pycbc -p <span class="number">8888:8888</span> -v /<span class="regexp">/D/</span>DockerShare/<span class="symbol">:/home/FromHost</span> notebook jupyter notebook --allow-root /home</span><br></pre></td></tr></table></figure><br>各参数的含义为：</p>
+<ul>
+<li>-d：在后台运行</li>
+<li>-p：将容器的8888端口映射到宿主机的8888端口</li>
+<li>-v：将容器的<code>/home/FromHost</code>目录挂载到宿主机的<code>D:DockerShare</code>目录下。注意Windows中D盘DockerShare文件夹的表示方式为<code>//D/DockerShare</code>。</li>
+</ul>
+<p>在宿主机访问<code>localhost:8888</code>即可使用Jupyter Notebook。</p>
+<h2 id="配置多个python"><a href="#配置多个python" class="headerlink" title="配置多个python"></a>配置多个python</h2><p>参考了<a href="https://blog.csdn.net/hohaizx/article/details/89633203" target="_blank" rel="noopener">这篇博客</a>。</p>
+<p>之前配置的Jupyter Notebook只能使用python3，现在要同时使用python2和python3，需要进一步配置。</p>
+<p>这只需添加python2的ipython kernel：<br><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">pip install -i https:<span class="string">//pypi.tuna.tsinghua.edu.cn/simple</span> ipykernel</span><br><span class="line">python -m ipykernel install <span class="params">--user</span> <span class="params">--name</span> python27 <span class="params">--display-name</span> <span class="string">"python27"</span></span><br></pre></td></tr></table></figure><br>再次启动Jupyter Notebook，即可看到两个python。</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>位置算符、动量算符和波函数</title>
+    <url>/2019/11/28/position-and-momentum/</url>
+    <content><![CDATA[<h2 id="1-6-Position-Momentum-and-Translation"><a href="#1-6-Position-Momentum-and-Translation" class="headerlink" title="1.6 Position, Momentum and Translation"></a>1.6 Position, Momentum and Translation</h2><h3 id="连续谱"><a href="#连续谱" class="headerlink" title="连续谱"></a>连续谱</h3><p>前面讨论的观测量的本征值都是离散分布的，然而还有另一类观测量，其本征值是连续分布的。连续谱使用的数学和之前讨论的类似，只需要把求和换成积分，克罗内克符号$\delta_{a’a’’}$换成狄拉克函数$\delta(a’-a’’)$。连续谱下的基的正交归一化条件和完备性关系可以写为：</p><a id="more"></a>
+<script type="math/tex; mode=display">\left<\xi'|\xi''\right>=\delta(\xi'-\xi'')</script><script type="math/tex; mode=display">\int \left|\xi'\right>\left<\xi'\right|d\xi'=1</script><h3 id="位置和波函数"><a href="#位置和波函数" class="headerlink" title="位置和波函数"></a>位置和波函数</h3><p><strong>位置</strong>就是这样一个本征值连续分布的观测量。对位置算符$x$的本征右矢$\left|x’\right&gt;$，有：</p>
+<script type="math/tex; mode=display">x\left|x'\right>=x'\left|x'\right></script><p>对任意的态$\left|\alpha\right&gt;$，由位置的完备性关系，可以在位置表象下展开：</p>
+<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|x'\right>\left<x'|\alpha\right>dx'</script><p>如果我们用仪器测量一个处于$\left|\alpha\right&gt;$态上的粒子的位置，粒子会以一定概率塌缩到某个位置本征态。当然，物理的仪器都是有限精度的，我们只能得知粒子的位置在$x’$附近一个宽度为$dx’$的区间内的概率为：</p>
+<script type="math/tex; mode=display">\left|\left<x'|\alpha\right>\right|^2dx'</script><p>其中$\psi(x’)=\left&lt;x’|\psi\right&gt;$被称作<strong>波函数</strong>，其模平方就是粒子在空间中的概率密度。</p>
+<p>粒子一定会在空间中某处被发现，这给出了波函数和态矢的归一化条件：</p>
+<script type="math/tex; mode=display">\left<\alpha|\alpha\right>=\int\left|\left<x'|\alpha\right>\right|^2dx'=\int\left|\Psi(x')\right|^2dx'=1</script><p>三维的情况和一维类似，我们假设存在位置本征态$\left|\mathbf{x}\right&gt;$，这即是假设三个方向的位置算符有共同的本征态$\left|x’,y’,z’\right&gt;$（否则的话粒子在任意时刻都不会有确定的位置——它不同方向的位置甚至都不对易！我们不希望这样）。如果位置本征态是完备的，我们仍可以展开任意的态矢：</p>
+<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>d\mathbf{x'}</script><h3 id="无穷小平移"><a href="#无穷小平移" class="headerlink" title="无穷小平移"></a>无穷小平移</h3><p>我们定义<strong>无穷小平移算符</strong>$\mathscr{T}(d\mathbf{x’})$，它作用在位置本征态$\left|\mathbf{x’}\right&gt;$上的结果为：</p>
+<script type="math/tex; mode=display">\mathscr{T}(d\mathbf{x'})\left|\mathbf{x'}\right>=\left|\mathbf{x'}+d\mathbf{x'}\right></script><p>物理上，考虑任意态矢在坐标表象下的表示：$\left|\alpha\right&gt;=\int c_{\mathbf{x’}}\left|\mathbf{x’}\right&gt;$，无穷小平移使每个本征态$\left|\mathbf{x’}\right&gt;$都变成$\left|\mathbf{x’}+d\mathbf{x’}\right&gt;$，相当于一个让物理系统平移了$d\mathbf{x’}$的坐标变换（我们很快会看到，它的确是一个幺正算符）。</p>
+<p>下面来考虑$\mathscr{T}(d\mathbf{x’})$的性质，将其作用在任意态矢上：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \mathscr{T}(d\mathbf{x'})\left|\alpha\right>
+    &=\mathscr{T}(d\mathbf{x'})\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>d\mathbf{x'}\\
+    &=\int \left|\mathbf{x'}+d\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>d\mathbf{x'}=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}-d\mathbf{x'}|\alpha\right>d\mathbf{x'}
+    \\
+    &=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\mathscr{T}(d\mathbf{x'})|\alpha\right>d\mathbf{x'}
+\end{aligned}</script><p>这说明$\mathscr{T}(d\mathbf{x’})$作用到本征左矢上结果为：</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}\right|\mathscr{T}(d\mathbf{x'})=\left<\mathbf{x'}-d\mathbf{x'}\right|</script><p>$\mathscr{T}(d\mathbf{x’})$让左矢向相反方向平移了$d\mathbf{x’}$。从而显然有$\mathscr{T}(d\mathbf{x’})$的厄米共轭为：</p>
+<script type="math/tex; mode=display">\mathscr{T}(d\mathbf{x'})^\dagger=\mathscr{T}(-d\mathbf{x'})</script><p>当然，根据定义，无穷小平移算符还应满足以下性质：</p>
+<ul>
+<li>$\mathscr{T}(d\mathbf{x’})\mathscr{T}(d\mathbf{x’’})=\mathscr{T}(d\mathbf{x’}+d\mathbf{x’’})$</li>
+<li>$\mathscr{T}(-d\mathbf{x’})=\mathscr{T}^{-1}(d\mathbf{x’})$</li>
+<li>根据上一条性质和$\mathscr{T}(d\mathbf{x’})$的厄米共轭的表达式，它也应该是厄米算符</li>
+</ul>
+<p><em>（书上这几个性质都是假设的，但是在不考虑简并的情况下真的有特意假设一下的必要吗……）</em></p>
+<p>第一个性质要求$\mathscr{T}(d\mathbf{x’})$是指数函数，即：</p>
+<script type="math/tex; mode=display">\mathscr{T}(d\mathbf{x'})=\exp \left(\mathbf{B}\cdot d\mathbf{x'}\right)</script><p>由于$d\mathbf{x’}$是无穷小量，可以展开并保留至一阶：</p>
+<script type="math/tex; mode=display">
+\mathscr{T}(d\mathbf{x'})=1+\mathbf{B}\cdot d\mathbf{x'}</script><p>上面厄米共轭的性质即成为：</p>
+<script type="math/tex; mode=display">1+\mathbf{B}^\dagger\cdot d\mathbf{x'}=1-\mathbf{B}\cdot d\mathbf{x'}</script><p>从而$\mathbf{B}$是反厄米算符，定义$\mathbf{B}=-i\mathbf{K}$，则$\mathbf{K}$是厄米算符。很容易验证$\mathscr{T}(d\mathbf{x’})$的幺正性。</p>
+<p>总结一下，上面定义的无穷小平移算符有如下形式：</p>
+<script type="math/tex; mode=display">\mathscr{T}(d\mathbf{x'})=1-i\mathbf{K}\cdot d\mathbf{x'}</script><p>下面考虑无穷小平移和位置算符的对易关系：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    &\mathbf{x}\mathscr{T}(d\mathbf{x'})\left|\mathbf{x'}\right>=\mathbf{x}\left|\mathbf{x'}+d\mathbf{x'}\right>=(\mathbf{x'}+d\mathbf{x'})\left|\mathbf{x'}+d\mathbf{x'}\right>
+    \\&\mathscr{T}(d\mathbf{x'})\mathbf{x}\left|\mathbf{x'}\right>=\mathbf{x'}\mathscr{T}(d\mathbf{x'})\left|\mathbf{x'}\right>=\mathbf{x'}\left|\mathbf{x'}+d\mathbf{x'}\right>
+\end{aligned}</script><p>从而：</p>
+<script type="math/tex; mode=display">[\mathbf{x}, \mathscr{T}(d\mathbf{x'})]=d\mathbf{x'}</script><p>带入上面的形式，有：</p>
+<script type="math/tex; mode=display">[x_i,K_j]=i\delta_{ij}</script><h3 id="动量作为无穷小平移的生成元"><a href="#动量作为无穷小平移的生成元" class="headerlink" title="动量作为无穷小平移的生成元"></a>动量作为无穷小平移的生成元</h3><p>我们来考虑$\mathbf{K}$的物理意义。</p>
+<p>在经典力学中，上面的无穷小平移可以作为正则变换考虑：</p>
+<script type="math/tex; mode=display">\mathbf{x'}=\mathbf{X}=\mathbf{x}+\mathbf{dx},\ \mathbf{p'}=\mathbf{P}=\mathbf{p}</script><p>这一变换的生成函数为：</p>
+<script type="math/tex; mode=display">F(\mathbf{x}, \mathbf{P})=\mathbf{x}\cdot\mathbf{P}+\mathbf{p}\cdot d\mathbf{x}</script><p>考虑到单位变换（$\mathbf{X}=\mathbf{x},\mathbf{P}=\mathbf{p}$）的生成函数是$F(\mathbf{x}, \mathbf{P})=\mathbf{x}\cdot\mathbf{P}$，这个生成函数和无穷小平移算符有着非常相似的形式。基于此，可以建立这样的对应，$\mathbf{K}$应该就是动量除以一个具有作用量量纲的常数。量子力学中这个常数就是$\hbar$。无穷小平移算符就可以表示为：</p>
+<script type="math/tex; mode=display">\mathscr{T}(d\mathbf{x'})=1-i\mathbf{p}\cdot d\mathbf{x'}/\hbar</script><p>从而坐标和动量的对易关系：</p>
+<script type="math/tex; mode=display">[x_i,p_j]=i\hbar\delta_{ij}</script><p>下面考虑动量的不同分量间的对易关系。不同方向上的无穷小平移算符是对易的（先在x方向平移再在y方向平移和先在y方向再在x方向平移是等效的），从而有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    [\mathscr{T}(dx\hat{\mathbf{x}}),\mathscr{T}(dx\hat{\mathbf{y}})]&=[1-ip_xdx/\hbar, 1-ip_ydy/\hbar]
+    \\&=-\frac{dxdy}{\hbar^2}[p_x,p_y]=0
+\end{aligned}</script><p>在其他方向上也同理，从而不同方向上的动量算符的对易关系为：</p>
+<script type="math/tex; mode=display">[p_i,p_j]=0</script><p>不同方向的动量是对易的，这说明和位置算符类似，也存在三维的动量本征态$\left|\mathbf{p’}\right&gt;$。</p>
+<h3 id="正则对易关系"><a href="#正则对易关系" class="headerlink" title="正则对易关系"></a>正则对易关系</h3><p>上面的对易关系：</p>
+<script type="math/tex; mode=display">[x_i,x_j]=0,[p_i,p_j]=0,[x_i,p_j]=i\hbar\delta_{ij}</script><p>被称为<strong>正则对易关系</strong>。</p>
+<p>注意到正则对易关系和经典力学中的泊松括号其实有着相似的形式，结果也是乘了一个$i\hbar$。一般地，量子力学中有经典对应的各种观测量的对易关系都可以对应为：</p>
+<script type="math/tex; mode=display">[,]_{classical}=\frac{[,]}{i\hbar}</script><p>泊松括号的一些性质也可以自然的被应用在对易子上，比如：</p>
+<script type="math/tex; mode=display">[A,BC]=[A,B]C+B[A,C]</script><script type="math/tex; mode=display">[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=0</script><h2 id="1-7-Wave-Functions-in-Position-and-Momentum-Space"><a href="#1-7-Wave-Functions-in-Position-and-Momentum-Space" class="headerlink" title="1.7 Wave Functions in Position and Momentum Space"></a>1.7 Wave Functions in Position and Momentum Space</h2><h3 id="位置空间波函数"><a href="#位置空间波函数" class="headerlink" title="位置空间波函数"></a>位置空间波函数</h3><p>位置表象的波函数为$\psi(x’)=\left&lt;x’|\psi\right&gt;$，从这一角度，我们可以得到波动力学中的一系列定义：</p>
+<script type="math/tex; mode=display">\left<\psi|\phi\right>=\int \left<\psi|x'\right>\left<x'|\phi\right>dx'=\int \psi^*(x')\phi(x')dx' \tag{1.7.2}</script><script type="math/tex; mode=display">
+\begin{aligned}
+    \left<\psi|A|\phi\right>&=\iint \left<\psi|x'\right>\left<x'|A|x''\right>\left<x''|\phi\right>dx'dx''
+    \\&=\iint \psi^*(x')\left<x'|A|x''\right>\phi(x'')dx'dx''
+\end{aligned}
+\tag{1.7.3}</script><p>对一个一般的算符，矩阵元$\left&lt;x’|A|x’’\right&gt;$是$x’,x’’$的函数。而当$A$是位置算符的函数时（从而拥有相同的本征态），我们有：</p>
+<script type="math/tex; mode=display">\left<x'|f(x)|x''\right>=\left<x'|f(x'')|x''\right>=f(x'')\delta(x'-x'')</script><p>上面的乘积就可以写为：</p>
+<script type="math/tex; mode=display">\left<\psi|f(x)|\phi\right>=\int \psi^*(x')f(x')\phi(x')dx'</script><h3 id="动量空间波函数"><a href="#动量空间波函数" class="headerlink" title="动量空间波函数"></a>动量空间波函数</h3><p>下面我们来考虑动量表象下波函数和位置空间波函数的关系，从无穷小平移算符出发：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left(1-\frac{ip\delta x'}{\hbar}\right)\left|\alpha\right>&=\int \mathscr{T}(\delta x')\left|x'\right>\left<x'|\alpha\right>dx'
+    \\&=\int \left|x'+\delta x'\right>\left<x'|\alpha\right>dx'
+    \\&=\int \left|x'\right>\left<x'-\delta x'|\alpha\right>dx'
+    \\&=\int \left|x'\right>\left(\left<x'|\alpha\right>-\delta x'\frac{\partial}{\partial x'}\left<x'|\alpha\right>\right)dx'
+\end{aligned}</script><p>对比等式两边，我们有：</p>
+<script type="math/tex; mode=display">p\left|\alpha\right>=-i\hbar\int \left|x'\right>\frac{\partial}{\partial x'}\left<x'|\alpha\right>dx'</script><p>从而：</p>
+<script type="math/tex; mode=display">
+\left<x'|p|\phi\right>=-i\hbar\frac{\partial}{\partial x'}\left<x'|\phi\right> \tag{1.7.4}</script><p>等式两边其实都是波函数，因此这定义了一个波函数空间上的线性映射，将波函数映射为动量算符作用后的态矢对应的波函数。这也和波动力学中动量算符的定义一致：</p>
+<script type="math/tex; mode=display">p=-i\hbar\frac{\partial}{\partial x'}</script><p>现在我们可以考虑态矢在动量表象下的展开，即动量空间波函数。利用完备性关系，我们有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left|\phi\right>&=\int \left|p'\right>\left<p'|\phi\right>dp'
+    \\&=\iint \left|p'\right>\left<p'|x'\right>\left<x'|\phi\right>dp'dx'
+    \\&=\int dp'\left|p'\right>\int \left<p'|x'\right>\phi(x')dx'
+\end{aligned}</script><p>对其中出现的$\left<p'|x'\right>$，考虑1.7.4中任意态$\phi$为动量本征态的情况，有：</p'|x'\right></p>
+<script type="math/tex; mode=display">\left<x'|p|p'\right>=p'\left<x'|p'\right>=-i\hbar\frac{\partial}{\partial x'}\left<x'|p'\right></script><p>从而：</p>
+<script type="math/tex; mode=display">\left<x'|p'\right>=N\exp\left(\frac{ip'x'}{\hbar}\right)</script><p>其中$N$是归一化常数，考虑$\left&lt;x’|x’’\right&gt;$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left<x'|x''\right>&=\delta(x'-x'')
+    \\&=\int \left<x'|p'\right>\left<p'|x''\right>dp'
+    \\&=\int \left|N\right|^2\exp\left[\frac{ip'(x'-x'')}{\hbar}\right]dp'
+    \\&=2\pi\hbar\left|N\right|^2\delta(x'-x'')
+\end{aligned}</script><p>从而有：</p>
+<script type="math/tex; mode=display">\left<x'|p'\right>=\frac{1}{\sqrt{2\pi\hbar}}\exp\left(\frac{ip'x'}{\hbar}\right) \tag{1.7.5}</script><p>从而我们得到位置空间波函数到动量空间波函数的变换：</p>
+<script type="math/tex; mode=display">\phi_p(p')=\frac{1}{\sqrt{2\pi\hbar}}\int \phi_x(x')\exp\left(\frac{ip'x'}{\hbar}\right)dx' \tag{1.7.6}</script><p>相似的，可以得到动量空间到位置空间的变换：</p>
+<script type="math/tex; mode=display">\phi_x(x')=\frac{1}{\sqrt{2\pi\hbar}}\int \phi_p(p')\exp\left(-\frac{ip'x'}{\hbar}\right)dp' \tag{1.7.7}</script><p>这是傅里叶变换和傅里叶逆变换的形式。</p>
+<h3 id="推广至三维"><a href="#推广至三维" class="headerlink" title="推广至三维"></a>推广至三维</h3><p>三维的归一化条件和完备性关系成为：</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{x''}\right>=\delta^3(\mathbf{x'}-\mathbf{x''})</script><script type="math/tex; mode=display">\int d^3\mathbf{x'}\left|\mathbf{x'}\right>\left<\mathbf{x'}\right|=1</script><p>对动量本征态也是同样。</p>
+<p>三维的动量算符作用在波函数上，微分成为梯度，1.7.4成为：</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{p}|\phi\right>=-i\hbar\nabla'\left<\mathbf{x'}|\phi\right></script><p>1.7.5成为：</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{p'}\right>=\frac{1}{[2\pi\hbar]^{3/2}}\exp\left(\frac{i\mathbf{x'}\cdot\mathbf{p'}}{\hbar}\right)</script><p>位置空间和动量空间波函数间的变换也成为三维傅里叶变换：</p>
+<script type="math/tex; mode=display">\phi_p(\mathbf{p'})=\frac{1}{[2\pi\hbar]^{3/2}}\int \phi_x(\mathbf{x'})\exp\left(\frac{i\mathbf{p'}\cdot\mathbf{x'}}{\hbar}\right)d\mathbf{x'} \tag{1.7.6}</script><script type="math/tex; mode=display">\phi_x(\mathbf{x'})=\frac{1}{[2\pi\hbar]^{3/2}}\int \phi_p(\mathbf{p'})\exp\left(-\frac{i\mathbf{p'}\cdot\mathbf{x'}}{\hbar}\right)d\mathbf{p'} \tag{1.7.7}</script><p>注意三维中位置波函数的量纲即成为长度的-3/2次方，这样粒子在全空间被发现的概率才仍然会是无量纲的1。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Sakurai量子力学笔记</category>
+      </categories>
+      <tags>
+        <tag>物理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为什么我们不该相信阴谋论</title>
+    <url>/2020/02/08/bayes-theorem-and-occams-razor/</url>
+    <content><![CDATA[<p>最近在B站偶然看到了一个介绍地平论的视频，这倒不是什么新鲜事，地平论也不是我第一次听说，不过下面称赞他们的独立思考能力和质疑精神的评论还是让我惊掉了下巴。地平论，顾名思义，主张地球不是个球体而是个圆盘，“地盘”的中心是北极，而南极洲是环绕圆盘外围的一圈冰墙。日月是在地盘上面绕转的两道光束，万有引力也不存在，地球在以$9.8m/s^2$的加速度向上加速运动，重力其实是地球系中的惯性力（草）。至于那些地球的照片等等，也都是伪造出来的。至于各国政府为什么要这么做，这大概隐藏着不可告人的惊 天 阴 谋吧（大草原）。</p><a id="more"></a>
+<p><img src="Flat_earth.png" alt="“地盘”图示"></p>
+<div align="center">     
+    所谓“地盘”
+</div>
+
+<p>当然这种not even wrong的东西倒并不值得太认真对待，不过我们可以带着些“质疑精神”，试试仅凭自己的眼睛能不能反驳地平论。答案是可以的。我们知道不同纬度处看到的北极星的高度角是不同的，且高度角就等于地理纬度。（当然，这要基于地球是个球）</p>
+<p><img src="polaris_altitude.png" alt="北极星高度角图示"></p>
+<div align="center">     
+    遥远的星光可近似看作平行光，北极星处于天北极附近，根据简单的几何推导就能看出北极星的高度角和地理纬度l相等
+    <br><br>
+</div>
+
+<p>地平论无法解释为什么不同纬度看到的星空是不一样的。就算他们可以声称星星其实离我们非常近，以至于在地盘上不同位置观测就会有不同的高度角，但在有限大小的地盘上高度角一定有一个大于零的最小值。换言之，只要地平论者愿意花钱去赤道看看高度角为零的北极星，他这套理论自然会不攻自破。</p>
+<p><img src="flat_earth_polaris.png" alt="地盘上北极星的高度角"></p>
+<div align="center">     
+    在地盘上的任何地点观测北极星，其高度角都不可能为零
+    <br><br>
+</div>
+
+<p>当然反驳地平论本身并不是这篇文章主要要说的事。我们的确有方法仅凭自己的观测的推理证实地球是圆的，但真的有必要持怀疑精神到这种程度吗？或者说，即使我们没法靠自己证实地球是圆的，在拥有相同的信息的前提下，我们是否有依据选择一种理论而排斥另一种呢？</p>
+<p>我们先来复习一下概率论。条件概率$P(A|B)$指的是事件B发生的前提下A发生的概率。显然我们有A和B同时发生和“B发生且B发生的前提下A发生”是一个意思，那么我们有：</p>
+<script type="math/tex; mode=display">P(A|B)P(B)=P(AB)=P(B|A)P(A)</script><p>稍微变换一下就有<strong>贝叶斯定理</strong>：</p>
+<script type="math/tex; mode=display">P(A|B)=\frac{P(B|A)P(A)}{P(B)}</script><p>我们把它写得物理一点：</p>
+<script type="math/tex; mode=display">P(M|D)=\frac{P(D|M)P(M)}{P(D)}</script><p>$M$代表模型，而$D$代表观测到的数据。这时贝叶斯公式中各项的意义就明了了：  </p>
+<ul>
+<li>左边的$P(M|D)$称作<strong>后验</strong>(posterior)，表示在分析了观测数据后我们得出的模型$M$正确的概率</li>
+<li>$P(D|M)$称作<strong>似然</strong>(likelihood)，代表模型$M$下预测的观测数据的分布</li>
+<li>$P(M)$称作<strong>先验</strong>(prior)，代表我们在观测之前已有的对模型的知识</li>
+<li>$P(D)$称作evidence，描述的是观测到数据$D$的概率，这一项作为归一化系数出现，在贝叶斯分析中通常不被考虑（因为我们感兴趣的是不同模型的后验，这时evidence总是个常数）。</li>
+</ul>
+<p>一般情况下贝叶斯公式会被用作估计模型的参数的后验分布$P(M,\boldsymbol{\theta}|D)$，这时上面的$P(M)$可以看做$P(M,\boldsymbol{\theta})$把参数$\boldsymbol{\theta}$积分掉的边缘分布。</p>
+<p>现在我们假设有了数据$D$，模型$M_1$和$M_2$都可以用于解释它。对$M_1$和$M_2$我们没有主观的偏好，因此取相同的先验$P(M_1)=P(M_2)$。它们的<strong>概率比</strong>(odds ratio)就成为：</p>
+<script type="math/tex; mode=display">O_{21}=\frac{P(M_2|D)}{P(M_1|D)}=\frac{P(D|M_2)}{P(D|M_1)}</script><p>如果模型$M_1$只有一个参数$\mu$，可以取$\mu$的先验为在$-\Delta_{\mu}/2$到$\Delta_{\mu}/2$之间的均匀分布。假设似然函数可以用中心为使似然取最大值的$\mu=\mu^0$，方差为$\sigma_\mu^2$的高斯分布来描述。一般情况下先验只能给出一个大致的范围，而数据能告诉我们更多关于参数的信息，也就是说$\sigma_{\mu}\ll\Delta_{\mu}$。我们就有：</p>
+<script type="math/tex; mode=display">P(D|M_1)=\int P(D|M_1,\mu)p(\mu) \mathrm{d}\mu \sim L^0(M_1)\frac{\sigma_\mu}{\Delta_\mu}</script><p>这里$L^0(M_1)=\max(P(D|M_1,\mu))$。</p>
+<p>注意到$\sigma_\mu/\Delta_\mu \ll 1$，这表明我们<strong>每在模型中增加一个独立参数，都会在$P(D|M)$中乘上一个远小于1的系数</strong>。如果$M_2$有两个独立参数$p$和$q$，那么：</p>
+<script type="math/tex; mode=display">O_{21} \sim \frac{L^0(M_2)}{L^0(M_1)}\frac{(\sigma_p/\Delta_p)(\sigma_q/\Delta_q)}{\sigma_\mu/\Delta_\mu}</script><p>如果$M_1$和$M_2$对数据的解释能力相近，即$L^0(M_1)\sim L^0(M_2)$，那么就有$O_{21}\ll 1$，我们就有很大把握选择$M_1$而拒绝$M_2$。</p>
+<p>这一原则可以被简单地概括为，<strong>对同样能解释观测到的现象的模型，我们总是选择所作的假设更少的的那个</strong>。或者说，“若非必要，勿增实体”——没错，这正是大名鼎鼎的<strong>奥卡姆剃刀</strong>。</p>
+<p>现在回到标题，为什么我们不该相信阴谋论？答案不证自明——阴谋论并没有提供更符合的解释，却凭空多出了相当多的假设，这也就使它的后验概率变得低得多。阴谋论最多做到自圆其说，但这并不是终点，为了质疑而产生的质疑也不会更能解释问题。</p>
+]]></content>
+      <categories>
+        <category>科普</category>
+      </categories>
+      <tags>
+        <tag>科普</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>宇宙距离阶梯</title>
+    <url>/2019/05/06/distance-ladder/</url>
+    <content><![CDATA[<blockquote>
+<p>本文来自<strong>初光天文科普工作室</strong>，作者为本人。<a href="https://mp.weixin.qq.com/s?__biz=Mzg3NTE1NjczNg==&amp;mid=2247483829&amp;idx=1&amp;sn=713804a7121f7f3656f1eb27e8358855&amp;chksm=cec485daf9b30ccca0cfcac3c73ab087368147ec69d4fe0c08ca8dc03aa2848b4b800dd142c8&amp;scene=0&amp;xtrack=1&amp;key=12a4c5f4665589b6e94ca0c1c30d7798ef98e5d9aa61bffff2f38ba93fef7b48b1606a877f6743898afe0350aa3e43f5ac555cb2870f1ce457c96d63817247fefaabbc6e908c7a5e78ee6d40bc6a4163&amp;ascene=1&amp;uin=OTI2NzcxMjE5&amp;devicetype=Windows+10&amp;version=62060739&amp;lang=zh_CN&amp;pass_ticket=B%2FUHcekpUTBQzDCkBv2i%2FYkVx4%2FTgAii0dVcQfh2%2B%2BkHOXsbJuQgAaa7HfEWpoVC" target="_blank" rel="noopener">原文链接</a><br><img src="firstlight.jpg" alt="微信公众号Firstlight_USTC"></p>
+</blockquote><p>即使没有亲眼见过满天繁星，你可能也听说过这样一个事实：即使是太阳系外离我们最近的恒星，与我们的距离也有4光年之遥（一光年定义为光传播一年走过的距离），而我们肉眼所见的很多恒星与我们的距离都可以达到数千光年。银河系外的星系的距离则又更上一层楼，人们甚至可以探测到数百亿光年远的星系发来的光。</p><a id="more"></a>
+
+<p>在感叹于宇宙的辽阔的同时，你有没有想过我们是如何确定遥远的天体与我们之间的距离的呢？这并不是一个简单的问题——我们没法制造出来一个巨大的尺，把天体和地球放在它的两端；也不能向天体发射一束激光，测量它反射回地球需要多长时间（不过对于太阳系内的行星，这一操作是可行的）。事实上，我们从天体接收到的信息也几乎只有它发出的光。下面，让我们看看天文学家利用了哪些方法来测量天体的距离。</p>
+<h1 id="三角视差法"><a href="#三角视差法" class="headerlink" title="三角视差法"></a>三角视差法</h1><p>如下图所示，一个位置固定的物体，我们从不同的位置向它看去，视线方向也会不同，这种现象被称为<strong>视差</strong>。</p>
+<p><img src="parallax_1.png" alt="视差图示"></p>
+<div align="center">     
+    视线方向的差异称为视差
+</div>
+
+<p> 那么视差和天体距离又有什么关系呢？我们知道，地球是绕太阳运动的，因此在一年之中的不同时刻观测同一颗恒星也会有视差现象，称为<strong>周年视差</strong>。参考下图，我们可以近似地得到周年视差$\theta$与距离的关系：</p>
+<script type="math/tex; mode=display">\theta = \frac{1AU}{D}</script><p> 其中$1AU$是一天文单位，约等于$1.5\times 10^{11}m$，它代表者地球与太阳的平均距离。</p>
+<p> <img src="parallax_2.png" alt="周年视差"><br> <div align="center">  
+     周年视差示意图
+ </div></p>
+<p>这就告诉了我们一种测量距离的方法。</p>
+<p>基于上面的讨论，我们可以定义一个新的距离单位——秒差距(parsec, 简记为pc)。距离我们1秒差距的恒星的周年视差为1角秒，它等于1度的1/3600。经过简单的计算可以得出，1秒差距约等于3.26光年。在天文学中，秒差距是一个比较常用的距离单位。</p>
+<h1 id="标准烛光"><a href="#标准烛光" class="headerlink" title="标准烛光"></a>标准烛光</h1><p>上面介绍的三角视差法可以较为精确地确定恒星离我们的距离，但是这并不是这个问题的全部答案。我们从上面的讨论中也可以看见，天体距离我们越远，它的周年视差就越小。那么对于远到一定程度的天体，我们将无法分辨出来它们的周年视差，自然三角视差法也就不能用于测量距离了。事实上，目前用三角视差法测距，一般几百pc就是极限了。那么对于更远的天体，我们该怎么确定它的距离呢？</p>
+<p>在了解下面要介绍的方法之前，让我们先来考虑这样一个问题。在日常生活中，很多人应该都会有这样的经验，一个发光的物体，比如蜡烛，在它离我们比较近的时候会感觉比离我们远的时候更亮。这是因为当它单位时间内辐射的能量（称为<strong>光度</strong>）是一定的，离我们更远时，光会分散到更广的面积上，那么平均下来各处的亮度就会变弱。经过定量的分析和计算，我们发现<strong>观测到的亮度和距离的平方成反比</strong>。</p>
+<p><img src="mag_and_distance.png" alt="从恒星发出的光向四面八方传播"></p>
+<div align="center">
+    从恒星发出的光向四面八方传播
+</div>
+
+<p>你可能已经知道了为什么要特意进行上面的讨论了。我们可以测量出到达望远镜的星光的亮度，如果通过其他手段可以确定恒星的光度，那么我们就可以计算出恒星的距离。已知其光度的天体，我们称之为“<strong>标准烛光</strong>”。</p>
+<p>有很多种标准烛光用于距离测量。其中一种是造父变星，这是一种亮度周期性变化的恒星，在对这一类天体的观测和研究中，我们发现它<strong>亮度变化的周期的对数是和它的光度的对数成正比的</strong>，因此我们可以通过观测一个星系中的造父变星来确定这个星系距离我们的位置。我们所熟知的北极星其实就是一颗造父变星。其他的，比如天琴座RR变星，Ia型超新星等，也被作为标准烛光来确定或近或远的距离，这里就不一一介绍了。</p>
+<p><img src="plrelnceph.png" alt="周光关系"></p>
+<div align="center">
+    第一型，第二型造父变星和天琴座RR变星的周光关系，注意图中是对数坐标。
+    图源：http://www.atnf.csiro.au/outreach/education/senior/astrophysics/variable_cepheids.html
+</div>
+
+<h1 id="宇宙学红移"><a href="#宇宙学红移" class="headerlink" title="宇宙学红移"></a>宇宙学红移</h1><p>在上世纪初，哈勃通过分析河外星系的光谱发现，大多数河外星系的光谱都是有红移的，即接收到的谱线的波长比本来的波长更长。如果把这种红移当做是星系在远离我们运动的多普勒效应导致的结果的话，推算出星系远离我们的速度大致与距离成正比，这被称做哈勃关系，他计算的结果如下图所示：</p>
+<p><img src="cosmological_redshift.jpg" alt="哈勃关系"></p>
+<div align="center">
+    哈勃关系 | 图源： A relation between distance and radial velocity among extra-galactic nebulae, E. P. Hubble
+</div>
+
+<p>现在的宇宙学告诉我们，这种红移并非是由于普通意义上星系在远离我们运动，而是由于<strong>宇宙膨胀</strong>导致的。根据广义相对论的计算，我们可以得到宇宙学红移的表达式。在近距离内，它可以近似成哈勃观测得到的正比关系。对于很远的星系，宇宙学红移也是一种测量距离的手段。</p>
+<h1 id="结语——宇宙距离阶梯"><a href="#结语——宇宙距离阶梯" class="headerlink" title="结语——宇宙距离阶梯"></a>结语——宇宙距离阶梯</h1><p>上面简单地介绍了三种不同的距离测量方式，但也只是讨论了最基本的概念，实际上的距离测量方法细化来看也各有其不同的原理，只是无法在本文中一一介绍了。</p>
+<p><img src="distance_ladder.JPG" alt="宇宙距离阶梯"></p>
+<div align="center">
+    宇宙距离阶梯 | 图源：向守平《天体物理概论》
+</div>
+
+<p>你也许会困惑，上面介绍的一些方法中，确定这个方法的有效性的过程中本来就利用了距离（比如，确定造父变星的周光关系时，我们不能直接得到它的光度，而是要根据观测到的亮度和距离推算光度），如果本来就知道距离的话为什么还要发展一个新的方法呢？事实上，各种测量方法都有其适用范围和限制，我们通过一个近距离上可用的方法来发现和确定下一个在更远的距离上可用的方法，如此一级一级推下去，这一系列方法有个形象的名字——<strong>宇宙距离阶梯</strong>。</p>
+<p>在这或简单或复杂的阶梯上一层层攀登的过程，也恰似人类认知自身所处的宇宙的过程。我们可能一生都局限在地球这一微不足道的行星之上，但是仍可以用科学的方法去探索浩瀚的宇宙。</p>
+]]></content>
+      <categories>
+        <category>科普</category>
+      </categories>
+      <tags>
+        <tag>科普</tag>
+        <tag>天文</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于超现实数</title>
+    <url>/2020/05/30/surreal-numbers/</url>
+    <content><![CDATA[<p>《研究之美》中描写了这样一个故事：在远离尘世的小岛上“寻找自我”的两人，根据石碑上记载的基本定义，从零开始发展出了一个不同的数学体系——超现实数(<strong>surreal numbers</strong>)。</p><p>书中比起介绍的内容，从已知的基本定义开始扩展得出有意义的定理的过程也同样精彩。本文则是一种相对拙劣的总结，试图将其中的内容以一种更清晰易懂的方式重新叙述出来。因此本文不足以成为《研究之美》的替代，也希望本文可以使更多人阅读这一值得被阅读的作品。</p><a id="more"></a>
+
+<h2 id="数的定义和序关系"><a href="#数的定义和序关系" class="headerlink" title="数的定义和序关系"></a>数的定义和序关系</h2><p><strong>数</strong>被定义为两个数集：</p>
+<script type="math/tex; mode=display">x=(X_L,X_R),\ \mathrm{where}\quad X_L\ngeq X_R \tag{1}</script><p>其中$X_L\ngeq X_R$是指任意$X_L$中的元素$x_L$和$X_R$中的元素$x_R$都有$x_L\ngeq x_R$。（如果$X_L$和$X_R$其中有一个是空集，那么$X_L\ngeq X_R$也是成立的，考虑其逆反命题就能得知这一点）</p>
+<p>而<strong>序关系</strong>$x\le y$则定义为：</p>
+<script type="math/tex; mode=display">x\le y \qquad\mathrm{when}\qquad X_L\ngeq y, x\ngeq Y_R \tag{2}</script><p>（$x\ge y$即是说$y\le x$）</p>
+<p>这是一个<strong>递归</strong>的定义，要定义一个数，必须先要有两个数集，而定义数集里的数也需要数······不过这并不是无止境的，因为我们可以拿<strong>空集</strong>来定义数：</p>
+<script type="math/tex; mode=display">0 = (\emptyset,\emptyset)</script><p>这里的0只是个记号，不过我们在后面就会看到它的确有0的性质（加法零元）。</p>
+<p>书中似乎用了点上帝创世的比喻，我们称0是“<strong>第一天</strong>”创造出来的。有了0之后的第二天，我们便可以将它塞到左集和右集，创造下面两个数：</p>
+<script type="math/tex; mode=display">-1=(\emptyset,\{0\}),\qquad 1=(\{0\},\emptyset)</script><p>于是我们可以一天天的创造数。这个“创造日”的概念将会在下面被广泛应用到证明中。</p>
+<p><em>（用形式一点的说法，数$x$的创造日可以递归地定义为<br>$d(x)=\max(X_L,X_R)+1$，且$d(0)=1$。这是为了说明创造日是一个有良好定义的概念）</em></p>
+<h3 id="le-的传递性"><a href="#le-的传递性" class="headerlink" title="$\le$的传递性"></a>$\le$的传递性</h3><p>下面证明$\le$的<strong>传递性</strong>：</p>
+<script type="math/tex; mode=display">x\le y, y\le z\ \Rightarrow\ x\le z \tag{T1}</script><p>对$(x,y,z)$的创造日之和归纳，即假设(T1)对创造日之和小于$d(x)+d(y)+d(z)$的一组数都成立。</p>
+<p>若$x\nleq z$，有两种可能：</p>
+<ul>
+<li>$X_L$中存在某些$x_L\ge z$，结合$y\le z$由归纳假设有$y\le x_L$，这与$x\le y$矛盾。</li>
+<li>$Z_R$中存在某些$z_R\le x$，结合$x\le y$由归纳假设有$z_R\le y$，这与$y\le z$矛盾。</li>
+</ul>
+<p>从而$x\le z$，即(T1)得证。</p>
+<h3 id="le-的完全性和自反性"><a href="#le-的完全性和自反性" class="headerlink" title="$\le$的完全性和自反性"></a>$\le$的完全性和自反性</h3><p>下面证明$\le$的<strong>自反性</strong>，即对任意$x$，</p>
+<script type="math/tex; mode=display">x\le x \tag{T3}</script><p>各定理的顺序和原书不一定相同，不过为了尊重原书（以及方便），序号还是和原书保持一致。</p>
+<p>(T3)容易由对创造日的归纳法给出，$x\le x$即是说$X_L\ngeq x$且$x\ngeq X_R$。而$x_L\ge x$蕴含$X_L\ngeq x_L$，其中必然有$x_L\ngeq x_L$，这和归纳假设矛盾。从而$X_L\ngeq x$成立，$x\ngeq X_R$也可以用相同方法证明。</p>
+<p>从而可以证明下面的引理：</p>
+<script type="math/tex; mode=display">X_L\le x,x\le X_R \tag{T2}</script><p>仍然使用归纳法，$x_L\nleq x$即是说存在一个$x_{LL}\ge x$或$x_L\ge x_R$。后者违反了规则(1)（数的定义）。而前者由归纳假设$x_{LL}\le x_L$和传递律有$x\le x_{LL}\le x_L$，则$X_L\ngeq x_L$，这和(T3)矛盾。</p>
+<p>$y\nleq x$即是存在$x_L\ge y$或$x\ge y_R$。由(T2)，这即是说$y\le x_L\le x$或$y\le y_R\le x$。这即是$\le$的<strong>完全性</strong>：</p>
+<script type="math/tex; mode=display">x\nleq y \Rightarrow y\le x \tag{T4}</script><p>从而我们可以把$x\ngeq y$定义为$x&lt;y$。显然$x&lt;y$蕴含了$x\le y$，于是下面两条传递律也成立：</p>
+<script type="math/tex; mode=display">x<y, y\le z\  \Rightarrow\ x<z \tag{T5}</script><script type="math/tex; mode=display">x\le y, y<z\  \Rightarrow\ x\le z \tag{T6}</script><p>同时$x\le y$的定义也可以改写为：</p>
+<script type="math/tex; mode=display">x\le y \qquad\mathrm{when}\qquad X_L<y, x<Y_R \tag{2'}</script><p>同时结合(T3)，(T2)可以被改写为</p>
+<script type="math/tex; mode=display">X_L<x<X_R \tag{T2'}</script><p>我们证明了$\le$满足偏序关系的自反性和传递性，但它并不严格的满足反对称性：可以存在两个数$x,y$，$x\le y,y\le x$，且$x\neq y$。<br>当$x\le y,y\le x$时，我们称$x$和$y$“<strong>相似</strong>”：$x\equiv y$。容易验证这是一个等价关系，如果把“$=$”换成“$\equiv$”，我们也可以称$\le$是数集上的全序。</p>
+<h2 id="加法"><a href="#加法" class="headerlink" title="加法"></a>加法</h2><h3 id="加法的性质"><a href="#加法的性质" class="headerlink" title="加法的性质"></a>加法的性质</h3><p>加法定义为</p>
+<script type="math/tex; mode=display">x+y = ((X_L+y)\cup(Y_L+x),(X_R+y)\cup(Y_R+x)) \tag{3}</script><p>显然<strong>交换律</strong>成立：</p>
+<script type="math/tex; mode=display">x+y = y+x \tag{T9}</script><p>有<strong>零元</strong>：</p>
+<script type="math/tex; mode=display">x+0=x \tag{T10}</script><p>$x+0=(X_L+0,X_R+0)$，从而容易由归纳法证明。</p>
+<p><strong>结合律</strong>：</p>
+<script type="math/tex; mode=display">x+(y+z) = (x+y)+z \tag{T11}</script><p>用归纳法证明，</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    左 = (&((X_L+y)+z)\cup((Y_L+x)+z)\cup(Z_L+(x+y)),
+    \\&((X_R+y)+z)\cup((Y_R+x)+z)\cup(Z_R+(x+y)))
+\end{aligned}</script><script type="math/tex; mode=display">
+\begin{aligned}
+    右 = (&(X_L+(y+z))\cup((Y_L+z)+x)\cup((Z_L+y)+x),
+    \\&(X_R+(y+z))\cup((Y_R+z)+x)\cup((Z_R+y)+x))
+\end{aligned}</script><p>由归纳假设，这六个集合分别相等。</p>
+<p>上面证明的命题都是“$=$”的，即集合的元素也完全相同。我们希望上一节中的相似在加法中也适用，即</p>
+<script type="math/tex; mode=display">x\equiv y\ \Rightarrow \ x+z\equiv y+z \tag{T12}</script><p>或者，更一般的，</p>
+<script type="math/tex; mode=display">x\le y\ \Rightarrow \ x+z\le y+z \tag{T13}</script><p>即是要证明$(X_L+z)\cup(Z_L+x)&lt;y+z$，$x+z&lt;(Y_R+z)\cup(Z_R+y)$。然而这里归纳法只能证明$X_L+z\le y+z$。为了排除$x_L+z\equiv y+z$的情况，我们需要(T13)的逆命题也成立：</p>
+<script type="math/tex; mode=display">x+z\le y+z\ \Rightarrow \ x\le y \tag{T14}</script><p>这里需要证明$x_L&lt;y,x&lt;y_R$。而这里归纳法也只能证明$x_L\le y$，这又会导致对(T13)的依赖。<br>一种方法是对$(x,y,z)$的创造日之和做归纳，证明命题“(T13)且(T14)”。不过这会在证明$Z_L+x&lt;y+z$时出现问题：证明$Z_L+x&lt;y+z$需要证明两部分，$Z_L+x\le Z_L+y$和$Z_L+y&lt;z+y$，而后一部分$(z_l,z,y)$的创造日之和不一定小于$(x,y,z)$，于是归纳法失效。</p>
+<p>为了解除定理之间的相互依赖，我们使用对称的形式：</p>
+<script type="math/tex; mode=display">\mathrm{V}(x,x',y,y'):\qquad x\le x',y\le y'\ \Rightarrow x+y\le x'+y'</script><script type="math/tex; mode=display">\mathrm{VI}(x,x',y,y'):\qquad x+y\ge x'+y',y\le y'\ \Rightarrow x\ge x'</script><p>要使用归纳法证明$\mathrm{V}(x,x’,y,y’)$，即  </p>
+<script type="math/tex; mode=display">(X_L+y)\cup(Y_L+x)\ngeq x'+y',x+y \ngeq (X'_R+y)\cup(Y'_R+x)</script><p>类似之前的讨论，我们需要</p>
+<script type="math/tex; mode=display">\mathrm{VI}(X_L,x',y,y'),\mathrm{VI}(Y_L,y',x,x'),\mathrm{VI}(x,X_R',y,y'),\mathrm{VI}(y,Y_R',x,x')</script><p>成立。<br>而要证明$\mathrm{VI}(x,x’,y,y’)$，即  </p>
+<script type="math/tex; mode=display">x'_L\ngeq x, x'\ngeq X_R</script><p>我们需要  </p>
+<script type="math/tex; mode=display">\mathrm{V}(x,X_L',y,y'),\mathrm{V}(X_R,x',y,y')</script><p>成立。<br>注意这时$\mathrm{V}(x,x’,y,y’)$和$\mathrm{VI}(x,x’,y,y’)$所依赖的都是创造日之和小于$(x,x’,y,y’)$的命题。从而这时用归纳法证明“$\mathrm{V}(x,x’,y,y’)$且$\mathrm{VI}(x,x’,y,y’)$”是没有问题的。</p>
+<p>在最后，我们要证明的是一个相当基础<del>（过于基础以至于被忘记需要证明）</del>的命题——$x+y$是数。</p>
+<p>（需要说明的是，一些定理的证明过程没有依赖规则(1)，从而它们对不满足数的规则的“伪数”也成立，如(T1)(T3)，而本节的(T9)-(T14)和V、VI有些依赖$x$和$y$是数，但没有依赖$x+y$是数。因此在证明过程中使用它们不会构成循环论证。）</p>
+<p>这一命题可以不用归纳法直接证明，$x+y$是数即是说</p>
+<script type="math/tex; mode=display">(X_L+y)\cup(Y_L+x)\ngeq(X_R+y)\cup(Y_R+x)</script><p>可以拆成四个命题，并可以通过套用$\mathrm{VI}(X_L,X_R,y,y)$，$\mathrm{VI}(X_L,x,y,Y_R)$，$\mathrm{VI}(Y_L,y,x,X_R)$，$\mathrm{VI}(Y_L,Y_R,x,x)$直接证明。</p>
+<h3 id="减法"><a href="#减法" class="headerlink" title="减法"></a>减法</h3><p><strong>加法逆元</strong>定义为：</p>
+<script type="math/tex; mode=display">-x = (-X_R, -X_L) \tag{4}</script><p>显然有</p>
+<script type="math/tex; mode=display">x=-(-x) \tag{T16}</script><p>我们先不证明$-x$是数，注意后面的定理中也不会用到这一条件。</p>
+<p><strong>减法</strong>即定义为和逆元的加法：</p>
+<script type="math/tex; mode=display">x-y = x+(-y) \tag{5}</script><p>下面证明</p>
+<script type="math/tex; mode=display">x-x\equiv 0 \tag{T15}</script><p>这即是证明</p>
+<script type="math/tex; mode=display">((X_L+(-x))\cup((-X_R)+x),(X_R+(-x))\cup((-X_L)+x)) \equiv 0</script><p>即$x_L+(-x)\ngeq 0,(-x_R)+x\ngeq 0,x_R+(-x)\nleq0,-x_L+x\nleq0$。<br>利用归纳法证明，若$x_L+(-x)\ge 0$，则$(-X)_R+x_L=-X_L+x_L&gt;0$。这与归纳假设$x_L-x_L\equiv0$矛盾，从而$x_L+(-x)&lt;0$成立。类似的方法也可以证明另三个条件。</p>
+<p><em>（(T15)说明减法并不是严格的加法的逆运算——因为这里是“$=$”而不是“$\equiv$”，只有在相似的意义上考虑它们才是逆运算，这也在后面的(T17)中体现。不过从下一节开始我们将只会考虑“$\equiv$”。）</em></p>
+<p>下面的定理可以由我们已经得到的定理来推出，而不必还原到基本定义了：</p>
+<script type="math/tex; mode=display">(x+y)-y \equiv x \tag{T17}</script><p>证明：$(x+y)-y = x+(y-y) \equiv x+0 = x$。</p>
+<script type="math/tex; mode=display">-(x+y) = (-x) + (-y) \tag{T18}</script><p>证明：$-(x+y) = 0-(x+y) = (x-x)+(y-y)-(x+y) = -x-y$</p>
+<script type="math/tex; mode=display">x\le y\ \Rightarrow \ -y\le -x \tag{T19}</script><p>证明：$x\le y\Rightarrow x-y-x\le y-y-x \Rightarrow -y\le -x$<br>有了(T19)，$-x$是数就是显然的了。</p>
+<h2 id="实数"><a href="#实数" class="headerlink" title="实数"></a>实数</h2><h3 id="数的构造规律"><a href="#数的构造规律" class="headerlink" title="数的构造规律"></a>数的构造规律</h3><p>现在我们来考虑实数是如何构造出来的。我们看到无论是序关系还是加减法运算下，相似的数之间并无什么差别，于是在考虑数如何被构造出来的时候我们也只考虑一组相似的数之中的一个。因此我们需要判断两数相似的判据，比如下面的定理：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \mathrm{if}\qquad &Y_L < x < Y_R
+    \\ \mathrm{then}\qquad &x\equiv (X_L\cup Y_L, X_R\cup Y_R)
+\end{aligned}
+\tag{T7}</script><p>（这是符合直觉的，由于数集上有线性序，可以认为数$x$在$X_L$和$X_R$的中间，而在$x$的两边增加一些元素也不会影响$x$的位置）</p>
+<p>令$z=(X_L\cup Y_L, X_R\cup Y_R)$。由(T2’)显然有$Z_L=X_L\cup Y_L&lt; x$，$z&lt;z_R\Rightarrow z&lt;X_R$，即$z\le x$。$z\ge x$也易证。从而$x\equiv z$。</p>
+<p>进一步的，我们有一个大胆的猜测：若在第$n$日时彼此不相似的数为</p>
+<script type="math/tex; mode=display">x_1 < x_2 < \cdots < x_m</script><p>则第$n+1$日创造出的新数只有：</p>
+<script type="math/tex; mode=display">\left(\emptyset,\left\{x_{1}\right\}\right),\left(\left\{x_{1}\right\},\left\{x_{2}\right\}\right), \ldots,\left(\left\{x_{m-1}\right\},\left\{x_{m}\right\}\right),\left(\left\{x_{m}\right\}, \emptyset\right)</script><p>要证明这一猜想，由(T7)，只需要考察$x_1\cdots x_m$中两个数构造出的数$(\left\{x_{i-1}\right\},\left\{x_{j+1}\right\})$，证明其相似于上面的某一数。</p>
+<p>为此，我们可以证明下面这个更一般性的定理：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \quad &若x是满足Y_L<x<Y_R的首个创造出来的数，
+    \\ &则x\equiv y。
+\end{aligned}
+\tag{T8}</script><p>由于$x_L$和$x_R$比$x$更早创造，从而$Y_L&lt;x_L&lt;Y_R$和$Y_L&lt;x_R&lt;Y_R$不成立，且$x_L&lt;x&lt;x_R$，从而存在$y_L,y_R$，使$x_L&lt;y_L&lt;y&lt;y_R&lt;x_R$。故$x$满足(T7)的条件，从而$x\equiv y$。 </p>
+<p>从而$(\left\{x_{i-1}\right\},\left\{x_{j+1}\right\})$相似于$x_i\cdots x_j$中最先被创造的数，不是一个新数。</p>
+<h3 id="有限天内可以创造的数"><a href="#有限天内可以创造的数" class="headerlink" title="有限天内可以创造的数"></a>有限天内可以创造的数</h3><p>我们有第一天构造的数</p>
+<script type="math/tex; mode=display">0=(\emptyset,\emptyset)</script><p>以及第二天</p>
+<script type="math/tex; mode=display">-1=(\emptyset,\{0\}),\qquad 1=(\{0\},\emptyset)</script><p>（容易验证$-1$是$1$的加法逆元，我们采用的记号是没问题的）</p>
+<p>那么第三天创造的数就有：</p>
+<script type="math/tex; mode=display">(\emptyset,\{-1\}),(\{-1\},\{0\}),(\{0\},\{1\}),(\{1\},\emptyset)</script><p>试着做一下加法：</p>
+<script type="math/tex; mode=display">1+1=(\{0+1\},\emptyset)=(\{1\},\emptyset)</script><p>我们把$1+1$定义为$2$，即$2\equiv (\{1\},\emptyset)$。<br>而对$b=(\{0\},\{1\})$，</p>
+<script type="math/tex; mode=display">b+b=(\{0+b\},\{1+b\})=(\{b\},\{1+b\})</script><p>由于$0&lt;b&lt;1$，$1$就是$b$和$1+b$之间最早创造出来的数，由(T8)，$b+b\equiv 1$，从而可以称$b\equiv\frac{1}{2}$。<br><img src="number-creation.png" alt></p>
+<p>我们看到数的构造似乎有这样的规律，对在第$n$天已经创造出来的数中相邻的两个数$x_i,x_{i+1}$，由它们创造的数$y=(\{x_i\},\{x_{i+1}\})$满足$y+y=x_i+x_{i+1}$。因此我们假设在第$n$天所有被创造出来的数为：</p>
+<script type="math/tex; mode=display">0,\pm\frac{1}{2^{n}},\cdots,\pm 1,\pm\left(1+\frac{1}{2^{n-1}}\right),\cdots,n+1</script><p>（为了方便，这里我们称$1$和$-1$被创造出来的那天为第$0$天。）<br>（即$0-1$之间是$\frac{i}{2^n}$，$1-2$之间是$1+\frac{i}{2^{n-1}}$······当然我们还没定义乘法和乘方，这里的$\frac{k}{2^n}$可以递归地定义为满足$\frac{k}{2^n}+\frac{k}{2^n}=\frac{k}{2^{n-1}}$的数，其唯一性容易验证，而$\frac{k}{2^0}=k$。）</p>
+<p>这一假设等价于在第$n$天创造出来的数</p>
+<script type="math/tex; mode=display">n-i+\frac{k}{2^i} \equiv \left(\left\{n-i+\frac{(k-1)/2}{2^{i-1}}\right\}, \left\{n-i+\frac{(k+1)/2}{2^{i-1}}\right\}\right)</script><p>（$k$是奇数，否则会更早被创造出来）</p>
+<p>用归纳法证明这一假设，分两步进行。首先考虑</p>
+<script type="math/tex; mode=display">1+x = ((1+X_L)\cup\{x\}, 1+X_R)</script><p>根据归纳假设，对已经得到的所有数$x$其左集中都可以找到$x_L$使$1+x_L\ge x$，从而上式可以化简为</p>
+<script type="math/tex; mode=display">1+x = (1+X_L, 1+X_R)</script><p>于是$n+1$日创造的所有大于1的数就是第$n$日的所有数加1，即这一假设大于1的部分得到证明。</p>
+<p>第二步我们考虑$0-1$内相邻的两数$\frac{k}{2^n}$和$\frac{k+1}{2^n}$，由它们构造的新数$y=(\{\frac{k}{2^n}\},\{\frac{k+1}{2^n}\})$，有</p>
+<script type="math/tex; mode=display">y+y = \left(\left\{ \frac{k}{2^n}+y \right\}, \left\{ \frac{k+1}{2^n}+y \right\}\right)</script><p>从而</p>
+<script type="math/tex; mode=display">(y+y)_L< \frac{2k+1}{2^n} < (y+y)_R</script><p>若$2k+1\le 2^n$，则由归纳假设$\frac{2k+1}{2^n}$在第$n$日已被创造出来，且是唯一满足上式的数；若$2k+1&gt;2^n$，则前面一段已经证明了它会在第$n+1$日创造出来，且也是唯一满足上式的数。从而由(T8)，</p>
+<script type="math/tex; mode=display">y+y \equiv \frac{2k+1}{2^n}</script><p>即</p>
+<script type="math/tex; mode=display">y\equiv \frac{2k+1}{2^{n+1}}</script><p>我们的假设在$0-1$的部分也得到证明。</p>
+<h3 id="aleph-天创造的数"><a href="#aleph-天创造的数" class="headerlink" title="$\aleph$天创造的数"></a>$\aleph$天创造的数</h3><p>我们已经得到有限日内所能创造的数的规律，它们所代表的实数似乎都可以表示成整数除以$2^n$。或者说，它们用二进制表达都是有限位的。而形如</p>
+<script type="math/tex; mode=display">\frac{1}{3}=0.010101\dots</script><p>的数不能在有限天内构造出来。从定义来看这也是必然的，我们无法通过有限次迭代创造所有实数。</p>
+<p>不过我们可以考虑无限集合，让左集从小的方向逼近</p>
+<script type="math/tex; mode=display">X_L=\{0.01,0.0101,\cdots\}</script><p>而右集从大的方向逼近$\frac{1}{3}$</p>
+<script type="math/tex; mode=display">X_L=\{1,0.1,0.011,\cdots\}</script><p>我们就可以将其构造出来：</p>
+<script type="math/tex; mode=display">\frac{1}{3}=(X_L,X_R)</script><p>于是我们在第$\aleph$天得到了所有实数（因为任何一个实数都可以写成一串二进制数）</p>
+<p>还不仅如此，我们可以考虑：</p>
+<script type="math/tex; mode=display">\omega = (\{1,2,3,\cdots\},\emptyset)</script><p>和</p>
+<script type="math/tex; mode=display">\epsilon = \left(\left\{0\right\}, \left\{1,\frac{1}{2},\frac{1}{2^2},\cdots\right\}\right)</script><p>$\omega$比任何实数都要大，而$\epsilon$严格大于零，却小于任何实数。我们得到了<strong>无穷大</strong>和<strong>非零的无穷小</strong>！  </p>
+<p>考虑$\omega$的一些性质：</p>
+<ul>
+<li>在$\alef+1$天，我们可以创造出：<script type="math/tex; mode=display">\omega+1 = (\{\omega\},\emptyset)</script>它比$\omega$还要大。以及<script type="math/tex; mode=display">\omega-1 = (\{1,2,\cdots\},\{\omega\})</script>它比任何正实数大，但小于$\omega+1$。</li>
+<li>在$2\alef$天，我们将得到<script type="math/tex; mode=display">2\omega = (\{\omega+1,\omega+2,\cdots\},\emptyset)</script></li>
+<li>在$\alef^2$天，我们将得到<script type="math/tex; mode=display">\omega^2 = (\{\omega,2\omega,\cdots\},\emptyset)</script></li>
+<li>以及<script type="math/tex; mode=display">\omega^\omega = (\{\omega,\omega^2,\cdots\},\emptyset)</script></li>
+</ul>
+<p>只要不停下来，数就会不断延伸<br><img src="dont-stop.png" alt></p>
+<p align="center">
+だからよ、止まるんじゃねぞ（指造数）
+</p>
+
+<h3 id="重新考虑归纳法"><a href="#重新考虑归纳法" class="headerlink" title="重新考虑归纳法"></a>重新考虑归纳法</h3><p>我们这里需要重新考虑针对创造日的归纳法，对所有自然数有效的归纳法在无穷及无穷之后的天数不一定有效。</p>
+<p>不过我们可以这样考虑归纳法，我们使用归纳法时事实上是在说，若命题对$x$不成立，则存在$x’\in X_L\cup X_R$，命题对$x’$也不成立。这将会形成一个数列，后一个数属于前一个数的左集或右集。对有穷的数，这将会终结于空集；但对无穷的数，这将会形成一个无穷祖先数列。而事实上，对我们的创造每一个数，它都不可能是无穷祖先数列的起始元素，因为它的左集和右集中不存在违反待证命题的元素。</p>
+<p>不过这番论证似乎还是在用归纳法证明归纳法，我们似乎需要将其视为某种公理来保证归纳法的合理性，同时也是形式地表达在定义新数$x=(X_L,X_R)$时$X_L$和$X_R$的元素是“已经存在的数”的含义。</p>
+<p>（这段完全是复读原书）</p>
+<p><img src="AB.png" alt></p>
+<p align="center">
+（AB天下第一！）
+</p>
+
+<h2 id="乘法"><a href="#乘法" class="headerlink" title="乘法"></a>乘法</h2><p>$x$和$y$的乘法$xy$的左集为所有形如</p>
+<script type="math/tex; mode=display">x_Ly+xy_L-x_Ly_L \qquad 或 \qquad x_Ry+xy_R-x_Ry_R</script><p>的数，右集为所有形如</p>
+<script type="math/tex; mode=display">x_Ly+xy_R-x_Ly_R \qquad 或 \qquad x_Ry+xy_L-x_Ry_L</script><p>的数。</p>
+<p>显然<strong>交换律</strong></p>
+<script type="math/tex; mode=display">xy=yx \tag{T20}</script><p>成立，有<strong>零元</strong></p>
+<script type="math/tex; mode=display">0x=x \tag{T21}</script><p>，<strong>幺元</strong></p>
+<script type="math/tex; mode=display">1x=x \tag{T22}</script><p>且</p>
+<script type="math/tex; mode=display">-(xy)=(-x)y \tag{T23}</script><p>运用我们之前在证明(T13)和(T14)时的归纳法，我们还应该可以证明</p>
+<script type="math/tex; mode=display">x(y+z) \equiv xy+xz \tag{T25}</script><script type="math/tex; mode=display">x(yz) \equiv (xy)z \tag{T26}</script><script type="math/tex; mode=display">x>x',y>y' \Rightarrow (x-x')(y-y')>0 \tag{T26}</script><p>同时我们有几个有趣的结果：</p>
+<script type="math/tex; mode=display">\epsilon\omega = 1</script><script type="math/tex; mode=display">\frac{1}{2}\omega = \left(\left\{1,2,3,\cdots\right\}, \left\{\omega-1,\omega-2,\omega-3,\cdots\right\} \right)</script><script type="math/tex; mode=display">\sqrt{\omega} = \left(\left\{1,2,3,\cdots\right\}, \left\{\frac{\omega}{1},\frac{\omega}{2},\frac{\omega}{3},\cdots\right\} \right)</script><script type="math/tex; mode=display">\sqrt{\epsilon} = \left(\left\{\epsilon,2\epsilon,3\epsilon,\cdots\right\}, \left\{\frac{1}{1},\frac{1}{2},\frac{1}{3},\cdots\right\} \right)</script><blockquote>
+<p>需要做的事情是无穷的，时间却是有限的······</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>数学</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>矢量和分析和曲线坐标系</title>
+    <url>/2019/03/14/vector-analysis/</url>
+    <content><![CDATA[<h1 id="1-矢量分析"><a href="#1-矢量分析" class="headerlink" title="1.矢量分析"></a>1.矢量分析</h1><h2 id="1-1-矢量的定义"><a href="#1-1-矢量的定义" class="headerlink" title="1.1 矢量的定义"></a>1.1 矢量的定义</h2><p>这里不深究矢量的定义，我们只考虑三维欧式空间$\mathbb{R}^3$中的矢量，它们有三个分量，并且分量在任意的坐标变换下与$\mathbf r=(x,y,z)$具有相同的变换形式。形象地说，“<strong>矢量应该像矢量那样变换</strong>”。</p><p>关于微分几何中介绍的矢量和张量的定义参见<a href="https://li-mz.github.io/404">这篇文章</a>。</p><a id="more"></a>
+
+<h2 id="1-2-爱因斯坦求和约定"><a href="#1-2-爱因斯坦求和约定" class="headerlink" title="1.2 爱因斯坦求和约定"></a>1.2 爱因斯坦求和约定</h2><p>我们经常会遇到形式相同的几项求和的式子，比如：</p>
+<script type="math/tex; mode=display">
+\mathbf A \cdot \mathbf B = A_1B_1+A_2B_2+A_3B_3 = \sum_{i=1}^3 A_iB_i</script><p>我们可以省略求和符号$\sum$，仅使用$A_iB_i$来表示上式，在确定的上下文中这一般不会导致误会。</p>
+<p>具体地说，若在表达式中出现了重复指标（称作<strong>哑指标</strong>），那么自动对其求和。（严格地讲要求哑指标一上一下，但是在这里由于$\mathbb R^3$上的基和对偶基是相等的，故不对矢量的协变和逆变表示，即上下指标做区分。在下面曲线坐标系一节将介绍矢量的协变和逆变表示。）</p>
+<p>使用爱因斯坦求和约定的表达式还有以下规则：</p>
+<ol>
+<li>每一项中一个哑指标最多出现两次。比如不允许出现类似$A_iB_iC_i$的项</li>
+<li>一个表达式中所有项中包含的不被求和的指标（即<strong>自由指标</strong>），比如不允许出现类似$A_iB_iC_j+C_k$的表达式。<br>当然这些规定并不是不允许进行这样的运算，仅仅是说明在矢量分析中不会出现这样的表达式而已。其作用也在于，若推导出了不符合这两条规则的表达式，那么可能需要对计算过程重新检查。</li>
+</ol>
+<p>另外，使用爱因斯坦求和约定的表达式的一个常用的性质是，<strong>可以将哑指标替换为其他的指标而不改变表达式的值</strong>。例如：$A_iB_i+A_jB_j=A_iB_i+A_iB_i=2A_iB_i$。这一性质在表达式的化简中经常会用到。</p>
+<p>利用爱因斯坦求和约定，我们可以给出$\mathbb R^3$中的矢量的点乘和叉乘的分量形式：</p>
+<ul>
+<li>矢量$\mathbf A$用分量表示为$\mathbf A=A_i\mathbf e_i$</li>
+<li>从而矢量的点乘为：<script type="math/tex; mode=display">
+\mathbf A \cdot \mathbf B = A_i\mathbf e_i \cdot B_j \mathbf e_j = A_iB_j \mathbf e_i \cdot \mathbf e_j = A_iB_j \delta_{ij} = A_iB_i</script>其中克罗内克$\delta$函数定义为：<script type="math/tex; mode=display">
+\delta_{ij} = \left\{
+\begin{matrix}
+1 & (i=j)
+\\0 & (i \neq j)
+\end{matrix}
+\right.</script></li>
+<li>根据定义，矢量叉乘：<script type="math/tex; mode=display">
+\mathbf A \times \mathbf B = (A_2B_3-A_3B_2)\mathbf e_1 + (A_3B_1-A_1B_3)\mathbf e_2 + (A_1B_2-A_2B_1)\mathbf e_3</script>可以使用爱因斯坦求和标记记为：<script type="math/tex; mode=display">
+\mathbf A \times \mathbf B = \epsilon_{ijk}A_jB_k\mathbf e_i</script>其中Levi-Civita符号$\epsilon_{ijk}$定义为：<script type="math/tex; mode=display">
+\epsilon_{ijk}=\left\{
+\begin{matrix}
+1 & (i,j,k)\mbox{是}(1,2,3)\mbox{的偶置换}
+\\-1 & (i,j,k)\mbox{是}(1,2,3)\mbox{的奇置换}
+\\0 & \mbox{其他（即}(i,j,k)\mbox{中存在两者相等）}
+\end{matrix}
+\right.</script>另外,Levi-Civita符号有一常用性质：<script type="math/tex; mode=display">
+\epsilon_{ijk}\epsilon_{imn} = \delta_{jm}\delta_{kn} - \delta_{jn}\delta_{km}</script></li>
+</ul>
+<h2 id="1-3-矢量分析"><a href="#1-3-矢量分析" class="headerlink" title="1.3 矢量分析"></a>1.3 矢量分析</h2><p>两个常用的公式是：</p>
+<script type="math/tex; mode=display">
+\begin{eqnarray*}
+\mathbf A \times(\mathbf B \times \mathbf C)=(\mathbf A\cdot \mathbf C)\mathbf B-(\mathbf A\cdot\mathbf B)\mathbf C \tag{1.3.1}
+\\ \mathbf A\cdot(\mathbf B\times\mathbf C)=\mathbf B\cdot(\mathbf C\times\mathbf A)=\mathbf C\cdot(\mathbf A\times\mathbf B) \tag{1.3.2}
+\end{eqnarray*}</script><p>在矢量分析的表达式中经常出现的是纳布拉算符$\nabla$（定义为$\nabla=\frac{\partial}{\partial x^i}\mathbf e_i$），作为微分算符，$\nabla$和分量为实数的矢量的运算规则不尽相同。下面对于出现$\nabla$的表达式，以$\nabla\times(\mathbf A\times \mathbf B)$为例介绍两种分析的方法：</p>
+<ol>
+<li>式中出现了两个矢量$\mathbf A$和$\mathbf B$，$\nabla$对二者都有作用，那么可以写成$\nabla_{\mathbf A}\times(\mathbf A\times\mathbf B)+\nabla_{\mathbf B}\times(\mathbf A\times\mathbf B)$，其中$\nabla_{\mathbf A}$只对$\mathbf A$作用，$\nabla_{\mathbf B}$只对$\mathbf B$作用。从而由(1.3.1)式，对第一项有：<script type="math/tex; mode=display">
+\nabla_{\mathbf A}\times(\mathbf A\times\mathbf B)=(\mathbf B\cdot\nabla_{\mathbf A})\mathbf A-(\nabla_{\mathbf A}\cdot\mathbf A)\mathbf B</script>这里$\nabla_{\mathbf A}$只对$\mathbf A$有作用，因此其与$\mathbf B$的点乘是可以交换的，进行恒等变换使得最后式中$\nabla_{\mathbf A}$只作用在$\mathbf A$上，从而保证在最后化回$\nabla$时不会引起歧义。<br>对$\nabla_{\mathbf B}$的式子同理，最后结果为：<script type="math/tex; mode=display">
+\begin{align*}
+\nabla\times(\mathbf A\times \mathbf B)&=(\mathbf B\cdot\nabla_{\mathbf A})\mathbf A-(\nabla_{\mathbf A}\cdot\mathbf A)\mathbf B + (\nabla_{\mathbf B}\cdot\mathbf B)\mathbf A-(\mathbf A\cdot\nabla_{\mathbf B})\mathbf B
+\\&=(\mathbf B\cdot\nabla)\mathbf A-(\nabla\cdot\mathbf A)\mathbf B + (\nabla\cdot\mathbf B)\mathbf A-(\mathbf A\cdot\nabla)\mathbf B
+\end{align*}</script></li>
+<li>使用爱因斯坦求和约定展开：<script type="math/tex; mode=display">
+\begin{align*}
+\nabla\times(\mathbf A\times \mathbf B) &= \epsilon_{ijk}\frac{\partial}{\partial x^j}(\mathbf A\times\mathbf B)\_k\mathbf e_i
+\\ &=\epsilon_{ijk}\frac{\partial}{\partial x^j}(\epsilon_{klm}A_lB_m)\mathbf e_i  = \epsilon_{kij}\frac{\partial}{\partial x^j}(\epsilon_{klm}A_lB_m)\mathbf e_i 
+\\&=(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})\frac{\partial}{\partial x^j}(A_lB_m)\mathbf e_i
+\\ &=\frac{\partial}{\partial x^j}(A_iB_j)\mathbf e_i-\frac{\partial}{\partial x^j}(A_jB_i)\mathbf e_i
+\\ &=B_j\frac{\partial A_i}{\partial x^j}\mathbf e_i + \frac{\partial B_j}{\partial x^j}A_i\mathbf e_i - \frac{\partial A_j}{\partial x^j}B_i\mathbf e_i - A_j\frac{\partial B_i}{\partial x^j}\mathbf e_i
+\\ &=(\mathbf B\cdot\nabla)\mathbf A + (\nabla\cdot\mathbf B)\mathbf A - (\nabla\cdot\mathbf A)\mathbf B -(\mathbf A\cdot\nabla)\mathbf B
+\end{align*}</script></li>
+</ol>
+<p>两种方法都得到了正确结果。</p>
+<h1 id="2-曲线坐标系"><a href="#2-曲线坐标系" class="headerlink" title="2.曲线坐标系"></a>2.曲线坐标系</h1><p>这一部分的说明旨在表述具有一般性地给出在曲线坐标系对矢量的描述，并介绍同一个矢量的协变和逆变表示。注意我们仍在讨论$\mathbb{R}^3$中的矢量，而非在微分流形上定义的，虽然二者具有相似性，但这里的矢量基和对偶基处于同一个线性空间。</p>
+<p>本节内容来自<a href="https://link.springer.com/book/10.1007%2F978-3-642-75595-8" target="_blank" rel="noopener">《Flux Coordinates and Magnetic Field Structure》</a>。</p>
+<h2 id="2-1-矢量的对偶集合（reciprocal-sets）"><a href="#2-1-矢量的对偶集合（reciprocal-sets）" class="headerlink" title="2.1 矢量的对偶集合（reciprocal sets）"></a>2.1 矢量的对偶集合（reciprocal sets）</h2><p>称矢量集合$\{\mathbf A,\mathbf B,\mathbf C\}$和$\{\mathbf a,\mathbf b,\mathbf c\}$为对偶集合，若：</p>
+<script type="math/tex; mode=display">
+\mathbf A\cdot\mathbf a=\mathbf B\cdot\mathbf b=\mathbf C\cdot\mathbf c=1
+\\ \mathbf A\cdot\mathbf b=\mathbf A\cdot\mathbf c=\cdots=0</script><p>。即，一个集合的每个元素都和另一个集合的一个元素的内积为1，并和另外两个元素正交。这两个集合中的元素都是线性无关的（否则，存在$\lambda,\mu,\gamma\neq0$，使$\lambda\mathbf A+\mu\mathbf B+\gamma\mathbf C=0$，从而$(\lambda\mathbf A+\mu\mathbf B+\gamma\mathbf C)\cdot\mathbf a=\lambda=0$，矛盾）。从而，对任意的矢量$\mathbf W$，都可以表示为这两个集合中的元素的线性组合：</p>
+<script type="math/tex; mode=display">\mathbf W=(\mathbf W\cdot\mathbf a)\mathbf A+(\mathbf W\cdot\mathbf b)\mathbf B+(\mathbf W\cdot\mathbf c)\mathbf C</script><p>或：</p>
+<script type="math/tex; mode=display">\mathbf W=(\mathbf W\cdot\mathbf A)\mathbf a+(\mathbf W\cdot\mathbf B)\mathbf b+(\mathbf W\cdot\mathbf C)\mathbf c</script><p>另外，由于$\{\mathbf A,\mathbf B,\mathbf C\}$线性无关，其对偶集合是唯一的，可以表示为：</p>
+<script type="math/tex; mode=display">
+\mathbf a=\frac{\mathbf B\times\mathbf C}{\mathbf A\cdot(\mathbf B\times\mathbf C)} ,\mathbf b=\frac{\mathbf C\times\mathbf A}{\mathbf B\cdot(\mathbf C\times\mathbf A)} ,\mathbf c=\frac{\mathbf A\times\mathbf B}{\mathbf C\cdot(\mathbf A\times\mathbf B)} \tag{2.1.1}</script><p>容易验证(2.1.1)给出的对偶集合满足上面介绍的对偶集合的定义。</p>
+<h2 id="2-2-曲线坐标基"><a href="#2-2-曲线坐标基" class="headerlink" title="2.2 曲线坐标基"></a>2.2 曲线坐标基</h2><p>考虑坐标变换$\mathbf R(u^1,u^2,u^3)$：</p>
+<script type="math/tex; mode=display">
+x=x(u^1,u^2,u^3)
+\\y=y(u^1,u^2,u^3)
+\\z=z(u^1,u^2,u^3)</script><p>要求这个变换是独立的，即可以用$u^1,u^2,u^3$表示$x,y,z$（严谨地说，Jacobi行列式非零）。</p>
+<p>令$(u^1,u^2,u^3)$中一个坐标为定值，可以确定一个曲面，称为<strong>坐标曲面</strong>。令两个坐标为定值，则确定了一条曲线，称为<strong>坐标曲线</strong>。显然任意一条坐标曲线都可以看作两个坐标面的交线。</p>
+<p>对空间中的任意一点$P$，有三条经过$P$的坐标曲线，坐标曲线的切线方向可以定义一组基：</p>
+<script type="math/tex; mode=display">
+\mathbf e_1=\frac{\partial \mathbf R}{\partial u^1},\mathbf e_2=\frac{\partial \mathbf R}{\partial u^2},\mathbf e_3=\frac{\partial \mathbf R}{\partial u^3} \tag{2.2.1}</script><p>根据Jacobi行列式非零，$\{\mathbf e_1,\mathbf e_2,\mathbf e_3\}$线性无关。这里与直角坐标系的区别在于，坐标基本身是位置的函数，不一定是常量。<br>另一方面，过同一点的三个坐标曲面的法线方向也可以定义另一组基。曲面某一点的法线方向应该与曲面上过这一点的曲线的切线方向垂直。注意到$\mathbf du^i=\nabla u^i\cdot\mathbf{dR}$，从而$\mathbf{dR}=\frac{\partial \mathbf R}{\partial u^j}\mathbf du^j = \mathbf e_j\mathbf du^j$，带回，$\mathbf du^i=\nabla u^i\cdot\mathbf e_j\mathbf du^j$，由于$u^1,u^2,u^3$互相独立，有：</p>
+<script type="math/tex; mode=display">\nabla u^i\cdot\mathbf e_j=\delta_j^i</script><p>这满足我们对曲线法线的期望，定义另外一组基如下：</p>
+<script type="math/tex; mode=display">\mathbf e^1=\nabla u^1,\mathbf e^2=\nabla u^2,\mathbf e^3=\nabla u^3 \tag{2.2.2}</script><p>另外由推导的过程我们知道，$\{\mathbf e_1,\mathbf e_2,\mathbf e_3\}$和$\{\mathbf e^1,\mathbf e^2,\mathbf e^3\}$是一对对偶矢量集合，分别称作<strong>基</strong>和<strong>对偶基</strong>。</p>
+<blockquote>
+<p>作为例子，让我们考虑球坐标：</p>
+<script type="math/tex; mode=display">
+x=r\sin\theta\cos\phi
+\\ y=r\sin\theta\sin\phi
+\\ z=r\cos\theta</script><p>根据2.2.1，坐标基为：</p>
+<script type="math/tex; mode=display">
+\mathbf{e_r}=\frac{\partial \mathbf R}{\partial r}=\sin\theta\cos\phi \mathbf{e_x}+\sin\theta\sin\phi \mathbf{e_y}+\cos\theta\mathbf{e_z}
+\\ \mathbf{e_{\theta}}=\frac{\partial \mathbf R}{\partial \theta}=r\cos\theta\cos\phi \mathbf{e_x}+r\cos\theta\sin\phi \mathbf{e_y}-r\sin\theta\mathbf{e_z}
+\\ \mathbf{e_{\phi}}=\frac{\partial \mathbf R}{\partial \theta}=-r\sin\theta\sin\phi \mathbf{e_x}+r\sin\theta\cos\phi \mathbf{e_y}</script><p>一般会对其进行归一化，这使它们成为坐标曲线的单位切向量，归一化的结果为：</p>
+<script type="math/tex; mode=display">
+\mathbf{e_r}=\sin\theta\cos\phi \mathbf{e_x}+\sin\theta\sin\phi \mathbf{e_y}+\cos\theta\mathbf{e_z}
+\\ \mathbf{e_{\theta}}=\cos\theta\cos\phi \mathbf{e_x}+\cos\theta\sin\phi \mathbf{e_y}-\sin\theta\mathbf{e_z}
+\\ \mathbf{e_{\phi}}=-\sin\theta\sin\phi \mathbf{e_x}+\sin\theta\cos\phi \mathbf{e_y}</script></blockquote>
+<h2 id="2-3-矢量的协变和逆变分量"><a href="#2-3-矢量的协变和逆变分量" class="headerlink" title="2.3 矢量的协变和逆变分量"></a>2.3 矢量的协变和逆变分量</h2><p>前面我们说过，可以用对偶矢量集合的线性叠加表示任意矢量，即：</p>
+<script type="math/tex; mode=display">
+\mathbf D = D^i\mathbf e_i = D_i\mathbf e^i</script><p>,其中：</p>
+<script type="math/tex; mode=display">
+D^i=\mathbf D\cdot\mathbf e^i
+\\D_i=\mathbf D\cdot\mathbf e_i</script><p>用上、下指标表示的分量$D^i,D_i$分别称作<strong>逆变分量</strong>、<strong>协变分量</strong>。</p>
+<p>下面的论述不完全准确地讨论了协变和逆变分量的含义。考虑不同于$\{\mathbf e_1,\mathbf e_2,\mathbf e_3\}$的另一组线性无关的基$\{\mathbf e_1’,\mathbf e_2’,\mathbf e_3’\}$，相应的对偶集合$\{\mathbf e^1{‘}  ,\mathbf e^2{‘},\mathbf e^3{‘}\}$。两组基之间的坐标变换为$\mathbf e_i’=T_i^{\cdot\alpha}\mathbf e_{\alpha},\mathbf e^j{‘}=T_{\cdot\beta}^j\mathbf e^{\beta}$。由对偶集合的定义，应有：</p>
+<script type="math/tex; mode=display">
+\begin{align*}\mathbf e_i'\cdot\mathbf e^j{'} &=  T_i^{\cdot\alpha}\mathbf e_{\alpha} \cdot T_{\cdot\beta}^j\mathbf e^{\beta} = T_i^{\cdot\alpha}T_{\cdot\beta}^j \delta_{\alpha}^{\beta} = T_i^{\cdot\alpha}T_{\cdot\alpha}^j
+\\&= \delta_i^j 
+\end{align*}</script><p>说明基和对偶基的坐标变换矩阵$T_i^{\cdot\alpha}$和$T_{\cdot\beta}^j$的分量形式构成的矩阵互逆。矢量$\mathbf D$的协变分量$D_i=\mathbf D\cdot\mathbf e_i$，和基的变换方式相同，故称作协变；同理，逆变分量和对偶基的变换方式相同，其变换矩阵为基的逆矩阵，故称为逆变。（事实上$T_i^{\cdot\alpha}$和$T_{\cdot\beta}^j$不是两个矩阵，而是同一个张量在不同的基下的分量形式）</p>
+<p>需要注意矢量的协变表示和逆变表示与协变矢量和逆变矢量是不同的概念，在$\mathbb R^3$中不对后者进行区分。</p>
+<h2 id="2-4-度规"><a href="#2-4-度规" class="headerlink" title="2.4 度规"></a>2.4 度规</h2><p>对任意矢量$\mathbf D$，有：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+D_i &= \mathbf D\cdot\mathbf e_i = (D^j\mathbf e_j)\cdot\mathbf e_i
+\\&=D^j(\mathbf e_i\cdot\mathbf e_j) = g_{ij}D^j
+\end{align*}</script><p>由此，根据分量：</p>
+<script type="math/tex; mode=display">
+g_{ij}=\mathbf e_i\cdot\mathbf e_j = \frac{\partial\mathbf R}{\partial u^i}\cdot\frac{\partial\mathbf R}{\partial u^j} \tag{2.4.1}</script><p>确定了一个二阶张量，称作<strong>度规</strong>。这里不准备展开介绍张量的定义，但需注意度规不仅仅是一个矩阵，而应被看做一个线性映射，它建立了基和对偶基下表示的矢量的联系。</p>
+<p>度规在对偶基下的分量形式为：</p>
+<script type="math/tex; mode=display">
+g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</script><p>由上面的讨论，我们知道，可以使用度规进行矢量协变和逆变分量的转换。根据爱因斯坦求和约定，可以很容易得到转换的表达式。例如，要得到根据矢量$\mathbf D$的协变分量（下指标）得到逆变分量（上指标），则需要使用度规在对偶基下的分量（两个上指标）进行运算，即哑指标一上一下，自由指标为上指标。从而得到：$D^i=g^{ij}D_j$。</p>
+<p>另外，借助度规，可以表示两个矢量的点乘和叉乘运算的同一类分量形式：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\mathbf A\cdot\mathbf B &= (A^i\mathbf e_i)\cdot(B^j\mathbf e_j)=g_{ij}A^iB^j
+\\&= (A_i\mathbf e^i)\cdot(B_j\mathbf e^j)=g^{ij}A_iB_j
+\end{align*}</script><p>特别地，$\mathbf{dR}\cdot\mathbf{dR} = g_{ij}(\mathbf{dR})^i(\mathbf{dR})^j = g_{ij}\mathbf{d}u^i\mathbf{d}u^j$。（其中$(\mathbf{dR})^i = \nabla u^i\cdot\mathbf{dR} = \mathbf du^i$），这告诉我们度规也蕴含了曲线坐标系中的线元长度。</p>
+<p>对矢量的叉乘：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\mathbf A\times\mathbf B &= A^iB^j(\mathbf e_i\times\mathbf e_j)
+\\&=A^iB^j\epsilon_{kij}\mathbf e^k(\mathbf e_k\cdot(\mathbf e_i\times\mathbf e_j))
+\\&=J\epsilon_{kij}A^iB^j\mathbf e^k
+\end{align*}</script><p>上面的推导用到了(2.1.1)式，当且仅当$(k,i,j)$是$(1,2,3)$的偶置换时有$\mathbf e^k = \frac{\mathbf e_i\times\mathbf e_j}{\mathbf e_k\cdot(\mathbf e_i\times\mathbf e_j)}$，且由(1.3.2)式，对所有偶置换，分母都相等。式中</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+J &= \mathbf e_1\cdot(\mathbf e_2\times\mathbf e_3) = \frac{\partial \mathbf R}{\partial u^1}\cdot(\frac{\partial \mathbf R}{\partial u^2}\times\frac{\partial \mathbf R}{\partial u^3})
+\\&=\begin{vmatrix}
+\frac{\partial x}{\partial u^1} & \frac{\partial y}{\partial u^1} & \frac{\partial z}{\partial u^1} 
+\\ \frac{\partial x}{\partial u^2} & \frac{\partial y}{\partial u^2} & \frac{\partial z}{\partial u^2}
+\\ \frac{\partial x}{\partial u^3} & \frac{\partial y}{\partial u^3} & \frac{\partial z}{\partial u^3}
+\end{vmatrix}
+\end{align*}</script><p>为Jacobi行列式。把度规的分量$g_{ij}$写成矩阵，发现其元素$g_{ij}=\sum_{q=1}^{3}\frac{\partial \mathbf R^q}{\partial u^i}\cdot\frac{\partial \mathbf R^q}{\partial u^j}$，可以写成上面的Jacobi矩阵与其转置的积，那么我们有：</p>
+<script type="math/tex; mode=display">g=det(g_{ij})=J^2</script>]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>电动力学笔记</category>
+      </categories>
+      <tags>
+        <tag>物理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>狭义相对论时空</title>
+    <url>/2019/03/21/SR/</url>
+    <content><![CDATA[<p>咕咕咕</p><p>这部分讲的是狭义相对论的一些结论以及闵氏时空中自由运动粒子的作用量的导出，由于上学期学过了，暂时就不写了，过后再补上去（<del>可能是个模因或者别的什么</del>）</p>]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>电动力学笔记</category>
+      </categories>
+      <tags>
+        <tag>物理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>n维正态分布的似然估计</title>
+    <url>/2019/04/08/n-dim-normal-distribution/</url>
+    <content><![CDATA[<p>$n$维向量$\mathbf x=(x_1,\cdots,x_n)$满足正态分布，概率密度函数为：</p><script type="math/tex; mode=display">p(\mathbf x) = \frac{1}{(2\pi)^{n/2}|\mathbf C|^{1/2}} \exp\left( -\frac 1 2 \sum_{i,j=1}^n (x_i-m_i)C^{-1}_{ij}(x_j-m_j) \right)</script><a id="more"></a>
+<p>均值$\mathbf m$和协方差矩阵$\mathbf C$的定义为：</p>
+<script type="math/tex; mode=display">
+\mathbf m = E(\mathbf x)
+\\ \mathbf C = E\left((\mathbf x-\mathbf m)(\mathbf x-\mathbf m)^T\right)</script><p>现有$N$个样本$\mathbf x_1,\cdots,\mathbf x_N$，使用极大似然估计来估计$\mathbf m$和$\mathbf C$。似然函数为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+H(\mathbf m, \mathbf C) &= \sum_{k=1}^N \ln p(\mathbf x_k)
+\\&= -\frac 1 2 \sum_{k=1}^N\sum_{i,j=1}^n (x_{ki}-m_i)C^{-1}_{ij}(x_{kj}-m_j) -\frac N 2 \ln |\mathbf C| -\frac{nN}2\ln 2\pi
+\end{aligned}</script><p>估计的参数应使$H$取极值。</p>
+<p>对$\mathbf m$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial H}{\partial m_l} &= \frac 1 2 \sum_{k=1}^N\sum_{i,j=1}^n C^{-1}_{ij}[\delta_{li}(x_{kj}-m_j)+\delta_{lj}(x_{ki}-m_i)]
+\\&= \frac 1 2\sum_{k=1}^N[\sum_{j=1}^n C^{-1}_{lj}(x_{kj}-m_j)+\sum_{i=1}^n C^{-1}_{il}(x_{ki}-m_i)]
+\\&= \sum_{k=1}^N\sum_{i=1}^n C^{-1}_{il}(x_{ki}-m_i) = 0
+\end{aligned}</script><p>最后一步是因为$\mathbf C$是对称矩阵（由定义显然）。从而有：</p>
+<script type="math/tex; mode=display">\sum_{i=1}^nC^{-1}_{il}(\sum_{k=1}^N x_{ki} - Nm_i) =0</script><p>对$l=0,\cdots,n$成立。写成矩阵形式，即为：</p>
+<script type="math/tex; mode=display">\mathbf C^{-1} (\sum_{k=1}^N \mathbf x_k - N\mathbf m) =0</script><p>由于$\mathbf C^{-1}$是可逆矩阵，要使上式成立，应有：</p>
+<script type="math/tex; mode=display">\mathbf{\hat m}=\frac 1 N \sum_{k=1}^N \mathbf x_k</script><p>即为$\mathbf m$的极大似然估计值。</p>
+<p>对$\mathbf C$，首先考虑$\mathbf C^{-1}$的行列式$|\mathbf C^{-1}|$对$C^{-1}_{lm}$的偏导数$\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}_{lm}}$：<br>将$|\mathbf C^{-1}|$按第$l$行展开，有：</p>
+<script type="math/tex; mode=display">|\mathbf C^{-1}|=\sum_{i=1}^n C^{-1}_{li}c_{li}</script><p>其中$c_{li}$是$C^{-1}_{li}$的代数余子式，同时也是$\mathbf C^{-1}$的伴随矩阵的$l,i$元素。对任意矩阵$\mathbf A$，其伴随矩阵$\mathbf A^* = |\mathbf A| \mathbf A^{-1} $，因此$c_{li} = |\mathbf C^{-1}|(C^{-1})^{-1}_{li} = |\mathbf C^{-1}|C_{li} $。<br>$l$行的代数余子式不显含$C^{-1}_{lm}$，从而有：</p>
+<script type="math/tex; mode=display">\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}_{lm}} = c_{lm} = |\mathbf C^{-1}|C_{lm}</script><p>故：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial H}{\partial C^{-1}_{lm}} &= -\frac 1 2 \sum_{k=1}^N (x_{kl}-m_l)(x_{km}-m_m) +\frac N {2|\mathbf C^{-1}|}\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}_{lm}}
+\\&= -\frac 1 2 \sum_{k=1}^N (x_{kl}-m_l)(x_{km}-m_m)  + \frac N 2 C_{lm} =0
+\end{aligned}</script><p>从而有$C_{lm}$的极大似然估计值：</p>
+<script type="math/tex; mode=display">\hat{C}_{lm} = \frac 1 N \sum_{k=1}^N (x_{kl}-\hat m_l)(x_{km}-\hat m_m)</script><p>写成矩阵形式：</p>
+<script type="math/tex; mode=display">\hat{\mathbf C} = \frac 1 N \sum_{k=1}^N (\mathbf x_k - \hat{\mathbf m})(\mathbf x_k - \hat{\mathbf m})^T</script>]]></content>
+      <tags>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在Linux远程服务器上搭建Jupyter服务</title>
+    <url>/2019/12/17/remote-jupyter/</url>
+    <content><![CDATA[<h2 id="配置Anaconda和Jupyter-Notebook"><a href="#配置Anaconda和Jupyter-Notebook" class="headerlink" title="配置Anaconda和Jupyter Notebook"></a>配置Anaconda和Jupyter Notebook</h2><p>在清华tuna镜像上下载anaconda的linux安装包，上传到服务器上，使用命令：<br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">bash</span> <span class="selector-tag">Anaconda3-2019</span><span class="selector-class">.10-Linux-x86_64</span><span class="selector-class">.sh</span></span><br></pre></td></tr></table></figure><br>安装。（直接用<code>./xxx.sh</code>运行会提示权限不够，但并不需要sudo）安装过程中可以指定安装到的目录，我这里指定了<code>~/data/</code>。</p><a id="more"></a>
+<p>安装完成后还不能找到conda指令，需要运行命令：<br><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> 'export PATH=<span class="string">"~/data/anaconda3/bin:$PATH"</span>' &gt;&gt; ~<span class="string">/.bashrc</span></span><br><span class="line">source ~<span class="string">/.bashrc</span></span><br></pre></td></tr></table></figure><br>添加环境变量。现在就可以使用conda命令了。</p>
+<p>接下来需要配置Jupyter，生成并修改配置文件，其方法和<a href="https://li-mz.github.io/2019/10/22/Docker-Jupyter/">这篇博客</a>的第二节一样（不必用pip安装jupyter，anaconda已经含了）。</p>
+<h2 id="在本地浏览器访问"><a href="#在本地浏览器访问" class="headerlink" title="在本地浏览器访问"></a>在本地浏览器访问</h2><p>配置好环境之后，让jupyter服务器端在后台运行：<br><figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">nohup jupyter notebook --allow-root &gt; ~/<span class="keyword">data</span>/jupyter.<span class="built_in">log</span></span><br></pre></td></tr></table></figure><br>如果不输出日志，可以设置为：<br><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">nohup jupyter notebook &gt;/dev/<span class="literal">null</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></table></figure><br><code>nohup</code>表示不挂起，在退出ssh终端后也会继续运行。jupyter的终端输出会记录在<code>~/data/jupyter.log</code>中。</p>
+<p>在本地运行：<br><code>ssh -N -f -L localhost:8888:localhost:8888 -p 22 remote_user@remote_host</code><br>把远程主机的8888端口映射到本地的8888端口。在浏览器中输入<code>localhost:8888</code>即可访问jupyter服务。</p>
+<p>（也可以使用Xshell，连接上远程主机后在文件-属性中选择类别：连接-SSH-隧道，如下添加：<br><img src="forwarding-with-Xshell.png" alt><br>之后在浏览器中输入<code>localhost:8888</code>访问。</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电磁场中运动的粒子</title>
+    <url>/2019/03/30/motion-in-EM-field/</url>
+    <content><![CDATA[<h1 id="1-电磁场-粒子耦合作用量"><a href="#1-电磁场-粒子耦合作用量" class="headerlink" title="1.电磁场-粒子耦合作用量"></a>1.电磁场-粒子耦合作用量</h1><p><del>（目前还不存在的）</del>上一节告诉我们，闵氏时空中的自由粒子的作用量为：</p><script type="math/tex; mode=display">S_p=\int mc^2\mathbf d\tau=\int \frac {mc^2} {\gamma} \mathbf dt</script><p>要描述一个在电磁场中运动的粒子，其作用量应再加上一项粒子与场的耦合项$S_{pf}$，即$S=S_p+S_{pf}$。</p><a id="more"></a>
+
+<p>实验告诉我们，应该使用一个4-矢量$A^{\alpha}=(\phi/c,\mathbf A)$描述电磁场，我们会在后面看到$A^{\alpha}$的时间、空间分量的物理意义。另外，作用量应为标量。因此我们猜测$S_{pf}$的形式为：</p>
+<script type="math/tex; mode=display">S_{pf}=-q\int A_{\alpha}\mathbf dx^{\alpha}</script><p>其中$q$也是一个标量，它表示了粒子与电磁场耦合的强度。<br>从而，粒子的作用量：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+S &=\int \frac m {\gamma} \mathbf dt - qA_{\alpha}\mathbf dx^{\alpha}
+\\&= \int dt\left(\frac {mc^2}{\gamma} + q\phi - q\mathbf A\cdot\frac{d\mathbf x}{dt}\right)
+\\&= \int \left(mc^2\sqrt{1-\frac{v^2}{c^2}} - q(\mathbf A\cdot \mathbf v - \phi)\right)dt
+\end{align*}</script><h1 id="2-粒子的运动方程"><a href="#2-粒子的运动方程" class="headerlink" title="2.粒子的运动方程"></a>2.粒子的运动方程</h1><p>得到作用量后，通过喜闻乐见的欧拉-拉格朗日方程推出运动方程：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\frac{\partial L}{\partial v} &= -m\gamma\mathbf v -q\mathbf A = -\mathbf p - q\mathbf A
+\\ \frac{\partial L}{\partial \mathbf r} &= -q\nabla(\mathbf A\cdot\mathbf v-\phi)
+\\&= -q((\mathbf v\cdot\nabla)\mathbf A + \mathbf v\times(\nabla\times\mathbf A) - \nabla\phi)
+\end{align*}</script><p>从而：</p>
+<script type="math/tex; mode=display">d\frac{\mathbf{p}}{dt} = q\left( -\frac{d\mathbf{A}}{dt} + (\mathbf v\cdot\nabla)\mathbf A + \mathbf v\times(\nabla\times\mathbf A) - \nabla\phi \right)</script><p>注意到：</p>
+<script type="math/tex; mode=display">
+\frac{d\mathbf{A}}{dt} = \frac{\partial\mathbf A}{\partial t} + \frac{\partial\mathbf A}{\partial x^i}\frac{\partial x^i}{\partial t} = \frac{\partial\mathbf A}{\partial t} + (\mathbf v\cdot\nabla)\mathbf A</script><p>故有：</p>
+<script type="math/tex; mode=display">\frac{d\mathbf{p}}{dt} = q\left( -\frac{\partial\mathbf{A}}{\partial t} - \nabla\phi + \mathbf v\times(\nabla\times\mathbf A) \right)</script><p>前两项与$\mathbf v$无关，最后一项则与$\mathbf v$有关。因此，我们可以定义：</p>
+<script type="math/tex; mode=display">
+\mathbf E = -\frac{\partial\mathbf{A}}{\partial t} - \nabla\phi
+\\ \mathbf B = \nabla\times\mathbf A</script><p>$\mathbf E$为电场强度，$\mathbf B$为磁感应强度。<br>从而粒子的运动方程为：</p>
+<script type="math/tex; mode=display">\frac{\mathbf{dp}}{\mathbf dt} = q\mathbf E + q\mathbf v\times\mathbf B</script><p>这和我们所了解的电磁学中粒子在电磁场中的运动方程相同。</p>
+<p>另外，根据上面的定义，我们有：</p>
+<script type="math/tex; mode=display">
+\nabla\times\mathbf E = -\frac{\partial\nabla\times\mathbf A }{\partial t} - \nabla\times\nabla\phi = -\frac{\partial\mathbf B}{\partial t}
+\\ \nabla\cdot\mathbf B = \nabla\cdot\nabla\times\mathbf A = 0</script><p>这是麦克斯韦方程组中的两个方程。</p>
+<h1 id="3-规范不变性"><a href="#3-规范不变性" class="headerlink" title="3.规范不变性"></a>3.规范不变性</h1><p>我们知道，拉氏量增加一个函数对时间的全导数不会改变运动方程，即：</p>
+<script type="math/tex; mode=display">
+L'=-q(\phi-\mathbf A\cdot \mathbf v)+q\frac{df}{dt} = -q\left[ \left(\phi-\frac{\partial f}{\partial t}\right) + (\mathbf A+\nabla f)\cdot \mathbf v \right]</script><p>和拉氏量$L=qA_{\alpha}x^{\alpha}$给出完全相同的运动方程。这即是说$A^{\alpha}$经过变换：</p>
+<script type="math/tex; mode=display">
+\phi' = \phi - \frac{\partial f}{\partial t}
+\\ \mathbf A' = \mathbf A+\nabla f</script><p>后给出相同的运动方程。这种不变性称作<strong>规范不变性</strong>，上面的变换式称作<strong>规范变换</strong>。</p>
+<p>规范不变性告诉我们，描述电磁场的矢量$A^{\alpha}$具有一个额外的自由度。因此我们可以人为地选定一种规范以简化问题。比如，<strong>库仑规范</strong>：</p>
+<script type="math/tex; mode=display">\nabla\cdot\mathbf A = 0</script><p>另外一种规范被称作<strong>洛伦兹规范(Lorenz Gauge)</strong>：</p>
+<script type="math/tex; mode=display">\nabla\cdot\mathbf A+\frac 1 {c^2}\frac{\partial \phi}{\partial t}=0</script><p>写成四维形式：</p>
+<script type="math/tex; mode=display">\frac{\partial A^{\alpha}}{\partial x^{\alpha}}=0</script><p>可见洛伦兹规范满足洛伦兹不变性，这一规范在后面也会被用到。</p>
+<h1 id="4-协变形式的运动方程"><a href="#4-协变形式的运动方程" class="headerlink" title="4.协变形式的运动方程"></a>4.协变形式的运动方程</h1><p>在上一节中我们已经求出的$S_p$的变分：</p>
+<script type="math/tex; mode=display">\delta S_p = m\int \frac{du_{\alpha}}{d\tau}\delta x^{\alpha} d\tau</script><p>现在再来看$S_{pf}$，其协变形式为：</p>
+<script type="math/tex; mode=display">S_{pf} = -\int qA_{\alpha} dx_{\alpha}</script><p>对其做变分：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\delta S_{pf} &= -q\int \delta A_{\alpha}dx_{\alpha} + A_{\alpha}\delta dx_{\alpha}
+\\ &= -q\int \frac{\partial A_{\alpha}}{\partial x^{\beta}}\delta x^{\beta} dx_{\alpha} + A_{\alpha}\delta dx_{\alpha}
+\\ &= -q\int \frac{\partial A_{\alpha}}{\partial x^{\beta}}\delta x^{\beta} dx_{\alpha} - \delta x_{\alpha} dA_{\alpha}
+\\ &= -q\int \left(\frac{\partial A_{\beta}}{\partial x^{\alpha}} - \frac{\partial A_{\alpha}}{\partial x^{\beta}} \right) \delta x^{\alpha}dx^{\beta}
+\\ &= -q\int F_{\alpha\beta} \delta x^{\alpha}dx^{\beta}
+\end{align*}</script><p>其中：</p>
+<script type="math/tex; mode=display">F_{\alpha\beta}=\frac{\partial A_{\beta}}{\partial x^{\alpha}}-\frac{\partial A_{\alpha}}{\partial x^{\beta}}</script><p>定义为<strong>电磁场张量</strong>。</p>
+<p>那么粒子的作用量的变分即为：</p>
+<script type="math/tex; mode=display">
+\delta S=\int \left(m\frac{du_{\alpha}}{d\tau} - F_{\alpha\beta}u^{\beta} \right)\delta x^{\alpha}d\tau</script><p>从而得到粒子的运动方程：</p>
+<script type="math/tex; mode=display">m\frac{du_{\alpha}}{d\tau} = F_{\alpha\beta}u^{\beta}</script><p>另外，根据上面2节中的$\mathbf E,\mathbf B$的定义，电磁场张量的分量形式为：</p>
+<script type="math/tex; mode=display">
+F_{\alpha\beta} = 
+\begin{pmatrix}
+0 & E_x/c & E_y/c & E_z/c
+\\ -E_x/c & 0 & -B_z & B_y
+\\ -E_y/c & B_z & 0 & -B_x
+\\ -E_z/c & -B_y & B_x & 0
+\end{pmatrix}</script><h1 id="5-电磁场的洛伦兹变换"><a href="#5-电磁场的洛伦兹变换" class="headerlink" title="5.电磁场的洛伦兹变换"></a>5.电磁场的洛伦兹变换</h1><h2 id="5-1-电场和磁场的变换式"><a href="#5-1-电场和磁场的变换式" class="headerlink" title="5.1 电场和磁场的变换式"></a>5.1 电场和磁场的变换式</h2><p>电场和磁场可看作电磁场张量的分量，可以简单的由张量的洛伦兹变换给出其在不同惯性系中的变换式：</p>
+<script type="math/tex; mode=display">
+E_x=E_x',\ E_y = \frac{E_y'+VB_z'}{\sqrt{1-V^2/c^2}},\ E_z=\frac{E_z'-VB_y'}{\sqrt{1-V^2/c^2}}
+\\B_x=B_x',\ B_y = \frac{B_y'-VE_z'}{\sqrt{1-V^2/c^2}},\ E_z=\frac{B_z'+VE_y'}{\sqrt{1-V^2/c^2}}</script><p>在低速近似$V&lt;&lt;1$下，上式化为：</p>
+<script type="math/tex; mode=display">
+\mathbf E = \mathbf E' + \mathbf B'\times \mathbf V
+\\ \mathbf B = \mathbf B' - \frac 1 {c^2}\mathbf E' \times \mathbf V</script><h2 id="5-2-电磁场的洛伦兹不变量"><a href="#5-2-电磁场的洛伦兹不变量" class="headerlink" title="5.2 电磁场的洛伦兹不变量"></a>5.2 电磁场的洛伦兹不变量</h2><p>寻找洛伦兹不变量，即寻找标量。我们可以通过构造上下指标互相匹配，即不含自由指标的表达式来构造张量。</p>
+<p>一个洛伦兹不变量为：</p>
+<script type="math/tex; mode=display">\frac {c^2} 2 F_{\alpha\beta}F^{\alpha\beta} = c^2B^2-E^2</script><p>在给出第二个洛伦兹不变量前，先说明四阶单位反对称张量$e^{\alpha\beta\mu\nu}$的定义：<br>和Levi-Civita算符$\epsilon_{ijk}$类似，若$\alpha,\beta,\mu,\nu$任意两个指标相同，则$ e^{\alpha\beta\mu\nu} = 0 $；规定$ e^{0123}=1 $，交换任意两个指标后的结果为交换前的相反数。可以证明$e^{\alpha\beta\mu\nu}$在归一化的坐标变换（变换矩阵行列式为1）下分量的值不变，而洛伦兹变换正是归一化的。从而有洛伦兹不变量：</p>
+<script type="math/tex; mode=display">-\frac 1 2 F_{\beta\alpha}e^{\alpha\beta\mu\nu}F^{\nu\mu} = \mathbf E\cdot\mathbf B</script><p>可以由这两个洛伦兹不变量得出一些简单的性质：</p>
+<ol>
+<li>若在惯性系K中有$E&gt;cB$，则$E&gt;cB$在任意惯性系中都成立。反之亦然。</li>
+<li>若在惯性系K中$\mathbf E\perp\ \mathbf B$，则$\mathbf E\perp\ \mathbf B$在任意惯性系中都成立，并且可以找到惯性系K’使得其中$\mathbf B=0$（当$E&gt;cB$）或$\mathbf E=0$（当$cB&gt;E$）。</li>
+</ol>
+<h2 id="5-3-匀速运动电荷的电场"><a href="#5-3-匀速运动电荷的电场" class="headerlink" title="5.3 匀速运动电荷的电场"></a>5.3 匀速运动电荷的电场</h2><p>下面用两种方法给出在惯性系K中以速度$V\mathbf e_x$匀速运动的电荷产生的电磁场。</p>
+<p>在相对K以$V\mathbf e_x$速度运动的惯性系K’中。K’中的电磁场由静电荷激发，其形式已知。从而我们有：</p>
+<script type="math/tex; mode=display">
+-\nabla\cdot\phi' = \frac 1 {4\pi\epsilon_0}\frac q {r'^2}\hat{\mathbf r}
+\\ \nabla\times\mathbf A'=0</script><p>从而可以选取</p>
+<script type="math/tex; mode=display">\phi'=\frac q {4\pi\epsilon_0}\frac 1 {r'},\mathbf A'=0</script><p>变换到K系：</p>
+<script type="math/tex; mode=display">
+\phi = \gamma(\phi'+VA_x') = \gamma\frac q {4\pi\epsilon_0}\frac 1 {r'}
+\\ A_x = \gamma(A_x'+V\phi') = \gamma V \frac q {4\pi\epsilon_0}\frac 1 {r'}
+\\ A_y=A_z=0</script><p>其中，</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+r' &= \sqrt{\gamma^2(x-Vt)^2+y^2+z^2}
+\\ &= R\sqrt{\gamma^2\cos^2\theta+\sin^2\theta}
+\end{align*}</script><p>其中$\mathbf R$为电荷指向场点的矢量，$\theta$为$\mathbf R$与$x$方向的夹角。<br>从而电场：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\mathbf E &= -\frac{\partial\mathbf{A}}{\partial t} - \nabla\phi
+\\ &=  \frac q {4\pi\epsilon_0} \left(-\gamma V \frac{\gamma^2(x-Vt)V}{r'^3}\mathbf e_x + \gamma \frac{\gamma^2(x-Vt)\mathbf e_x+y\mathbf e_y+z\mathbf e_z}{r'^3} \right)
+\\ &= \frac q {4\pi\epsilon_0}\frac 1 {r'^3} \left( \gamma(x-Vt) \mathbf e_x + \gamma y\mathbf e_y + \gamma z\mathbf e_z \right)
+\\ &= \frac q {4\pi\epsilon_0}\frac 1 {R^2}\frac{\gamma}{(\gamma^2\cos^2\theta+\sin^2\theta)^{3/2}}\hat{\mathbf R}
+\end{align*}</script><p>可见，运动电荷的电场和静电场相比，在运动方向（$\theta=0$）上衰减了$\frac 1 {\gamma^2}$倍，在垂直方向（$\theta=\frac {\pi} 2 $）上增大了$\gamma$倍。</p>
+<p>另一种方法是通过5.1中的电场的洛伦兹变换求出运动电荷的电场：</p>
+<script type="math/tex; mode=display">
+E_x = E_x',E_y=\gamma E_y',E_z=\gamma E_z'</script><p>这看起来与上面的结果是矛盾的：上面的推导给出在运动方向上电场强度衰减了$\frac 1 {\gamma^2}$倍，而这里$x$方向上电场强度的大小在K和K’系中相等。事实上，两个结果并不矛盾，因为$\mathbf E$是空间的函数，而同一点在不同惯性系中的坐标也不相同。例如，考虑$t=0$时刻的电场，我们有：</p>
+<script type="math/tex; mode=display">
+E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向同理，因此两种方法给出相同的结果。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>电动力学笔记</category>
+      </categories>
+      <tags>
+        <tag>物理</tag>
+      </tags>
+  </entry>
+</search>
