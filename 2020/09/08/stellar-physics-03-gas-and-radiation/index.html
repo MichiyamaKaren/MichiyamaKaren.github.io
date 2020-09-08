@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="恒星物理笔记（三）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="恒星内部气体和辐射基本物理">
+<meta property="og:url" content="http://li-mz.github.io/2020/09/08/stellar-physics-03-gas-and-radiation/index.html">
+<meta property="og:site_name" content="Y&#39;s Personal Blog">
+<meta property="og:description" content="恒星物理笔记（三）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-08T07:34:00.000Z">
+<meta property="article:modified_time" content="2020-09-08T07:52:26.236Z">
+<meta property="article:author" content="Y">
+<meta property="article:tag" content="天文">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://li-mz.github.io/2020/09/08/stellar-physics-03-gas-and-radiation/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>恒星内部气体和辐射基本物理 | Y's Personal Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Y's Personal Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://li-mz.github.io/2020/09/08/stellar-physics-03-gas-and-radiation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/kirin.gif">
+      <meta itemprop="name" content="Y">
+      <meta itemprop="description" content="宇宙的最不可理解之处在于它是可以被理解的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Y's Personal Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          恒星内部气体和辐射基本物理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-08 15:34:00 / 修改时间：15:52:26" itemprop="dateCreated datePublished" datetime="2020-09-08T15:34:00+08:00">2020-09-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/%E6%81%92%E6%98%9F%E7%89%A9%E7%90%86%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">恒星物理笔记</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">恒星物理笔记（三）</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body></body></html><html><head></head><body><h2 id="理想气体物态方程"><a href="#理想气体物态方程" class="headerlink" title="理想气体物态方程"></a>理想气体物态方程</h2><p>若恒星内粒子的库伦相互作用势远小于平均动能，则可以忽略静电作用，看做理想气体。</p>
+<h3 id="理想气体近似"><a href="#理想气体近似" class="headerlink" title="理想气体近似"></a>理想气体近似</h3><p>粒子间的平均距离为</p>
+<script type="math/tex; mode=display">d \cong \left(\frac{1}{n}\right)^{1/3}=n^{-1/3}</script><p>而数密度</p>
+<script type="math/tex; mode=display">n=\frac{\bar{\rho}}{Am_\mathrm{H}}</script><p>其中$A$是原子的质量数。<br>再根据平均密度=恒星质量/体积，有：</p>
+<script type="math/tex; mode=display">d = \left(\frac{4\pi Am_\mathrm{H}}{3M}\right)^{1/3}R</script><p>库伦势能</p>
+<script type="math/tex; mode=display">\epsilon_c \simeq \frac{1}{4\pi \epsilon_0}\frac{Z^2 e^2}{d}</script><p>另一方面，由维里定理可以估计平均温度：</p>
+<script type="math/tex; mode=display">\overline{T} = \frac{\alpha}{3}\frac{Am_\mathrm{H}}{k}\frac{GM}{R}</script><p>从而</p>
+<script type="math/tex; mode=display">\frac{\epsilon_c}{k\overline{T}} \sim \frac{1}{4\pi\epsilon_0}\frac{Z^2e^2}{A^{4/3}m_\mathrm{H}^{4/3}GM^{2/3}}</script><p>带入$M=M_\odot$，$Z=1$，$A=1$（氢原子），有$\epsilon_c/kT\sim 10^{-2}$。因此采用理想气体近似是合理的。<br>重元素有$A\simeq 2Z$，从而$\epsilon_c/kT\sim Z^{2/3}$。对演化到晚期的恒星，重元素很多，$\epsilon_c/kT$会增大。</p>
+<h3 id="压强积分"><a href="#压强积分" class="headerlink" title="压强积分"></a>压强积分</h3><p>考虑一个假想面，速度与其法向夹角$\theta$的粒子撞击到上面被反弹回来，动量改变</p>
+<script type="math/tex; mode=display">\Delta p = 2p\cos\theta</script><p>由于粒子分布是各向同的，</p>
+<script type="math/tex; mode=display">\frac{n(\theta, p) \mathrm{d}\theta \mathrm{d}p}{n(p) \mathrm{d}p}=\frac{\mathrm{d} \Omega}{4 \pi}=\frac{2 \pi \sin \theta \mathrm{d} \theta}{4 \pi}=\frac{1}{2} \sin \theta \mathrm{d}\theta</script><p>其中$n(\theta, p)$是方向在$\theta\sim\theta+\mathrm{d}\theta$之间，动量在$p\sim p+\mathrm{d}p$之间的粒子的（空间）数密度。</p>
+<p>在$\delta t$时间内，体积$v\delta t\mathrm{d}S\cos\theta$中的粒子会撞击到$\mathrm{d}S$面积上。从而传输到面上的动量为</p>
+<script type="math/tex; mode=display">\delta p = n(\theta,p)\mathrm{d}\theta\mathrm{d}p \cdot v\delta t\mathrm{d}S\cos\theta \cdot \Delta p</script><p>贡献的压强则为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \mathrm{d}P &= \frac{\delta p}{\delta t\mathrm{d}S} = n(\theta,p)\mathrm{d}\theta\mathrm{d}p \cdot v\cos\theta \cdot 2p\cos\theta
+    \\&= \frac{1}{2}  \mathrm{d}\theta \cdot n(p)\mathrm{d}p \cdot v\cos\theta \cdot 2p\cos\theta
+    \\&= vpn(p)\mathrm{d}p \cos^2\theta \sin\theta \mathrm{d}\theta
+\end{aligned}</script><p>压强对所有方向和动量积分：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    P &= \int_0^\infty\mathrm{d}p\int_0^\pi vpn(p)\cos^2\theta \sin\theta \mathrm{d}\theta
+    \\&= \frac{1}{3}\int_0^{\infty} vpn(p)\mathrm{d}p
+\end{aligned}</script><p>即为<strong>压强积分</strong>。</p>
+<h2 id="离子压"><a href="#离子压" class="headerlink" title="离子压"></a>离子压</h2><p>理想气体近似给出的离子的EoS：</p>
+<script type="math/tex; mode=display">P_I = n_I k T</script><p>下面用压强积分求离子的压强：<br>处于温度$T$的平衡态气体满足麦克斯韦分布</p>
+<script type="math/tex; mode=display">f(v)\mathrm{d}v = 4\pi\left(\frac{m}{2\pi k T}\right)^{3/2} e^{-\frac{1}{2}mv^2/kT} v^2\mathrm{d}v</script><p>由$\mathrm{d}p=m\mathrm{d}v$：</p>
+<script type="math/tex; mode=display">f(p)\mathrm{d}p = \frac{4\pi p^2\mathrm{d}p}{(2\pi mkT)^{3/2}} e^{-p^2/2mkT}</script><p>另一方面，$f(p)\mathrm{d}p$是动量在$p\sim p+\mathrm{d}p$之间的粒子的占比，也是在单位体积内动量在$p\sim p+\mathrm{d}p$的粒子数比总粒子数，即：</p>
+<script type="math/tex; mode=display">f(p)\mathrm{d}p = \frac{n(p)}{n}\mathrm{d}p</script><p>从而压强积分</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+  P_I &= \frac{1}{3}\int_0^{\infty} vpn(p)\mathrm{d}p
+  \\&= \frac{1}{3}\int_0^{\infty} vpn_I \frac{4\pi p^2}{(2\pi mkT)^{3/2}} e^{-p^2/2mkT}\mathrm{d}p
+  \\&= n_I kT
+\end{aligned}</script><p>和理想气体状态方程给出的压强一致。</p>
+<p>气体（平均）分子量为$\mu_I$，也可以写成</p>
+<script type="math/tex; mode=display">P_I = \frac{R}{\mu_I}\rho T</script><h2 id="电子压强"><a href="#电子压强" class="headerlink" title="电子压强"></a>电子压强</h2><h3 id="电子气体的压强"><a href="#电子气体的压强" class="headerlink" title="电子气体的压强"></a>电子气体的压强</h3><p>将电子气体看做理想气体，也有</p>
+<script type="math/tex; mode=display">P_e = n_e kT</script><p>离子$i$充分电离，放出$Z_i$个电子，产生的电子的数密度为</p>
+<script type="math/tex; mode=display">n_e = \sum_i n_iZ_i = \frac{\rho}{m_H}\sum_i X_i \frac{Z_i}{A_i}</script><p>定义电子气体的等效平均分子量</p>
+<script type="math/tex; mode=display">\frac{1}{\mu_e} = \sum_i X_i \frac{Z_i}{A_i}</script><p>$X_i$是原子$i$占的质量分数。<br>一般地，</p>
+<script type="math/tex; mode=display">\frac{1}{\mu_e} = X + \frac{1}{2}Y + (1-X-Y)\left<\frac{Z_i}{A_i}\right></script><p>$X$为氢的质量分数，$Y$为氦，其余为金属元素。一般有$Z_i/A_i\sim 1/2$，从而</p>
+<script type="math/tex; mode=display">\frac{1}{\mu_e} \approx \frac{1}{2}(X+1)</script><p>对太阳，$\mu_e\approx 1.17$。<br>对氢耗尽的恒星，$X=0$，$\mu_e\approx 2$。</p>
+<h3 id="总压强"><a href="#总压强" class="headerlink" title="总压强"></a>总压强</h3><p>由道尔顿分压定律，总压强</p>
+<script type="math/tex; mode=display">P_\mathrm{gas} = P_I+P_e = \left(\frac{1}{\mu_I} + \frac{1}{\mu_e}\right) R\rho T</script><p>混合气体的平均分子量$\mu$定义为</p>
+<script type="math/tex; mode=display">\frac{1}{\mu} = \frac{1}{\mu_I} + \frac{1}{\mu_e}</script><p>从而压强仍可写为</p>
+<script type="math/tex; mode=display">P_\mathrm{gas} = \frac{R}{\mu} \rho T</script><p>上面的结论依赖如下近似：</p>
+<ul>
+<li>忽略分子之间的电磁相互作用，看作理想气体</li>
+<li>假设离子都是完全电离的</li>
+<li>不考虑相对论效应，不考虑简并压</li>
+</ul>
+<h3 id="量子简并压"><a href="#量子简并压" class="headerlink" title="量子简并压"></a>量子简并压</h3><p>费米动量</p>
+<script type="math/tex; mode=display">p_F = \left(\frac{3h^2n_e}{8\pi}\right)^{1/3}</script><p>考虑$0K$的费米分布作为近似，由压强积分给出量子简并压</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+  P_{\mathrm{e,deg}} &= \frac{1}{3}\int_0^{p_F} \frac{p}{m_e}pn_e(p)\mathrm{d}p
+\\&= \frac{h^2}{20m_e}\left(\frac{3}{\pi}\right)^{2/3}\left(\frac{\rho}{m_H\mu_e}\right)^{5/3}
+\end{aligned} \tag{*}</script><p>可以看见简并压反比于粒子的质量，因此只有电子简并压需要考虑，离子的可以忽略不计。只有在极高密度的情况下才会出现核子的简并态（中子星）。</p>
+<p>$T\sim 0K$附近，电子动能远大于库伦势能$E_k=\frac{p_F^2}{2m_e}\gg \epsilon$，可近似看为自由电子气。在恒星演化的过程中，恒星氢燃料耗尽而氦聚变还未点燃时，温度很低（相比于电子的费米温度），可以近似看为此情况。</p>
+<p>简并电子气的压强可简写为</p>
+<script type="math/tex; mode=display">P_{\mathrm{e,deg}} = K_1 \rho^{5/3}</script><p>$K_1$是常数，带入氢耗尽（$\mu=2$）的恒星，有</p>
+<script type="math/tex; mode=display">k_1 \approx 3.15\times10^{12} \mathrm{dyn}\cdot\mathrm{cm}^{-2}</script><h3 id="相对论性电子简并压"><a href="#相对论性电子简并压" class="headerlink" title="相对论性电子简并压"></a>相对论性电子简并压</h3><p>恒星的氢燃料耗尽后，没有辐射压，恒星由于自引力快速收缩，$\Delta V$降低，从而$\Delta p$上升，电子速率可以接近光速。此时的电子是相对论性简并电子气。</p>
+<p>对相对论性电子使用近似$v\sim c$，压强积分为</p>
+<script type="math/tex; mode=display">P_\mathrm{e,r-deg} = \frac{hc}{8}\left(\frac{3}{\pi}\right)^{1/3}\left(\frac{\rho}{m_H\mu_e}\right)^{4/3}</script><p>或</p>
+<script type="math/tex; mode=display">P_\mathrm{e,r-deg} = K_2 \rho^{4/3}</script><h2 id="辐射压"><a href="#辐射压" class="headerlink" title="辐射压"></a>辐射压</h2><p>温度$T$的热平衡态下的光子气体，动量$p=h\nu/c$。从而动量空间分布$n(p)\mathrm{d}p$取决于频率空间分布。黑体辐射的普朗克公式：</p>
+<script type="math/tex; mode=display">n(\nu)\mathrm{d}\nu = \frac{8\pi\nu^2}{c^3}\frac{\mathrm{d}\nu}{e^{h\nu/kT}-1}</script><p>带入压强积分：</p>
+<script type="math/tex; mode=display">P_{\mathrm{rad}} = \frac{1}{3}\int_0^{\infty} vpn(p)\mathrm{d}p = \frac{1}{3}\int_0^{\infty} c\frac{h\nu}{c}n(\nu)\mathrm{d}\nu = \frac{1}{3}aT^4</script><p>其中</p>
+<script type="math/tex; mode=display">a=\frac{8\pi^5k^4}{15c^3h^3}=\frac{4\sigma}{c}</script><p>其中$\sigma$为Stefan-Boltzmann常量。$a$则称为黑体辐射常量。</p>
+<p>热力学中给出黑体辐射的能量密度$u=aT^4$，故$P_{\mathrm{rad}}=u/3$。</p>
+<h2 id="气体和辐射的内能"><a href="#气体和辐射的内能" class="headerlink" title="气体和辐射的内能"></a>气体和辐射的内能</h2><p>气体的比内能定义为单位质量气体的内能。对理想气体，即粒子热运动的动能。从而</p>
+<script type="math/tex; mode=display">u = \frac{1}{\rho}\int_0^{\infty} \epsilon(p)n(p)\mathrm{d}p</script><p>其中$\epsilon$为单个粒子动能。对单一成分气体，粒子质量$m_g$：<br>非相对论的$\epsilon(p)=p^2/2m_g$<br>相对论的$\epsilon(p)=\gamma mc^2-mc^2$。再根据$p=\gamma mc^2$，有：</p>
+<script type="math/tex; mode=display">\epsilon(p) = m_g c^2\left[ \left(1+\frac{p^2}{m_gc^2}\right)^{1/2}-1 \right]</script><p>内能密度$u|$定义为单位体积气体的内能。对非相对论性理想气体：</p>
+<script type="math/tex; mode=display">u|=n\epsilon=\frac{3}{2}nkT=\frac{3}{2}P</script><p>比内能</p>
+<script type="math/tex; mode=display">u_\mathrm{gas} = \frac{u|}{\rho} = \frac{3}{2}\frac{P_\mathrm{gas}}{\rho}</script><p>对非相对论性简并气体，类似地有</p>
+<script type="math/tex; mode=display">u=\frac{3}{2}\frac{P_{\mathrm{gas,deg}}}{\rho}</script><p>对相对论性的简并气体，</p>
+<script type="math/tex; mode=display">u = \frac{1}{\rho}\int_0^{p_F}\epsilon(p)n(p)\mathrm{d}p = 3\frac{P_{\mathrm{gas,r,deg}}}{\rho}</script><p>对辐射，能量密度为</p>
+<script type="math/tex; mode=display">\int_0^{\infty} h\nu n(\nu)\mathrm{d}\nu = aT^4</script><p>光子没有质量，但由于是在恒星中，可以考虑单位质量的恒星气体的体积中辐射的能量作为辐射的比内能：</p>
+<script type="math/tex; mode=display">u_{\mathrm{rad}} = \frac{aT^4}{\rho} = 3\frac{P_\mathrm{rad}}{\rho}</script><p>总结：</p>
+<ul>
+<li>对非相对论性气体，<script type="math/tex; mode=display">u=\frac{3}{2}\frac{P}{\rho}</script></li>
+<li>对相对论性气体（包括光子）：<script type="math/tex; mode=display">u=3\frac{P}{\rho}</script></li>
+</ul>
+<h2 id="绝热指数"><a href="#绝热指数" class="headerlink" title="绝热指数"></a>绝热指数</h2><h3 id="恒星气体的近似绝热过程"><a href="#恒星气体的近似绝热过程" class="headerlink" title="恒星气体的近似绝热过程"></a>恒星气体的近似绝热过程</h3><p>$\mathrm{d}Q=0$时，能量方程成为</p>
+<script type="math/tex; mode=display">\mathrm{d}u + P\mathrm{d}\left(\frac{1}{\rho}\right) = 0</script><p>上一节给出$u=\Phi P/\rho$，$\Phi$为常数。代入上式，解得</p>
+<script type="math/tex; mode=display">P = k_a\rho^{\gamma_a}</script><p>其中</p>
+<script type="math/tex; mode=display">\gamma_a = \frac{\Phi+1}{\Phi}</script><p>为绝热指数。</p>
+<p>对非相对论气体，$\Phi=3/2$，$\gamma_a=5/3$。<br>对相对论性气体，$\Phi=3$，$\gamma_a=4/3$。<br>而对一般物态（气体和辐射混合，或中等速度的气体），$\gamma_a$介于二者之间。</p>
+<h3 id="部分电离"><a href="#部分电离" class="headerlink" title="部分电离"></a>部分电离</h3><p>定义电离度</p>
+<script type="math/tex; mode=display">x = \frac{n_+}{n_0+n_+}</script><p>其中$n_0$为中性氢的数密度，$n_+$为氢离子（电子）的数密度。</p>
+<p>对混合理想气体，物态方程为</p>
+<script type="math/tex; mode=display">P=nkT</script><p>粒子的总数密度为</p>
+<script type="math/tex; mode=display">n=n_0+n_e+n_+ = (x+1)(n_0+n_+)</script><p>从而物态方程成为</p>
+<script type="math/tex; mode=display">P=(x+1)(n_0+n_+)Rm_HT = (x+1)R\rho T</script><p>在温度$T$下，离子电离和复合过程达到动态平衡，满足<strong>Saha方程</strong>：</p>
+<script type="math/tex; mode=display">\frac{n_+n_e}{n_0} = \frac{g}{h^3}(2\pi m_ekT)^{3/2} e^{-\chi/kT}</script><p>其中$\chi$为电子的电离势能。</p>
+<p>根据电离度的定义：</p>
+<script type="math/tex; mode=display">\frac{n_+n_e}{n_0} = \frac{x^2(n_0+n_+)^2}{(n_0+n_+)-x(n_0+n_+)} = \frac{x^2}{1-x}(n_0+n_+)</script><p>对Saha方程两边乘因子$1/((1+x)(n_0+n_+))=1/n$，成为：</p>
+<script type="math/tex; mode=display">\frac{x^2}{1-x^2} = \frac{g}{h^3}\frac{(2\pi m_e)^{3/2}(kT)^{5/2}}{P} e^{-\chi/kT}</script><p>单位体积内$n_+$个氢原子被电离，释放电离能$\chi n_+$都转化为气体内能。从而电离对气体比内能的贡献为</p>
+<script type="math/tex; mode=display">\frac{\chi n_+}{\rho} = \frac{\chi n_+}{(n_0+n_+)m_H} = \frac{\chi}{m_H}x</script><p>从而部分电离气体的比内能为</p>
+<script type="math/tex; mode=display">u = \frac{3}{2}\frac{P}{\rho} + \frac{\chi}{m_H}x</script><p>对$u$全微分，绝热过程</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+  \mathrm{d}u &= -P\mathrm{d}\left(\frac{1}{\rho}\right)
+  \\ &= \frac{3}{2}\left(\frac{1}{\rho}\right)\mathrm{d}P + \frac{3}{2}P\mathrm{d}\left(\frac{1}{\rho}\right) + \frac{\chi}{m_H}\left(\frac{\partial x}{\partial P}\right)_\rho\mathrm{d}P + \frac{\chi}{m_H}\left(\frac{\partial x}{\partial \rho}\right)_P\mathrm{d}\rho
+\end{aligned}</script><p>从而得到</p>
+<script type="math/tex; mode=display">\frac{3}{2}\left(\frac{1}{\rho}\right)\mathrm{d}P + \frac{5}{2}P\mathrm{d}\left(\frac{1}{\rho}\right) + \frac{\chi}{m_H}\left(\frac{\partial x}{\partial P}\right)_\rho\mathrm{d}P + \frac{\chi}{m_H}\left(\frac{\partial x}{\partial \rho}\right)_P\mathrm{d}\rho = 0</script><p>各项乘$\rho/P$，上式成为：</p>
+<script type="math/tex; mode=display">\left[ \frac{3}{2} + \frac{\chi}{kT}\frac{P}{1+x}\left(\frac{\partial x}{\partial P}\right)_\rho \right]\frac{\mathrm{d}P}{P} -\left[ \frac{5}{2} - \frac{\chi}{kT}\frac{\rho}{1+x}\left(\frac{\partial x}{\partial \rho}\right)_P \right] \frac{\mathrm{d}\rho}{\rho} = 0</script><p>此时绝热指数</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+  \gamma_a &= \frac{\mathrm{d}\ln P}{\mathrm{d}\ln \rho} = \frac{\mathrm{d}P/P}{\mathrm{d}\rho/\rho}
+  \\&= \frac{\frac{5}{2}-\frac{\chi}{kT}\frac{\rho}{1+x}\left(\frac{\partial x}{\partial \rho}\right)_P}{\frac{3}{2} + \frac{\chi}{kT}\frac{P}{1+x}\left(\frac{\partial x}{\partial P}\right)_\rho}
+  \\&= \frac{\frac{5}{2}-\frac{\chi}{kT}\frac{\partial \ln(1+x)}{\partial \ln\rho}|_P}{\frac{3}{2} + \frac{\chi}{kT}\frac{\partial \ln(1+x)}{\partial \ln P}|_\rho}
+\end{aligned}</script><p>由Saha方程，</p>
+<script type="math/tex; mode=display">\ln\frac{x^2}{1-x^2} = \ln\left(\frac{g}{h^3}(2\pi m_e)^{3/2}k^{5/2}\right) + \frac{5}{2}\ln T - \ln P - \frac{\chi}{kT}</script><p>求微分：</p>
+<script type="math/tex; mode=display">\frac{2}{x(1-x)}\mathrm{d}\ln(1+x) = -\mathrm{d}\ln P + \frac{5}{2}\mathrm{d}\ln T + \frac{\chi}{kT}\mathrm{d}\ln T</script><p>再联立物态方程</p>
+<script type="math/tex; mode=display">\mathrm{d}\ln P = \mathrm{d}\ln(1+x) + \mathrm{d}\ln\rho + \mathrm{d}\ln T</script><p>得到</p>
+<script type="math/tex; mode=display">\frac{\partial \ln(1+x)}{\partial \ln\rho}\bigg |_P = -\frac{\frac{5}{2}+\frac{\chi}{kT}}{\frac{2}{x(1-x)}+\frac{5}{2}+\frac{\chi}{kT}}</script><script type="math/tex; mode=display">\frac{\partial \ln(1+x)}{\partial \ln P}\bigg |_\rho = \frac{\frac{3}{2}+\frac{\chi}{kT}}{\frac{2}{x(1-x)}+\frac{5}{2}+\frac{\chi}{kT}}</script><p>从而不完全电离气体的绝热系数</p>
+<script type="math/tex; mode=display">\gamma_{\mathrm{a}}(x)=\frac{5+\left(\frac{5}{2}+\frac{x}{k T}\right)^{2} x(1-x)}{3+\left[\frac{3}{2}+\left(\frac{3}{2}+\frac{x}{k T}\right)^{2}\right] x(1-x)}</script><p>讨论：</p>
+<ul>
+<li>对$x=1$（完全电离）和$x=0$（完全不电离）的情况，都有$\gamma_a=5/3$。</li>
+<li>对部分电离，绝热指数还取决于温度。</li>
+</ul>
+<h2 id="辐射转移"><a href="#辐射转移" class="headerlink" title="辐射转移"></a>辐射转移</h2><h3 id="辐射的吸收"><a href="#辐射的吸收" class="headerlink" title="辐射的吸收"></a>辐射的吸收</h3><p>定义辐射流量$F$为单位时间通过单位横截面的能量。</p>
+<p>辐射通过厚$\mathrm{d}r$的介质薄层，流量减少$-\mathrm{d}F$。对密度$\rho$的介质，有经验公式</p>
+<script type="math/tex; mode=display">\mathrm{d}F = -\kappa F\rho\mathrm{d}r = -k_\nu F \mathrm{d}r</script><p>常数$\kappa$称为<strong>不透明度系数</strong>。称$k_\nu=\kappa\rho$为介质的<strong>吸收系数</strong>（依赖辐射的频率）。<br>$k_\nu$为具长度-1次方量纲，统计物理给出$k_\nu^{-1}$的物理意义即为光子的平均自由程。</p>
+<p>定义$\mathrm{d}\tau=k_\nu\mathrm{d}r$，称为介质的<strong>光深</strong>。<br>在恒星内部，对辐射不透明，$\tau\sim\infty$；光球层和以外，对辐射透明，$\tau\sim 1$。</p>
+<p>对厚$R$的均匀介质，积分有</p>
+<script type="math/tex; mode=display">F = F_0 e^{-\kappa\rho R}</script><p>出射流量按指数衰减。</p>
+<p>介质中光子和物质相互作用的机制有：</p>
+<ul>
+<li>电子散射：光子和电子两体碰撞，光子改变方向<ul>
+<li>汤姆逊散射：弹性散射，光子动量不改变，从而频率$\nu$也不改变。光子方向改变，无法再被探测到，等效于被介质吸收（吸收机制）。</li>
+<li>康普顿散射：光子的能量传给电子，频率降低，运动方向改变，吸收机制</li>
+</ul>
+</li>
+<li>自由-自由吸收：自由电子吸收光子，末态仍为自由电子。（韧致辐射的逆过程）</li>
+<li>束缚-自由吸收：原子中的束缚态电子吸收光子，成为自由电子，也称光致电离过程。（复合过程的逆过程）</li>
+<li>束缚-束缚吸收：原子中电子吸收光子从低能级跃迁到高能级。</li>
+</ul>
+<p>介质的不透明度有经验公式：</p>
+<script type="math/tex; mode=display">\kappa = \kappa_0 \rho^a T^b</script><p>$a,b$对不同相互作用机制有不同值。</p>
+<ul>
+<li>电子汤姆逊散射，$a\approx 0,b\approx 0$。<script type="math/tex; mode=display">\kappa_{\mathrm{es}} = \frac{\kappa_{\mathrm{es},0}}{\mu_e} \approx \frac{1}{2}\kappa_{\mathrm{es},0}(1+X)</script>$\kappa_{\mathrm{es},0}=\sigma_T/m_H$，$\sigma_T$为电子的散射截面。</li>
+<li>自由-自由吸收：<script type="math/tex; mode=display">\kappa_{\mathrm{ff}} = \frac{\kappa_{\mathrm{ff},0}}{\mu_e} \left<\frac{Z^2}{A}\right> \rho T^{-7/2} \approx \frac{1}{2}\kappa_{\mathrm{ff},0}(1+X)\left<\frac{Z^2}{A}\right> \rho T^{-7/2}</script></li>
+</ul>
+<h3 id="辐射转移-1"><a href="#辐射转移-1" class="headerlink" title="辐射转移"></a>辐射转移</h3><p>若恒星内部类似太阳，光子的平均自由程$l\sim 1\mathrm{cm}$，厚$l$的球壳可以近似为单一温度黑体。<br>流量$F$，则单位时间、单位面积吸收的光子动量（也就等于净辐射压强）为</p>
+<script type="math/tex; mode=display">\frac{|\mathrm{d}F|}{c} = \frac{\kappa\rho F\mathrm{d}r}{c} = P_\mathrm{rad}(r) - P_\mathrm{rad}(r+\mathrm{d}r)</script><p>即：</p>
+<script type="math/tex; mode=display">-\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}r} = \frac{\kappa\rho F}{c}</script><p>对黑体辐射，</p>
+<script type="math/tex; mode=display">P_\mathrm{rad} = \frac{1}{3}aT^4</script><p>从而</p>
+<script type="math/tex; mode=display">F = -\frac{4acT^3}{3\kappa\rho}\frac{\mathrm{d}T}{\mathrm{d}r}</script><p>由于光度$L=4\pi r^2 F$，上式可以写成：</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}T}{\mathrm{d}r} = -\frac{3}{4ac}\frac{\kappa\rho}{T^3}\frac{L}{4\pi r^2}</script><p>或者</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}T}{\mathrm{d}m} = -\frac{3}{4ac}\frac{\kappa}{T^3}\frac{L}{(4\pi r^2)^2}</script><p>至此结构方程组已完备。加上聚变产能率的方程可以得到完整的恒星演化方程。</p>
+</body></html>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A9%E6%96%87/" rel="tag"># 天文</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/09/08/stellar-physics-02-stellar-evolution-equations/" rel="next" title="恒星演化方程">
+                  <i class="fa fa-chevron-left"></i> 恒星演化方程
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/09/08/stellar-physics-04-nuclear-processes/" rel="prev" title="恒星内部的核过程">
+                  恒星内部的核过程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#理想气体物态方程"><span class="nav-number">1.</span> <span class="nav-text">理想气体物态方程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理想气体近似"><span class="nav-number">1.1.</span> <span class="nav-text">理想气体近似</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#压强积分"><span class="nav-number">1.2.</span> <span class="nav-text">压强积分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#离子压"><span class="nav-number">2.</span> <span class="nav-text">离子压</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电子压强"><span class="nav-number">3.</span> <span class="nav-text">电子压强</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#电子气体的压强"><span class="nav-number">3.1.</span> <span class="nav-text">电子气体的压强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总压强"><span class="nav-number">3.2.</span> <span class="nav-text">总压强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#量子简并压"><span class="nav-number">3.3.</span> <span class="nav-text">量子简并压</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相对论性电子简并压"><span class="nav-number">3.4.</span> <span class="nav-text">相对论性电子简并压</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#辐射压"><span class="nav-number">4.</span> <span class="nav-text">辐射压</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#气体和辐射的内能"><span class="nav-number">5.</span> <span class="nav-text">气体和辐射的内能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绝热指数"><span class="nav-number">6.</span> <span class="nav-text">绝热指数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#恒星气体的近似绝热过程"><span class="nav-number">6.1.</span> <span class="nav-text">恒星气体的近似绝热过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部分电离"><span class="nav-number">6.2.</span> <span class="nav-text">部分电离</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#辐射转移"><span class="nav-number">7.</span> <span class="nav-text">辐射转移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#辐射的吸收"><span class="nav-number">7.1.</span> <span class="nav-text">辐射的吸收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#辐射转移-1"><span class="nav-number">7.2.</span> <span class="nav-text">辐射转移</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Y"
+    src="/images/kirin.gif">
+  <p class="site-author-name" itemprop="name">Y</p>
+  <div class="site-description" itemprop="description">宇宙的最不可理解之处在于它是可以被理解的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Li-mz" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;Li-mz" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5566902218" title="Weibo &amp;rarr; https:&#x2F;&#x2F;weibo.com&#x2F;5566902218" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Y</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22077,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      extensions: ["mediawiki-texvc.js"],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'a689a162e6bf693f09ef',
+      clientSecret: '6aeddd5e4a137ac862f95f4b014c96912779357f',
+      repo: 'Li-mz.github.io',
+      owner: 'Li-mz',
+      admin: ['Li-mz'],
+      id: '4b02f6065c26e730b3e6352a81eb149f',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+</body>
+</html>
