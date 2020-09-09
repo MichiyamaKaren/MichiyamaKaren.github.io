@@ -58,7 +58,7 @@
 <meta property="og:description" content="恒星物理笔记（三）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-08T07:34:00.000Z">
-<meta property="article:modified_time" content="2020-09-09T08:35:20.365Z">
+<meta property="article:modified_time" content="2020-09-09T13:03:33.638Z">
 <meta property="article:author" content="Y">
 <meta property="article:tag" content="天文">
 <meta name="twitter:card" content="summary">
@@ -241,7 +241,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-09 16:35:20" itemprop="dateModified" datetime="2020-09-09T16:35:20+08:00">2020-09-09</time>
+                <time title="修改时间：2020-09-09 21:03:33" itemprop="dateModified" datetime="2020-09-09T21:03:33+08:00">2020-09-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -309,16 +309,16 @@
   \\&= n_I kT
 \end{aligned}</script><p>和理想气体状态方程给出的压强一致。</p>
 <p>气体（平均）分子量为$\mu_I$，也可以写成</p>
-<script type="math/tex; mode=display">P_I = \frac{R}{\mu_I}\rho T</script><h2 id="电子压强"><a href="#电子压强" class="headerlink" title="电子压强"></a>电子压强</h2><h3 id="电子气体的压强"><a href="#电子气体的压强" class="headerlink" title="电子气体的压强"></a>电子气体的压强</h3><p>将电子气体看做理想气体，也有</p>
+<script type="math/tex; mode=display">P_I = \frac{\mathcal{R}}{\mu_I}\rho T</script><h2 id="电子压强"><a href="#电子压强" class="headerlink" title="电子压强"></a>电子压强</h2><h3 id="电子气体的压强"><a href="#电子气体的压强" class="headerlink" title="电子气体的压强"></a>电子气体的压强</h3><p>将电子气体看做理想气体，也有</p>
 <script type="math/tex; mode=display">P_e = n_e kT</script><p>离子$i$充分电离，放出$Z_i$个电子，产生的电子的数密度为</p>
 <script type="math/tex; mode=display">n_e = \sum_i n_iZ_i = \frac{\rho}{m_H}\sum_i X_i \frac{Z_i}{A_i}</script><p>定义电子气体的等效平均分子量</p>
 <script type="math/tex; mode=display">\frac{1}{\mu_e} = \sum_i X_i \frac{Z_i}{A_i}</script><p>$X_i$是原子$i$占的质量分数。<br>一般地，</p>
 <script type="math/tex; mode=display">\frac{1}{\mu_e} = X + \frac{1}{2}Y + (1-X-Y)\left<\frac{Z_i}{A_i}\right></script><p>$X$为氢的质量分数，$Y$为氦，其余为金属元素。一般有$Z_i/A_i\sim 1/2$，从而</p>
 <script type="math/tex; mode=display">\frac{1}{\mu_e} \approx \frac{1}{2}(X+1)</script><p>对太阳，$\mu_e\approx 1.17$。<br>对氢耗尽的恒星，$X=0$，$\mu_e\approx 2$。</p>
 <h3 id="总压强"><a href="#总压强" class="headerlink" title="总压强"></a>总压强</h3><p>由道尔顿分压定律，总压强</p>
-<script type="math/tex; mode=display">P_\mathrm{gas} = P_I+P_e = \left(\frac{1}{\mu_I} + \frac{1}{\mu_e}\right) R\rho T</script><p>混合气体的平均分子量$\mu$定义为</p>
+<script type="math/tex; mode=display">P_\mathrm{gas} = P_I+P_e = \left(\frac{1}{\mu_I} + \frac{1}{\mu_e}\right) \mathcal{R}\rho T</script><p>混合气体的平均分子量$\mu$定义为</p>
 <script type="math/tex; mode=display">\frac{1}{\mu} = \frac{1}{\mu_I} + \frac{1}{\mu_e}</script><p>从而压强仍可写为</p>
-<script type="math/tex; mode=display">P_\mathrm{gas} = \frac{R}{\mu} \rho T</script><p>上面的结论依赖如下近似：</p>
+<script type="math/tex; mode=display">P_\mathrm{gas} = \frac{\mathcal{R}}{\mu} \rho T</script><p>上面的结论依赖如下近似：</p>
 <ul>
 <li>忽略分子之间的电磁相互作用，看作理想气体</li>
 <li>假设离子都是完全电离的</li>
@@ -365,7 +365,7 @@
 <p>对混合理想气体，物态方程为</p>
 <script type="math/tex; mode=display">P=nkT</script><p>粒子的总数密度为</p>
 <script type="math/tex; mode=display">n=n_0+n_e+n_+ = (x+1)(n_0+n_+)</script><p>从而物态方程成为</p>
-<script type="math/tex; mode=display">P=(x+1)(n_0+n_+)Rm_HT = (x+1)R\rho T</script><p>在温度$T$下，离子电离和复合过程达到动态平衡，满足<strong>Saha方程</strong>：</p>
+<script type="math/tex; mode=display">P=(x+1)(n_0+n_+)\mathcal{R}m_HT = (x+1)\mathcal{R}\rho T</script><p>在温度$T$下，离子电离和复合过程达到动态平衡，满足<strong>Saha方程</strong>：</p>
 <script type="math/tex; mode=display">\frac{n_+n_e}{n_0} = \frac{g}{h^3}(2\pi m_ekT)^{3/2} e^{-\chi/kT}</script><p>其中$\chi$为电子的电离势能。</p>
 <p>根据电离度的定义：</p>
 <script type="math/tex; mode=display">\frac{n_+n_e}{n_0} = \frac{x^2(n_0+n_+)^2}{(n_0+n_+)-x(n_0+n_+)} = \frac{x^2}{1-x}(n_0+n_+)</script><p>对Saha方程两边乘因子$1/((1+x)(n_0+n_+))=1/n$，成为：</p>
