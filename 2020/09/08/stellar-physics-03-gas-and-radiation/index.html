@@ -58,7 +58,7 @@
 <meta property="og:description" content="恒星物理笔记（三）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-08T07:34:00.000Z">
-<meta property="article:modified_time" content="2020-09-08T07:52:26.236Z">
+<meta property="article:modified_time" content="2020-09-09T08:35:20.365Z">
 <meta property="article:author" content="Y">
 <meta property="article:tag" content="天文">
 <meta name="twitter:card" content="summary">
@@ -233,10 +233,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-09-08 15:34:00 / 修改时间：15:52:26" itemprop="dateCreated datePublished" datetime="2020-09-08T15:34:00+08:00">2020-09-08</time>
+              <time title="创建时间：2020-09-08 15:34:00" itemprop="dateCreated datePublished" datetime="2020-09-08T15:34:00+08:00">2020-09-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-09 16:35:20" itemprop="dateModified" datetime="2020-09-09T16:35:20+08:00">2020-09-09</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -388,12 +394,12 @@
 <li>对$x=1$（完全电离）和$x=0$（完全不电离）的情况，都有$\gamma_a=5/3$。</li>
 <li>对部分电离，绝热指数还取决于温度。</li>
 </ul>
-<h2 id="辐射转移"><a href="#辐射转移" class="headerlink" title="辐射转移"></a>辐射转移</h2><h3 id="辐射的吸收"><a href="#辐射的吸收" class="headerlink" title="辐射的吸收"></a>辐射的吸收</h3><p>定义辐射流量$F$为单位时间通过单位横截面的能量。</p>
-<p>辐射通过厚$\mathrm{d}r$的介质薄层，流量减少$-\mathrm{d}F$。对密度$\rho$的介质，有经验公式</p>
-<script type="math/tex; mode=display">\mathrm{d}F = -\kappa F\rho\mathrm{d}r = -k_\nu F \mathrm{d}r</script><p>常数$\kappa$称为<strong>不透明度系数</strong>。称$k_\nu=\kappa\rho$为介质的<strong>吸收系数</strong>（依赖辐射的频率）。<br>$k_\nu$为具长度-1次方量纲，统计物理给出$k_\nu^{-1}$的物理意义即为光子的平均自由程。</p>
+<h2 id="辐射转移"><a href="#辐射转移" class="headerlink" title="辐射转移"></a>辐射转移</h2><h3 id="辐射的吸收"><a href="#辐射的吸收" class="headerlink" title="辐射的吸收"></a>辐射的吸收</h3><p>定义辐射流量$H$为单位时间通过单位横截面的能量。</p>
+<p>辐射通过厚$\mathrm{d}r$的介质薄层，流量减少$-\mathrm{d}H$。对密度$\rho$的介质，有经验公式</p>
+<script type="math/tex; mode=display">\mathrm{d}H = -\kappa H\rho\mathrm{d}r = -k_\nu H \mathrm{d}r</script><p>常数$\kappa$称为<strong>不透明度系数</strong>。称$k_\nu=\kappa\rho$为介质的<strong>吸收系数</strong>（依赖辐射的频率）。<br>$k_\nu$为具长度-1次方量纲，统计物理给出$k_\nu^{-1}$的物理意义即为光子的平均自由程。</p>
 <p>定义$\mathrm{d}\tau=k_\nu\mathrm{d}r$，称为介质的<strong>光深</strong>。<br>在恒星内部，对辐射不透明，$\tau\sim\infty$；光球层和以外，对辐射透明，$\tau\sim 1$。</p>
 <p>对厚$R$的均匀介质，积分有</p>
-<script type="math/tex; mode=display">F = F_0 e^{-\kappa\rho R}</script><p>出射流量按指数衰减。</p>
+<script type="math/tex; mode=display">H = H_0 e^{-\kappa\rho R}</script><p>出射流量按指数衰减。</p>
 <p>介质中光子和物质相互作用的机制有：</p>
 <ul>
 <li>电子散射：光子和电子两体碰撞，光子改变方向<ul>
@@ -411,13 +417,13 @@
 <li>电子汤姆逊散射，$a\approx 0,b\approx 0$。<script type="math/tex; mode=display">\kappa_{\mathrm{es}} = \frac{\kappa_{\mathrm{es},0}}{\mu_e} \approx \frac{1}{2}\kappa_{\mathrm{es},0}(1+X)</script>$\kappa_{\mathrm{es},0}=\sigma_T/m_H$，$\sigma_T$为电子的散射截面。</li>
 <li>自由-自由吸收：<script type="math/tex; mode=display">\kappa_{\mathrm{ff}} = \frac{\kappa_{\mathrm{ff},0}}{\mu_e} \left<\frac{Z^2}{A}\right> \rho T^{-7/2} \approx \frac{1}{2}\kappa_{\mathrm{ff},0}(1+X)\left<\frac{Z^2}{A}\right> \rho T^{-7/2}</script></li>
 </ul>
-<h3 id="辐射转移-1"><a href="#辐射转移-1" class="headerlink" title="辐射转移"></a>辐射转移</h3><p>若恒星内部类似太阳，光子的平均自由程$l\sim 1\mathrm{cm}$，厚$l$的球壳可以近似为单一温度黑体。<br>流量$F$，则单位时间、单位面积吸收的光子动量（也就等于净辐射压强）为</p>
-<script type="math/tex; mode=display">\frac{|\mathrm{d}F|}{c} = \frac{\kappa\rho F\mathrm{d}r}{c} = P_\mathrm{rad}(r) - P_\mathrm{rad}(r+\mathrm{d}r)</script><p>即：</p>
-<script type="math/tex; mode=display">-\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}r} = \frac{\kappa\rho F}{c}</script><p>对黑体辐射，</p>
+<h3 id="辐射转移-1"><a href="#辐射转移-1" class="headerlink" title="辐射转移"></a>辐射转移</h3><p>若恒星内部类似太阳，光子的平均自由程$l\sim 1\mathrm{cm}$，厚$l$的球壳可以近似为单一温度黑体。<br>光子的能量$E=cp$，从而单位时间、单位面积的物质吸收的光子动量（也就等于净辐射压强）为</p>
+<script type="math/tex; mode=display">\frac{|\mathrm{d}H|}{c} = \frac{\kappa\rho H\mathrm{d}r}{c} = P_\mathrm{rad}(r) - P_\mathrm{rad}(r+\mathrm{d}r)</script><p>即：</p>
+<script type="math/tex; mode=display">-\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}r} = \frac{\kappa\rho H}{c}</script><p>对黑体辐射，</p>
 <script type="math/tex; mode=display">P_\mathrm{rad} = \frac{1}{3}aT^4</script><p>从而</p>
-<script type="math/tex; mode=display">F = -\frac{4acT^3}{3\kappa\rho}\frac{\mathrm{d}T}{\mathrm{d}r}</script><p>由于光度$L=4\pi r^2 F$，上式可以写成：</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}T}{\mathrm{d}r} = -\frac{3}{4ac}\frac{\kappa\rho}{T^3}\frac{L}{4\pi r^2}</script><p>或者</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}T}{\mathrm{d}m} = -\frac{3}{4ac}\frac{\kappa}{T^3}\frac{L}{(4\pi r^2)^2}</script><p>至此结构方程组已完备。加上聚变产能率的方程可以得到完整的恒星演化方程。</p>
+<script type="math/tex; mode=display">H = -\frac{4acT^3}{3\kappa\rho}\frac{\mathrm{d}T}{\mathrm{d}r}</script><p>由于辐射功率$F=4\pi r^2 H$，上式可以写成：</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}T}{\mathrm{d}r} = -\frac{3}{4ac}\frac{\kappa\rho}{T^3}\frac{F}{4\pi r^2}</script><p>或者</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}T}{\mathrm{d}m} = -\frac{3}{4ac}\frac{\kappa}{T^3}\frac{F}{(4\pi r^2)^2}</script><p>至此结构方程组已完备。加上聚变产能率的方程可以得到完整的恒星演化方程。</p>
 </body></html>
     </div>
 
