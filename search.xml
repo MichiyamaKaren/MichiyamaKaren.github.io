@@ -1539,7 +1539,7 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <li>光致中微子过程<script type="math/tex; mode=display">\gamma + e^- \rightarrow e^- + \nu_e</script></li>
 <li>正负电子对湮灭<script type="math/tex; mode=display">e + e^- \rightarrow \gamma + \gamma + \nu_e +\bar{\nu}_i</script>($i=e,\tau,\mu$)都有可能。通常释放gamma光子<br>逆反应：电子对产生，发生在高温、高密度情况</li>
 </ol>
-<h2 id="4-2-核反应的可行性"><a href="#4-2-核反应的可行性" class="headerlink" title="4.2 核反应的可行性"></a>4.2 核反应的可行性</h2><h3 id="可能的反应路线"><a href="#可能的反应路线" class="headerlink" title="可能的反应路线"></a>可能的反应路线</h3><p>自由核子结合形成原子核$I(A,Z)$释放能量$\Delta \epsilon$，定义该原子核的结合能为</p>
+<h2 id="核反应的可行性"><a href="#核反应的可行性" class="headerlink" title="核反应的可行性"></a>核反应的可行性</h2><h3 id="可能的反应路线"><a href="#可能的反应路线" class="headerlink" title="可能的反应路线"></a>可能的反应路线</h3><p>自由核子结合形成原子核$I(A,Z)$释放能量$\Delta \epsilon$，定义该原子核的结合能为</p>
 <script type="math/tex; mode=display">E_b(I) = \frac{\Delta\epsilon}{A}</script><p>即平均每个核子释放的能量。<br>结合能越大，原子核越稳定。<br><img src="04-1-binding-energy.png" alt><br>由结合能曲线，${}^{56}\mathrm{Fe}$有最大的结合能，原子核最稳定。更重的核裂变和更轻的核聚变都能自发进行，释放能量。恒星聚变形成铁核后，核反应终止，经历超新星爆炸后一部分铁碎裂飞出，形成ISM。</p>
 <h3 id="库伦势垒"><a href="#库伦势垒" class="headerlink" title="库伦势垒"></a>库伦势垒</h3><p>氢原子要发生核聚变，需要靠近到强核力起作用的距离内($r\le 10^{-15}\mathrm{m}$)。</p>
 <p>原子热运动动能$E_k\sim \frac{3}{2}kT\sim 1\mathrm{keV}$，而库伦势能$E_c\sim 10^3\mathrm{keV}$，故热运动无法突破库伦势垒产生核聚变。</p>
