@@ -1469,7 +1469,7 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <h3 id="对流产生的条件"><a href="#对流产生的条件" class="headerlink" title="对流产生的条件"></a>对流产生的条件</h3><p><img src="06-1-convection.png" alt></p>
 <p>如图，内壳层的高温气体密度较小从而上浮，经历绝热膨胀，密度增大。如果密度比当前壳层的密度大则下沉，否则将继续上浮，直到最后的$r_\mathrm{out}$处，绝热膨胀后的密度大于环境密度。$r_\mathrm{out}$即为对流区的外边界。一般$r_\mathrm{out}\ll R$。</p>
 <p><img src="06-2-density-pressure.png" alt></p>
-<p>如图，若环境为S构型，绝热膨胀的$\rho_<em><\rho_2$，从而质元上浮，对流区将不断发展，系统对流不稳定；若环境为S’构型，绝热膨胀的$\rho_</em><\rho_2’$，质元下沉，系统对流稳定。</p>
+<p>如图，若环境为S构型，绝热膨胀的$\rho_{*}<\rho_2$，从而质元上浮，对流区将不断发展，系统对流不稳定；若环境为S’构型，绝热膨胀的$ \rho_{*}<\rho_2’$，质元下沉，系统对流稳定。</p>
 <p>对流稳定的条件也可以写为：</p>
 <script type="math/tex; mode=display">\left(\frac{\mathrm{d}P}{\mathrm{d}\rho}\right)_\mathrm{star} < \left(\frac{\mathrm{d}P}{\mathrm{d}\rho}\right)_\mathrm{adiabatic}</script><p>由多方过程的物态方程</p>
 <script type="math/tex; mode=display">P = k\rho^{\gamma}</script><p>有</p>
