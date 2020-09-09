@@ -1847,7 +1847,7 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <script type="math/tex; mode=display">D_n = \frac{4\pi R^3\rho_c}{3M} = -\left[\frac{3}{\xi_1} \left. \frac{\mathrm{d}\theta}{\mathrm{d} \xi}\right|_{\xi_1}\right]^{-1}</script><p>对不同的$n<5$，一般$D_n$和$R_n=\xi_1$取值都在$1\sim10$之间。</p>
 <p>根据$M_n,R_n$的定义，可导出如下关系</p>
 <script type="math/tex; mode=display">\left(\frac{GM}{M_n}\right)^{n-1} \left(\frac{R}{R_n}\right)^{3-n} = \frac{[(n+1)k]^n}{4\pi G}</script><p>即对确定的EoS，主序星的$M$和$R$有一一对应，称为<strong>质量-半径关系</strong>。</p>
-<p>由质量-半径关系式，可以看出$n=3$时（相对论性气体），$R/R_n$的项消失，$M=\mathrm{const}$不依赖$R$；$n=1$时，$M/M_n$的项消失，$R=\mathrm{const}$不依赖$M$。<br>$1<n<3$时，$R$与$M$负相关。</p>
+<p>由质量-半径关系式，可以看出$n=3$时（相对论性气体），$R/R_n$的项消失，$M=\mathrm{const}$不依赖$R$；$n=1$时，$M/M_n$的项消失，$R=\mathrm{const}$不依赖$M$。<br>$1 < n < 3$时，$R$与$M$负相关。</p>
 <p>由质量-半径关系可以给出$k$和$M,R$的关系，带入物态方程，得到中心压强：</p>
 <script type="math/tex; mode=display">P_c = \frac{(4\pi G)^{1/n}}{n+1}\left(\frac{GM}{M_n}\right)^{\frac{n-1}{n}}\left(\frac{R}{R_n}\right)^{\frac{3-n}{n}}\rho_c^{\frac{n+1}{n}}</script><p>用$D_n$消去$R$：</p>
 <script type="math/tex; mode=display">
@@ -1868,12 +1868,10 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <li>氢耗尽，主要是氦，此时$\mu_e\approx 2$，$M_{\mathrm{ch}}=1.46M_\odot$</li>
 <li>中心铁核，此时$\mu_e\approx 2.15$，$M_{\mathrm{ch}}=1.26M_\odot$</li>
 </ul>
-<h2 id="爱丁顿（极限）光度"><a href="#爱丁顿（极限）光度" class="headerlink" title="爱丁顿（极限）光度"></a>爱丁顿（极限）光度</h2><p>由辐射转移方程</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d} T}{\mathrm{d} r}=-\frac{3}{4 a c} \frac{\kappa \rho}{T^{3}} \frac{F}{4 \pi r^{2}}</script><p>和辐射压</p>
-<script type="math/tex; mode=display">P_\mathrm{rad} = \frac{1}{3}aT^4</script><p>有</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}r} = -\frac{\kappa \rho}{c} \frac{F}{4 \pi r^{2}}</script><p>再根据流体静力学平衡</p>
+<h2 id="爱丁顿（极限）光度"><a href="#爱丁顿（极限）光度" class="headerlink" title="爱丁顿（极限）光度"></a>爱丁顿（极限）光度</h2><p>由辐射转移方程，</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}r} = -\frac{\kappa \rho H}{c} = -\frac{\kappa \rho}{c} \frac{F}{4 \pi r^{2}}</script><p>再根据流体静力学平衡</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d} P}{\mathrm{d} r}=-\rho \frac{G m}{r^{2}}</script><p>有</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}P} = \frac{\kappa F}{4\pi cGm}</script><p>主序星向外辐射，$F>0$，从而$\mathrm{d}P$和$\mathrm{d}P_\mathrm{rad}$符号相同。<br>由于从内向外$P$和$P_\mathrm{gas}$都减小，故$\mathrm{d}P_\mathrm{rad}<\mathrm{d}P$，从而有</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}P} = \frac{\kappa F}{4\pi cGm}</script><p>主序星辐射的能流向外，$F>0$，从而$\mathrm{d}P$和$\mathrm{d}P_\mathrm{rad}$符号相同。由于从内向外$P$和$P_\mathrm{gas}$都减小，故$\mathrm{d}P_\mathrm{rad}<\mathrm{d}P$，从而有</p>
 <script type="math/tex; mode=display">\kappa F < 4\pi cGm</script><p>注意：在恒星外围壳层的对流区，氢氦充分电离，存在大量自由电子。若核区的磁流体不稳定性使核燃烧增强，$F$增大，导致更强的光致电离，使$n_e$增大，导致汤姆逊散射主导的$\kappa$增大。此时可能有$\kappa F>4\pi cGm$，需要引入对流机制转移多余的辐射的能量。</p>
 <p>考虑热平衡方程</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}F}{\mathrm{d}m} = q</script><ul>
@@ -1882,14 +1880,13 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 </ul>
 <p>若由于内部扰动，$L$超过$L_\mathrm{Edd}$，流体静力学平衡被破坏，$P_\mathrm{rad}$的值很大形成强星风，吹散恒星外包层，使恒星质量减小。</p>
 <p>观测上，主序星有质光关系</p>
-<script type="math/tex; mode=display">\log L \propto n\log M</script><p>结合$L<L_\mathrm{Edd}$，表明恒星质量存在上限。</p>
+<script type="math/tex; mode=display">\log L \propto n\log M</script><p>结合$L < L_\mathrm{Edd}$，表明恒星质量存在上限。</p>
 <h2 id="标准模型（爱丁顿模型）"><a href="#标准模型（爱丁顿模型）" class="headerlink" title="标准模型（爱丁顿模型）"></a>标准模型（爱丁顿模型）</h2><h3 id="光度"><a href="#光度" class="headerlink" title="光度"></a>光度</h3><p>引入无量纲参数$\eta$，使</p>
 <script type="math/tex; mode=display">\frac{F(r)}{m(r)} = \eta \frac{L}{M}</script><p>与可观测量$L,M$联系起来。<br>显然，在恒星表面，$\eta=1$。</p>
 <p>则：</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}P} = \frac{\kappa F}{4\pi cGm} = \frac{\kappa \eta L}{4\pi cGM} = \frac{\kappa_s L}{4\pi cGM}</script><p>其中$\kappa_s=\kappa\eta$。</p>
-<p>由于$q$对温度极端敏感，可以近似认为核区（点源）之外$q=0$。即对$r>0$，$F(r)\sim\mathrm{const}$。</p>
-<p>向内$m(r)$减小，$\eta$增大，$\eta\ge 1$。<br>另一方面，$\kappa\propto \rho T^{-7/2}$。（电子自由-自由散射的Kramers不透明度）$\kappa$和$\eta$抵消，$\kappa_s\sim\mathrm{const}$。而在外表面$\kappa=1\cdot\kappa(R)=\kappa(R)$，即$\kappa_s$其实是恒星外表面的不透明度。</p>
-<p>$\kappa_s$是常数，从而：</p>
+<p>由于$q$对温度极端敏感，可以近似认为核区（点源）之外$q=0$。即对$r>0$，$F(r)\sim\mathrm{const}$。而向内$m(r)$减小，从而$\eta$增大，$\eta\ge 1$。<br>另一方面，$\kappa\propto \rho T^{-7/2}$（电子自由-自由散射的Kramers不透明度）。近似认为$\kappa$和$\eta$抵消，$\kappa_s\sim\mathrm{const}$。而在外表面$\kappa=1\cdot\kappa(R)=\kappa(R)$，从而$\kappa_s$就是恒星外表面的不透明度。</p>
+<p>$\kappa_s$是常数，从而积分得到：</p>
 <script type="math/tex; mode=display">P_\mathrm{rad} = \frac{\kappa_s L}{4\pi cGM}P</script><p>定义$\beta=P_{\mathrm{gas}}/P$，则</p>
 <script type="math/tex; mode=display">L = \frac{4\pi cGM}{\kappa_s}\frac{P_\mathrm{rad}}{P} = L_\mathrm{Edd}(1-\beta)</script><p>即<strong>恒星的光度是爱丁顿光度的$1-\beta$倍</strong>。</p>
 <h3 id="压强"><a href="#压强" class="headerlink" title="压强"></a>压强</h3><p>总压强</p>
