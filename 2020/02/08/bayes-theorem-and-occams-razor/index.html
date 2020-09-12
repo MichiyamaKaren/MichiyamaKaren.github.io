@@ -164,6 +164,11 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook" rel="section"><i class="fa fa-fw fa-comments"></i>留言板</a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -260,6 +265,20 @@
             </span>
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/02/08/bayes-theorem-and-occams-razor/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/08/bayes-theorem-and-occams-razor/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
             <div class="post-description">主体内容是贝叶斯定理和奥卡姆剃刀的缝合怪科普</div>
 
         </div>
@@ -356,7 +375,7 @@
 
           </div>
           
-    <div class="comments" id="gitalk-container"></div>
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -420,6 +439,9 @@
       </span>
       <span class="links-of-author-item">
         <a href="https://weibo.com/5566902218" title="Weibo &amp;rarr; https:&#x2F;&#x2F;weibo.com&#x2F;5566902218" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/13024288" title="Bilibili &amp;rarr; https:&#x2F;&#x2F;space.bilibili.com&#x2F;13024288" rel="noopener" target="_blank"><i class="fa fa-fw fa-bilibili"></i>Bilibili</a>
       </span>
   </div>
 
@@ -588,22 +610,31 @@
 
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
 
 <script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID: 'a689a162e6bf693f09ef',
-      clientSecret: '6aeddd5e4a137ac862f95f4b014c96912779357f',
-      repo: 'Li-mz.github.io',
-      owner: 'Li-mz',
-      admin: ['Li-mz'],
-      id: '0356974437217adec5d6a6c9c7b252e9',
-        language: 'zh-CN',
-      distractionFreeMode: 'true'
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'GMC8JlmcdEXQuVhez2nFHNag-gzGzoHsz',
+    appKey: 'mICrom67f9LiUrnuDD9DOh7I',
+    placeholder: "Just go go",
+    avatar: 'identicon',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
 </script>
 
 </body>
