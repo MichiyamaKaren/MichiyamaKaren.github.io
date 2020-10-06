@@ -165,135 +165,6 @@ S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
       </tags>
   </entry>
   <entry>
-    <title>态矢和表象</title>
-    <url>/2019/11/17/brackets-and-representation/</url>
-    <content><![CDATA[<h2 id="1-1-The-Stern-Gerlach-Experiment"><a href="#1-1-The-Stern-Gerlach-Experiment" class="headerlink" title="1.1 The Stern-Gerlach Experiment"></a>1.1 The Stern-Gerlach Experiment</h2><p>第一节从一个稍微不同的角度介绍了一下Stern-Gerlach实验。其基本原理如原子物理中所介绍的，银原子的唯一一个处在非满壳层的电子自旋方向不同使银原子有不同的磁矩，通过空间上均匀变化的磁场后会在变化的方向上被分成两束。</p><p>书中讨论了这样的sequential S-G experiment：<br><img src="sequential-sg-experiment.png" alt><br>在a中，连续布置两个z方向的SG装置，只让$S_z+$通过第一个装置，最后从第二个装置射出的也只有一束$S_z+$。这容易理解，因为第一个装置起了“滤掉”$S_z-$的作用。<br>在b中，第二个装置是x方向的，最后出射的原子有$S_x+$和$S_z-$两束。这似乎说明了$S_z+$的原子在x方向的磁矩也是均匀分布的，一半是$S_x+$，另一半是$S_x-$。让我们继续看第三个序列。<br>在c中，在b的后面再增加一个z方向的装置，并只让$S_x+$方向的原子进入第三个装置。而最后出射的原子中既有$S_z+$又有$S_z-$。这是个惊人的结果——$S_z-$的原子本应在第一个装置就被滤掉了，却再次出现在第三个装置的出射。这似乎是说，仅仅在中间加入一个x方向的装置，就使我们失去了对磁矩在z方向分布的信息（对比a）<del>全部木大</del>。</p><a id="more"></a>
-
-<p>这让人想到另一个经典物理中的现象——光的偏振。我们可以让$S_x$和$S_z$对应xy方向和与xy方向夹角$45^\circ$的x’y’方向的偏振光，SG装置对应相应的偏振片，得到的就是上面的结果。而考虑我们对偏振光的描述，x’方向的偏振是x和y方向偏振的线性组合，我们推断这里原子的状态也应该由某种抽象的二维线性空间中的矢量来表示：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \left|S_x;+\right>=\frac{1}{\sqrt{2}}\left|S_z;+\right>+\frac{1}{\sqrt{2}}\left|S_z;-\right>
-    \\
-    \left|S_x;-\right>=-\frac{1}{\sqrt{2}}\left|S_z;+\right>+\frac{1}{\sqrt{2}}\left|S_z;-\right>
-\end{aligned}</script><p>书中接下来讨论了$S_y$态的表示，它也应该是$S_z$的线性组合，且要和$S_x$区分开来。为此，书中将$S_y$对应成左旋和右旋偏振，相应的线性组合的系数则变成了$\frac{1}{\sqrt{2}}$和$ \pm\frac{i}{\sqrt{2}}$。书中进一步说明这个线性空间应该是定义在复数域上的。<em>（这里我存有一些疑问，如果是在二维空间中的话，是否就不必要引入复数了？如果在更高维的空间，是否还需要定义在其他的数域上？这只是数学巧合还是蕴含了物理上三维空间中的某种对称性？）</em></p>
-<h2 id="1-2-Kets-Bras-and-Operators"><a href="#1-2-Kets-Bras-and-Operators" class="headerlink" title="1.2 Kets, Bras, and Operators"></a>1.2 Kets, Bras, and Operators</h2><p>延续上一节的思路，我们认为物理系统的状态被<strong>右矢</strong>(ket)描述，它定义在复数域上的线性空间，形如$\left|\alpha\right&gt;$。右矢空间具有线性空间的诸多性质，这里不再赘述。</p>
-<p>接下来需要介绍的是<strong>左矢</strong>(bra)空间。左矢空间是右矢空间的对偶空间，它和右矢一一对应。和右矢$\left|\alpha\right&gt;$对应的左矢就记作$\left&lt;\alpha\right|$。左矢和右矢的对偶映射保留了加法。需要注意的是，$c\left|\alpha\right&gt;$对应的左矢应该是$c^*\left&lt;\alpha\right|$。</p>
-<p>一个左矢和一个右矢可以定义<strong>内积</strong>：$\left&lt;\beta|\alpha\right&gt;$。内积是一个线性运算，且满足：</p>
-<ul>
-<li>共轭对称性：<script type="math/tex">\left<\beta|\alpha\right>=\left<\alpha|\beta\right>^*</script></li>
-<li>正定性：<script type="math/tex; mode=display">\left<\alpha|\alpha\right>\geq0</script>取等号仅当$\left|\alpha\right&gt;$是右矢空间的零矢量。</li>
-</ul>
-<p><strong>算符</strong>是一个双线性映射，将右矢映成右矢，或将左矢映成左矢。被相同的算符作用的互相对偶的左矢和右矢通常并不对偶，而$X\left|\alpha\right&gt;$对偶的左矢是$\left&lt;\alpha\right|X^\dagger$。$X^\dagger$称为算符$X$的厄米共轭。和自己的厄米共轭相等的算符称为厄米算符。<em>（这里的描述有些不清晰，因为仅凭上面的定义，$X$作用在左矢和右矢上原则上可以完全不相关。不过事实上并非如此，参见下面的结合公理）</em></p>
-<p>算符也可以定义乘法，和映射的乘法类似。显然有：</p>
-<script type="math/tex; mode=display">(XY)^\dagger=Y^\dagger X^\dagger</script><p>至此我们定义了这样几种“乘法”：内积、算符作用在（“乘”）左矢或右矢，算符的乘法。再定义外积：$\left|\alpha\right&gt;\left&lt;\beta\right|$。这些“乘法”是我们会涉及到的全部合法的乘法式。</p>
-<p>结合公理说的是，对于任何合法的乘法式，结合的顺序是任意的。比如：</p>
-<script type="math/tex; mode=display">(\left|\alpha\right>\left<\beta\right|)\left|\gamma\right>=\left|\alpha\right>(\left<\beta|\gamma\right>)</script><p>这告诉我们，可以根据外积定义算符：</p>
-<script type="math/tex; mode=display">X=\left|\alpha\right>\left<\beta\right|</script><p>根据结合公理，$X$确是将一个右矢映成另一个右矢。<em>（事实上，结合公理无非是说算符在作用于左矢和作用于右矢上时，应该满足$(\left&lt;\alpha|X)|\beta\right&gt;=\left&lt;\alpha|(X|\beta\right&gt;)）$。只是给出了这一限制，以及让外积拥有算符的性质，其他的结合律都是显然的）</em> 可以证明：</p>
-<script type="math/tex; mode=display">X^\dagger= \left|\beta\right>\left<\alpha\right|</script><p>另一个常用的公式是：</p>
-<script type="math/tex; mode=display">\left<\beta|X|\alpha\right>=\left<\alpha|X^\dagger|\beta\right>^*</script><h2 id="1-3-Base-Kets-and-Matrix-Representations"><a href="#1-3-Base-Kets-and-Matrix-Representations" class="headerlink" title="1.3 Base Kets and Matrix Representations"></a>1.3 Base Kets and Matrix Representations</h2><p>定义算符的本征右矢和本征值，对算符$A$，本征右矢是这样的右矢$\left|\alpha\right&gt;$，使得$A\left|\alpha\right&gt;=a’\left|\alpha\right&gt;$。其中$a’$是常数，称为本征值。书中将本征值为a’的本征右矢记为$\left|a’\right&gt;$。</p>
-<p>若$A$是厄米的，我们有：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \left<a''|A|a'\right>&=a'\left<a''|a'\right>
-    \\ &=(\left<a'|A|a''\right>)^*=a''^*(\left<a'|a'\right>)^*
-    \\ &=a''^*\left<a''|a'\right>
-\end{aligned}</script><p>即：</p>
-<script type="math/tex; mode=display">(a'-a''^*)\left<a''|a'\right>=0</script><p>取$a’=a’’$，有厄米算符的本征值都是实数；取$a’\neq a’’$，有厄米算符不同的本征右矢是相互正交的。</p>
-<p>我们假设$A$的本征右矢是完备的，可以通过其线性组合表示右矢空间中任意的右矢：</p>
-<script type="math/tex; mode=display">\left|\alpha\right>=\sum_{a'}c_{a'}\left|a'\right></script><p>考虑$\left&lt;a’\right|$和$\left|\alpha\right&gt;$的内积，我们可以得出$c_{a’}=\left&lt;a’|\alpha\right&gt;$。即：</p>
-<script type="math/tex; mode=display">\left|\alpha\right>=\sum_{a'}\left|a'\right>\left<a'|\alpha\right> \tag{1.3.1}</script><p>我们的结论是，<strong>$A$的所有归一化的本征右矢构成了右矢空间中的一组单位正交完备基。</strong></p>
-<p>1.3.1中也定义了<strong>完备性关系</strong>：</p>
-<script type="math/tex; mode=display">\sum_{a'}\left|a'\right>\left<a'\right|=\sum_{a'}\Lambda_{a'}=1 \tag{1.3.2}</script><p>其中$\Lambda_{a’}$是<strong>投影算符</strong>，其几何意义是将右矢投影到平行于$\left|a’\right&gt;$的方向。</p>
-<p>根据完备性关系，算符$X$可写为：</p>
-<script type="math/tex; mode=display">X=\sum_{a''}\sum_{a'}\left|a''\right>\left<a''\right|X\left|a'\right>\left<a'\right|</script><p>我们用一个$N\times N$的矩阵来表示$X$：$X_{ij}=\left&lt; a^{(i)} \right| X \left| a^{(j)} \right&gt;$。</p>
-<p>可以证明，厄米共轭对应的矩阵表示就是共轭转置，算符相乘对应的就是矩阵乘法。后者的证明如下：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    XY&=\sum_{a''}\sum_{a'}\left|a''\right>\left<a''\right|XY\left|a'\right>\left<a'\right|
-    \\ &=\sum_{a''}\sum_{a'}\left|a''\right>\left(\sum_{a'''}\left<a''\right|X\left|a'''\right>\left<a'''\right|Y\left|a'\right>\right)\left<a'\right|
-\end{aligned}</script><p>在中间插入一个单位算符的技巧十分常用，用相同的技巧，将左矢和右矢对应到分量组成的行矢量和列矢量，算符作用到左矢和右矢上就也成了矩阵乘法。内积和外积也同样。</p>
-<h2 id="1-4-Measurements-Observables-and-the-Uncertainty-Relations"><a href="#1-4-Measurements-Observables-and-the-Uncertainty-Relations" class="headerlink" title="1.4 Measurements, Observables, and the Uncertainty Relations"></a>1.4 Measurements, Observables, and the Uncertainty Relations</h2><h3 id="测量"><a href="#测量" class="headerlink" title="测量"></a>测量</h3><p>让我们回到物理的讨论上来。右矢用于表示物理系统的状态，而算符代表的是<strong>观测量</strong>。这代表的是，对某个观测量进行测量，让系统的状态成为了对应的算符的某个本征态。我们无法确定的给出具体会变成哪个本征态，但可以给出归一化的态$\left|\alpha\right&gt;$变成本征态$\left|a’\right&gt;$的<strong>概率</strong>为$\left|\left&lt;a’|\alpha\right&gt;\right|^2$。此时测量的结果就是对应的<strong>本征值</strong>。这被称为<strong>测量公理</strong>。</p>
-<p>定义态$\left|\alpha\right&gt;$下观测量的平均值：</p>
-<script type="math/tex; mode=display">\left<A\right>=\left<\alpha|A|\alpha\right></script><p>可以将其写成下面的形式：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \left<A\right>&=\left<\alpha|A|\alpha\right>
-    \\&=\sum_{a''}\sum_{a'}\left<\alpha|a''\right>\left<a''\right|A\left|a'\right>\left<a'|\alpha\right>
-    \\&=\sum_{a'}a'\left|\left<a'|\alpha\right>\right|^2
-\end{aligned}</script><p>这说明观测量平均值的物理意义即为对含有大量相同态矢的粒子进行测量，测量的结果的平均值，亦即测量结果的期望。</p>
-<h3 id="1-2自旋系统"><a href="#1-2自旋系统" class="headerlink" title="1/2自旋系统"></a>1/2自旋系统</h3><p>现在再来看1.1中的SG实验，记$S_z+$的态矢为$\left|+\right&gt;$，$S_z-$的态矢为$\left|-\right&gt;$。由sequential S-G experiment的b，应该有：</p>
-<script type="math/tex; mode=display">
-\left|\left<+|S_x;+\right>\right|^2=\left|\left<-|S_x;+\right>\right|^2=\frac{1}{2}</script><p>对$\left|S_x;-\right&gt;$也同样，考虑到$\left|S_x;+\right&gt;$和$\left|S_x;-\right&gt;$应正交，从而有：</p>
-<script type="math/tex; mode=display">
-\left|S_x;\pm\right>=\frac{1}{\sqrt{2}}\left|+\right>\pm\frac{1}{\sqrt{2}}e^{i\delta_1}\left|-\right></script><p>$S_x$在本征态$\left|S_x;\pm\right&gt;$上的本征值为$\pm\hbar/2$，则可以构造算符$S_x$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    S_x&=\frac{\hbar}{2}\left|S_x;+\right>\left<S_x;+\right|-\frac{\hbar}{2}\left|S_x;-\right>\left<S_x;-\right|
-    \\ &=\frac{\hbar}{2}(e^{-i\delta_1}\left|+\right>\left<-\right|+e^{i\delta_1}\left|-\right>\left<+\right|)
-\end{aligned}</script><p>在y方向也同样：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \left|S_y;\pm\right>=\frac{1}{\sqrt{2}}\left|+\right>\pm\frac{1}{\sqrt{2}}e^{i\delta_2}\left|-\right>
-    \\
-    S_y=\frac{\hbar}{2}(e^{-i\delta_2}\left|+\right>\left<-\right|+e^{i\delta_2}\left|-\right>\left<+\right|)
-\end{aligned}</script><p>考虑到xy方向也并不相关，也应该有：</p>
-<script type="math/tex; mode=display">
-\left|\left<S_x;+|S_y;\pm\right>\right|^2=\left|\left<S_x;-|S_y;\pm\right>\right|^2=\frac{1}{2}</script><p>我们得到：</p>
-<script type="math/tex; mode=display">\delta_2-\delta_1=\pm\frac{\pi}{2}</script><p>不妨取$\delta_1=0$（$\left|+\right&gt;$定义的任意性给出了这个自由度），$\delta_2=\pi/2$（这个自由度则由空间坐标的左手系/右手系的选取给出），这就对应了我们之前基于偏振光的猜测，也说明了三个方向上线性组合的系数不能全是实数。</p>
-<p>我们有：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    S_x=\frac{\hbar}{2}(\left|+\right>\left<-\right|+\left|-\right>\left<+\right|)
-    \\
-    S_y=\frac{\hbar}{2}(-i\left|+\right>\left<-\right|+i\left|-\right>\left<+\right|)
-    \\
-    S_z=\frac{\hbar}{2}(\left|+\right>\left<+\right|+\left|-\right>\left<-\right|)
-\end{aligned}</script><p>得到它们的对易关系：</p>
-<script type="math/tex; mode=display">[S_i,S_j]=i\epsilon_{ijk}\hbar S_k</script><p>其中对易子的定义为：$[A,B]=AB-BA$。定义$S^2=S_x^2+S_y^2+S_z^2$，也有：</p>
-<script type="math/tex; mode=display">[S^2,S_i]=0</script><p>这具有角动量的对易关系的性质。</p>
-<h3 id="相容观测量"><a href="#相容观测量" class="headerlink" title="相容观测量"></a>相容观测量</h3><p>对应的算符的对易子为零的两个观测量称为相容观测量。对相容观测量$A$和$B$，有：</p>
-<script type="math/tex; mode=display">\left<a''\right|[A,B]\left|a'\right>=(a''-a')\left<a''\right|B\left|a'\right>=0</script><p>则应有（不考虑简并，即不同的本征右矢对应同一个本征值，因为一般来说总可以选取另外一个观测量来区分简并的右矢）：</p>
-<script type="math/tex; mode=display">\left<a''\right|B\left|a'\right>=\left<a''\right|B\left|a'\right>\delta_{a'a''}</script><p>从而，</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    B\left|a'\right>&=\sum_{a''}\left|a''\right>\left<a''\right|B\left|a'\right>
-    \\&=\left<a'\right|B\left|a'\right>\left|a'\right>
-\end{aligned}</script><p>这说明$A$和$B$具有相同的本征右矢，可以将其记作$\left|a’,b’\right&gt;$。这也是“相容”的含义——对B的测量不会破坏A的信息，因为它们的本征态是相同的，先测量A再测量B，第二次测量不会改变态矢（以1的概率塌缩到原本的态）。</p>
-<p>与相容观测量相反的是不相容观测量，即对易子非零的观测量。对不相容观测量，后面的测量会破坏前面的测量的信息（因为塌缩到了不同的本征态上）。</p>
-<h3 id="不确定性关系"><a href="#不确定性关系" class="headerlink" title="不确定性关系"></a>不确定性关系</h3><p>对观测量$A$，定义这样一个算符：</p>
-<script type="math/tex; mode=display">\Delta A=A-\left<A\right></script><p>$A$的弥散度定义为$\Delta A$的平均值：</p>
-<script type="math/tex; mode=display">\left<(\Delta A)^2\right>=\left<A^2-2A\left<A\right>+\left<A\right>^2\right>=\left<A^2\right>-\left<A\right>^2</script><p>和方差类似。</p>
-<p>现在我们可以证明<strong>不确定性关系</strong>：</p>
-<script type="math/tex; mode=display">\left<(\Delta A)^2\right>\left<(\Delta B)^2\right>\geq \frac{1}{4}\left|\left<[A,B]\right>\right|^2</script><p>首先，需要以下引理：</p>
-<ul>
-<li>Schwarz不等式：<script type="math/tex; mode=display">\left<\alpha|\alpha\right>\left<\beta|\beta\right>\geq\left|\left<\alpha|\beta\right>\right|^2</script>（考虑$\left|\alpha+\lambda\beta\right&gt;$的模长的非负性）</li>
-<li>厄米算符的平均值是实数</li>
-<li>反厄米算符（$C=-C^\dagger$）的平均值是纯虚数</li>
-</ul>
-<p>对任意右矢$\left|\gamma\right&gt;$，取$\left|\alpha\right&gt;=\Delta A\left|\gamma\right&gt;,\left|\beta\right&gt;=\Delta B\left|\gamma\right&gt;$，带入Schwarz不等式，有：</p>
-<script type="math/tex; mode=display">\left<(\Delta A)^2\right>\left<(\Delta B)^2\right>\geq\left|\left<\Delta A\Delta B\right>\right|^2</script><p>（其中利用到了$A$和$B$的厄米性），而$\Delta A\Delta B$可以写为厄米部分和反厄米部分之和：</p>
-<script type="math/tex; mode=display">\Delta A\Delta B=\frac{1}{2}[\Delta A,\Delta B]+\frac{1}{2}\{\Delta A,\Delta B\}</script><p>对上式求平均值，第一项是实数，第二项是纯虚数。求模长则有不确定性关系。</p>
-<h2 id="1-5-基的变换"><a href="#1-5-基的变换" class="headerlink" title="1.5 基的变换"></a>1.5 基的变换</h2><p>基的选取不是唯一的，这节主要讨论不同基之间的变换，或被称为<strong>表象变换</strong>。</p>
-<p>首先，任意两组基$\{\left|a’\right&gt;\}$和$\{\left|b’\right&gt;\}$之间，都可以通过一个幺正算符联系起来：$\left|b^{(k)}\right&gt;=U\left|a^{(k)}\right&gt;$。</p>
-<p>所谓幺正算符，是这样的算符$U$，$UU^\dagger=U^\dagger U=1$。这里的坐标变换算符可以这样定义：</p>
-<script type="math/tex; mode=display">U=\sum_k\left|b^{(k)}\right>\left<a^{(k)}\right|</script><p>在b表象上，分量的值为：</p>
-<script type="math/tex; mode=display">\left<b^{(k)}|\alpha\right>=\sum_l \left<b^{(k)}|a^{(l)}\right>\left<a^{(l)}|\alpha\right>=\sum_l \left<a^{(k)}|U^\dagger|a^{(l)}\right>\left<a^{(l)}|\alpha\right></script><p>在新表象下的分量即为$U^{\dagger}$在旧表象下的矩阵乘旧表象下的分量。</p>
-<p>类似的方法可以证明，算符在新表象下的矩阵为：</p>
-<script type="math/tex; mode=display">X'=U^\dagger XU</script><p>是一个相似变换。</p>
-<p>不同表象下的算符的变换启发我们，如果根据算符$A$定义一个新算符$B$，它在新表象下的矩阵表示和旧表象下相同，那它应该和$A$有相同的本征值，其本征态的分量也和$A$在旧表象的分量相同。也就是说，它们的<strong>观测值之间具有相同的概率分布。</strong></p>
-<p><strong>幺正等效观测量</strong>定义为：</p>
-<script type="math/tex; mode=display">B=UAU^{-1}</script><p>我们有：</p>
-<script type="math/tex; mode=display">UAU^{-1}(U\left|a'\right>)=B(U\left|a'\right>)=a'(U\left|a'\right>)</script><p>这符合上面的论述。</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>Sakurai量子力学笔记</category>
-      </categories>
-      <tags>
-        <tag>物理</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在Docker上部署Jupyter Notebook</title>
     <url>/2019/10/22/Docker-Jupyter/</url>
     <content><![CDATA[<p>由于要用到只能在Linux上运行的python包，又懒得装双系统，就了解了一下Docker，配置了一个能在Windows上用的Jupyter Notebook环境。</p><h2 id="Docker上Ubuntu的基础配置"><a href="#Docker上Ubuntu的基础配置" class="headerlink" title="Docker上Ubuntu的基础配置"></a>Docker上Ubuntu的基础配置</h2><p>去官网上下载一个Docker Desktop，然后pull一个ubuntu镜像。刚pull下来的ubuntu镜像里什么必要的工具也没有，需要自己apt-get安装。（改软件源的配置文件时需要注意按照对应的系统版本去搜索配置文件的写法，否则apt-get会报错）</p><a id="more"></a>
@@ -317,117 +188,6 @@ S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
       </categories>
       <tags>
         <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>位置算符、动量算符和波函数</title>
-    <url>/2019/11/28/position-and-momentum/</url>
-    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><h2 id="1-6-Position-Momentum-and-Translation"><a href="#1-6-Position-Momentum-and-Translation" class="headerlink" title="1.6 Position, Momentum and Translation"></a>1.6 Position, Momentum and Translation</h2><h3 id="连续谱"><a href="#连续谱" class="headerlink" title="连续谱"></a>连续谱</h3><p>前面讨论的观测量的本征值都是离散分布的，然而还有另一类观测量，其本征值是连续分布的。连续谱使用的数学和之前讨论的类似，只需要把求和换成积分，克罗内克符号$\delta_{a’a’’}$换成狄拉克函数$\delta(a’-a’’)$。连续谱下的基的正交归一化条件和完备性关系可以写为：</p>
-<script type="math/tex; mode=display">\left<\xi'|\xi''\right>=\delta(\xi'-\xi'')</script><script type="math/tex; mode=display">\int \left|\xi'\right>\left<\xi'\right|\mathrm{d}\xi'=1</script><h3 id="位置和波函数"><a href="#位置和波函数" class="headerlink" title="位置和波函数"></a>位置和波函数</h3><p><strong>位置</strong>就是这样一个本征值连续分布的观测量。对位置算符$x$的本征右矢$\left|x’\right>$，有：</p>
-<script type="math/tex; mode=display">x\left|x'\right>=x'\left|x'\right></script><p>对任意的态$\left|\alpha\right>$，由位置的完备性关系，可以在位置表象下展开：</p>
-<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|x'\right>\left<x'|\alpha\right>\mathrm{d}x'</script><p>如果我们用仪器测量一个处于$\left|\alpha\right>$态上的粒子的位置，粒子会以一定概率塌缩到某个位置本征态。当然，物理的仪器都是有限精度的，我们只能得知粒子的位置在$x’$附近一个宽度为$\mathrm{d}x’$的区间内的概率为：</p>
-<script type="math/tex; mode=display">\left|\left<x'|\alpha\right>\right|^2\mathrm{d}x'</script><p>其中$\psi(x’)=\left< x’|\psi \right>$被称作<strong>波函数</strong>，其模平方就是粒子在空间中的概率密度。</p>
-<p>粒子一定会在空间中某处被发现，这给出了波函数和态矢的归一化条件：</p>
-<script type="math/tex; mode=display">\left<\alpha|\alpha\right>=\int\left|\left<x'|\alpha\right>\right|^2\mathrm{d}x'=\int\left|\Psi(x')\right|^2\mathrm{d}x'=1</script><p>三维的情况和一维类似，我们假设存在位置本征态$\left|\mathbf{x}\right>$，这即是假设三个方向的位置算符有共同的本征态$\left|x’,y’,z’\right>$（否则的话粒子在任意时刻都不会有确定的位置——它不同方向的位置甚至都不对易！我们不希望这样）。如果位置本征态是完备的，我们仍可以展开任意的态矢：</p>
-<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}</script><h3 id="无穷小平移"><a href="#无穷小平移" class="headerlink" title="无穷小平移"></a>无穷小平移</h3><p>我们定义<strong>无穷小平移算符</strong>$\mathscr{T}(\mathrm{d}\mathbf{x’})$，它作用在位置本征态$\left|\mathbf{x’}\right>$上的结果为：</p>
-<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right></script><p>物理上，考虑任意态矢在坐标表象下的表示：$\left|\alpha\right>=\int c_{\mathbf{x’}}\left|\mathbf{x’}\right>$，无穷小平移使每个本征态$\left|\mathbf{x’}\right>$都变成$\left|\mathbf{x’}+\mathrm{d}\mathbf{x’}\right>$，相当于一个让物理系统平移了$\mathrm{d}\mathbf{x’}$的坐标变换（我们很快会看到，它的确是一个幺正算符）。</p>
-<p>下面来考虑$\mathscr{T}(\mathrm{d}\mathbf{x’})$的性质，将其作用在任意态矢上：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \mathscr{T}(\mathrm{d}\mathbf{x'})\left|\alpha\right>
-    &=\mathscr{T}(\mathrm{d}\mathbf{x'})\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}\\
-    &=\int \left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}-\mathrm{d}\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}
-    \\
-    &=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\mathscr{T}(\mathrm{d}\mathbf{x'})|\alpha\right>\mathrm{d}\mathbf{x'}
-\end{aligned}</script><p>这说明$\mathscr{T}(\mathrm{d}\mathbf{x’})$作用到本征左矢上结果为：</p>
-<script type="math/tex; mode=display">\left<\mathbf{x'}\right|\mathscr{T}(\mathrm{d}\mathbf{x'})=\left<\mathbf{x'}-\mathrm{d}\mathbf{x'}\right|</script><p>$\mathscr{T}(\mathrm{d}\mathbf{x’})$让左矢向相反方向平移了$\mathrm{d}\mathbf{x’}$。从而显然有$\mathscr{T}(\mathrm{d}\mathbf{x’})$的厄米共轭为：</p>
-<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})^\dagger=\mathscr{T}(-\mathrm{d}\mathbf{x'})</script><p>当然，根据定义，无穷小平移算符还应满足以下性质：</p>
-<ul>
-<li>$\mathscr{T}(\mathrm{d}\mathbf{x’})\mathscr{T}(\mathrm{d}\mathbf{x’’})=\mathscr{T}(\mathrm{d}\mathbf{x’}+\mathrm{d}\mathbf{x’’})$</li>
-<li>$\mathscr{T}(-\mathrm{d}\mathbf{x’})=\mathscr{T}^{-1}(\mathrm{d}\mathbf{x’})$</li>
-<li>根据上一条性质和$\mathscr{T}(\mathrm{d}\mathbf{x’})$的厄米共轭的表达式，它也应该是厄米算符</li>
-</ul>
-<p><em>（书上这几个性质都是假设的，但是在不考虑简并的情况下真的有特意假设一下的必要吗……）</em></p>
-<p>第一个性质要求$\mathscr{T}(\mathrm{d}\mathbf{x’})$是指数函数，即：</p>
-<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})=\exp \left(\mathbf{B}\cdot \mathrm{d}\mathbf{x'}\right)</script><p>由于$\mathrm{d}\mathbf{x’}$是无穷小量，可以展开并保留至一阶：</p>
-<script type="math/tex; mode=display">
-\mathscr{T}(\mathrm{d}\mathbf{x'})=1+\mathbf{B}\cdot \mathrm{d}\mathbf{x'}</script><p>上面厄米共轭的性质即成为：</p>
-<script type="math/tex; mode=display">1+\mathbf{B}^\dagger\cdot \mathrm{d}\mathbf{x'}=1-\mathbf{B}\cdot \mathrm{d}\mathbf{x'}</script><p>从而$\mathbf{B}$是反厄米算符，定义$\mathbf{B}=-i\mathbf{K}$，则$\mathbf{K}$是厄米算符。很容易验证$\mathscr{T}(\mathrm{d}\mathbf{x’})$的幺正性。</p>
-<p>总结一下，上面定义的无穷小平移算符有如下形式：</p>
-<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})=1-i\mathbf{K}\cdot \mathrm{d}\mathbf{x'}</script><p>下面考虑无穷小平移和位置算符的对易关系：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    &\mathbf{x}\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\mathbf{x}\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>=(\mathbf{x'}+\mathrm{d}\mathbf{x'})\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>
-    \\&\mathscr{T}(\mathrm{d}\mathbf{x'})\mathbf{x}\left|\mathbf{x'}\right>=\mathbf{x'}\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\mathbf{x'}\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>
-\end{aligned}</script><p>从而：</p>
-<script type="math/tex; mode=display">[\mathbf{x}, \mathscr{T}(\mathrm{d}\mathbf{x'})]=\mathrm{d}\mathbf{x'}</script><p>带入上面的形式，有：</p>
-<script type="math/tex; mode=display">[x_i,K_j]=i\delta_{ij}</script><h3 id="动量作为无穷小平移的生成元"><a href="#动量作为无穷小平移的生成元" class="headerlink" title="动量作为无穷小平移的生成元"></a>动量作为无穷小平移的生成元</h3><p>我们来考虑$\mathbf{K}$的物理意义。</p>
-<p>在经典力学中，上面的无穷小平移可以作为正则变换考虑：</p>
-<script type="math/tex; mode=display">\mathbf{x'}=\mathbf{X}=\mathbf{x}+\mathrm{d}\mathbf{x},\ \mathbf{p'}=\mathbf{P}=\mathbf{p}</script><p>这一变换的生成函数为：</p>
-<script type="math/tex; mode=display">F(\mathbf{x}, \mathbf{P})=\mathbf{x}\cdot\mathbf{P}+\mathbf{p}\cdot \mathrm{d}\mathbf{x}</script><p>考虑到单位变换（$\mathbf{X}=\mathbf{x},\mathbf{P}=\mathbf{p}$）的生成函数是$F(\mathbf{x}, \mathbf{P})=\mathbf{x}\cdot\mathbf{P}$，这个生成函数和无穷小平移算符有着非常相似的形式。基于此，可以建立这样的对应，$\mathbf{K}$应该就是动量除以一个具有作用量量纲的常数。量子力学中这个常数就是$\hbar$。无穷小平移算符就可以表示为：</p>
-<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})=1-i\mathbf{p}\cdot \mathrm{d}\mathbf{x'}/\hbar</script><p>从而坐标和动量的对易关系：</p>
-<script type="math/tex; mode=display">[x_i,p_j]=i\hbar\delta_{ij}</script><p>下面考虑动量的不同分量间的对易关系。不同方向上的无穷小平移算符是对易的（先在x方向平移再在y方向平移和先在y方向再在x方向平移是等效的），从而有：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    [\mathscr{T}(\mathrm{d}x\hat{\mathbf{x}}),\mathscr{T}(\mathrm{d}x\hat{\mathbf{y}})]&=[1-ip_x\mathrm{d}x/\hbar, 1-ip_ydy/\hbar]
-    \\&=-\frac{\mathrm{d}xdy}{\hbar^2}[p_x,p_y]=0
-\end{aligned}</script><p>在其他方向上也同理，从而不同方向上的动量算符的对易关系为：</p>
-<script type="math/tex; mode=display">[p_i,p_j]=0</script><p>不同方向的动量是对易的，这说明和位置算符类似，也存在三维的动量本征态$\left|\mathbf{p’}\right>$。</p>
-<h3 id="正则对易关系"><a href="#正则对易关系" class="headerlink" title="正则对易关系"></a>正则对易关系</h3><p>上面的对易关系：</p>
-<script type="math/tex; mode=display">[x_i,x_j]=0,[p_i,p_j]=0,[x_i,p_j]=i\hbar\delta_{ij}</script><p>被称为<strong>正则对易关系</strong>。</p>
-<p>注意到正则对易关系和经典力学中的泊松括号其实有着相似的形式，结果也是乘了一个$i\hbar$。一般地，量子力学中有经典对应的各种观测量的对易关系都可以对应为：</p>
-<script type="math/tex; mode=display">[,]_{classical}=\frac{[,]}{i\hbar}</script><p>泊松括号的一些性质也可以自然的被应用在对易子上，比如：</p>
-<script type="math/tex; mode=display">[A,BC]=[A,B]C+B[A,C]</script><script type="math/tex; mode=display">[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=0</script><h2 id="1-7-Wave-Functions-in-Position-and-Momentum-Space"><a href="#1-7-Wave-Functions-in-Position-and-Momentum-Space" class="headerlink" title="1.7 Wave Functions in Position and Momentum Space"></a>1.7 Wave Functions in Position and Momentum Space</h2><h3 id="位置空间波函数"><a href="#位置空间波函数" class="headerlink" title="位置空间波函数"></a>位置空间波函数</h3><p>位置表象的波函数为$\psi(x’)=\left< x’|\psi \right>$，从这一角度，我们可以得到波动力学中的一系列定义：</p>
-<script type="math/tex; mode=display">\left<\psi|\phi\right>=\int \left<\psi|x'\right>\left<x'|\phi\right>\mathrm{d}x'=\int \psi^*(x')\phi(x')\mathrm{d}x' \tag{1.7.2}</script><script type="math/tex; mode=display">
-\begin{aligned}
-    \left<\psi|A|\phi\right>&=\iint \left<\psi|x'\right>\left<x'|A|x''\right>\left<x''|\phi\right>\mathrm{d}x'\mathrm{d}x''
-    \\&=\iint \psi^*(x')\left<x'|A|x''\right>\phi(x'')\mathrm{d}x'\mathrm{d}x''
-\end{aligned}
-\tag{1.7.3}</script><p>对一个一般的算符，矩阵元$\left< x’|A|x’’ \right>$是$x’,x’’$的函数。而当$A$是位置算符的函数时（从而拥有相同的本征态），我们有：</p>
-<script type="math/tex; mode=display">\left<x'|f(x)|x''\right>=\left<x'|f(x'')|x''\right>=f(x'')\delta(x'-x'')</script><p>上面的乘积就可以写为：</p>
-<script type="math/tex; mode=display">\left<\psi|f(x)|\phi\right>=\int \psi^*(x')f(x')\phi(x')\mathrm{d}x'</script><h3 id="动量空间波函数"><a href="#动量空间波函数" class="headerlink" title="动量空间波函数"></a>动量空间波函数</h3><p>下面我们来考虑动量表象下波函数和位置空间波函数的关系，从无穷小平移算符出发：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \left(1-\frac{ip\delta x'}{\hbar}\right)\left|\alpha\right>&=\int \mathscr{T}(\delta x')\left|x'\right>\left<x'|\alpha\right>\mathrm{d}x'
-    \\&=\int \left|x'+\delta x'\right>\left<x'|\alpha\right>\mathrm{d}x'
-    \\&=\int \left|x'\right>\left<x'-\delta x'|\alpha\right>\mathrm{d}x'
-    \\&=\int \left|x'\right>\left(\left<x'|\alpha\right>-\delta x'\frac{\partial}{\partial x'}\left<x'|\alpha\right>\right)\mathrm{d}x'
-\end{aligned}</script><p>对比等式两边，我们有：</p>
-<script type="math/tex; mode=display">p\left|\alpha\right>=-i\hbar\int \left|x'\right>\frac{\partial}{\partial x'}\left<x'|\alpha\right>\mathrm{d}x'</script><p>从而：</p>
-<script type="math/tex; mode=display">
-\left<x'|p|\phi\right>=-i\hbar\frac{\partial}{\partial x'}\left<x'|\phi\right> \tag{1.7.4}</script><p>等式两边其实都是波函数，因此这定义了一个波函数空间上的线性映射，将波函数映射为动量算符作用后的态矢对应的波函数。这也和波动力学中动量算符的定义一致：</p>
-<script type="math/tex; mode=display">p=-i\hbar\frac{\partial}{\partial x'}</script><p>现在我们可以考虑态矢在动量表象下的展开，即动量空间波函数。利用完备性关系，我们有：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \left|\phi\right>&=\int \left|p'\right>\left<p'|\phi\right>\mathrm{d}p'
-    \\&=\iint \left|p'\right>\left<p'|x'\right>\left<x'|\phi\right>\mathrm{d}p'\mathrm{d}x'
-    \\&=\int \mathrm{d}p'\left|p'\right>\int \left<p'|x'\right>\phi(x')\mathrm{d}x'
-\end{aligned}</script><p>对其中出现的$\left< p’|x’ \right>$，考虑1.7.4中任意态$\phi$为动量本征态的情况，有：</p>
-<script type="math/tex; mode=display">\left<x'|p|p'\right>=p'\left<x'|p'\right>=-i\hbar\frac{\partial}{\partial x'}\left<x'|p'\right></script><p>从而：</p>
-<script type="math/tex; mode=display">\left<x'|p'\right>=N\exp\left(\frac{ip'x'}{\hbar}\right)</script><p>其中$N$是归一化常数，考虑$\left< x’|x’’ \right>$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \left<x'|x''\right>&=\delta(x'-x'')
-    \\&=\int \left<x'|p'\right>\left<p'|x''\right>\mathrm{d}p'
-    \\&=\int \left|N\right|^2\exp\left[\frac{ip'(x'-x'')}{\hbar}\right]\mathrm{d}p'
-    \\&=2\pi\hbar\left|N\right|^2\delta(x'-x'')
-\end{aligned}</script><p>从而有：</p>
-<script type="math/tex; mode=display">\left<x'|p'\right>=\frac{1}{\sqrt{2\pi\hbar}}\exp\left(\frac{ip'x'}{\hbar}\right) \tag{1.7.5}</script><p>从而我们得到位置空间波函数到动量空间波函数的变换：</p>
-<script type="math/tex; mode=display">\phi_p(p')=\frac{1}{\sqrt{2\pi\hbar}}\int \phi_x(x')\exp\left(\frac{ip'x'}{\hbar}\right)\mathrm{d}x' \tag{1.7.6}</script><p>相似的，可以得到动量空间到位置空间的变换：</p>
-<script type="math/tex; mode=display">\phi_x(x')=\frac{1}{\sqrt{2\pi\hbar}}\int \phi_p(p')\exp\left(-\frac{ip'x'}{\hbar}\right)\mathrm{d}p' \tag{1.7.7}</script><p>这是傅里叶变换和傅里叶逆变换的形式。</p>
-<h3 id="推广至三维"><a href="#推广至三维" class="headerlink" title="推广至三维"></a>推广至三维</h3><p>三维的归一化条件和完备性关系成为：</p>
-<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{x''}\right>=\delta^3(\mathbf{x'}-\mathbf{x''})</script><script type="math/tex; mode=display">\int d^3\mathbf{x'}\left|\mathbf{x'}\right>\left<\mathbf{x'}\right|=1</script><p>对动量本征态也是同样。</p>
-<p>三维的动量算符作用在波函数上，微分成为梯度，1.7.4成为：</p>
-<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{p}|\phi\right>=-i\hbar\nabla'\left<\mathbf{x'}|\phi\right></script><p>1.7.5成为：</p>
-<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{p'}\right>=\frac{1}{[2\pi\hbar]^{3/2}}\exp\left(\frac{i\mathbf{x'}\cdot\mathbf{p'}}{\hbar}\right)</script><p>位置空间和动量空间波函数间的变换也成为三维傅里叶变换：</p>
-<script type="math/tex; mode=display">\phi_p(\mathbf{p'})=\frac{1}{[2\pi\hbar]^{3/2}}\int \phi_x(\mathbf{x'})\exp\left(\frac{i\mathbf{p'}\cdot\mathbf{x'}}{\hbar}\right)\mathrm{d}\mathbf{x'} \tag{1.7.6}</script><script type="math/tex; mode=display">\phi_x(\mathbf{x'})=\frac{1}{[2\pi\hbar]^{3/2}}\int \phi_p(\mathbf{p'})\exp\left(-\frac{i\mathbf{p'}\cdot\mathbf{x'}}{\hbar}\right)\mathrm{d}\mathbf{p'} \tag{1.7.7}</script><p>注意三维中位置波函数的量纲即成为长度的-3/2次方，这样粒子在全空间被发现的概率才仍然会是无量纲的1。</p>
-</body></html>]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>Sakurai量子力学笔记</category>
-      </categories>
-      <tags>
-        <tag>物理</tag>
       </tags>
   </entry>
   <entry>
@@ -704,8 +464,7 @@ S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
   <entry>
     <title>矢量和分析和曲线坐标系</title>
     <url>/2019/03/14/vector-analysis/</url>
-    <content><![CDATA[<h1 id="1-矢量分析"><a href="#1-矢量分析" class="headerlink" title="1.矢量分析"></a>1.矢量分析</h1><h2 id="1-1-矢量的定义"><a href="#1-1-矢量的定义" class="headerlink" title="1.1 矢量的定义"></a>1.1 矢量的定义</h2><p>这里不深究矢量的定义，我们只考虑三维欧式空间$\mathbb{R}^3$中的矢量，它们有三个分量，并且分量在任意的坐标变换下与$\mathbf r=(x,y,z)$具有相同的变换形式。形象地说，“<strong>矢量应该像矢量那样变换</strong>”。</p><p>关于微分几何中介绍的矢量和张量的定义参见<a href="https://li-mz.github.io/404">这篇文章</a>。</p><a id="more"></a>
-
+    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><h1 id="1-矢量分析"><a href="#1-矢量分析" class="headerlink" title="1.矢量分析"></a>1.矢量分析</h1><h2 id="1-1-矢量的定义"><a href="#1-1-矢量的定义" class="headerlink" title="1.1 矢量的定义"></a>1.1 矢量的定义</h2><p>这里不深究矢量的定义，我们只考虑三维欧式空间$\mathbb{R}^3$中的矢量，它们有三个分量，并且分量在任意的坐标变换下与$\mathbf r=(x,y,z)$具有相同的变换形式。形象地说，“<strong>矢量应该像矢量那样变换</strong>”。</p>
 <h2 id="1-2-爱因斯坦求和约定"><a href="#1-2-爱因斯坦求和约定" class="headerlink" title="1.2 爱因斯坦求和约定"></a>1.2 爱因斯坦求和约定</h2><p>我们经常会遇到形式相同的几项求和的式子，比如：</p>
 <script type="math/tex; mode=display">
 \mathbf A \cdot \mathbf B = A_1B_1+A_2B_2+A_3B_3 = \sum_{i=1}^3 A_iB_i</script><p>我们可以省略求和符号$\sum$，仅使用$A_iB_i$来表示上式，在确定的上下文中这一般不会导致误会。</p>
@@ -754,7 +513,7 @@ S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
 \end{align*}</script></li>
 <li>使用爱因斯坦求和约定展开：<script type="math/tex; mode=display">
 \begin{align*}
-\nabla\times(\mathbf A\times \mathbf B) &= \epsilon_{ijk}\frac{\partial}{\partial x^j}(\mathbf A\times\mathbf B)\_k\mathbf e_i
+\nabla\times(\mathbf A\times \mathbf B) &= \epsilon_{ijk}\frac{\partial}{\partial x^j}(\mathbf A\times\mathbf B)_k\mathbf e_i
 \\ &=\epsilon_{ijk}\frac{\partial}{\partial x^j}(\epsilon_{klm}A_lB_m)\mathbf e_i  = \epsilon_{kij}\frac{\partial}{\partial x^j}(\epsilon_{klm}A_lB_m)\mathbf e_i 
 \\&=(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})\frac{\partial}{\partial x^j}(A_lB_m)\mathbf e_i
 \\ &=\frac{\partial}{\partial x^j}(A_iB_j)\mathbf e_i-\frac{\partial}{\partial x^j}(A_jB_i)\mathbf e_i
@@ -766,56 +525,42 @@ S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
 <h1 id="2-曲线坐标系"><a href="#2-曲线坐标系" class="headerlink" title="2.曲线坐标系"></a>2.曲线坐标系</h1><p>这一部分的说明旨在表述具有一般性地给出在曲线坐标系对矢量的描述，并介绍同一个矢量的协变和逆变表示。注意我们仍在讨论$\mathbb{R}^3$中的矢量，而非在微分流形上定义的，虽然二者具有相似性，但这里的矢量基和对偶基处于同一个线性空间。</p>
 <p>本节内容来自<a href="https://link.springer.com/book/10.1007%2F978-3-642-75595-8" target="_blank" rel="noopener">《Flux Coordinates and Magnetic Field Structure》</a>。</p>
 <h2 id="2-1-矢量的对偶集合（reciprocal-sets）"><a href="#2-1-矢量的对偶集合（reciprocal-sets）" class="headerlink" title="2.1 矢量的对偶集合（reciprocal sets）"></a>2.1 矢量的对偶集合（reciprocal sets）</h2><p>称矢量集合$\{\mathbf A,\mathbf B,\mathbf C\}$和$\{\mathbf a,\mathbf b,\mathbf c\}$为对偶集合，若：</p>
-<script type="math/tex; mode=display">
-\mathbf A\cdot\mathbf a=\mathbf B\cdot\mathbf b=\mathbf C\cdot\mathbf c=1
-\\ \mathbf A\cdot\mathbf b=\mathbf A\cdot\mathbf c=\cdots=0</script><p>。即，一个集合的每个元素都和另一个集合的一个元素的内积为1，并和另外两个元素正交。这两个集合中的元素都是线性无关的（否则，存在$\lambda,\mu,\gamma\neq0$，使$\lambda\mathbf A+\mu\mathbf B+\gamma\mathbf C=0$，从而$(\lambda\mathbf A+\mu\mathbf B+\gamma\mathbf C)\cdot\mathbf a=\lambda=0$，矛盾）。从而，对任意的矢量$\mathbf W$，都可以表示为这两个集合中的元素的线性组合：</p>
+<script type="math/tex; mode=display">\mathbf A\cdot\mathbf a=\mathbf B\cdot\mathbf b=\mathbf C\cdot\mathbf c=1</script><script type="math/tex; mode=display">\mathbf A\cdot\mathbf b=\mathbf A\cdot\mathbf c=\cdots=0</script><p>。即，一个集合的每个元素都和另一个集合的一个元素的内积为1，并和另外两个元素正交。这两个集合中的元素都是线性无关的（否则，存在$\lambda,\mu,\gamma\neq0$，使$\lambda\mathbf A+\mu\mathbf B+\gamma\mathbf C=0$，从而$(\lambda\mathbf A+\mu\mathbf B+\gamma\mathbf C)\cdot\mathbf a=\lambda=0$，矛盾）。从而，对任意的矢量$\mathbf W$，都可以表示为这两个集合中的元素的线性组合：</p>
 <script type="math/tex; mode=display">\mathbf W=(\mathbf W\cdot\mathbf a)\mathbf A+(\mathbf W\cdot\mathbf b)\mathbf B+(\mathbf W\cdot\mathbf c)\mathbf C</script><p>或：</p>
 <script type="math/tex; mode=display">\mathbf W=(\mathbf W\cdot\mathbf A)\mathbf a+(\mathbf W\cdot\mathbf B)\mathbf b+(\mathbf W\cdot\mathbf C)\mathbf c</script><p>另外，由于$\{\mathbf A,\mathbf B,\mathbf C\}$线性无关，其对偶集合是唯一的，可以表示为：</p>
 <script type="math/tex; mode=display">
 \mathbf a=\frac{\mathbf B\times\mathbf C}{\mathbf A\cdot(\mathbf B\times\mathbf C)} ,\mathbf b=\frac{\mathbf C\times\mathbf A}{\mathbf B\cdot(\mathbf C\times\mathbf A)} ,\mathbf c=\frac{\mathbf A\times\mathbf B}{\mathbf C\cdot(\mathbf A\times\mathbf B)} \tag{2.1.1}</script><p>容易验证(2.1.1)给出的对偶集合满足上面介绍的对偶集合的定义。</p>
 <h2 id="2-2-曲线坐标基"><a href="#2-2-曲线坐标基" class="headerlink" title="2.2 曲线坐标基"></a>2.2 曲线坐标基</h2><p>考虑坐标变换$\mathbf R(u^1,u^2,u^3)$：</p>
-<script type="math/tex; mode=display">
-x=x(u^1,u^2,u^3)
-\\y=y(u^1,u^2,u^3)
-\\z=z(u^1,u^2,u^3)</script><p>要求这个变换是独立的，即可以用$u^1,u^2,u^3$表示$x,y,z$（严谨地说，Jacobi行列式非零）。</p>
+<script type="math/tex; mode=display">x=x(u^1,u^2,u^3)</script><script type="math/tex; mode=display">y=y(u^1,u^2,u^3)</script><script type="math/tex; mode=display">z=z(u^1,u^2,u^3)</script><p>要求这个变换是独立的，即可以用$u^1,u^2,u^3$表示$x,y,z$（严谨地说，Jacobi行列式非零）。</p>
 <p>令$(u^1,u^2,u^3)$中一个坐标为定值，可以确定一个曲面，称为<strong>坐标曲面</strong>。令两个坐标为定值，则确定了一条曲线，称为<strong>坐标曲线</strong>。显然任意一条坐标曲线都可以看作两个坐标面的交线。</p>
 <p>对空间中的任意一点$P$，有三条经过$P$的坐标曲线，坐标曲线的切线方向可以定义一组基：</p>
 <script type="math/tex; mode=display">
-\mathbf e_1=\frac{\partial \mathbf R}{\partial u^1},\mathbf e_2=\frac{\partial \mathbf R}{\partial u^2},\mathbf e_3=\frac{\partial \mathbf R}{\partial u^3} \tag{2.2.1}</script><p>根据Jacobi行列式非零，$\{\mathbf e_1,\mathbf e_2,\mathbf e_3\}$线性无关。这里与直角坐标系的区别在于，坐标基本身是位置的函数，不一定是常量。<br>另一方面，过同一点的三个坐标曲面的法线方向也可以定义另一组基。曲面某一点的法线方向应该与曲面上过这一点的曲线的切线方向垂直。注意到$\mathbf du^i=\nabla u^i\cdot\mathbf{dR}$，从而$\mathbf{dR}=\frac{\partial \mathbf R}{\partial u^j}\mathbf du^j = \mathbf e_j\mathbf du^j$，带回，$\mathbf du^i=\nabla u^i\cdot\mathbf e_j\mathbf du^j$，由于$u^1,u^2,u^3$互相独立，有：</p>
+\mathbf e_1=\frac{\partial \mathbf R}{\partial u^1},\mathbf e_2=\frac{\partial \mathbf R}{\partial u^2},\mathbf e_3=\frac{\partial \mathbf R}{\partial u^3} \tag{2.2.1}</script><p>根据Jacobi行列式非零，$\{\mathbf e_1,\mathbf e_2,\mathbf e_3\}$线性无关。这里与直角坐标系的区别在于，坐标基本身是位置的函数，不一定是常量。 </p>
+<p>另一方面，过同一点的三个坐标曲面的法线方向也可以定义另一组基。曲面某一点的法线方向应该与曲面上过这一点的曲线的切线方向垂直。注意到$\mathrm{d}u^i=\nabla u^i\cdot\mathrm{d}\mathbf{R}$，从而$\mathrm{d}\mathbf{R}=\frac{\partial \mathbf R}{\partial u^j}\mathbf du^j = \mathbf e_j\mathrm{d}u^j$，带回，$\mathrm{d}u^i=\nabla u^i\cdot\mathbf e_j\mathrm{d}u^j$，由于$u^1,u^2,u^3$互相独立，有：</p>
 <script type="math/tex; mode=display">\nabla u^i\cdot\mathbf e_j=\delta_j^i</script><p>这满足我们对曲线法线的期望，定义另外一组基如下：</p>
 <script type="math/tex; mode=display">\mathbf e^1=\nabla u^1,\mathbf e^2=\nabla u^2,\mathbf e^3=\nabla u^3 \tag{2.2.2}</script><p>另外由推导的过程我们知道，$\{\mathbf e_1,\mathbf e_2,\mathbf e_3\}$和$\{\mathbf e^1,\mathbf e^2,\mathbf e^3\}$是一对对偶矢量集合，分别称作<strong>基</strong>和<strong>对偶基</strong>。</p>
 <blockquote>
 <p>作为例子，让我们考虑球坐标：</p>
-<script type="math/tex; mode=display">
-x=r\sin\theta\cos\phi
-\\ y=r\sin\theta\sin\phi
-\\ z=r\cos\theta</script><p>根据2.2.1，坐标基为：</p>
-<script type="math/tex; mode=display">
-\mathbf{e_r}=\frac{\partial \mathbf R}{\partial r}=\sin\theta\cos\phi \mathbf{e_x}+\sin\theta\sin\phi \mathbf{e_y}+\cos\theta\mathbf{e_z}
-\\ \mathbf{e_{\theta}}=\frac{\partial \mathbf R}{\partial \theta}=r\cos\theta\cos\phi \mathbf{e_x}+r\cos\theta\sin\phi \mathbf{e_y}-r\sin\theta\mathbf{e_z}
-\\ \mathbf{e_{\phi}}=\frac{\partial \mathbf R}{\partial \theta}=-r\sin\theta\sin\phi \mathbf{e_x}+r\sin\theta\cos\phi \mathbf{e_y}</script><p>一般会对其进行归一化，这使它们成为坐标曲线的单位切向量，归一化的结果为：</p>
-<script type="math/tex; mode=display">
-\mathbf{e_r}=\sin\theta\cos\phi \mathbf{e_x}+\sin\theta\sin\phi \mathbf{e_y}+\cos\theta\mathbf{e_z}
-\\ \mathbf{e_{\theta}}=\cos\theta\cos\phi \mathbf{e_x}+\cos\theta\sin\phi \mathbf{e_y}-\sin\theta\mathbf{e_z}
-\\ \mathbf{e_{\phi}}=-\sin\theta\sin\phi \mathbf{e_x}+\sin\theta\cos\phi \mathbf{e_y}</script></blockquote>
+<script type="math/tex; mode=display">x=r\sin\theta\cos\phi</script><script type="math/tex; mode=display">y=r\sin\theta\sin\phi</script><script type="math/tex; mode=display">z=r\cos\theta</script><p>根据2.2.1，坐标基为：</p>
+<script type="math/tex; mode=display">\mathbf{e_r}=\frac{\partial \mathbf R}{\partial r}=\sin\theta\cos\phi \mathbf{e_x}+\sin\theta\sin\phi \mathbf{e_y}+\cos\theta\mathbf{e_z}</script><script type="math/tex; mode=display">\mathbf{e_{\theta}}=\frac{\partial \mathbf R}{\partial \theta}=r\cos\theta\cos\phi \mathbf{e_x}+r\cos\theta\sin\phi \mathbf{e_y}-r\sin\theta\mathbf{e_z}</script><script type="math/tex; mode=display">\mathbf{e_{\phi}}=\frac{\partial \mathbf R}{\partial \theta}=-r\sin\theta\sin\phi \mathbf{e_x}+r\sin\theta\cos\phi \mathbf{e_y}</script><p>一般会对其进行归一化，这使它们成为坐标曲线的单位切向量，归一化的结果为：</p>
+<script type="math/tex; mode=display">\mathbf{e_r}=\sin\theta\cos\phi \mathbf{e_x}+\sin\theta\sin\phi \mathbf{e_y}+\cos\theta\mathbf{e_z}</script><script type="math/tex; mode=display">\mathbf{e_{\theta}}=\cos\theta\cos\phi \mathbf{e_x}+\cos\theta\sin\phi \mathbf{e_y}-\sin\theta\mathbf{e_z}</script><script type="math/tex; mode=display">\mathbf{e_{\phi}}=-\sin\theta\sin\phi \mathbf{e_x}+\sin\theta\cos\phi \mathbf{e_y}</script></blockquote>
 <h2 id="2-3-矢量的协变和逆变分量"><a href="#2-3-矢量的协变和逆变分量" class="headerlink" title="2.3 矢量的协变和逆变分量"></a>2.3 矢量的协变和逆变分量</h2><p>前面我们说过，可以用对偶矢量集合的线性叠加表示任意矢量，即：</p>
 <script type="math/tex; mode=display">
 \mathbf D = D^i\mathbf e_i = D_i\mathbf e^i</script><p>,其中：</p>
+<script type="math/tex; mode=display">D^i=\mathbf D\cdot\mathbf e^i</script><script type="math/tex; mode=display">D_i=\mathbf D\cdot\mathbf e_i</script><p>用上、下指标表示的分量$D^i,D_i$分别称作<strong>逆变分量</strong>、<strong>协变分量</strong>。</p>
+<p>下面的论述不完全准确地讨论了协变和逆变分量的含义。考虑不同于$\{\mathbf e_1,\mathbf e_2,\mathbf e_3\}$的另一组线性无关的基$\{\mathbf e_1’,\mathbf e_2’,\mathbf e_3’\}$，相应的对偶集合$\{\mathbf e^1{}’ ,\mathbf e^2{}’,\mathbf e^3{}’\}$。两组基之间的坐标变换为$\mathbf e_i’=T_i^{\alpha}\mathbf e_{\alpha},\mathbf e^j{}’=T_{\beta}^j\mathbf e^{\beta}$。由对偶集合的定义，应有：</p>
 <script type="math/tex; mode=display">
-D^i=\mathbf D\cdot\mathbf e^i
-\\D_i=\mathbf D\cdot\mathbf e_i</script><p>用上、下指标表示的分量$D^i,D_i$分别称作<strong>逆变分量</strong>、<strong>协变分量</strong>。</p>
-<p>下面的论述不完全准确地讨论了协变和逆变分量的含义。考虑不同于$\{\mathbf e_1,\mathbf e_2,\mathbf e_3\}$的另一组线性无关的基$\{\mathbf e_1’,\mathbf e_2’,\mathbf e_3’\}$，相应的对偶集合$\{\mathbf e^1{‘}  ,\mathbf e^2{‘},\mathbf e^3{‘}\}$。两组基之间的坐标变换为$\mathbf e_i’=T_i^{\cdot\alpha}\mathbf e_{\alpha},\mathbf e^j{‘}=T_{\cdot\beta}^j\mathbf e^{\beta}$。由对偶集合的定义，应有：</p>
-<script type="math/tex; mode=display">
-\begin{align*}\mathbf e_i'\cdot\mathbf e^j{'} &=  T_i^{\cdot\alpha}\mathbf e_{\alpha} \cdot T_{\cdot\beta}^j\mathbf e^{\beta} = T_i^{\cdot\alpha}T_{\cdot\beta}^j \delta_{\alpha}^{\beta} = T_i^{\cdot\alpha}T_{\cdot\alpha}^j
-\\&= \delta_i^j 
-\end{align*}</script><p>说明基和对偶基的坐标变换矩阵$T_i^{\cdot\alpha}$和$T_{\cdot\beta}^j$的分量形式构成的矩阵互逆。矢量$\mathbf D$的协变分量$D_i=\mathbf D\cdot\mathbf e_i$，和基的变换方式相同，故称作协变；同理，逆变分量和对偶基的变换方式相同，其变换矩阵为基的逆矩阵，故称为逆变。（事实上$T_i^{\cdot\alpha}$和$T_{\cdot\beta}^j$不是两个矩阵，而是同一个张量在不同的基下的分量形式）</p>
+\begin{aligned}
+    \mathbf e_i'\cdot\mathbf e^j{}' &=  T_i^{\alpha}\mathbf e_{\alpha} \cdot T_{\beta}^j\mathbf e^{\beta} = T_i^{\alpha}T_{\beta}^j \delta_{\alpha}^{\beta} = T_i^{\alpha}T_{\alpha}^j
+    \\&= \delta_i^j
+\end{aligned}</script><p>说明基和对偶基的坐标变换矩阵$T_i^{\alpha}$和$T_{\beta}^j$的分量形式构成的矩阵互逆。矢量$\mathbf D$的协变分量$D_i=\mathbf D\cdot\mathbf e_i$，和基的变换方式相同，故称作协变；同理，逆变分量和对偶基的变换方式相同，其变换矩阵为基的逆矩阵，故称为逆变。（事实上$T_i^{\alpha}$和$T_{\beta}^j$不是两个矩阵，而是同一个张量在不同的基下的分量形式）</p>
 <p>需要注意矢量的协变表示和逆变表示与协变矢量和逆变矢量是不同的概念，在$\mathbb R^3$中不对后者进行区分。</p>
 <h2 id="2-4-度规"><a href="#2-4-度规" class="headerlink" title="2.4 度规"></a>2.4 度规</h2><p>对任意矢量$\mathbf D$，有：</p>
 <script type="math/tex; mode=display">
-\begin{align*}
-D_i &= \mathbf D\cdot\mathbf e_i = (D^j\mathbf e_j)\cdot\mathbf e_i
-\\&=D^j(\mathbf e_i\cdot\mathbf e_j) = g_{ij}D^j
-\end{align*}</script><p>由此，根据分量：</p>
+\begin{aligned}
+    D_i &= \mathbf D\cdot\mathbf e_i = (D^j\mathbf e_j)\cdot\mathbf e_i
+    \\&=D^j(\mathbf e_i\cdot\mathbf e_j) = g_{ij}D^j
+\end{aligned}</script><p>由此，根据分量：</p>
 <script type="math/tex; mode=display">
 g_{ij}=\mathbf e_i\cdot\mathbf e_j = \frac{\partial\mathbf R}{\partial u^i}\cdot\frac{\partial\mathbf R}{\partial u^j} \tag{2.4.1}</script><p>确定了一个二阶张量，称作<strong>度规</strong>。这里不准备展开介绍张量的定义，但需注意度规不仅仅是一个矩阵，而应被看做一个线性映射，它建立了基和对偶基下表示的矢量的联系。</p>
 <p>度规在对偶基下的分量形式为：</p>
@@ -823,27 +568,28 @@ g_{ij}=\mathbf e_i\cdot\mathbf e_j = \frac{\partial\mathbf R}{\partial u^i}\cdot
 g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</script><p>由上面的讨论，我们知道，可以使用度规进行矢量协变和逆变分量的转换。根据爱因斯坦求和约定，可以很容易得到转换的表达式。例如，要得到根据矢量$\mathbf D$的协变分量（下指标）得到逆变分量（上指标），则需要使用度规在对偶基下的分量（两个上指标）进行运算，即哑指标一上一下，自由指标为上指标。从而得到：$D^i=g^{ij}D_j$。</p>
 <p>另外，借助度规，可以表示两个矢量的点乘和叉乘运算的同一类分量形式：</p>
 <script type="math/tex; mode=display">
-\begin{align*}
-\mathbf A\cdot\mathbf B &= (A^i\mathbf e_i)\cdot(B^j\mathbf e_j)=g_{ij}A^iB^j
-\\&= (A_i\mathbf e^i)\cdot(B_j\mathbf e^j)=g^{ij}A_iB_j
-\end{align*}</script><p>特别地，$\mathbf{dR}\cdot\mathbf{dR} = g_{ij}(\mathbf{dR})^i(\mathbf{dR})^j = g_{ij}\mathbf{d}u^i\mathbf{d}u^j$。（其中$(\mathbf{dR})^i = \nabla u^i\cdot\mathbf{dR} = \mathbf du^i$），这告诉我们度规也蕴含了曲线坐标系中的线元长度。</p>
+\begin{aligned}
+    \mathbf A\cdot\mathbf B &= (A^i\mathbf e_i)\cdot(B^j\mathbf e_j)=g_{ij}A^iB^j
+    \\&= (A_i\mathbf e^i)\cdot(B_j\mathbf e^j)=g^{ij}A_iB_j
+\end{aligned}</script><p>特别地，$\mathrm{d}\mathbf{R}\cdot\mathbf{dR} = g_{ij}(\mathrm{d}\mathbf{R})^i(\mathrm{d}\mathbf{R})^j = g_{ij}\mathbf{d}u^i\mathbf{d}u^j$。（其中$(\mathrm{d}\mathbf{R})^i = \nabla u^i\cdot\mathrm{d}\mathbf{R} = \mathbf du^i$），这告诉我们度规也蕴含了曲线坐标系中的线元长度。</p>
 <p>对矢量的叉乘：</p>
 <script type="math/tex; mode=display">
-\begin{align*}
-\mathbf A\times\mathbf B &= A^iB^j(\mathbf e_i\times\mathbf e_j)
+\begin{aligned}
+    \mathbf A\times\mathbf B &= A^iB^j(\mathbf e_i\times\mathbf e_j)
 \\&=A^iB^j\epsilon_{kij}\mathbf e^k(\mathbf e_k\cdot(\mathbf e_i\times\mathbf e_j))
-\\&=J\epsilon_{kij}A^iB^j\mathbf e^k
-\end{align*}</script><p>上面的推导用到了(2.1.1)式，当且仅当$(k,i,j)$是$(1,2,3)$的偶置换时有$\mathbf e^k = \frac{\mathbf e_i\times\mathbf e_j}{\mathbf e_k\cdot(\mathbf e_i\times\mathbf e_j)}$，且由(1.3.2)式，对所有偶置换，分母都相等。式中</p>
+\\&=\epsilon_{kij}A^iB^j\mathbf e^k
+\end{aligned}</script><p>上面的推导用到了(2.1.1)式，当且仅当$(k,i,j)$是$(1,2,3)$的偶置换时有$\mathbf e^k = \frac{\mathbf e_i\times\mathbf e_j}{\mathbf e_k\cdot(\mathbf e_i\times\mathbf e_j)}$，且由(1.3.2)式，对所有偶置换，分母都相等。式中</p>
 <script type="math/tex; mode=display">
-\begin{align*}
-J &= \mathbf e_1\cdot(\mathbf e_2\times\mathbf e_3) = \frac{\partial \mathbf R}{\partial u^1}\cdot(\frac{\partial \mathbf R}{\partial u^2}\times\frac{\partial \mathbf R}{\partial u^3})
-\\&=\begin{vmatrix}
-\frac{\partial x}{\partial u^1} & \frac{\partial y}{\partial u^1} & \frac{\partial z}{\partial u^1} 
-\\ \frac{\partial x}{\partial u^2} & \frac{\partial y}{\partial u^2} & \frac{\partial z}{\partial u^2}
-\\ \frac{\partial x}{\partial u^3} & \frac{\partial y}{\partial u^3} & \frac{\partial z}{\partial u^3}
-\end{vmatrix}
-\end{align*}</script><p>为Jacobi行列式。把度规的分量$g_{ij}$写成矩阵，发现其元素$g_{ij}=\sum_{q=1}^{3}\frac{\partial \mathbf R^q}{\partial u^i}\cdot\frac{\partial \mathbf R^q}{\partial u^j}$，可以写成上面的Jacobi矩阵与其转置的积，那么我们有：</p>
-<script type="math/tex; mode=display">g=det(g_{ij})=J^2</script>]]></content>
+\begin{aligned}
+    J &= \mathbf e_1\cdot(\mathbf e_2\times\mathbf e_3) = \frac{\partial \mathbf R}{\partial u^1}\cdot(\frac{\partial \mathbf R}{\partial u^2}\times\frac{\partial \mathbf R}{\partial u^3})
+    \\&=
+    \begin{vmatrix}
+        \frac{\partial x}{\partial u^1} & \frac{\partial y}{\partial u^1} & \frac{\partial z}{\partial u^1} 
+        \\ \frac{\partial x}{\partial u^2} & \frac{\partial y}{\partial u^2} & \frac{\partial z}{\partial u^2}
+        \\ \frac{\partial x}{\partial u^3} & \frac{\partial y}{\partial u^3} & \frac{\partial z}{\partial u^3}
+    \end{vmatrix}
+\end{aligned}</script><p>为Jacobi行列式。把度规的分量$g_{ij}$写成矩阵，发现其元素$g_{ij}=\sum_{q=1}^{3}\frac{\partial \mathbf R^q}{\partial u^i}\cdot\frac{\partial \mathbf R^q}{\partial u^j}$，可以写成上面的Jacobi矩阵与其转置的积，那么我们有：</p>
+<script type="math/tex; mode=display">g=det(g_{ij})=J^2</script></body></html>]]></content>
       <categories>
         <category>笔记</category>
         <category>电动力学笔记</category>
@@ -1937,6 +1683,246 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
       </categories>
       <tags>
         <tag>天文</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>态矢和表象</title>
+    <url>/2019/11/17/sakurai-qm-01-brackets-and-representation/</url>
+    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><h2 id="1-1-The-Stern-Gerlach-Experiment"><a href="#1-1-The-Stern-Gerlach-Experiment" class="headerlink" title="1.1 The Stern-Gerlach Experiment"></a>1.1 The Stern-Gerlach Experiment</h2><p>第一节从一个稍微不同的角度介绍了一下Stern-Gerlach实验。其基本原理如原子物理中所介绍的，银原子的唯一一个处在非满壳层的电子自旋方向不同使银原子有不同的磁矩，通过空间上均匀变化的磁场后会在变化的方向上被分成两束。</p>
+<p>书中讨论了这样的sequential S-G experiment：<br><img src="sequential-sg-experiment.png" alt><br>在a中，连续布置两个z方向的SG装置，只让$S_z+$通过第一个装置，最后从第二个装置射出的也只有一束$S_z+$。这容易理解，因为第一个装置起了“滤掉”$S_z-$的作用。<br>在b中，第二个装置是x方向的，最后出射的原子有$S_x+$和$S_z-$两束。这似乎说明了$S_z+$的原子在x方向的磁矩也是均匀分布的，一半是$S_x+$，另一半是$S_x-$。让我们继续看第三个序列。<br>在c中，在b的后面再增加一个z方向的装置，并只让$S_x+$方向的原子进入第三个装置。而最后出射的原子中既有$S_z+$又有$S_z-$。这是个惊人的结果——$S_z-$的原子本应在第一个装置就被滤掉了，却再次出现在第三个装置的出射。这似乎是说，仅仅在中间加入一个x方向的装置，就使我们失去了对磁矩在z方向分布的信息（对比a）<del>全部木大</del>。</p>
+<p>这让人想到另一个经典物理中的现象——光的偏振。我们可以让$S_x$和$S_z$对应xy方向和与xy方向夹角$45^\circ$的x’y’方向的偏振光，SG装置对应相应的偏振片，得到的就是上面的结果。而考虑我们对偏振光的描述，x’方向的偏振是x和y方向偏振的线性组合，我们推断这里原子的状态也应该由某种抽象的二维线性空间中的矢量来表示：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left|S_x;+\right>=\frac{1}{\sqrt{2}}\left|S_z;+\right>+\frac{1}{\sqrt{2}}\left|S_z;-\right>
+    \\
+    \left|S_x;-\right>=-\frac{1}{\sqrt{2}}\left|S_z;+\right>+\frac{1}{\sqrt{2}}\left|S_z;-\right>
+\end{aligned}</script><p>书中接下来讨论了$S_y$态的表示，它也应该是$S_z$的线性组合，且要和$S_x$区分开来。为此，书中将$S_y$对应成左旋和右旋偏振，相应的线性组合的系数则变成了$\frac{1}{\sqrt{2}}$和$ \pm\frac{i}{\sqrt{2}}$。书中进一步说明这个线性空间应该是定义在复数域上的。<em>（这里我存有一些疑问，如果是在二维空间中的话，是否就不必要引入复数了？如果在更高维的空间，是否还需要定义在其他的数域上？这只是数学巧合还是蕴含了物理上三维空间中的某种对称性？）</em></p>
+<h2 id="1-2-Kets-Bras-and-Operators"><a href="#1-2-Kets-Bras-and-Operators" class="headerlink" title="1.2 Kets, Bras, and Operators"></a>1.2 Kets, Bras, and Operators</h2><p>延续上一节的思路，我们认为物理系统的状态被<strong>右矢</strong>(ket)描述，它定义在复数域上的线性空间，形如$\left|\alpha\right>$。右矢空间具有线性空间的诸多性质，这里不再赘述。</p>
+<p>接下来需要介绍的是<strong>左矢</strong>(bra)空间。左矢空间是右矢空间的对偶空间，它和右矢一一对应。和右矢$\left|\alpha\right>$对应的左矢就记作$\left<\alpha\right|$。左矢和右矢的对偶映射保留了加法。需要注意的是，$c\left|\alpha\right>$对应的左矢应该是$c^*\left<\alpha\right|$。</p>
+<p>一个左矢和一个右矢可以定义<strong>内积</strong>：$\left<\beta|\alpha\right>$。内积是一个线性运算，且满足：</p>
+<ul>
+<li>共轭对称性：<script type="math/tex">\left<\beta|\alpha\right>=\left<\alpha|\beta\right>^*</script></li>
+<li>正定性：<script type="math/tex; mode=display">\left<\alpha|\alpha\right>\geq0</script>取等号仅当$\left|\alpha\right>$是右矢空间的零矢量。</li>
+</ul>
+<p><strong>算符</strong>是一个双线性映射，将右矢映成右矢，或将左矢映成左矢。被相同的算符作用的互相对偶的左矢和右矢通常并不对偶，而$X\left|\alpha\right>$对偶的左矢是$\left<\alpha\right|X^\dagger$。$X^\dagger$称为算符$X$的厄米共轭。和自己的厄米共轭相等的算符称为厄米算符。<em>（这里的描述有些不清晰，因为仅凭上面的定义，$X$作用在左矢和右矢上原则上可以完全不相关。不过事实上并非如此，参见下面的结合公理）</em></p>
+<p>算符也可以定义乘法，和映射的乘法类似。显然有：</p>
+<script type="math/tex; mode=display">(XY)^\dagger=Y^\dagger X^\dagger</script><p>至此我们定义了这样几种“乘法”：内积、算符作用在（“乘”）左矢或右矢，算符的乘法。再定义外积：$\left|\alpha\right>\left<\beta\right|$。这些“乘法”是我们会涉及到的全部合法的乘法式。</p>
+<p>结合公理说的是，对于任何合法的乘法式，结合的顺序是任意的。比如：</p>
+<script type="math/tex; mode=display">(\left|\alpha\right>\left<\beta\right|)\left|\gamma\right>=\left|\alpha\right>(\left<\beta|\gamma\right>)</script><p>这告诉我们，可以根据外积定义算符：</p>
+<script type="math/tex; mode=display">X=\left|\alpha\right>\left<\beta\right|</script><p>根据结合公理，$X$确是将一个右矢映成另一个右矢。<em>（事实上，结合公理无非是说算符在作用于左矢和作用于右矢上时，应该满足$(\left<\alpha|X)|\beta\right>=\left<\alpha|(X|\beta\right>)）$。只是给出了这一限制，以及让外积拥有算符的性质，其他的结合律都是显然的）</em> 可以证明：</p>
+<script type="math/tex; mode=display">X^\dagger= \left|\beta\right>\left<\alpha\right|</script><p>另一个常用的公式是：</p>
+<script type="math/tex; mode=display">\left<\beta|X|\alpha\right>=\left<\alpha|X^\dagger|\beta\right>^*</script><h2 id="1-3-Base-Kets-and-Matrix-Representations"><a href="#1-3-Base-Kets-and-Matrix-Representations" class="headerlink" title="1.3 Base Kets and Matrix Representations"></a>1.3 Base Kets and Matrix Representations</h2><p>定义算符的本征右矢和本征值，对算符$A$，本征右矢是这样的右矢$\left|\alpha\right>$，使得$A\left|\alpha\right>=a’\left|\alpha\right>$。其中$a’$是常数，称为本征值。书中将本征值为a’的本征右矢记为$\left|a’\right>$。</p>
+<p>若$A$是厄米的，我们有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left<a''|A|a'\right>&=a'\left<a''|a'\right>
+    \\ &=(\left<a'|A|a''\right>)^*=a''^*(\left<a'|a'\right>)^*
+    \\ &=a''^*\left<a''|a'\right>
+\end{aligned}</script><p>即：</p>
+<script type="math/tex; mode=display">(a'-a''^*)\left<a''|a'\right>=0</script><p>取$a’=a’’$，有厄米算符的本征值都是实数；取$a’\neq a’’$，有厄米算符不同的本征右矢是相互正交的。</p>
+<p>我们假设$A$的本征右矢是完备的，可以通过其线性组合表示右矢空间中任意的右矢：</p>
+<script type="math/tex; mode=display">\left|\alpha\right>=\sum_{a'}c_{a'}\left|a'\right></script><p>考虑$\left<a’\right|$和$\left|\alpha\right>$的内积，我们可以得出$c_{a’}=\left<a’|\alpha\right>$。即：</p>
+<script type="math/tex; mode=display">\left|\alpha\right>=\sum_{a'}\left|a'\right>\left<a'|\alpha\right> \tag{1.3.1}</script><p>我们的结论是，<strong>$A$的所有归一化的本征右矢构成了右矢空间中的一组单位正交完备基。</strong></p>
+<p>1.3.1中也定义了<strong>完备性关系</strong>：</p>
+<script type="math/tex; mode=display">\sum_{a'}\left|a'\right>\left<a'\right|=\sum_{a'}\Lambda_{a'}=1 \tag{1.3.2}</script><p>其中$\Lambda_{a’}$是<strong>投影算符</strong>，其几何意义是将右矢投影到平行于$\left|a’\right>$的方向。</p>
+<p>根据完备性关系，算符$X$可写为：</p>
+<script type="math/tex; mode=display">X=\sum_{a''}\sum_{a'}\left|a''\right>\left<a''\right|X\left|a'\right>\left<a'\right|</script><p>我们用一个$N\times N$的矩阵来表示$X$：$X_{ij}=\left< a^{(i)} \right| X \left| a^{(j)} \right>$。</p>
+<p>可以证明，厄米共轭对应的矩阵表示就是共轭转置，算符相乘对应的就是矩阵乘法。后者的证明如下：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    XY&=\sum_{a''}\sum_{a'}\left|a''\right>\left<a''\right|XY\left|a'\right>\left<a'\right|
+    \\ &=\sum_{a''}\sum_{a'}\left|a''\right>\left(\sum_{a'''}\left<a''\right|X\left|a'''\right>\left<a'''\right|Y\left|a'\right>\right)\left<a'\right|
+\end{aligned}</script><p>在中间插入一个单位算符的技巧十分常用，用相同的技巧，将左矢和右矢对应到分量组成的行矢量和列矢量，算符作用到左矢和右矢上就也成了矩阵乘法。内积和外积也同样。</p>
+<h2 id="1-4-Measurements-Observables-and-the-Uncertainty-Relations"><a href="#1-4-Measurements-Observables-and-the-Uncertainty-Relations" class="headerlink" title="1.4 Measurements, Observables, and the Uncertainty Relations"></a>1.4 Measurements, Observables, and the Uncertainty Relations</h2><h3 id="测量"><a href="#测量" class="headerlink" title="测量"></a>测量</h3><p>让我们回到物理的讨论上来。右矢用于表示物理系统的状态，而算符代表的是<strong>观测量</strong>。这代表的是，对某个观测量进行测量，让系统的状态成为了对应的算符的某个本征态。我们无法确定的给出具体会变成哪个本征态，但可以给出归一化的态$\left|\alpha\right>$变成本征态$\left|a’\right>$的<strong>概率</strong>为$\left|\left<a’|\alpha\right>\right|^2$。此时测量的结果就是对应的<strong>本征值</strong>。这被称为<strong>测量公理</strong>。</p>
+<p>定义态$\left|\alpha\right>$下观测量的平均值：</p>
+<script type="math/tex; mode=display">\left<A\right>=\left<\alpha|A|\alpha\right></script><p>可以将其写成下面的形式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left<A\right>&=\left<\alpha|A|\alpha\right>
+    \\&=\sum_{a''}\sum_{a'}\left<\alpha|a''\right>\left<a''\right|A\left|a'\right>\left<a'|\alpha\right>
+    \\&=\sum_{a'}a'\left|\left<a'|\alpha\right>\right|^2
+\end{aligned}</script><p>这说明观测量平均值的物理意义即为对含有大量相同态矢的粒子进行测量，测量的结果的平均值，亦即测量结果的期望。</p>
+<h3 id="1-2自旋系统"><a href="#1-2自旋系统" class="headerlink" title="1/2自旋系统"></a>1/2自旋系统</h3><p>现在再来看1.1中的SG实验，记$S_z+$的态矢为$\left|+\right>$，$S_z-$的态矢为$\left|-\right>$。由sequential S-G experiment的b，应该有：</p>
+<script type="math/tex; mode=display">
+\left|\left<+|S_x;+\right>\right|^2=\left|\left<-|S_x;+\right>\right|^2=\frac{1}{2}</script><p>对$\left|S_x;-\right>$也同样，考虑到$\left|S_x;+\right>$和$\left|S_x;-\right>$应正交，从而有：</p>
+<script type="math/tex; mode=display">
+\left|S_x;\pm\right>=\frac{1}{\sqrt{2}}\left|+\right>\pm\frac{1}{\sqrt{2}}e^{i\delta_1}\left|-\right></script><p>$S_x$在本征态$\left|S_x;\pm\right>$上的本征值为$\pm\hbar/2$，则可以构造算符$S_x$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    S_x&=\frac{\hbar}{2}\left|S_x;+\right>\left<S_x;+\right|-\frac{\hbar}{2}\left|S_x;-\right>\left<S_x;-\right|
+    \\ &=\frac{\hbar}{2}(e^{-i\delta_1}\left|+\right>\left<-\right|+e^{i\delta_1}\left|-\right>\left<+\right|)
+\end{aligned}</script><p>在y方向也同样：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left|S_y;\pm\right>=\frac{1}{\sqrt{2}}\left|+\right>\pm\frac{1}{\sqrt{2}}e^{i\delta_2}\left|-\right>
+    \\
+    S_y=\frac{\hbar}{2}(e^{-i\delta_2}\left|+\right>\left<-\right|+e^{i\delta_2}\left|-\right>\left<+\right|)
+\end{aligned}</script><p>考虑到xy方向也并不相关，也应该有：</p>
+<script type="math/tex; mode=display">
+\left|\left<S_x;+|S_y;\pm\right>\right|^2=\left|\left<S_x;-|S_y;\pm\right>\right|^2=\frac{1}{2}</script><p>我们得到：</p>
+<script type="math/tex; mode=display">\delta_2-\delta_1=\pm\frac{\pi}{2}</script><p>不妨取$\delta_1=0$（$\left|+\right>$定义的任意性给出了这个自由度），$\delta_2=\pi/2$（这个自由度则由空间坐标的左手系/右手系的选取给出），这就对应了我们之前基于偏振光的猜测，也说明了三个方向上线性组合的系数不能全是实数。</p>
+<p>我们有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    S_x=\frac{\hbar}{2}(\left|+\right>\left<-\right|+\left|-\right>\left<+\right|)
+    \\
+    S_y=\frac{\hbar}{2}(-i\left|+\right>\left<-\right|+i\left|-\right>\left<+\right|)
+    \\
+    S_z=\frac{\hbar}{2}(\left|+\right>\left<+\right|+\left|-\right>\left<-\right|)
+\end{aligned}</script><p>得到它们的对易关系：</p>
+<script type="math/tex; mode=display">[S_i,S_j]=i\epsilon_{ijk}\hbar S_k</script><p>其中对易子的定义为：$[A,B]=AB-BA$。定义$S^2=S_x^2+S_y^2+S_z^2$，也有：</p>
+<script type="math/tex; mode=display">[S^2,S_i]=0</script><p>这具有角动量的对易关系的性质。</p>
+<h3 id="相容观测量"><a href="#相容观测量" class="headerlink" title="相容观测量"></a>相容观测量</h3><p>对应的算符的对易子为零的两个观测量称为相容观测量。对相容观测量$A$和$B$，有：</p>
+<script type="math/tex; mode=display">\left<a''\right|[A,B]\left|a'\right>=(a''-a')\left<a''\right|B\left|a'\right>=0</script><p>则应有（不考虑简并，即不同的本征右矢对应同一个本征值，因为一般来说总可以选取另外一个观测量来区分简并的右矢）：</p>
+<script type="math/tex; mode=display">\left<a''\right|B\left|a'\right>=\left<a''\right|B\left|a'\right>\delta_{a'a''}</script><p>从而，</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    B\left|a'\right>&=\sum_{a''}\left|a''\right>\left<a''\right|B\left|a'\right>
+    \\&=\left<a'\right|B\left|a'\right>\left|a'\right>
+\end{aligned}</script><p>这说明$A$和$B$具有相同的本征右矢，可以将其记作$\left|a’,b’\right>$。这也是“相容”的含义——对B的测量不会破坏A的信息，因为它们的本征态是相同的，先测量A再测量B，第二次测量不会改变态矢（以1的概率塌缩到原本的态）。</p>
+<p>与相容观测量相反的是不相容观测量，即对易子非零的观测量。对不相容观测量，后面的测量会破坏前面的测量的信息（因为塌缩到了不同的本征态上）。</p>
+<h3 id="不确定性关系"><a href="#不确定性关系" class="headerlink" title="不确定性关系"></a>不确定性关系</h3><p>对观测量$A$，定义这样一个算符：</p>
+<script type="math/tex; mode=display">\Delta A=A-\left<A\right></script><p>$A$的弥散度定义为$\Delta A$的平均值：</p>
+<script type="math/tex; mode=display">\left<(\Delta A)^2\right>=\left<A^2-2A\left<A\right>+\left<A\right>^2\right>=\left<A^2\right>-\left<A\right>^2</script><p>和方差类似。</p>
+<p>现在我们可以证明<strong>不确定性关系</strong>：</p>
+<script type="math/tex; mode=display">\left<(\Delta A)^2\right>\left<(\Delta B)^2\right>\geq \frac{1}{4}\left|\left<[A,B]\right>\right|^2</script><p>首先，需要以下引理：</p>
+<ul>
+<li>Schwarz不等式：<script type="math/tex; mode=display">\left<\alpha|\alpha\right>\left<\beta|\beta\right>\geq\left|\left<\alpha|\beta\right>\right|^2</script>（考虑$\left|\alpha+\lambda\beta\right>$的模长的非负性）</li>
+<li>厄米算符的平均值是实数</li>
+<li>反厄米算符（$C=-C^\dagger$）的平均值是纯虚数</li>
+</ul>
+<p>对任意右矢$\left|\gamma\right>$，取$\left|\alpha\right>=\Delta A\left|\gamma\right>,\left|\beta\right>=\Delta B\left|\gamma\right>$，带入Schwarz不等式，有：</p>
+<script type="math/tex; mode=display">\left<(\Delta A)^2\right>\left<(\Delta B)^2\right>\geq\left|\left<\Delta A\Delta B\right>\right|^2</script><p>（其中利用到了$A$和$B$的厄米性），而$\Delta A\Delta B$可以写为厄米部分和反厄米部分之和：</p>
+<script type="math/tex; mode=display">\Delta A\Delta B=\frac{1}{2}[\Delta A,\Delta B]+\frac{1}{2}\{\Delta A,\Delta B\}</script><p>对上式求平均值，第一项是实数，第二项是纯虚数。求模长则有不确定性关系。</p>
+<h2 id="1-5-基的变换"><a href="#1-5-基的变换" class="headerlink" title="1.5 基的变换"></a>1.5 基的变换</h2><p>基的选取不是唯一的，这节主要讨论不同基之间的变换，或被称为<strong>表象变换</strong>。</p>
+<p>首先，任意两组基$\{\left|a’\right>\}$和$\{\left|b’\right>\}$之间，都可以通过一个幺正算符联系起来：$\left|b^{(k)}\right>=U\left|a^{(k)}\right>$。</p>
+<p>所谓幺正算符，是这样的算符$U$，$UU^\dagger=U^\dagger U=1$。这里的坐标变换算符可以这样定义：</p>
+<script type="math/tex; mode=display">U=\sum_k\left|b^{(k)}\right>\left<a^{(k)}\right|</script><p>在b表象上，分量的值为：</p>
+<script type="math/tex; mode=display">\left<b^{(k)}|\alpha\right>=\sum_l \left<b^{(k)}|a^{(l)}\right>\left<a^{(l)}|\alpha\right>=\sum_l \left<a^{(k)}|U^\dagger|a^{(l)}\right>\left<a^{(l)}|\alpha\right></script><p>在新表象下的分量即为$U^{\dagger}$在旧表象下的矩阵乘旧表象下的分量。</p>
+<p>类似的方法可以证明，算符在新表象下的矩阵为：</p>
+<script type="math/tex; mode=display">X'=U^\dagger XU</script><p>是一个相似变换。</p>
+<p>不同表象下的算符的变换启发我们，如果根据算符$A$定义一个新算符$B$，它在新表象下的矩阵表示和旧表象下相同，那它应该和$A$有相同的本征值，其本征态的分量也和$A$在旧表象的分量相同。也就是说，它们的<strong>观测值之间具有相同的概率分布。</strong></p>
+<p><strong>幺正等效观测量</strong>定义为：</p>
+<script type="math/tex; mode=display">B=UAU^{-1}</script><p>我们有：</p>
+<script type="math/tex; mode=display">UAU^{-1}(U\left|a'\right>)=B(U\left|a'\right>)=a'(U\left|a'\right>)</script><p>这符合上面的论述。</p>
+</body></html>]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Sakurai量子力学笔记</category>
+      </categories>
+      <tags>
+        <tag>物理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>位置算符、动量算符和波函数</title>
+    <url>/2019/11/28/sakurai-qm-02-position-and-momentum/</url>
+    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><h2 id="1-6-Position-Momentum-and-Translation"><a href="#1-6-Position-Momentum-and-Translation" class="headerlink" title="1.6 Position, Momentum and Translation"></a>1.6 Position, Momentum and Translation</h2><h3 id="连续谱"><a href="#连续谱" class="headerlink" title="连续谱"></a>连续谱</h3><p>前面讨论的观测量的本征值都是离散分布的，然而还有另一类观测量，其本征值是连续分布的。连续谱使用的数学和之前讨论的类似，只需要把求和换成积分，克罗内克符号$\delta_{a’a’’}$换成狄拉克函数$\delta(a’-a’’)$。连续谱下的基的正交归一化条件和完备性关系可以写为：</p>
+<script type="math/tex; mode=display">\left<\xi'|\xi''\right>=\delta(\xi'-\xi'')</script><script type="math/tex; mode=display">\int \left|\xi'\right>\left<\xi'\right|\mathrm{d}\xi'=1</script><h3 id="位置和波函数"><a href="#位置和波函数" class="headerlink" title="位置和波函数"></a>位置和波函数</h3><p><strong>位置</strong>就是这样一个本征值连续分布的观测量。对位置算符$x$的本征右矢$\left|x’\right>$，有：</p>
+<script type="math/tex; mode=display">x\left|x'\right>=x'\left|x'\right></script><p>对任意的态$\left|\alpha\right>$，由位置的完备性关系，可以在位置表象下展开：</p>
+<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|x'\right>\left<x'|\alpha\right>\mathrm{d}x'</script><p>如果我们用仪器测量一个处于$\left|\alpha\right>$态上的粒子的位置，粒子会以一定概率塌缩到某个位置本征态。当然，物理的仪器都是有限精度的，我们只能得知粒子的位置在$x’$附近一个宽度为$\mathrm{d}x’$的区间内的概率为：</p>
+<script type="math/tex; mode=display">\left|\left<x'|\alpha\right>\right|^2\mathrm{d}x'</script><p>其中$\psi(x’)=\left< x’|\psi \right>$被称作<strong>波函数</strong>，其模平方就是粒子在空间中的概率密度。</p>
+<p>粒子一定会在空间中某处被发现，这给出了波函数和态矢的归一化条件：</p>
+<script type="math/tex; mode=display">\left<\alpha|\alpha\right>=\int\left|\left<x'|\alpha\right>\right|^2\mathrm{d}x'=\int\left|\Psi(x')\right|^2\mathrm{d}x'=1</script><p>三维的情况和一维类似，我们假设存在位置本征态$\left|\mathbf{x}\right>$，这即是假设三个方向的位置算符有共同的本征态$\left|x’,y’,z’\right>$（否则的话粒子在任意时刻都不会有确定的位置——它不同方向的位置甚至都不对易！我们不希望这样）。如果位置本征态是完备的，我们仍可以展开任意的态矢：</p>
+<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}</script><h3 id="无穷小平移"><a href="#无穷小平移" class="headerlink" title="无穷小平移"></a>无穷小平移</h3><p>我们定义<strong>无穷小平移算符</strong>$\mathscr{T}(\mathrm{d}\mathbf{x’})$，它作用在位置本征态$\left|\mathbf{x’}\right>$上的结果为：</p>
+<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right></script><p>物理上，考虑任意态矢在坐标表象下的表示：$\left|\alpha\right>=\int c_{\mathbf{x’}}\left|\mathbf{x’}\right>$，无穷小平移使每个本征态$\left|\mathbf{x’}\right>$都变成$\left|\mathbf{x’}+\mathrm{d}\mathbf{x’}\right>$，相当于一个让物理系统平移了$\mathrm{d}\mathbf{x’}$的坐标变换（我们很快会看到，它的确是一个幺正算符）。</p>
+<p>下面来考虑$\mathscr{T}(\mathrm{d}\mathbf{x’})$的性质，将其作用在任意态矢上：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \mathscr{T}(\mathrm{d}\mathbf{x'})\left|\alpha\right>
+    &=\mathscr{T}(\mathrm{d}\mathbf{x'})\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}\\
+    &=\int \left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}-\mathrm{d}\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}
+    \\
+    &=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\mathscr{T}(\mathrm{d}\mathbf{x'})|\alpha\right>\mathrm{d}\mathbf{x'}
+\end{aligned}</script><p>这说明$\mathscr{T}(\mathrm{d}\mathbf{x’})$作用到本征左矢上结果为：</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}\right|\mathscr{T}(\mathrm{d}\mathbf{x'})=\left<\mathbf{x'}-\mathrm{d}\mathbf{x'}\right|</script><p>$\mathscr{T}(\mathrm{d}\mathbf{x’})$让左矢向相反方向平移了$\mathrm{d}\mathbf{x’}$。从而显然有$\mathscr{T}(\mathrm{d}\mathbf{x’})$的厄米共轭为：</p>
+<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})^\dagger=\mathscr{T}(-\mathrm{d}\mathbf{x'})</script><p>当然，根据定义，无穷小平移算符还应满足以下性质：</p>
+<ul>
+<li>$\mathscr{T}(\mathrm{d}\mathbf{x’})\mathscr{T}(\mathrm{d}\mathbf{x’’})=\mathscr{T}(\mathrm{d}\mathbf{x’}+\mathrm{d}\mathbf{x’’})$</li>
+<li>$\mathscr{T}(-\mathrm{d}\mathbf{x’})=\mathscr{T}^{-1}(\mathrm{d}\mathbf{x’})$</li>
+<li>根据上一条性质和$\mathscr{T}(\mathrm{d}\mathbf{x’})$的厄米共轭的表达式，它也应该是厄米算符</li>
+</ul>
+<p><em>（书上这几个性质都是假设的，但是在不考虑简并的情况下真的有特意假设一下的必要吗……）</em></p>
+<p>第一个性质要求$\mathscr{T}(\mathrm{d}\mathbf{x’})$是指数函数，即：</p>
+<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})=\exp \left(\mathbf{B}\cdot \mathrm{d}\mathbf{x'}\right)</script><p>由于$\mathrm{d}\mathbf{x’}$是无穷小量，可以展开并保留至一阶：</p>
+<script type="math/tex; mode=display">
+\mathscr{T}(\mathrm{d}\mathbf{x'})=1+\mathbf{B}\cdot \mathrm{d}\mathbf{x'}</script><p>上面厄米共轭的性质即成为：</p>
+<script type="math/tex; mode=display">1+\mathbf{B}^\dagger\cdot \mathrm{d}\mathbf{x'}=1-\mathbf{B}\cdot \mathrm{d}\mathbf{x'}</script><p>从而$\mathbf{B}$是反厄米算符，定义$\mathbf{B}=-i\mathbf{K}$，则$\mathbf{K}$是厄米算符。很容易验证$\mathscr{T}(\mathrm{d}\mathbf{x’})$的幺正性。</p>
+<p>总结一下，上面定义的无穷小平移算符有如下形式：</p>
+<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})=1-i\mathbf{K}\cdot \mathrm{d}\mathbf{x'}</script><p>下面考虑无穷小平移和位置算符的对易关系：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    &\mathbf{x}\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\mathbf{x}\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>=(\mathbf{x'}+\mathrm{d}\mathbf{x'})\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>
+    \\&\mathscr{T}(\mathrm{d}\mathbf{x'})\mathbf{x}\left|\mathbf{x'}\right>=\mathbf{x'}\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\mathbf{x'}\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>
+\end{aligned}</script><p>从而：</p>
+<script type="math/tex; mode=display">[\mathbf{x}, \mathscr{T}(\mathrm{d}\mathbf{x'})]=\mathrm{d}\mathbf{x'}</script><p>带入上面的形式，有：</p>
+<script type="math/tex; mode=display">[x_i,K_j]=i\delta_{ij}</script><h3 id="动量作为无穷小平移的生成元"><a href="#动量作为无穷小平移的生成元" class="headerlink" title="动量作为无穷小平移的生成元"></a>动量作为无穷小平移的生成元</h3><p>我们来考虑$\mathbf{K}$的物理意义。</p>
+<p>在经典力学中，上面的无穷小平移可以作为正则变换考虑：</p>
+<script type="math/tex; mode=display">\mathbf{x'}=\mathbf{X}=\mathbf{x}+\mathrm{d}\mathbf{x},\ \mathbf{p'}=\mathbf{P}=\mathbf{p}</script><p>这一变换的生成函数为：</p>
+<script type="math/tex; mode=display">F(\mathbf{x}, \mathbf{P})=\mathbf{x}\cdot\mathbf{P}+\mathbf{p}\cdot \mathrm{d}\mathbf{x}</script><p>考虑到单位变换（$\mathbf{X}=\mathbf{x},\mathbf{P}=\mathbf{p}$）的生成函数是$F(\mathbf{x}, \mathbf{P})=\mathbf{x}\cdot\mathbf{P}$，这个生成函数和无穷小平移算符有着非常相似的形式。基于此，可以建立这样的对应，$\mathbf{K}$应该就是动量除以一个具有作用量量纲的常数。量子力学中这个常数就是$\hbar$。无穷小平移算符就可以表示为：</p>
+<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})=1-i\mathbf{p}\cdot \mathrm{d}\mathbf{x'}/\hbar</script><p>从而坐标和动量的对易关系：</p>
+<script type="math/tex; mode=display">[x_i,p_j]=i\hbar\delta_{ij}</script><p>下面考虑动量的不同分量间的对易关系。不同方向上的无穷小平移算符是对易的（先在x方向平移再在y方向平移和先在y方向再在x方向平移是等效的），从而有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    [\mathscr{T}(\mathrm{d}x\hat{\mathbf{x}}),\mathscr{T}(\mathrm{d}x\hat{\mathbf{y}})]&=[1-ip_x\mathrm{d}x/\hbar, 1-ip_ydy/\hbar]
+    \\&=-\frac{\mathrm{d}xdy}{\hbar^2}[p_x,p_y]=0
+\end{aligned}</script><p>在其他方向上也同理，从而不同方向上的动量算符的对易关系为：</p>
+<script type="math/tex; mode=display">[p_i,p_j]=0</script><p>不同方向的动量是对易的，这说明和位置算符类似，也存在三维的动量本征态$\left|\mathbf{p’}\right>$。</p>
+<h3 id="正则对易关系"><a href="#正则对易关系" class="headerlink" title="正则对易关系"></a>正则对易关系</h3><p>上面的对易关系：</p>
+<script type="math/tex; mode=display">[x_i,x_j]=0,[p_i,p_j]=0,[x_i,p_j]=i\hbar\delta_{ij}</script><p>被称为<strong>正则对易关系</strong>。</p>
+<p>注意到正则对易关系和经典力学中的泊松括号其实有着相似的形式，结果也是乘了一个$i\hbar$。一般地，量子力学中有经典对应的各种观测量的对易关系都可以对应为：</p>
+<script type="math/tex; mode=display">[,]_{classical}=\frac{[,]}{i\hbar}</script><p>泊松括号的一些性质也可以自然的被应用在对易子上，比如：</p>
+<script type="math/tex; mode=display">[A,BC]=[A,B]C+B[A,C]</script><script type="math/tex; mode=display">[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=0</script><h2 id="1-7-Wave-Functions-in-Position-and-Momentum-Space"><a href="#1-7-Wave-Functions-in-Position-and-Momentum-Space" class="headerlink" title="1.7 Wave Functions in Position and Momentum Space"></a>1.7 Wave Functions in Position and Momentum Space</h2><h3 id="位置空间波函数"><a href="#位置空间波函数" class="headerlink" title="位置空间波函数"></a>位置空间波函数</h3><p>位置表象的波函数为$\psi(x’)=\left< x’|\psi \right>$，从这一角度，我们可以得到波动力学中的一系列定义：</p>
+<script type="math/tex; mode=display">\left<\psi|\phi\right>=\int \left<\psi|x'\right>\left<x'|\phi\right>\mathrm{d}x'=\int \psi^*(x')\phi(x')\mathrm{d}x' \tag{1.7.2}</script><script type="math/tex; mode=display">
+\begin{aligned}
+    \left<\psi|A|\phi\right>&=\iint \left<\psi|x'\right>\left<x'|A|x''\right>\left<x''|\phi\right>\mathrm{d}x'\mathrm{d}x''
+    \\&=\iint \psi^*(x')\left<x'|A|x''\right>\phi(x'')\mathrm{d}x'\mathrm{d}x''
+\end{aligned}
+\tag{1.7.3}</script><p>对一个一般的算符，矩阵元$\left< x’|A|x’’ \right>$是$x’,x’’$的函数。而当$A$是位置算符的函数时（从而拥有相同的本征态），我们有：</p>
+<script type="math/tex; mode=display">\left<x'|f(x)|x''\right>=\left<x'|f(x'')|x''\right>=f(x'')\delta(x'-x'')</script><p>上面的乘积就可以写为：</p>
+<script type="math/tex; mode=display">\left<\psi|f(x)|\phi\right>=\int \psi^*(x')f(x')\phi(x')\mathrm{d}x'</script><h3 id="动量空间波函数"><a href="#动量空间波函数" class="headerlink" title="动量空间波函数"></a>动量空间波函数</h3><p>下面我们来考虑动量表象下波函数和位置空间波函数的关系，从无穷小平移算符出发：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left(1-\frac{ip\delta x'}{\hbar}\right)\left|\alpha\right>&=\int \mathscr{T}(\delta x')\left|x'\right>\left<x'|\alpha\right>\mathrm{d}x'
+    \\&=\int \left|x'+\delta x'\right>\left<x'|\alpha\right>\mathrm{d}x'
+    \\&=\int \left|x'\right>\left<x'-\delta x'|\alpha\right>\mathrm{d}x'
+    \\&=\int \left|x'\right>\left(\left<x'|\alpha\right>-\delta x'\frac{\partial}{\partial x'}\left<x'|\alpha\right>\right)\mathrm{d}x'
+\end{aligned}</script><p>对比等式两边，我们有：</p>
+<script type="math/tex; mode=display">p\left|\alpha\right>=-i\hbar\int \left|x'\right>\frac{\partial}{\partial x'}\left<x'|\alpha\right>\mathrm{d}x'</script><p>从而：</p>
+<script type="math/tex; mode=display">
+\left<x'|p|\phi\right>=-i\hbar\frac{\partial}{\partial x'}\left<x'|\phi\right> \tag{1.7.4}</script><p>等式两边其实都是波函数，因此这定义了一个波函数空间上的线性映射，将波函数映射为动量算符作用后的态矢对应的波函数。这也和波动力学中动量算符的定义一致：</p>
+<script type="math/tex; mode=display">p=-i\hbar\frac{\partial}{\partial x'}</script><p>现在我们可以考虑态矢在动量表象下的展开，即动量空间波函数。利用完备性关系，我们有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left|\phi\right>&=\int \left|p'\right>\left<p'|\phi\right>\mathrm{d}p'
+    \\&=\iint \left|p'\right>\left<p'|x'\right>\left<x'|\phi\right>\mathrm{d}p'\mathrm{d}x'
+    \\&=\int \mathrm{d}p'\left|p'\right>\int \left<p'|x'\right>\phi(x')\mathrm{d}x'
+\end{aligned}</script><p>对其中出现的$\left< p’|x’ \right>$，考虑1.7.4中任意态$\phi$为动量本征态的情况，有：</p>
+<script type="math/tex; mode=display">\left<x'|p|p'\right>=p'\left<x'|p'\right>=-i\hbar\frac{\partial}{\partial x'}\left<x'|p'\right></script><p>从而：</p>
+<script type="math/tex; mode=display">\left<x'|p'\right>=N\exp\left(\frac{ip'x'}{\hbar}\right)</script><p>其中$N$是归一化常数，考虑$\left< x’|x’’ \right>$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left<x'|x''\right>&=\delta(x'-x'')
+    \\&=\int \left<x'|p'\right>\left<p'|x''\right>\mathrm{d}p'
+    \\&=\int \left|N\right|^2\exp\left[\frac{ip'(x'-x'')}{\hbar}\right]\mathrm{d}p'
+    \\&=2\pi\hbar\left|N\right|^2\delta(x'-x'')
+\end{aligned}</script><p>从而有：</p>
+<script type="math/tex; mode=display">\left<x'|p'\right>=\frac{1}{\sqrt{2\pi\hbar}}\exp\left(\frac{ip'x'}{\hbar}\right) \tag{1.7.5}</script><p>从而我们得到位置空间波函数到动量空间波函数的变换：</p>
+<script type="math/tex; mode=display">\phi_p(p')=\frac{1}{\sqrt{2\pi\hbar}}\int \phi_x(x')\exp\left(\frac{ip'x'}{\hbar}\right)\mathrm{d}x' \tag{1.7.6}</script><p>相似的，可以得到动量空间到位置空间的变换：</p>
+<script type="math/tex; mode=display">\phi_x(x')=\frac{1}{\sqrt{2\pi\hbar}}\int \phi_p(p')\exp\left(-\frac{ip'x'}{\hbar}\right)\mathrm{d}p' \tag{1.7.7}</script><p>这是傅里叶变换和傅里叶逆变换的形式。</p>
+<h3 id="推广至三维"><a href="#推广至三维" class="headerlink" title="推广至三维"></a>推广至三维</h3><p>三维的归一化条件和完备性关系成为：</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{x''}\right>=\delta^3(\mathbf{x'}-\mathbf{x''})</script><script type="math/tex; mode=display">\int d^3\mathbf{x'}\left|\mathbf{x'}\right>\left<\mathbf{x'}\right|=1</script><p>对动量本征态也是同样。</p>
+<p>三维的动量算符作用在波函数上，微分成为梯度，1.7.4成为：</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{p}|\phi\right>=-i\hbar\nabla'\left<\mathbf{x'}|\phi\right></script><p>1.7.5成为：</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{p'}\right>=\frac{1}{[2\pi\hbar]^{3/2}}\exp\left(\frac{i\mathbf{x'}\cdot\mathbf{p'}}{\hbar}\right)</script><p>位置空间和动量空间波函数间的变换也成为三维傅里叶变换：</p>
+<script type="math/tex; mode=display">\phi_p(\mathbf{p'})=\frac{1}{[2\pi\hbar]^{3/2}}\int \phi_x(\mathbf{x'})\exp\left(\frac{i\mathbf{p'}\cdot\mathbf{x'}}{\hbar}\right)\mathrm{d}\mathbf{x'} \tag{1.7.6}</script><script type="math/tex; mode=display">\phi_x(\mathbf{x'})=\frac{1}{[2\pi\hbar]^{3/2}}\int \phi_p(\mathbf{p'})\exp\left(-\frac{i\mathbf{p'}\cdot\mathbf{x'}}{\hbar}\right)\mathrm{d}\mathbf{p'} \tag{1.7.7}</script><p>注意三维中位置波函数的量纲即成为长度的-3/2次方，这样粒子在全空间被发现的概率才仍然会是无量纲的1。</p>
+</body></html>]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Sakurai量子力学笔记</category>
+      </categories>
+      <tags>
+        <tag>物理</tag>
       </tags>
   </entry>
 </search>
