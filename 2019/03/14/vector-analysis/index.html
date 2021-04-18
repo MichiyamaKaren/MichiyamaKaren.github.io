@@ -54,12 +54,12 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="矢量和分析和曲线坐标系">
 <meta property="og:url" content="http://li-mz.github.io/2019/03/14/vector-analysis/index.html">
-<meta property="og:site_name" content="Y&#39;s Personal Blog">
+<meta property="og:site_name" content="Michiyama Karen&#39;s Blog">
 <meta property="og:description" content="电动力学笔记（一）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-03-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-10-06T16:08:49.867Z">
-<meta property="article:author" content="Y">
+<meta property="article:modified_time" content="2021-04-18T04:39:22.619Z">
+<meta property="article:author" content="道山神連">
 <meta property="article:tag" content="物理">
 <meta name="twitter:card" content="summary">
 
@@ -77,7 +77,7 @@
   };
 </script>
 
-  <title>矢量和分析和曲线坐标系 | Y's Personal Blog</title>
+  <title>矢量和分析和曲线坐标系 | Michiyama Karen's Blog</title>
   
 
 
@@ -121,7 +121,7 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Y's Personal Blog</span>
+        <span class="site-title">Michiyama Karen's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -230,12 +230,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/kirin.gif">
-      <meta itemprop="name" content="Y">
+      <meta itemprop="name" content="道山神連">
       <meta itemprop="description" content="宇宙的最不可理解之处在于它是可以被理解的">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Y's Personal Blog">
+      <meta itemprop="name" content="Michiyama Karen's Blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -256,7 +256,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-07 00:08:49" itemprop="dateModified" datetime="2020-10-07T00:08:49+08:00">2020-10-07</time>
+                <time title="修改时间：2021-04-18 12:39:22" itemprop="dateModified" datetime="2021-04-18T12:39:22+08:00">2021-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -329,39 +329,35 @@
 \mathbf A \times \mathbf B = \epsilon_{ijk}A_jB_k\mathbf e_i</script>其中Levi-Civita符号$\epsilon_{ijk}$定义为：<script type="math/tex; mode=display">
 \epsilon_{ijk}=\left\{
 \begin{matrix}
-1 & (i,j,k)\mbox{是}(1,2,3)\mbox{的偶置换}
-\\-1 & (i,j,k)\mbox{是}(1,2,3)\mbox{的奇置换}
-\\0 & \mbox{其他（即}(i,j,k)\mbox{中存在两者相等）}
+1 & (i,j,k)是(1,2,3)的偶置换
+\\-1 & (i,j,k)是(1,2,3)的奇置换
+\\0 & 其他（即(i,j,k)中存在两者相等）
 \end{matrix}
 \right.</script>另外,Levi-Civita符号有一常用性质：<script type="math/tex; mode=display">
 \epsilon_{ijk}\epsilon_{imn} = \delta_{jm}\delta_{kn} - \delta_{jn}\delta_{km}</script></li>
 </ul>
 <h2 id="1-3-矢量分析"><a href="#1-3-矢量分析" class="headerlink" title="1.3 矢量分析"></a>1.3 矢量分析</h2><p>两个常用的公式是：</p>
-<script type="math/tex; mode=display">
-\begin{eqnarray*}
-\mathbf A \times(\mathbf B \times \mathbf C)=(\mathbf A\cdot \mathbf C)\mathbf B-(\mathbf A\cdot\mathbf B)\mathbf C \tag{1.3.1}
-\\ \mathbf A\cdot(\mathbf B\times\mathbf C)=\mathbf B\cdot(\mathbf C\times\mathbf A)=\mathbf C\cdot(\mathbf A\times\mathbf B) \tag{1.3.2}
-\end{eqnarray*}</script><p>在矢量分析的表达式中经常出现的是纳布拉算符$\nabla$（定义为$\nabla=\frac{\partial}{\partial x^i}\mathbf e_i$），作为微分算符，$\nabla$和分量为实数的矢量的运算规则不尽相同。下面对于出现$\nabla$的表达式，以$\nabla\times(\mathbf A\times \mathbf B)$为例介绍两种分析的方法：</p>
+<script type="math/tex; mode=display">\mathbf A \times(\mathbf B \times \mathbf C)=(\mathbf A\cdot \mathbf C)\mathbf B-(\mathbf A\cdot\mathbf B)\mathbf C \tag{1.3.1}</script><script type="math/tex; mode=display">\mathbf A\cdot(\mathbf B\times\mathbf C)=\mathbf B\cdot(\mathbf C\times\mathbf A)=\mathbf C\cdot(\mathbf A\times\mathbf B) \tag{1.3.2}</script><p>在矢量分析的表达式中经常出现的是纳布拉算符$\nabla$（定义为$\nabla=\frac{\partial}{\partial x^i}\mathbf e_i$），作为微分算符，$\nabla$和分量为实数的矢量的运算规则不尽相同。下面对于出现$\nabla$的表达式，以$\nabla\times(\mathbf A\times \mathbf B)$为例介绍两种分析的方法：</p>
 <ol>
 <li>式中出现了两个矢量$\mathbf A$和$\mathbf B$，$\nabla$对二者都有作用，那么可以写成$\nabla_{\mathbf A}\times(\mathbf A\times\mathbf B)+\nabla_{\mathbf B}\times(\mathbf A\times\mathbf B)$，其中$\nabla_{\mathbf A}$只对$\mathbf A$作用，$\nabla_{\mathbf B}$只对$\mathbf B$作用。从而由(1.3.1)式，对第一项有：<script type="math/tex; mode=display">
 \nabla_{\mathbf A}\times(\mathbf A\times\mathbf B)=(\mathbf B\cdot\nabla_{\mathbf A})\mathbf A-(\nabla_{\mathbf A}\cdot\mathbf A)\mathbf B</script>这里$\nabla_{\mathbf A}$只对$\mathbf A$有作用，因此其与$\mathbf B$的点乘是可以交换的，进行恒等变换使得最后式中$\nabla_{\mathbf A}$只作用在$\mathbf A$上，从而保证在最后化回$\nabla$时不会引起歧义。<br>对$\nabla_{\mathbf B}$的式子同理，最后结果为：<script type="math/tex; mode=display">
-\begin{align*}
+\begin{aligned}
 \nabla\times(\mathbf A\times \mathbf B)&=(\mathbf B\cdot\nabla_{\mathbf A})\mathbf A-(\nabla_{\mathbf A}\cdot\mathbf A)\mathbf B + (\nabla_{\mathbf B}\cdot\mathbf B)\mathbf A-(\mathbf A\cdot\nabla_{\mathbf B})\mathbf B
 \\&=(\mathbf B\cdot\nabla)\mathbf A-(\nabla\cdot\mathbf A)\mathbf B + (\nabla\cdot\mathbf B)\mathbf A-(\mathbf A\cdot\nabla)\mathbf B
-\end{align*}</script></li>
+\end{aligned}</script></li>
 <li>使用爱因斯坦求和约定展开：<script type="math/tex; mode=display">
-\begin{align*}
+\begin{aligned}
 \nabla\times(\mathbf A\times \mathbf B) &= \epsilon_{ijk}\frac{\partial}{\partial x^j}(\mathbf A\times\mathbf B)_k\mathbf e_i
 \\ &=\epsilon_{ijk}\frac{\partial}{\partial x^j}(\epsilon_{klm}A_lB_m)\mathbf e_i  = \epsilon_{kij}\frac{\partial}{\partial x^j}(\epsilon_{klm}A_lB_m)\mathbf e_i 
 \\&=(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})\frac{\partial}{\partial x^j}(A_lB_m)\mathbf e_i
 \\ &=\frac{\partial}{\partial x^j}(A_iB_j)\mathbf e_i-\frac{\partial}{\partial x^j}(A_jB_i)\mathbf e_i
 \\ &=B_j\frac{\partial A_i}{\partial x^j}\mathbf e_i + \frac{\partial B_j}{\partial x^j}A_i\mathbf e_i - \frac{\partial A_j}{\partial x^j}B_i\mathbf e_i - A_j\frac{\partial B_i}{\partial x^j}\mathbf e_i
 \\ &=(\mathbf B\cdot\nabla)\mathbf A + (\nabla\cdot\mathbf B)\mathbf A - (\nabla\cdot\mathbf A)\mathbf B -(\mathbf A\cdot\nabla)\mathbf B
-\end{align*}</script></li>
+\end{aligned}</script></li>
 </ol>
 <p>两种方法都得到了正确结果。</p>
 <h1 id="2-曲线坐标系"><a href="#2-曲线坐标系" class="headerlink" title="2.曲线坐标系"></a>2.曲线坐标系</h1><p>这一部分的说明旨在表述具有一般性地给出在曲线坐标系对矢量的描述，并介绍同一个矢量的协变和逆变表示。注意我们仍在讨论$\mathbb{R}^3$中的矢量，而非在微分流形上定义的，虽然二者具有相似性，但这里的矢量基和对偶基处于同一个线性空间。</p>
-<p>本节内容来自<a href="https://link.springer.com/book/10.1007%2F978-3-642-75595-8" target="_blank" rel="noopener">《Flux Coordinates and Magnetic Field Structure》</a>。</p>
+<p>本节内容来自<a target="_blank" rel="noopener" href="https://link.springer.com/book/10.1007%2F978-3-642-75595-8">《Flux Coordinates and Magnetic Field Structure》</a>。</p>
 <h2 id="2-1-矢量的对偶集合（reciprocal-sets）"><a href="#2-1-矢量的对偶集合（reciprocal-sets）" class="headerlink" title="2.1 矢量的对偶集合（reciprocal sets）"></a>2.1 矢量的对偶集合（reciprocal sets）</h2><p>称矢量集合$\{\mathbf A,\mathbf B,\mathbf C\}$和$\{\mathbf a,\mathbf b,\mathbf c\}$为对偶集合，若：</p>
 <script type="math/tex; mode=display">\mathbf A\cdot\mathbf a=\mathbf B\cdot\mathbf b=\mathbf C\cdot\mathbf c=1</script><script type="math/tex; mode=display">\mathbf A\cdot\mathbf b=\mathbf A\cdot\mathbf c=\cdots=0</script><p>。即，一个集合的每个元素都和另一个集合的一个元素的内积为1，并和另外两个元素正交。这两个集合中的元素都是线性无关的（否则，存在$\lambda,\mu,\gamma\neq0$，使$\lambda\mathbf A+\mu\mathbf B+\gamma\mathbf C=0$，从而$(\lambda\mathbf A+\mu\mathbf B+\gamma\mathbf C)\cdot\mathbf a=\lambda=0$，矛盾）。从而，对任意的矢量$\mathbf W$，都可以表示为这两个集合中的元素的线性组合：</p>
 <script type="math/tex; mode=display">\mathbf W=(\mathbf W\cdot\mathbf a)\mathbf A+(\mathbf W\cdot\mathbf b)\mathbf B+(\mathbf W\cdot\mathbf c)\mathbf C</script><p>或：</p>
@@ -453,8 +449,8 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/03/21/SR/" rel="prev" title="狭义相对论时空">
-                  狭义相对论时空 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/03/30/motion-in-EM-field/" rel="prev" title="电磁场中运动的粒子">
+                  电磁场中运动的粒子 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -501,9 +497,9 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="site-author-image" itemprop="image" alt="Y"
+  <img class="site-author-image" itemprop="image" alt="道山神連"
     src="/images/kirin.gif">
-  <p class="site-author-name" itemprop="name">Y</p>
+  <p class="site-author-name" itemprop="name">道山神連</p>
   <div class="site-description" itemprop="description">宇宙的最不可理解之处在于它是可以被理解的</div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -518,13 +514,13 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -564,7 +560,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Y</span>
+  <span class="author" itemprop="copyrightHolder">道山神連</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
   </div>
