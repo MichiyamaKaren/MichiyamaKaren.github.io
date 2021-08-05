@@ -2271,7 +2271,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 <h2 id="后处理"><a href="#后处理" class="headerlink" title="后处理"></a>后处理</h2><p>下载完所有ts文件之后，还需要将其拼接成一整个文件。在Windows下，只需进入下载ts文件的目录（即上面代码中的<code>outdir</code>），并执行命令：</p>
 <figure class="highlight vim"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">copy</span> /<span class="keyword">b</span> *.<span class="keyword">ts</span> total.<span class="keyword">ts</span></span><br></pre></td></tr></tbody></table></figure>
 <p>再使用ffmpeg转码为mp4：</p>
-<figure class="highlight stata"><table><tbody><tr><td class="code"><pre><span class="line">ffmpeg -i <span class="keyword">total</span>.ts -vcodec <span class="keyword">copy</span> -acodec <span class="keyword">copy</span> toatl.mp4</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight stata"><table><tbody><tr><td class="code"><pre><span class="line">ffmpeg -i <span class="keyword">total</span>.ts -vcodec <span class="keyword">copy</span> -acodec <span class="keyword">copy</span> <span class="keyword">total</span>.mp4</span><br></pre></td></tr></tbody></table></figure>
 <p>即可得到mp4格式的完整视频文件。</p>
 </body></html>]]></content>
       <categories>
