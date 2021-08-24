@@ -2291,7 +2291,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 <li><strong>一个推特开发者账号</strong>：只要你有推特账号，就可以去推特的开发者平台申请成为开发者账号以获得调用推特API的权限。具体的申请流程和注意事项网上有很多教程，这里就不赘述了。需要强调的是推特开发者账号的申请是要经过人工审核的，且申请失败就不能再申请了，因此务必要慎重。</li>
 <li><strong>一个可以访问到不存在网站的神奇主机</strong>：懂的都懂。需要配置好Python3.7+环境。</li>
 </ul>
-<h2 id="部署流程"><a href="#部署流程" class="headerlink" title="部署流程"></a>部署流程</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>首先将twitter2bilibili代码clone到本地：<br></p><figure class="highlight groovy"><table><tbody><tr><td class="code"><pre><span class="line">git<span class="meta">@github</span>.<span class="attr">com:</span>MichiyamaKaren/twitter2bilibili.git</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="部署流程"><a href="#部署流程" class="headerlink" title="部署流程"></a>部署流程</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>首先将twitter2bilibili代码clone到本地：<br></p><figure class="highlight crmsh"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>@github.com:MichiyamaKaren/twitter2bilibili.git</span><br></pre></td></tr></tbody></table></figure><p></p>
 <p>进入twitter2bilibili目录，安装依赖的Python库：<br></p><figure class="highlight cmake"><table><tbody><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></tbody></table></figure><p></p>
 <h3 id="填写配置项"><a href="#填写配置项" class="headerlink" title="填写配置项"></a>填写配置项</h3><p>创建<code>config.py</code>文件，这是整个项目的配置文件。需要填写的配置项可以参照<code>config_example.py</code>文件</p>
 <p><img src="config-example.png" alt="config_example.py的截图"></p>
@@ -2306,7 +2306,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 <p>因此，如果要改变转推行为，那么应该重载的就是<code>get_forward_action</code>、<code>on_send_dynamic</code>、<code>on_repost</code>和<code>on_comment</code>方法。查看项目代码可以发现<code>get_forward_action</code>返回的不仅有行为（action，字符串），也有一个<code>dynamic_id</code>，而后三个方法接收的参数都是<code>tweet</code>和<code>dynamic_id</code>。这个<code>dynamic_id</code>参数就是用来实现B站动态的转发和评论，以及通过链接对动态进行引用的。如果需要更改接口，那<code>handler</code>方法也要被重载。</p>
 <p>另外可重载的是<code>query</code>属性（通过<code>@property</code>装饰器定义），这是发送给推特Filtered Stream的query内容，描述了要请求的<code>Tweet</code>对象的哪些域。如果你的新功能需要请求不同的域，那么你会需要修改query。query的具体格式和含义见推特开发者文档。</p>
 <hr>
-<p>如果你真的按照这篇教程用我的代码成功部署了自己的转推bot，请标注出<a href="https://github.com/MichiyamaKaren/twitter2bilibili">项目地址</a>。另外也请顺手给我的github仓库点个star，这对我不是很重要，但还是求求你了。</p>
+<p>如果你真的按照这篇教程用我的代码成功部署了自己的转推bot，请标注出<a href="https://github.com/MichiyamaKaren/twitter2bilibili">项目地址</a>。另外也请顺手给这个仓库点个star，这对我不是很重要，但还是求求你了。</p>
 </body></html>]]></content>
       <categories>
         <category>技术</category>
