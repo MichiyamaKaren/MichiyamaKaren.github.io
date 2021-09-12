@@ -2295,7 +2295,8 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 <p>进入twitter2bilibili目录，安装依赖的Python库：<br></p><figure class="highlight cmake"><table><tbody><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></tbody></table></figure><p></p>
 <h3 id="填写配置项"><a href="#填写配置项" class="headerlink" title="填写配置项"></a>填写配置项</h3><p>创建<code>config.py</code>文件，这是整个项目的配置文件。需要填写的配置项可以参照<code>config_example.py</code>文件</p>
 <p><img src="config-example.png" alt="config_example.py的截图"></p>
-<p>其中以BILI开头的三项为调用B站API所需要的身份认证信息，你可以在bilibili-api的<a href="https://www.moyu.moe/bilibili-api/#/get-credential">文档</a>中看到如何获取。</p>
+<p>其中以BILI开头的三项为调用B站API所需要的身份认证信息，你可以在<a href="https://www.moyu.moe/bilibili-api/#/get-credential">bilibili-api的文档</a>中看到如何获取。</p>
+<p><strong>须知</strong>：bilibili-api所要求的这三个key是长期有效，但不是永久有效的。在网页端退出登录后，身份认证将会过期（直接关闭网页则不会），此时如果继续使用旧的key则会出错，会由接口返回错误代码-6。</p>
 <p><code>TWITTER_BEARER_TOKEN</code>是推特开发者账号的Bearer Token，在开发者平台上创建应用即可获取。</p>
 <p><code>subscribe_users</code>记录了要转推的推特账号，每一项代表一名用户，<code>username</code>为推特用户名（不是昵称），<code>name</code>为转推bot要显示的名字。</p>
 <p>最后，<code>display_timezone</code>是转推bot要显示时间的时区，其应为<code>pytz</code>库所接受的时区格式。</p>
