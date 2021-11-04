@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -53,8 +53,8 @@
   <meta name="description" content="NoneBotNoneBot是基于酷Q的一个QQ机器人框架，其基本介绍和使用参见其文档。本段旨在补充一些目前在文档中还未点出的有关NoneBot的一些性质，它们在NG词语游戏插件的编写中是不可或缺的。 当QQ机器人接收到一条消息时，它会首先对消息进行parsing，解析出当前消息对应的指令和参数。随后，它会根据上下文——即CoolQ HTTP API中事件上报的数据的字典，包含消息和发信人的信息—">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于NoneBot的NG词语游戏插件">
-<meta property="og:url" content="http://li-mz.github.io/2019/07/07/NGWordGame-with-Nonebot/index.html">
-<meta property="og:site_name" content="Michiyama Karen&#39;s Blog">
+<meta property="og:url" content="https://michiyamakaren.github.io/2019/07/07/NGWordGame-with-Nonebot/index.html">
+<meta property="og:site_name" content="道山神連的博客">
 <meta property="og:description" content="NoneBotNoneBot是基于酷Q的一个QQ机器人框架，其基本介绍和使用参见其文档。本段旨在补充一些目前在文档中还未点出的有关NoneBot的一些性质，它们在NG词语游戏插件的编写中是不可或缺的。 当QQ机器人接收到一条消息时，它会首先对消息进行parsing，解析出当前消息对应的指令和参数。随后，它会根据上下文——即CoolQ HTTP API中事件上报的数据的字典，包含消息和发信人的信息—">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-07-06T16:00:00.000Z">
@@ -63,7 +63,7 @@
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://li-mz.github.io/2019/07/07/NGWordGame-with-Nonebot/">
+<link rel="canonical" href="https://michiyamakaren.github.io/2019/07/07/NGWordGame-with-Nonebot/">
 
 
 <script id="page-configurations">
@@ -76,8 +76,20 @@
     isArchive: false
   };
 </script>
+<!-- from: https://www.cnblogs.com/wstong/p/12874732.html -->
+<!-- Live2DCubismCore script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/live2dcubismcore.js"></script>
+<!-- Build script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/bundle.js"></script>
+<canvas id="live2d" width="400" height="600" class="live2d" style="position: fixed; opacity: 0.8; left: -70px; bottom: -250px; z-index: 99999; pointer-events: none;"></canvas>
 
-  <title>基于NoneBot的NG词语游戏插件 | Michiyama Karen's Blog</title>
+<script type="text/javascript">
+    var resourcesPath = '/live2d_models/'; // 指定资源文件（模型）保存的路径
+    var backImageName = ''; // 指定背景图片
+    var modelDir = ['AijoKaren']; // 指定需要加载的模型
+    initDefine(resourcesPath, backImageName, modelDir); // 初始化模型
+</script>
+  <title>基于NoneBot的NG词语游戏插件 | 道山神連的博客</title>
   
 
 
@@ -121,7 +133,7 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Michiyama Karen's Blog</span>
+        <span class="site-title">道山神連的博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -226,7 +238,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://li-mz.github.io/2019/07/07/NGWordGame-with-Nonebot/">
+    <link itemprop="mainEntityOfPage" href="https://michiyamakaren.github.io/2019/07/07/NGWordGame-with-Nonebot/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/kirin.gif">
@@ -235,7 +247,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Michiyama Karen's Blog">
+      <meta itemprop="name" content="道山神連的博客">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -455,7 +467,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">道山神連</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.4.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
