@@ -315,7 +315,7 @@
 
       
         <html><head></head><body></body></html><html><head></head><body><h1 id="1-电磁场-粒子耦合作用量"><a href="#1-电磁场-粒子耦合作用量" class="headerlink" title="1.电磁场-粒子耦合作用量"></a>1.电磁场-粒子耦合作用量</h1><p><del>（目前还不存在的）</del>上一节告诉我们，闵氏时空中的自由粒子的作用量为：</p>
-<script type="math/tex; mode=display">S_p=\int mc^2\mathbf d\tau=\int \frac {mc^2} {\gamma} \mathbf dt</script><p>要描述一个在电磁场中运动的粒子，其作用量应再加上一项粒子与场的耦合项$S_{pf}$，即$S=S_p+S_{pf}$。</p>
+<script type="math/tex; mode=display">S_p=\int mc^2\mathbf d\tau=\int \frac {mc^2} {\gamma} \mathbf dt</script><p>要描述一个在电磁场中运动的粒子，其作用量应再加上一项粒子与场的耦合项$S<em>{pf}$，即$S=S_p+S</em>{pf}$。</p>
 <p>实验告诉我们，应该使用一个4-矢量$A^{\alpha}=(\phi/c,\mathbf A)$描述电磁场，我们会在后面看到$A^{\alpha}$的时间、空间分量的物理意义。另外，作用量应为标量。因此我们猜测$S_{pf}$的形式为：</p>
 <script type="math/tex; mode=display">S_{pf}=-q\int A_{\alpha}\mathbf dx^{\alpha}</script><p>其中$q$也是一个标量，它表示了粒子与电磁场耦合的强度。<br>从而，粒子的作用量：</p>
 <script type="math/tex; mode=display">
@@ -378,7 +378,7 @@ F_{\alpha\beta} =
 \end{pmatrix}</script><h1 id="5-电磁场的洛伦兹变换"><a href="#5-电磁场的洛伦兹变换" class="headerlink" title="5.电磁场的洛伦兹变换"></a>5.电磁场的洛伦兹变换</h1><h2 id="5-1-电场和磁场的变换式"><a href="#5-1-电场和磁场的变换式" class="headerlink" title="5.1 电场和磁场的变换式"></a>5.1 电场和磁场的变换式</h2><p>电场和磁场可看作电磁场张量的分量，可以简单的由张量的洛伦兹变换给出其在不同惯性系中的变换式：</p>
 <script type="math/tex; mode=display">
 E_x=E_x',\ E_y = \frac{E_y'+VB_z'}{\sqrt{1-V^2/c^2}},\ E_z=\frac{E_z'-VB_y'}{\sqrt{1-V^2/c^2}}
-\\B_x=B_x',\ B_y = \frac{B_y'-VE_z'}{\sqrt{1-V^2/c^2}},\ E_z=\frac{B_z'+VE_y'}{\sqrt{1-V^2/c^2}}</script><p>在低速近似$V<<1$下，上式化为：</p>
+\\B_x=B_x',\ B_y = \frac{B_y'-VE_z'}{\sqrt{1-V^2/c^2}},\ E_z=\frac{B_z'+VE_y'}{\sqrt{1-V^2/c^2}}</script><p>在低速近似$V&lt;&lt;1$下，上式化为：</p>
 <script type="math/tex; mode=display">
 \mathbf E = \mathbf E' + \mathbf B'\times \mathbf V
 \\ \mathbf B = \mathbf B' - \frac 1 {c^2}\mathbf E' \times \mathbf V</script><h2 id="5-2-电磁场的洛伦兹不变量"><a href="#5-2-电磁场的洛伦兹不变量" class="headerlink" title="5.2 电磁场的洛伦兹不变量"></a>5.2 电磁场的洛伦兹不变量</h2><p>寻找洛伦兹不变量，即寻找标量。我们可以通过构造上下指标互相匹配，即不含自由指标的表达式来构造张量。</p>
@@ -386,8 +386,8 @@ E_x=E_x',\ E_y = \frac{E_y'+VB_z'}{\sqrt{1-V^2/c^2}},\ E_z=\frac{E_z'-VB_y'}{\sq
 <script type="math/tex; mode=display">\frac {c^2} 2 F_{\alpha\beta}F^{\alpha\beta} = c^2B^2-E^2</script><p>在给出第二个洛伦兹不变量前，先说明四阶单位反对称张量$e^{\alpha\beta\mu\nu}$的定义：<br>和Levi-Civita算符$\epsilon_{ijk}$类似，若$\alpha,\beta,\mu,\nu$任意两个指标相同，则$ e^{\alpha\beta\mu\nu} = 0 $；规定$ e^{0123}=1 $，交换任意两个指标后的结果为交换前的相反数。可以证明$e^{\alpha\beta\mu\nu}$在归一化的坐标变换（变换矩阵行列式为1）下分量的值不变，而洛伦兹变换正是归一化的。从而有洛伦兹不变量：</p>
 <script type="math/tex; mode=display">-\frac 1 2 F_{\beta\alpha}e^{\alpha\beta\mu\nu}F^{\nu\mu} = \mathbf E\cdot\mathbf B</script><p>可以由这两个洛伦兹不变量得出一些简单的性质：</p>
 <ol>
-<li>若在惯性系K中有$E>cB$，则$E>cB$在任意惯性系中都成立。反之亦然。</li>
-<li>若在惯性系K中$\mathbf E\perp\ \mathbf B$，则$\mathbf E\perp\ \mathbf B$在任意惯性系中都成立，并且可以找到惯性系K’使得其中$\mathbf B=0$（当$E>cB$）或$\mathbf E=0$（当$cB>E$）。</li>
+<li>若在惯性系K中有$E&gt;cB$，则$E&gt;cB$在任意惯性系中都成立。反之亦然。</li>
+<li>若在惯性系K中$\mathbf E\perp\ \mathbf B$，则$\mathbf E\perp\ \mathbf B$在任意惯性系中都成立，并且可以找到惯性系K’使得其中$\mathbf B=0$（当$E&gt;cB$）或$\mathbf E=0$（当$cB&gt;E$）。</li>
 </ol>
 <h2 id="5-3-匀速运动电荷的电场"><a href="#5-3-匀速运动电荷的电场" class="headerlink" title="5.3 匀速运动电荷的电场"></a>5.3 匀速运动电荷的电场</h2><p>下面用两种方法给出在惯性系K中以速度$V\mathbf e_x$匀速运动的电荷产生的电磁场。</p>
 <p>在相对K以$V\mathbf e_x$速度运动的惯性系K’中。K’中的电磁场由静电荷激发，其形式已知。从而我们有：</p>

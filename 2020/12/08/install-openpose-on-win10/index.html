@@ -309,11 +309,11 @@
 <p>其中第二篇文章记录了大部分可能遇到的问题，不过我安装时还遇到了一些额外的问题，记录如下：</p>
 <h3 id="TensorFlow和CUDA"><a href="#TensorFlow和CUDA" class="headerlink" title="TensorFlow和CUDA"></a>TensorFlow和CUDA</h3><p>关于tensorflow的版本的问题比较多，首先openpose是依赖tensorflow的1.x版本的，和tensorflow 2.x版本不能兼容，所以安装tensorflow时要注意只能安装tensorflow 1.x版本。</p>
 <p>另外，CUDA和tensorflow-gpu的版本要求对应的很严格，可能差几个版本号就没法正常运行了。这里可以参照tensorflow官网的<a target="_blank" rel="noopener" href="https://tensorflow.google.cn/install/source_windows#gpu">对应表</a>。</p>
-<p><img src="CUDA-tensorflow-version.png" alt></p>
+<p><img src="CUDA-tensorflow-version.png" alt=""></p>
 <p>按照上面的对应表，CUDA 10.0以上的版本就没有测试过tensorflow 1.x了，但我意识到这个问题时已经装好了CUDA 10.1，试了一下别的教程中用过的配置，发现CUDA 10.1也是可以用的。最终我的成功配置是CUDA 10.1+cuDNN 8.0.5+python 3.6.8+tensorflow-gpu 1.15.0。</p>
 <h3 id="pycocotools"><a href="#pycocotools" class="headerlink" title="pycocotools"></a>pycocotools</h3><p>安装依赖包的pycocotools时，在conda环境中使用<code>pip install pycocotools</code>是会报错，提示需要安装Microsoft Visual C++ 14.0。我安装了VC 14.0之后还是报相同的错，但是退出conda环境之后就可以安装了。这个有点玄学，我也没查到编译python库是要依赖哪个环境变量，于是后面的操作都是关闭conda环境进行的。</p>
 <h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>最后在使用<code>python setup.py build_ext --inplace</code>安装openpose时，报错：</p>
-<figure class="highlight subunit"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">error: </span>Error executing cmd /u /c C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat x86_amd64 && set</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight subunit"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">error: </span>Error executing cmd /u /c C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat x86_amd64 &amp;&amp; set</span><br></pre></td></tr></tbody></table></figure>
 <p>直接查这个报错信息没查出来怎么解决，可以看到错误是在执行<code>vcvarsall.bat</code>时出现的，单独运行一下这个脚本，会出现报错：</p>
 <p><img src="vcvarsall-error.png" alt="此时不应有 \Microsoft。"></p>
 <p>查一下这个报错信息，发现了<a target="_blank" rel="noopener" href="https://www.cnblogs.com/happykoukou/p/6986350.html">这篇文章</a>。按照其中的解决方法，找出来环境变量中所有带双引号的变量（不只是<code>PATH</code>，我的情况是变量<code>LIB</code>和<code>INCLUDE</code>带了双引号），把双引号去掉，就可以正常编译安装了。</p>

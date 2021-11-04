@@ -315,14 +315,14 @@
 
       
         <html><head></head><body></body></html><html><head></head><body><h2 id="1-6-Position-Momentum-and-Translation"><a href="#1-6-Position-Momentum-and-Translation" class="headerlink" title="1.6 Position, Momentum and Translation"></a>1.6 Position, Momentum and Translation</h2><h3 id="连续谱"><a href="#连续谱" class="headerlink" title="连续谱"></a>连续谱</h3><p>前面讨论的观测量的本征值都是离散分布的，然而还有另一类观测量，其本征值是连续分布的。连续谱使用的数学和之前讨论的类似，只需要把求和换成积分，克罗内克符号$\delta_{a’a’’}$换成狄拉克函数$\delta(a’-a’’)$。连续谱下的基的正交归一化条件和完备性关系可以写为：</p>
-<script type="math/tex; mode=display">\left<\xi'|\xi''\right>=\delta(\xi'-\xi'')</script><script type="math/tex; mode=display">\int \left|\xi'\right>\left<\xi'\right|\mathrm{d}\xi'=1</script><h3 id="位置和波函数"><a href="#位置和波函数" class="headerlink" title="位置和波函数"></a>位置和波函数</h3><p><strong>位置</strong>就是这样一个本征值连续分布的观测量。对位置算符$x$的本征右矢$\left|x’\right>$，有：</p>
-<script type="math/tex; mode=display">x\left|x'\right>=x'\left|x'\right></script><p>对任意的态$\left|\alpha\right>$，由位置的完备性关系，可以在位置表象下展开：</p>
-<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|x'\right>\left<x'|\alpha\right>\mathrm{d}x'</script><p>如果我们用仪器测量一个处于$\left|\alpha\right>$态上的粒子的位置，粒子会以一定概率塌缩到某个位置本征态。当然，物理的仪器都是有限精度的，我们只能得知粒子的位置在$x’$附近一个宽度为$\mathrm{d}x’$的区间内的概率为：</p>
-<script type="math/tex; mode=display">\left|\left<x'|\alpha\right>\right|^2\mathrm{d}x'</script><p>其中$\psi(x’)=\left< x’|\psi \right>$被称作<strong>波函数</strong>，其模平方就是粒子在空间中的概率密度。</p>
+<script type="math/tex; mode=display">\left<\xi'|\xi''\right>=\delta(\xi'-\xi'')</script><script type="math/tex; mode=display">\int \left|\xi'\right>\left<\xi'\right|\mathrm{d}\xi'=1</script><h3 id="位置和波函数"><a href="#位置和波函数" class="headerlink" title="位置和波函数"></a>位置和波函数</h3><p><strong>位置</strong>就是这样一个本征值连续分布的观测量。对位置算符$x$的本征右矢$\left|x’\right&gt;$，有：</p>
+<script type="math/tex; mode=display">x\left|x'\right>=x'\left|x'\right></script><p>对任意的态$\left|\alpha\right&gt;$，由位置的完备性关系，可以在位置表象下展开：</p>
+<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|x'\right>\left<x'|\alpha\right>\mathrm{d}x'</script><p>如果我们用仪器测量一个处于$\left|\alpha\right&gt;$态上的粒子的位置，粒子会以一定概率塌缩到某个位置本征态。当然，物理的仪器都是有限精度的，我们只能得知粒子的位置在$x’$附近一个宽度为$\mathrm{d}x’$的区间内的概率为：</p>
+<script type="math/tex; mode=display">\left|\left<x'|\alpha\right>\right|^2\mathrm{d}x'</script><p>其中$\psi(x’)=\left&lt; x’|\psi \right&gt;$被称作<strong>波函数</strong>，其模平方就是粒子在空间中的概率密度。</p>
 <p>粒子一定会在空间中某处被发现，这给出了波函数和态矢的归一化条件：</p>
-<script type="math/tex; mode=display">\left<\alpha|\alpha\right>=\int\left|\left<x'|\alpha\right>\right|^2\mathrm{d}x'=\int\left|\Psi(x')\right|^2\mathrm{d}x'=1</script><p>三维的情况和一维类似，我们假设存在位置本征态$\left|\mathbf{x}\right>$，这即是假设三个方向的位置算符有共同的本征态$\left|x’,y’,z’\right>$（否则的话粒子在任意时刻都不会有确定的位置——它不同方向的位置甚至都不对易！我们不希望这样）。如果位置本征态是完备的，我们仍可以展开任意的态矢：</p>
-<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}</script><h3 id="无穷小平移"><a href="#无穷小平移" class="headerlink" title="无穷小平移"></a>无穷小平移</h3><p>我们定义<strong>无穷小平移算符</strong>$\mathscr{T}(\mathrm{d}\mathbf{x’})$，它作用在位置本征态$\left|\mathbf{x’}\right>$上的结果为：</p>
-<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right></script><p>物理上，考虑任意态矢在坐标表象下的表示：$\left|\alpha\right>=\int c_{\mathbf{x’}}\left|\mathbf{x’}\right>$，无穷小平移使每个本征态$\left|\mathbf{x’}\right>$都变成$\left|\mathbf{x’}+\mathrm{d}\mathbf{x’}\right>$，相当于一个让物理系统平移了$\mathrm{d}\mathbf{x’}$的坐标变换（我们很快会看到，它的确是一个幺正算符）。</p>
+<script type="math/tex; mode=display">\left<\alpha|\alpha\right>=\int\left|\left<x'|\alpha\right>\right|^2\mathrm{d}x'=\int\left|\Psi(x')\right|^2\mathrm{d}x'=1</script><p>三维的情况和一维类似，我们假设存在位置本征态$\left|\mathbf{x}\right&gt;$，这即是假设三个方向的位置算符有共同的本征态$\left|x’,y’,z’\right&gt;$（否则的话粒子在任意时刻都不会有确定的位置——它不同方向的位置甚至都不对易！我们不希望这样）。如果位置本征态是完备的，我们仍可以展开任意的态矢：</p>
+<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}</script><h3 id="无穷小平移"><a href="#无穷小平移" class="headerlink" title="无穷小平移"></a>无穷小平移</h3><p>我们定义<strong>无穷小平移算符</strong>$\mathscr{T}(\mathrm{d}\mathbf{x’})$，它作用在位置本征态$\left|\mathbf{x’}\right&gt;$上的结果为：</p>
+<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right></script><p>物理上，考虑任意态矢在坐标表象下的表示：$\left|\alpha\right&gt;=\int c_{\mathbf{x’}}\left|\mathbf{x’}\right&gt;$，无穷小平移使每个本征态$\left|\mathbf{x’}\right&gt;$都变成$\left|\mathbf{x’}+\mathrm{d}\mathbf{x’}\right&gt;$，相当于一个让物理系统平移了$\mathrm{d}\mathbf{x’}$的坐标变换（我们很快会看到，它的确是一个幺正算符）。</p>
 <p>下面来考虑$\mathscr{T}(\mathrm{d}\mathbf{x’})$的性质，将其作用在任意态矢上：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
@@ -363,18 +363,18 @@
     [\mathscr{T}(\mathrm{d}x\hat{\mathbf{x}}),\mathscr{T}(\mathrm{d}x\hat{\mathbf{y}})]&=[1-ip_x\mathrm{d}x/\hbar, 1-ip_ydy/\hbar]
     \\&=-\frac{\mathrm{d}xdy}{\hbar^2}[p_x,p_y]=0
 \end{aligned}</script><p>在其他方向上也同理，从而不同方向上的动量算符的对易关系为：</p>
-<script type="math/tex; mode=display">[p_i,p_j]=0</script><p>不同方向的动量是对易的，这说明和位置算符类似，也存在三维的动量本征态$\left|\mathbf{p’}\right>$。</p>
+<script type="math/tex; mode=display">[p_i,p_j]=0</script><p>不同方向的动量是对易的，这说明和位置算符类似，也存在三维的动量本征态$\left|\mathbf{p’}\right&gt;$。</p>
 <h3 id="正则对易关系"><a href="#正则对易关系" class="headerlink" title="正则对易关系"></a>正则对易关系</h3><p>上面的对易关系：</p>
 <script type="math/tex; mode=display">[x_i,x_j]=0,[p_i,p_j]=0,[x_i,p_j]=i\hbar\delta_{ij}</script><p>被称为<strong>正则对易关系</strong>。</p>
 <p>注意到正则对易关系和经典力学中的泊松括号其实有着相似的形式，结果也是乘了一个$i\hbar$。一般地，量子力学中有经典对应的各种观测量的对易关系都可以对应为：</p>
 <script type="math/tex; mode=display">[,]_{classical}=\frac{[,]}{i\hbar}</script><p>泊松括号的一些性质也可以自然的被应用在对易子上，比如：</p>
-<script type="math/tex; mode=display">[A,BC]=[A,B]C+B[A,C]</script><script type="math/tex; mode=display">[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=0</script><h2 id="1-7-Wave-Functions-in-Position-and-Momentum-Space"><a href="#1-7-Wave-Functions-in-Position-and-Momentum-Space" class="headerlink" title="1.7 Wave Functions in Position and Momentum Space"></a>1.7 Wave Functions in Position and Momentum Space</h2><h3 id="位置空间波函数"><a href="#位置空间波函数" class="headerlink" title="位置空间波函数"></a>位置空间波函数</h3><p>位置表象的波函数为$\psi(x’)=\left< x’|\psi \right>$，从这一角度，我们可以得到波动力学中的一系列定义：</p>
+<script type="math/tex; mode=display">[A,BC]=[A,B]C+B[A,C]</script><script type="math/tex; mode=display">[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=0</script><h2 id="1-7-Wave-Functions-in-Position-and-Momentum-Space"><a href="#1-7-Wave-Functions-in-Position-and-Momentum-Space" class="headerlink" title="1.7 Wave Functions in Position and Momentum Space"></a>1.7 Wave Functions in Position and Momentum Space</h2><h3 id="位置空间波函数"><a href="#位置空间波函数" class="headerlink" title="位置空间波函数"></a>位置空间波函数</h3><p>位置表象的波函数为$\psi(x’)=\left&lt; x’|\psi \right&gt;$，从这一角度，我们可以得到波动力学中的一系列定义：</p>
 <script type="math/tex; mode=display">\left<\psi|\phi\right>=\int \left<\psi|x'\right>\left<x'|\phi\right>\mathrm{d}x'=\int \psi^*(x')\phi(x')\mathrm{d}x' \tag{1.7.2}</script><script type="math/tex; mode=display">
 \begin{aligned}
     \left<\psi|A|\phi\right>&=\iint \left<\psi|x'\right>\left<x'|A|x''\right>\left<x''|\phi\right>\mathrm{d}x'\mathrm{d}x''
     \\&=\iint \psi^*(x')\left<x'|A|x''\right>\phi(x'')\mathrm{d}x'\mathrm{d}x''
 \end{aligned}
-\tag{1.7.3}</script><p>对一个一般的算符，矩阵元$\left< x’|A|x’’ \right>$是$x’,x’’$的函数。而当$A$是位置算符的函数时（从而拥有相同的本征态），我们有：</p>
+\tag{1.7.3}</script><p>对一个一般的算符，矩阵元$\left&lt; x’|A|x’’ \right&gt;$是$x’,x’’$的函数。而当$A$是位置算符的函数时（从而拥有相同的本征态），我们有：</p>
 <script type="math/tex; mode=display">\left<x'|f(x)|x''\right>=\left<x'|f(x'')|x''\right>=f(x'')\delta(x'-x'')</script><p>上面的乘积就可以写为：</p>
 <script type="math/tex; mode=display">\left<\psi|f(x)|\phi\right>=\int \psi^*(x')f(x')\phi(x')\mathrm{d}x'</script><h3 id="动量空间波函数"><a href="#动量空间波函数" class="headerlink" title="动量空间波函数"></a>动量空间波函数</h3><p>下面我们来考虑动量表象下波函数和位置空间波函数的关系，从无穷小平移算符出发：</p>
 <script type="math/tex; mode=display">
@@ -393,9 +393,9 @@
     \left|\phi\right>&=\int \left|p'\right>\left<p'|\phi\right>\mathrm{d}p'
     \\&=\iint \left|p'\right>\left<p'|x'\right>\left<x'|\phi\right>\mathrm{d}p'\mathrm{d}x'
     \\&=\int \mathrm{d}p'\left|p'\right>\int \left<p'|x'\right>\phi(x')\mathrm{d}x'
-\end{aligned}</script><p>对其中出现的$\left< p’|x’ \right>$，考虑1.7.4中任意态$\phi$为动量本征态的情况，有：</p>
+\end{aligned}</script><p>对其中出现的$\left&lt; p’|x’ \right&gt;$，考虑1.7.4中任意态$\phi$为动量本征态的情况，有：</p>
 <script type="math/tex; mode=display">\left<x'|p|p'\right>=p'\left<x'|p'\right>=-i\hbar\frac{\partial}{\partial x'}\left<x'|p'\right></script><p>从而：</p>
-<script type="math/tex; mode=display">\left<x'|p'\right>=N\exp\left(\frac{ip'x'}{\hbar}\right)</script><p>其中$N$是归一化常数，考虑$\left< x’|x’’ \right>$：</p>
+<script type="math/tex; mode=display">\left<x'|p'\right>=N\exp\left(\frac{ip'x'}{\hbar}\right)</script><p>其中$N$是归一化常数，考虑$\left&lt; x’|x’’ \right&gt;$：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
     \left<x'|x''\right>&=\delta(x'-x'')

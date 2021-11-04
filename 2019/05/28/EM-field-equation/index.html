@@ -332,11 +332,11 @@
 <ol>
 <li>如1小节所述，$\mathscr L_f$应该是洛伦兹不变量</li>
 <li>应该具有规范对称性</li>
-<li>电磁场应该满足叠加原理，即电磁场方程应该是线性的，则应该有$\mathscr L_f \sim (\partial_{\mu}A^{\nu})^2$</li>
+<li>电磁场应该满足叠加原理，即电磁场方程应该是线性的，则应该有$\mathscr L<em>f \sim (\partial</em>{\mu}A^{\nu})^2$</li>
 </ol>
 <p>事实上人们发现$\mathscr L_f$的形式是：</p>
 <script type="math/tex; mode=display">\mathscr L_f = -\frac 1 {4\mu_0 c} F^{\alpha\beta}F_{\alpha\beta}</script><p>很容易验证它是满足以上的要求的。</p>
-<h2 id="2-2-真空电磁场方程"><a href="#2-2-真空电磁场方程" class="headerlink" title="2.2 真空电磁场方程"></a>2.2 真空电磁场方程</h2><p>将电磁场的拉氏量带入E-L方程，求得真空中的（即只考虑$\mathscr L_f$，不考虑$\mathscr L_{pf}$）电磁场方程为：</p>
+<h2 id="2-2-真空电磁场方程"><a href="#2-2-真空电磁场方程" class="headerlink" title="2.2 真空电磁场方程"></a>2.2 真空电磁场方程</h2><p>将电磁场的拉氏量带入E-L方程，求得真空中的（即只考虑$\mathscr L<em>f$，不考虑$\mathscr L</em>{pf}$）电磁场方程为：</p>
 <script type="math/tex; mode=display">\frac 1 {\mu_0 c} \frac{\partial F_{\nu}^{\cdot\mu}}{\partial x^{\mu}}=0</script><p>也可以乘$\eta_{\mu\gamma}$并改变自由指标得到：</p>
 <script type="math/tex; mode=display">\frac 1 {\mu_0 c} \frac{\partial F_{\nu\mu}}{\partial x^{\mu}}=0</script><p>将电磁场张量按照定义展开，得到：</p>
 <script type="math/tex; mode=display">\frac{\partial}{\partial x^{\nu}}\frac{\partial A^{\mu}}{\partial x^{\mu}}-\frac{\partial^2}{\partial x_{\mu}\partial x^{\mu}}A^{\nu}=0</script><p>选取洛伦兹规范：</p>
@@ -362,14 +362,14 @@
 <script type="math/tex; mode=display">
 \nabla\cdot\mathbf E=0
 \\ \nabla\times\mathbf B = \frac 1 {c^2}\frac{\partial \mathbf E}{\partial t}</script><p>结合上一节中的两个方程，我们得到了全部真空中的麦克斯韦方程。</p>
-<h1 id="3-与粒子耦合的电磁场"><a href="#3-与粒子耦合的电磁场" class="headerlink" title="3.与粒子耦合的电磁场"></a>3.与粒子耦合的电磁场</h1><h2 id="3-1-电流密度"><a href="#3-1-电流密度" class="headerlink" title="3.1 电流密度"></a>3.1 电流密度</h2><p>我们下一步要做的事自然是考虑$S_{pf}$和$S_f$的耦合，但是在此之前，由于电磁场的项是用拉氏量密度表示的，所以我们也需要将$S_{pf}$也用拉氏量密度表示。</p>
+<h1 id="3-与粒子耦合的电磁场"><a href="#3-与粒子耦合的电磁场" class="headerlink" title="3.与粒子耦合的电磁场"></a>3.与粒子耦合的电磁场</h1><h2 id="3-1-电流密度"><a href="#3-1-电流密度" class="headerlink" title="3.1 电流密度"></a>3.1 电流密度</h2><p>我们下一步要做的事自然是考虑$S<em>{pf}$和$S_f$的耦合，但是在此之前，由于电磁场的项是用拉氏量密度表示的，所以我们也需要将$S</em>{pf}$也用拉氏量密度表示。</p>
 <p>对多个粒子的系统：</p>
 <script type="math/tex; mode=display">
 \begin{align*}
 S_{pf} &= -\int\sum_i q_iA_{\alpha}(t,\mathbf x_i)dx^{\alpha}
 \\ &= -\int \sum_i q_iA_{\alpha}(t,\mathbf{x})\delta(\mathbf x-\mathbf x_i) dVdx^{\alpha}
 \\ &= \int \mathscr L_{pf} d\Omega dt
-\end{align*}</script><p>在进行下一步之前需要说明，这里的$S_{pf}$是场与所有粒子的耦合项的作用量，求和的每一项中$A_{\alpha}$采用的是在粒子的位置上的值。其原因是电磁场的作用是局域的，即$A_{\alpha}$只有沿着粒子的运动轨迹取值才会对运动方程有贡献。</p>
+\end{align*}</script><p>在进行下一步之前需要说明，这里的$S<em>{pf}$是场与所有粒子的耦合项的作用量，求和的每一项中$A</em>{\alpha}$采用的是在粒子的位置上的值。其原因是电磁场的作用是局域的，即$A_{\alpha}$只有沿着粒子的运动轨迹取值才会对运动方程有贡献。</p>
 <p>我们可以定义电荷密度：</p>
 <script type="math/tex; mode=display">\rho(t,\mathbf x)=\sum_i q_i\delta(\mathbf x-\mathbf x_i)</script><p>注意到$\int \rho dV=Q$，为系统中电荷总量，是洛伦兹不变量。这说明$\rho$与体积微元$dV$相乘为洛伦兹不变量，即它可以作为某个4-矢量的时间分量。再考虑$S_{pf}$：</p>
 <script type="math/tex; mode=display">

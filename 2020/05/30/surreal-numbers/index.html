@@ -335,9 +335,9 @@
 <script type="math/tex; mode=display">x\le x \tag{T3}</script><p>各定理的顺序和原书不一定相同，不过为了尊重原书（以及方便），序号还是和原书保持一致。</p>
 <p>(T3)容易由对创造日的归纳法给出，$x\le x$即是说$X_L\ngeq x$且$x\ngeq X_R$。而$x_L\ge x$蕴含$X_L\ngeq x_L$，其中必然有$x_L\ngeq x_L$，这和归纳假设矛盾。从而$X_L\ngeq x$成立，$x\ngeq X_R$也可以用相同方法证明。</p>
 <p>从而可以证明下面的引理：</p>
-<script type="math/tex; mode=display">X_L\le x,x\le X_R \tag{T2}</script><p>仍然使用归纳法，$x_L\nleq x$即是说存在一个$x_{LL}\ge x$或$x_L\ge x_R$。后者违反了规则(1)（数的定义）。而前者由归纳假设$x_{LL}\le x_L$和传递律有$x\le x_{LL}\le x_L$，则$X_L\ngeq x_L$，这和(T3)矛盾。</p>
+<script type="math/tex; mode=display">X_L\le x,x\le X_R \tag{T2}</script><p>仍然使用归纳法，$x<em>L\nleq x$即是说存在一个$x</em>{LL}\ge x$或$x<em>L\ge x_R$。后者违反了规则(1)（数的定义）。而前者由归纳假设$x</em>{LL}\le x<em>L$和传递律有$x\le x</em>{LL}\le x_L$，则$X_L\ngeq x_L$，这和(T3)矛盾。</p>
 <p>$y\nleq x$即是存在$x_L\ge y$或$x\ge y_R$。由(T2)，这即是说$y\le x_L\le x$或$y\le y_R\le x$。这即是$\le$的<strong>完全性</strong>：</p>
-<script type="math/tex; mode=display">x\nleq y \Rightarrow y\le x \tag{T4}</script><p>从而我们可以把$x\ngeq y$定义为$x<y$。显然$x<y$蕴含了$x\le y$，于是下面两条传递律也成立：</p>
+<script type="math/tex; mode=display">x\nleq y \Rightarrow y\le x \tag{T4}</script><p>从而我们可以把$x\ngeq y$定义为$x&lt;y$。显然$x&lt;y$蕴含了$x\le y$，于是下面两条传递律也成立：</p>
 <script type="math/tex; mode=display">x<y, y\le z\  \Rightarrow\ x<z \tag{T5}</script><script type="math/tex; mode=display">x\le y, y<z\  \Rightarrow\ x\le z \tag{T6}</script><p>同时$x\le y$的定义也可以改写为：</p>
 <script type="math/tex; mode=display">x\le y \qquad\mathrm{when}\qquad X_L<y, x<Y_R \tag{2'}</script><p>同时结合(T3)，(T2)可以被改写为</p>
 <script type="math/tex; mode=display">X_L<x<X_R \tag{T2'}</script><p>我们证明了$\le$满足偏序关系的自反性和传递性，但它并不严格的满足反对称性：可以存在两个数$x,y$，$x\le y,y\le x$，且$x\neq y$。<br>当$x\le y,y\le x$时，我们称$x$和$y$“<strong>相似</strong>”：$x\equiv y$。容易验证这是一个等价关系，如果把“$=$”换成“$\equiv$”，我们也可以称$\le$是数集上的全序。</p>
@@ -358,8 +358,8 @@
 \end{aligned}</script><p>由归纳假设，这六个集合分别相等。</p>
 <p>上面证明的命题都是“$=$”的，即集合的元素也完全相同。我们希望上一节中的相似在加法中也适用，即</p>
 <script type="math/tex; mode=display">x\equiv y\ \Rightarrow \ x+z\equiv y+z \tag{T12}</script><p>或者，更一般的，</p>
-<script type="math/tex; mode=display">x\le y\ \Rightarrow \ x+z\le y+z \tag{T13}</script><p>即是要证明$(X_L+z)\cup(Z_L+x)<y+z$，$x+z<(Y_R+z)\cup(Z_R+y)$。然而这里归纳法只能证明$X_L+z\le y+z$。为了排除$x_L+z\equiv y+z$的情况，我们需要(T13)的逆命题也成立：</p>
-<script type="math/tex; mode=display">x+z\le y+z\ \Rightarrow \ x\le y \tag{T14}</script><p>这里需要证明$x_L<y,x<y_R$。而这里归纳法也只能证明$x_L\le y$，这又会导致对(T13)的依赖。<br>一种方法是对$(x,y,z)$的创造日之和做归纳，证明命题“(T13)且(T14)”。不过这会在证明$Z_L+x<y+z$时出现问题：证明$Z_L+x<y+z$需要证明两部分，$Z_L+x\le Z_L+y$和$Z_L+y<z+y$，而后一部分$(z_l,z,y)$的创造日之和不一定小于$(x,y,z)$，于是归纳法失效。</p>
+<script type="math/tex; mode=display">x\le y\ \Rightarrow \ x+z\le y+z \tag{T13}</script><p>即是要证明$(X_L+z)\cup(Z_L+x)&lt;y+z$，$x+z&lt;(Y_R+z)\cup(Z_R+y)$。然而这里归纳法只能证明$X_L+z\le y+z$。为了排除$x_L+z\equiv y+z$的情况，我们需要(T13)的逆命题也成立：</p>
+<script type="math/tex; mode=display">x+z\le y+z\ \Rightarrow \ x\le y \tag{T14}</script><p>这里需要证明$x_L&lt;y,x&lt;y_R$。而这里归纳法也只能证明$x_L\le y$，这又会导致对(T13)的依赖。<br>一种方法是对$(x,y,z)$的创造日之和做归纳，证明命题“(T13)且(T14)”。不过这会在证明$Z_L+x&lt;y+z$时出现问题：证明$Z_L+x&lt;y+z$需要证明两部分，$Z_L+x\le Z_L+y$和$Z_L+y&lt;z+y$，而后一部分$(z_l,z,y)$的创造日之和不一定小于$(x,y,z)$，于是归纳法失效。</p>
 <p>为了解除定理之间的相互依赖，我们使用对称的形式：</p>
 <script type="math/tex; mode=display">\mathrm{V}(x,x',y,y'):\qquad x\le x',y\le y'\ \Rightarrow x+y\le x'+y'</script><script type="math/tex; mode=display">\mathrm{VI}(x,x',y,y'):\qquad x+y\ge x'+y',y\le y'\ \Rightarrow x\ge x'</script><p>要使用归纳法证明$\mathrm{V}(x,x’,y,y’)$，即  </p>
 <script type="math/tex; mode=display">(X_L+y)\cup(Y_L+x)\ngeq x'+y',x+y \ngeq (X'_R+y)\cup(Y'_R+x)</script><p>类似之前的讨论，我们需要</p>
@@ -376,7 +376,7 @@
 <p><strong>减法</strong>即定义为和逆元的加法：</p>
 <script type="math/tex; mode=display">x-y = x+(-y) \tag{5}</script><p>下面证明</p>
 <script type="math/tex; mode=display">x-x\equiv 0 \tag{T15}</script><p>这即是证明</p>
-<script type="math/tex; mode=display">((X_L+(-x))\cup((-X_R)+x),(X_R+(-x))\cup((-X_L)+x)) \equiv 0</script><p>即$x_L+(-x)\ngeq 0,(-x_R)+x\ngeq 0,x_R+(-x)\nleq0,-x_L+x\nleq0$。<br>利用归纳法证明，若$x_L+(-x)\ge 0$，则$(-X)_R+x_L=-X_L+x_L>0$。这与归纳假设$x_L-x_L\equiv0$矛盾，从而$x_L+(-x)<0$成立。类似的方法也可以证明另三个条件。</p>
+<script type="math/tex; mode=display">((X_L+(-x))\cup((-X_R)+x),(X_R+(-x))\cup((-X_L)+x)) \equiv 0</script><p>即$x_L+(-x)\ngeq 0,(-x_R)+x\ngeq 0,x_R+(-x)\nleq0,-x_L+x\nleq0$。<br>利用归纳法证明，若$x_L+(-x)\ge 0$，则$(-X)_R+x_L=-X_L+x_L&gt;0$。这与归纳假设$x_L-x_L\equiv0$矛盾，从而$x_L+(-x)&lt;0$成立。类似的方法也可以证明另三个条件。</p>
 <p><em>（(T15)说明减法并不是严格的加法的逆运算——因为这里是“$=$”而不是“$\equiv$”，只有在相似的意义上考虑它们才是逆运算，这也在后面的(T17)中体现。不过从下一节开始我们将只会考虑“$\equiv$”。）</em></p>
 <p>下面的定理可以由我们已经得到的定理来推出，而不必还原到基本定义了：</p>
 <script type="math/tex; mode=display">(x+y)-y \equiv x \tag{T17}</script><p>证明：$(x+y)-y = x+(y-y) \equiv x+0 = x$。</p>
@@ -389,35 +389,35 @@
     \\ \mathrm{then}\qquad &x\equiv (X_L\cup Y_L, X_R\cup Y_R)
 \end{aligned}
 \tag{T7}</script><p>（这是符合直觉的，由于数集上有线性序，可以认为数$x$在$X_L$和$X_R$的中间，而在$x$的两边增加一些元素也不会影响$x$的位置）</p>
-<p>令$z=(X_L\cup Y_L, X_R\cup Y_R)$。由(T2’)显然有$Z_L=X_L\cup Y_L< x$，$z<z_R\Rightarrow z<X_R$，即$z\le x$。$z\ge x$也易证。从而$x\equiv z$。</p>
+<p>令$z=(X_L\cup Y_L, X_R\cup Y_R)$。由(T2’)显然有$Z_L=X_L\cup Y_L&lt; x$，$z&lt;z_R\Rightarrow z&lt;X_R$，即$z\le x$。$z\ge x$也易证。从而$x\equiv z$。</p>
 <p>进一步的，我们有一个大胆的猜测：若在第$n$日时彼此不相似的数为</p>
 <script type="math/tex; mode=display">x_1 < x_2 < \cdots < x_m</script><p>则第$n+1$日创造出的新数只有：</p>
-<script type="math/tex; mode=display">\left(\emptyset,\left\{x_{1}\right\}\right),\left(\left\{x_{1}\right\},\left\{x_{2}\right\}\right), \ldots,\left(\left\{x_{m-1}\right\},\left\{x_{m}\right\}\right),\left(\left\{x_{m}\right\}, \emptyset\right)</script><p>要证明这一猜想，由(T7)，只需要考察$x_1\cdots x_m$中两个数构造出的数$(\left\{x_{i-1}\right\},\left\{x_{j+1}\right\})$，证明其相似于上面的某一数。</p>
+<script type="math/tex; mode=display">\left(\emptyset,\left\{x_{1}\right\}\right),\left(\left\{x_{1}\right\},\left\{x_{2}\right\}\right), \ldots,\left(\left\{x_{m-1}\right\},\left\{x_{m}\right\}\right),\left(\left\{x_{m}\right\}, \emptyset\right)</script><p>要证明这一猜想，由(T7)，只需要考察$x<em>1\cdots x_m$中两个数构造出的数$(\left{x</em>{i-1}\right},\left{x_{j+1}\right})$，证明其相似于上面的某一数。</p>
 <p>为此，我们可以证明下面这个更一般性的定理：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
     \quad &若x是满足Y_L<x<Y_R的首个创造出来的数，
     \\ &则x\equiv y。
 \end{aligned}
-\tag{T8}</script><p>由于$x_L$和$x_R$比$x$更早创造，从而$Y_L<x_L<Y_R$和$Y_L<x_R<Y_R$不成立，且$x_L<x<x_R$，从而存在$y_L,y_R$，使$x_L<y_L<y<y_R<x_R$。故$x$满足(T7)的条件，从而$x\equiv y$。 </p>
-<p>从而$(\left\{x_{i-1}\right\},\left\{x_{j+1}\right\})$相似于$x_i\cdots x_j$中最先被创造的数，不是一个新数。</p>
+\tag{T8}</script><p>由于$x_L$和$x_R$比$x$更早创造，从而$Y_L&lt;x_L&lt;Y_R$和$Y_L&lt;x_R&lt;Y_R$不成立，且$x_L&lt;x&lt;x_R$，从而存在$y_L,y_R$，使$x_L&lt;y_L&lt;y&lt;y_R&lt;x_R$。故$x$满足(T7)的条件，从而$x\equiv y$。 </p>
+<p>从而$(\left{x<em>{i-1}\right},\left{x</em>{j+1}\right})$相似于$x_i\cdots x_j$中最先被创造的数，不是一个新数。</p>
 <h3 id="有限天内可以创造的数"><a href="#有限天内可以创造的数" class="headerlink" title="有限天内可以创造的数"></a>有限天内可以创造的数</h3><p>我们有第一天构造的数</p>
 <script type="math/tex; mode=display">0=(\emptyset,\emptyset)</script><p>以及第二天</p>
 <script type="math/tex; mode=display">-1=(\emptyset,\{0\}),\qquad 1=(\{0\},\emptyset)</script><p>（容易验证$-1$是$1$的加法逆元，我们采用的记号是没问题的）</p>
 <p>那么第三天创造的数就有：</p>
 <script type="math/tex; mode=display">(\emptyset,\{-1\}),(\{-1\},\{0\}),(\{0\},\{1\}),(\{1\},\emptyset)</script><p>试着做一下加法：</p>
-<script type="math/tex; mode=display">1+1=(\{0+1\},\emptyset)=(\{1\},\emptyset)</script><p>我们把$1+1$定义为$2$，即$2\equiv (\{1\},\emptyset)$。<br>而对$b=(\{0\},\{1\})$，</p>
-<script type="math/tex; mode=display">b+b=(\{0+b\},\{1+b\})=(\{b\},\{1+b\})</script><p>由于$0<b<1$，$1$就是$b$和$1+b$之间最早创造出来的数，由(T8)，$b+b\equiv 1$，从而可以称$b\equiv\frac{1}{2}$。<br><img src="number-creation.png" alt></p>
-<p>我们看到数的构造似乎有这样的规律，对在第$n$天已经创造出来的数中相邻的两个数$x_i,x_{i+1}$，由它们创造的数$y=(\{x_i\},\{x_{i+1}\})$满足$y+y=x_i+x_{i+1}$。因此我们假设在第$n$天所有被创造出来的数为：</p>
+<script type="math/tex; mode=display">1+1=(\{0+1\},\emptyset)=(\{1\},\emptyset)</script><p>我们把$1+1$定义为$2$，即$2\equiv ({1},\emptyset)$。<br>而对$b=({0},{1})$，</p>
+<script type="math/tex; mode=display">b+b=(\{0+b\},\{1+b\})=(\{b\},\{1+b\})</script><p>由于$0&lt;b&lt;1$，$1$就是$b$和$1+b$之间最早创造出来的数，由(T8)，$b+b\equiv 1$，从而可以称$b\equiv\frac{1}{2}$。<br><img src="number-creation.png" alt=""></p>
+<p>我们看到数的构造似乎有这样的规律，对在第$n$天已经创造出来的数中相邻的两个数$x<em>i,x</em>{i+1}$，由它们创造的数$y=({x<em>i},{x</em>{i+1}})$满足$y+y=x<em>i+x</em>{i+1}$。因此我们假设在第$n$天所有被创造出来的数为：</p>
 <script type="math/tex; mode=display">0,\pm\frac{1}{2^{n}},\cdots,\pm 1,\pm\left(1+\frac{1}{2^{n-1}}\right),\cdots,n+1</script><p>（为了方便，这里我们称$1$和$-1$被创造出来的那天为第$0$天。）<br>（即$0-1$之间是$\frac{i}{2^n}$，$1-2$之间是$1+\frac{i}{2^{n-1}}$······当然我们还没定义乘法和乘方，这里的$\frac{k}{2^n}$可以递归地定义为满足$\frac{k}{2^n}+\frac{k}{2^n}=\frac{k}{2^{n-1}}$的数，其唯一性容易验证，而$\frac{k}{2^0}=k$。）</p>
 <p>这一假设等价于在第$n$天创造出来的数</p>
 <script type="math/tex; mode=display">n-i+\frac{k}{2^i} \equiv \left(\left\{n-i+\frac{(k-1)/2}{2^{i-1}}\right\}, \left\{n-i+\frac{(k+1)/2}{2^{i-1}}\right\}\right)</script><p>（$k$是奇数，否则会更早被创造出来）</p>
 <p>用归纳法证明这一假设，分两步进行。首先考虑</p>
 <script type="math/tex; mode=display">1+x = ((1+X_L)\cup\{x\}, 1+X_R)</script><p>根据归纳假设，对已经得到的所有数$x$其左集中都可以找到$x_L$使$1+x_L\ge x$，从而上式可以化简为</p>
 <script type="math/tex; mode=display">1+x = (1+X_L, 1+X_R)</script><p>于是$n+1$日创造的所有大于1的数就是第$n$日的所有数加1，即这一假设大于1的部分得到证明。</p>
-<p>第二步我们考虑$0-1$内相邻的两数$\frac{k}{2^n}$和$\frac{k+1}{2^n}$，由它们构造的新数$y=(\{\frac{k}{2^n}\},\{\frac{k+1}{2^n}\})$，有</p>
+<p>第二步我们考虑$0-1$内相邻的两数$\frac{k}{2^n}$和$\frac{k+1}{2^n}$，由它们构造的新数$y=({\frac{k}{2^n}},{\frac{k+1}{2^n}})$，有</p>
 <script type="math/tex; mode=display">y+y = \left(\left\{ \frac{k}{2^n}+y \right\}, \left\{ \frac{k+1}{2^n}+y \right\}\right)</script><p>从而</p>
-<script type="math/tex; mode=display">(y+y)_L< \frac{2k+1}{2^n} < (y+y)_R</script><p>若$2k+1\le 2^n$，则由归纳假设$\frac{2k+1}{2^n}$在第$n$日已被创造出来，且是唯一满足上式的数；若$2k+1>2^n$，则前面一段已经证明了它会在第$n+1$日创造出来，且也是唯一满足上式的数。从而由(T8)，</p>
+<script type="math/tex; mode=display">(y+y)_L< \frac{2k+1}{2^n} < (y+y)_R</script><p>若$2k+1\le 2^n$，则由归纳假设$\frac{2k+1}{2^n}$在第$n$日已被创造出来，且是唯一满足上式的数；若$2k+1&gt;2^n$，则前面一段已经证明了它会在第$n+1$日创造出来，且也是唯一满足上式的数。从而由(T8)，</p>
 <script type="math/tex; mode=display">y+y \equiv \frac{2k+1}{2^n}</script><p>即</p>
 <script type="math/tex; mode=display">y\equiv \frac{2k+1}{2^{n+1}}</script><p>我们的假设在$0-1$的部分也得到证明。</p>
 <h3 id="aleph-天创造的数"><a href="#aleph-天创造的数" class="headerlink" title="$\aleph$天创造的数"></a>$\aleph$天创造的数</h3><p>我们已经得到有限日内所能创造的数的规律，它们所代表的实数似乎都可以表示成整数除以$2^n$。或者说，它们用二进制表达都是有限位的。而形如</p>
@@ -436,7 +436,7 @@
 <li>在$\alef^2$天，我们将得到<script type="math/tex; mode=display">\omega^2 = (\{\omega,2\omega,\cdots\},\emptyset)</script></li>
 <li>以及<script type="math/tex; mode=display">\omega^\omega = (\{\omega,\omega^2,\cdots\},\emptyset)</script></li>
 </ul>
-<p>只要不停下来，数就会不断延伸<br><img src="dont-stop.png" alt></p>
+<p>只要不停下来，数就会不断延伸<br><img src="dont-stop.png" alt=""></p>
 <p align="center">
 だからよ、止まるんじゃねぞ（指造数）
 </p>
@@ -445,7 +445,7 @@
 <p>不过我们可以这样考虑归纳法，我们使用归纳法时事实上是在说，若命题对$x$不成立，则存在$x’\in X_L\cup X_R$，命题对$x’$也不成立。这将会形成一个数列，后一个数属于前一个数的左集或右集。对有穷的数，这将会终结于空集；但对无穷的数，这将会形成一个无穷祖先数列。而事实上，对我们的创造每一个数，它都不可能是无穷祖先数列的起始元素，因为它的左集和右集中不存在违反待证命题的元素。</p>
 <p>不过这番论证似乎还是在用归纳法证明归纳法，我们似乎需要将其视为某种公理来保证归纳法的合理性，同时也是形式地表达在定义新数$x=(X_L,X_R)$时$X_L$和$X_R$的元素是“已经存在的数”的含义。</p>
 <p>（这段完全是复读原书）</p>
-<p><img src="AB.png" alt></p>
+<p><img src="AB.png" alt=""></p>
 <p align="center">
 （AB天下第一！）
 </p>

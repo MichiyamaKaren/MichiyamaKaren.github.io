@@ -402,15 +402,15 @@
 <script type="math/tex; mode=display">\gamma_a = \frac{\Phi+1}{\Phi}</script><p>为绝热指数。</p>
 <p>对非相对论气体，$\Phi=3/2$，$\gamma_a=5/3$。<br>对相对论性气体，$\Phi=3$，$\gamma_a=4/3$。<br>而对一般物态（气体和辐射混合，或中等速度的气体），$\gamma_a$介于二者之间。</p>
 <h3 id="部分电离"><a href="#部分电离" class="headerlink" title="部分电离"></a>部分电离</h3><p>定义电离度</p>
-<script type="math/tex; mode=display">x = \frac{n_+}{n_0+n_+}</script><p>其中$n_0$为中性氢的数密度，$n_+$为氢离子（电子）的数密度。</p>
+<script type="math/tex; mode=display">x = \frac{n_+}{n_0+n_+}</script><p>其中$n<em>0$为中性氢的数密度，$n</em>+$为氢离子（电子）的数密度。</p>
 <p>对混合理想气体，物态方程为</p>
 <script type="math/tex; mode=display">P=nkT</script><p>粒子的总数密度为</p>
 <script type="math/tex; mode=display">n=n_0+n_e+n_+ = (x+1)(n_0+n_+)</script><p>从而物态方程成为</p>
 <script type="math/tex; mode=display">P=(x+1)(n_0+n_+)\mathcal{R}m_HT = (x+1)\mathcal{R}\rho T</script><p>在温度$T$下，离子电离和复合过程达到动态平衡，满足<strong>Saha方程</strong>：</p>
 <script type="math/tex; mode=display">\frac{n_+n_e}{n_0} = \frac{g}{h^3}(2\pi m_ekT)^{3/2} e^{-\chi/kT}</script><p>其中$\chi$为电子的电离势能。</p>
 <p>根据电离度的定义：</p>
-<script type="math/tex; mode=display">\frac{n_+n_e}{n_0} = \frac{x^2(n_0+n_+)^2}{(n_0+n_+)-x(n_0+n_+)} = \frac{x^2}{1-x}(n_0+n_+)</script><p>对Saha方程两边乘因子$1/((1+x)(n_0+n_+))=1/n$，成为：</p>
-<script type="math/tex; mode=display">\frac{x^2}{1-x^2} = \frac{g}{h^3}\frac{(2\pi m_e)^{3/2}(kT)^{5/2}}{P} e^{-\chi/kT}</script><p>单位体积内$n_+$个氢原子被电离，释放电离能$\chi n_+$都转化为气体内能。从而电离对气体比内能的贡献为</p>
+<script type="math/tex; mode=display">\frac{n_+n_e}{n_0} = \frac{x^2(n_0+n_+)^2}{(n_0+n_+)-x(n_0+n_+)} = \frac{x^2}{1-x}(n_0+n_+)</script><p>对Saha方程两边乘因子$1/((1+x)(n<em>0+n</em>+))=1/n$，成为：</p>
+<script type="math/tex; mode=display">\frac{x^2}{1-x^2} = \frac{g}{h^3}\frac{(2\pi m_e)^{3/2}(kT)^{5/2}}{P} e^{-\chi/kT}</script><p>单位体积内$n<em>+$个氢原子被电离，释放电离能$\chi n</em>+$都转化为气体内能。从而电离对气体比内能的贡献为</p>
 <script type="math/tex; mode=display">\frac{\chi n_+}{\rho} = \frac{\chi n_+}{(n_0+n_+)m_H} = \frac{\chi}{m_H}x</script><p>从而部分电离气体的比内能为</p>
 <script type="math/tex; mode=display">u = \frac{3}{2}\frac{P}{\rho} + \frac{\chi}{m_H}x</script><p>对$u$全微分，绝热过程</p>
 <script type="math/tex; mode=display">
@@ -437,7 +437,7 @@
 </ul>
 <h2 id="辐射转移"><a href="#辐射转移" class="headerlink" title="辐射转移"></a>辐射转移</h2><h3 id="辐射的吸收"><a href="#辐射的吸收" class="headerlink" title="辐射的吸收"></a>辐射的吸收</h3><p>定义辐射流量$H$为单位时间通过单位横截面的能量。</p>
 <p>辐射通过厚$\mathrm{d}r$的介质薄层，流量减少$-\mathrm{d}H$。对密度$\rho$的介质，有经验公式</p>
-<script type="math/tex; mode=display">\mathrm{d}H = -\kappa H\rho\mathrm{d}r = -k_\nu H \mathrm{d}r</script><p>常数$\kappa$称为<strong>不透明度系数</strong>。称$k_\nu=\kappa\rho$为介质的<strong>吸收系数</strong>（依赖辐射的频率）。<br>$k_\nu$为具长度-1次方量纲，统计物理给出$k_\nu^{-1}$的物理意义即为光子的平均自由程。</p>
+<script type="math/tex; mode=display">\mathrm{d}H = -\kappa H\rho\mathrm{d}r = -k_\nu H \mathrm{d}r</script><p>常数$\kappa$称为<strong>不透明度系数</strong>。称$k<em>\nu=\kappa\rho$为介质的<strong>吸收系数</strong>（依赖辐射的频率）。<br>$k</em>\nu$为具长度-1次方量纲，统计物理给出$k_\nu^{-1}$的物理意义即为光子的平均自由程。</p>
 <p>定义$\mathrm{d}\tau=k_\nu\mathrm{d}r$，称为介质的<strong>光深</strong>。<br>在恒星内部，对辐射不透明，$\tau\sim\infty$；光球层和以外，对辐射透明，$\tau\sim 1$。</p>
 <p>对厚$R$的均匀介质，积分有</p>
 <script type="math/tex; mode=display">H = H_0 e^{-\kappa\rho R}</script><p>出射流量按指数衰减。</p>
