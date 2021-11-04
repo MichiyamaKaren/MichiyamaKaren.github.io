@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="恒星物理笔记（六）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="恒星的稳定性">
+<meta property="og:url" content="https://michiyamakaren.github.io/2020/09/08/stellar-physics-06-stability/index.html">
+<meta property="og:site_name" content="道山神連的博客">
+<meta property="og:description" content="恒星物理笔记（六）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://michiyamakaren.github.io/2020/09/08/stellar-physics-06-stability/06-1-convection.png">
+<meta property="og:image" content="https://michiyamakaren.github.io/2020/09/08/stellar-physics-06-stability/06-2-density-pressure.png">
+<meta property="article:published_time" content="2020-09-08T13:18:50.000Z">
+<meta property="article:modified_time" content="2021-04-18T04:39:07.698Z">
+<meta property="article:author" content="道山神連">
+<meta property="article:tag" content="天文">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://michiyamakaren.github.io/2020/09/08/stellar-physics-06-stability/06-1-convection.png">
+
+<link rel="canonical" href="https://michiyamakaren.github.io/2020/09/08/stellar-physics-06-stability/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+<!-- from: https://www.cnblogs.com/wstong/p/12874732.html -->
+<!-- Live2DCubismCore script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/live2dcubismcore.js"></script>
+<!-- Build script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/bundle.js"></script>
+<canvas id="live2d" width="400" height="600" class="live2d" style="position: fixed; opacity: 0.8; left: -70px; bottom: -250px; z-index: 99999; pointer-events: none;"></canvas>
+
+<script type="text/javascript">
+    var resourcesPath = '/live2d_models/'; // 指定资源文件（模型）保存的路径
+    var backImageName = ''; // 指定背景图片
+    var modelDir = ['AijoKaren']; // 指定需要加载的模型
+    initDefine(resourcesPath, backImageName, modelDir); // 初始化模型
+</script>
+  <title>恒星的稳定性 | 道山神連的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">道山神連的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook" rel="section"><i class="fa fa-fw fa-comments"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies" rel="section"><i class="fa fa-fw fa-film"></i>电影</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://michiyamakaren.github.io/2020/09/08/stellar-physics-06-stability/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/kirin.gif">
+      <meta itemprop="name" content="道山神連">
+      <meta itemprop="description" content="宇宙的最不可理解之处在于它是可以被理解的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="道山神連的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          恒星的稳定性
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-08 21:18:50" itemprop="dateCreated datePublished" datetime="2020-09-08T21:18:50+08:00">2020-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-18 12:39:07" itemprop="dateModified" datetime="2021-04-18T12:39:07+08:00">2021-04-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/%E6%81%92%E6%98%9F%E7%89%A9%E7%90%86%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">恒星物理笔记</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/09/08/stellar-physics-06-stability/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/08/stellar-physics-06-stability/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">恒星物理笔记（六）</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body></body></html><html><head></head><body><p>平衡态按二阶导数分为稳定平衡、不稳定平衡、随遇平衡</p>
+<p>恒星处于热平衡、流体静力学平衡。稳定平衡的恒星受热扰动、动力学扰动，应该可以回到平衡态。</p>
+<h2 id="长期热稳定性"><a href="#长期热稳定性" class="headerlink" title="长期热稳定性"></a>长期热稳定性</h2><p>2.4节（维里定理）里推出过</p>
+<script type="math/tex; mode=display">3\int_{0}^{M} \frac{P}{\rho} \mathrm{d}m = -\Omega</script><p>而</p>
+<script type="math/tex; mode=display">\frac{P}{\rho} = \frac{P_\mathrm{gas}}{\rho} + \frac{P_\mathrm{rad}}{\rho} = \frac{2}{3}u_\mathrm{gas} + \frac{1}{3}u_\mathrm{rad}</script><p>从而</p>
+<script type="math/tex; mode=display">U_\mathrm{gas} = -\frac{1}{2}(\Omega + U_\mathrm{rad})</script><p>$E=U<em>\mathrm{gas}+U</em>\mathrm{rad}+\Omega=-U<em>\mathrm{gas}&lt;0$，系统处于束缚态。<br>定义等效引力势能$\Omega</em>\mathrm{eff}=\Omega+U<em>\mathrm{rad}$，能保留维里定理的形式$2U</em>\mathrm{gas}+\Omega<em>\mathrm{eff}=0$。<br>恒星收缩时，$|\Omega</em>\mathrm{eff}|$增大，即$U_\mathrm{gas}$增大，恒星温度升高（释放的引力势能用来加热恒星气体）。</p>
+<p>恒星总能的变化率</p>
+<script type="math/tex; mode=display">\dot{E} = L_\mathrm{nuc} - L</script><p>在平衡态上，$L<em>\mathrm{nuc}=L,E=\mathrm{const}$。<br>设系统受扰动略微偏离平衡态，使$L</em>\mathrm{nuc}&gt;L$，此时$\dot{E}&gt;0$，$|E|$减小，从而$|\Omega_\mathrm{eff}|$减小，恒星膨胀，温度降低，导致核产能率降低，回到原平衡态。从而即使恒星有很多短时标的不稳定性，其在长时标上还是稳定的。</p>
+<h2 id="热不稳定性"><a href="#热不稳定性" class="headerlink" title="热不稳定性"></a>热不稳定性</h2><h3 id="简并气体的不稳定性"><a href="#简并气体的不稳定性" class="headerlink" title="简并气体的不稳定性"></a>简并气体的不稳定性</h3><p>多方球模型中</p>
+<script type="math/tex; mode=display">P_c = (4\pi)^{1/3}B_n GM^{2/3} \rho_c^{4/3} = C_1\rho_c^{4/3}</script><p>($C_1$为常数)。求对数并取全微分，</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P_c}{P_c} = \frac{4}{3}\frac{\mathrm{d}\rho_c}{\rho_c} \tag{2.1}</script><p>一般地,气体状态方程$P = C_3\rho^aT^b$，有：</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P_c}{P_c} = a\frac{\mathrm{d}\rho_c}{\rho_c} + b\frac{\mathrm{d}T_c}{T_c} \tag{2.2}</script><p>对比(2.1)和(2.2)，有</p>
+<script type="math/tex; mode=display">\left(\frac{4}{3}-a\right) \frac{\mathrm{d}\rho_c}{\rho_c} = b\frac{\mathrm{d}T_c}{T_c} \tag{2.3}</script><p>分析下面两种情况：</p>
+<ul>
+<li>若核区为理想气体，<script type="math/tex; mode=display">P = \frac{\mathcal{R}}{\mu}\rho T</script>即$a=b=1$，(2.3)给出<script type="math/tex; mode=display">\frac{1}{3} \frac{\mathrm{d}\rho_c}{\rho_c} = \frac{\mathrm{d}T_c}{T_c}</script>若引力不稳定性导致核区稍微收缩，$\rho_c$增大，则$T_c$增大，从而$q$迅速增大，产生大量热量，使辐射压增大，又导致核区膨胀，从而可以维持稳定。</li>
+<li>若核区为简并电子气，非相对论性的和相对论性的物态方程分别为<script type="math/tex; mode=display">P_\mathrm{e,deg} = k_1\rho^{5/3}T^b</script><script type="math/tex; mode=display">P_\mathrm{e,r,deg} = k_2\rho^{4/3}T^b</script>其中$0 &lt; b \ll 1$。<br>这两种物态方程都有$a \ge 4/3$，即密度减小时温度增大。当核区等离子体不稳定性使$L_\mathrm{nuc} &gt; L$时，辐射压增大导致核区膨胀，$\rho_c$减小，而$T_c$将增大，使$q$进一步增大，核区将会持续膨胀，偏离平衡态，这一过程称为<strong>runaway</strong>。<br>若膨胀到一定程度使密度减小到解除简并态，核区重新成为稳定的理想气体，这一特例下runaway可以被避免。</li>
+</ul>
+<h3 id="薄壳不稳定性"><a href="#薄壳不稳定性" class="headerlink" title="薄壳不稳定性"></a>薄壳不稳定性</h3><p>考虑半径$r_0\sim r$处，厚$\ell=r-r_0$，质量$\Delta m$的薄壳，$\ell\ll R$，认为这一薄壳中温度、密度均匀，近似处于热平衡态。</p>
+<p>由流体静力学平衡条件，薄壳中的总压力即为$r$内的物质对$r\sim R$的质量为$\Delta \tilde{m}$的壳层的自引力，而压强是各向同性的，从而</p>
+<script type="math/tex; mode=display">P(r) \approx \frac{1}{4\pi r^2}\frac{Gm\Delta\tilde{m}}{r^2} \sim \frac{1}{r^4}</script><p>即</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P}{P} = -4\frac{\mathrm{d}r}{r}</script><p>质量$\Delta m=\rho(r)(4\pi r^2\ell)$保持不变时，有$\rho\sim\ell^{-1}$，即</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}\rho}{\rho} = -\frac{\mathrm{d}\ell}{\ell} = -\frac{\mathrm{d}r}{\ell} = -\frac{\mathrm{d}r}{r}\frac{r}{\ell}</script><p>即</p>
+<script type="math/tex; mode=display">-\frac{\mathrm{d}r}{r} = \frac{\ell}{r}\frac{\mathrm{d}\rho}{\rho}</script><p>从而</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P}{P} = 4\frac{\ell}{r}\frac{\mathrm{d}\rho}{\rho}</script><p>联立(2.2)式，</p>
+<script type="math/tex; mode=display">\left(4\frac{\ell}{r}-a\right) \frac{\mathrm{d}\rho_c}{\rho_c} = b\frac{\mathrm{d}T_c}{T_c}</script><p>同简并气体不稳定性的分析，壳层热扰动下能维持平衡的条件是$4\frac{\ell}{r}&gt;a$。远离核区的气体近似为理想气体，稳定条件即$4\frac{\ell}{r}&gt;1$。而薄壳$\ell\ll r$，因此薄壳在热扰动下是不稳定的。</p>
+<p>白矮星表面上会残留没燃烧的氢，若经历热扰动，表面亮度会急剧增加，形成核闪耀，使本不可见的白矮星变得可见，观测上称为新星。</p>
+<p>最后需要说明的是，上面的讨论中没有考虑温度的变化也会导致光度$L$的变化。如果恒星壳层的膨胀导致温度升高，但同时光度也升高使$L_\mathrm{nuc} &lt; L$，此时壳层也会失去能量而收缩，使其不至于runaway。不过事实上$L\sim T^4$，而相比之下$q$对温度要敏感的多，因此忽略$L$的变化也是合理的。</p>
+<h2 id="动力学稳定性"><a href="#动力学稳定性" class="headerlink" title="动力学稳定性"></a>动力学稳定性</h2><p>恒星$r$处压强产生各向同性扰动$\delta P$，收缩至半径$r’$。若收缩后还能向外膨胀恢复到原来的位置，则认为系统是动力学稳定的。</p>
+<p>令</p>
+<script type="math/tex; mode=display">r' = r(1-\epsilon)</script><p>$0&lt;\epsilon\ll 1$。<br>由质量连续性方程，</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \rho'(r') &= \frac{1}{4\pi r'^2}\frac{\mathrm{d}m}{\mathrm{d}r'} = \frac{1}{4\pi r^2(1-\epsilon)^2}\frac{\mathrm{d}m}{\mathrm{d}r}\frac{\mathrm{d}r}{\mathrm{d}r'}
+    \\&= \frac{\rho(r)}{(1-\epsilon)^3}
+    \\&\approx \rho(r)(1+3\epsilon)
+\end{aligned}</script><p>设压缩过程为绝热的（忽略辐射冷却，也忽略辐射压），绝热指数$\gamma_a$。气体的物态方程为$PV^{\gamma_a}=\mathrm{const}$，即$P\rho^{-\gamma_a}=\mathrm{const}$。从而有</p>
+<script type="math/tex; mode=display">P' = P(1+3\epsilon)^{\gamma_a} \approx P(1+3\gamma_a\epsilon)</script><p>另一方面，$r’$处自引力产生的压强为</p>
+<script type="math/tex; mode=display">P_h' = \int_m^M \frac{Gm}{4\pi r^4(1-\epsilon)^4} \mathrm{d}m = (1-\epsilon)^{-4}P \approx (1+4\epsilon)P</script><p>若要使壳层能膨胀会原来的状态，应有$P’&gt;P_h’$，即</p>
+<script type="math/tex; mode=display">\gamma_a > \frac{4}{3}</script><p>这一条件需要在恒星中任何位置都成立，称为<strong>动力学稳定（强）判据</strong>。</p>
+<p>强判据成立意味着系统是动力学稳定的，但只有部分区域的$\gamma_a&lt;4/3$是否就意味着动力学不稳定还需要进一步考虑。整体的动力学稳定性取决于<strong>动力学积分</strong>：</p>
+<script type="math/tex; mode=display">I_\mathrm{dyn} = \int \left(\gamma_a-\frac{4}{3}\right)\frac{P}{\rho}\mathrm{d}m</script><p>$I_\mathrm{dyn}&lt;0$时系统是动力学不稳定的。</p>
+<ul>
+<li>若$\gamma<em>a&lt;4/3$在核区较大范围内成立，由于中心部分$P/\rho$较大，$I</em>\mathrm{dyn}&lt;0$，系统动力学不稳定。</li>
+<li>若$\gamma<em>a&lt;4/3$仅在表面附近的壳层成立，这一区域对应$P/\rho$很小，因此积分由内部区域主导，$I</em>\mathrm{dyn}&gt;0$，系统是动力学稳定的。</li>
+</ul>
+<h2 id="动力学不稳定性的例子"><a href="#动力学不稳定性的例子" class="headerlink" title="动力学不稳定性的例子"></a>动力学不稳定性的例子</h2><ol>
+<li>相对论性简并电子气<br>$n=3,\gamma<em>a=4/3$。系统为白矮星，$M\rightarrow M</em>\mathrm{ch}$。<br>若吸附质量$\delta M$使$M+\delta M&gt;M_\mathrm{ch}$，此时简并压不足以抵抗引力，星体将进行引力塌缩，白矮星结构破坏，因此是动力学不稳定的。</li>
+<li>辐射压主导<br>非相对论性气体$n=3/2,\gamma_a=5/3$<br>相对论性气体和辐射$n=3,\gamma=4/3$<br>因此辐射主导的恒星是动力学不稳定的。</li>
+</ol>
+<p>另一方面，对辐射，$u_\mathrm{rad}=3P/\rho$，从而</p>
+<script type="math/tex; mode=display">-\Omega = 3\int_{0}^{M} \frac{P}{\rho} \mathrm{d}m = 3\int_{0}^{M} \frac{1}{3}u_\mathrm{rad} \mathrm{d}m = U_\mathrm{rad}</script><p>即辐射压主导的恒星的$E=U+\Omega\approx 0$，即系统是非束缚的。也能说明系统是动力学不稳定的。</p>
+<h3 id="部分电离"><a href="#部分电离" class="headerlink" title="部分电离"></a>部分电离</h3><p>考虑部分电离的气体，满足Saha方程</p>
+<script type="math/tex; mode=display">\frac{x^2}{1-x^2} = \frac{g}{h^3}\frac{(2\pi m_ekT)^{3/2}(kT)^{5/2}}{P} e^{-\chi/kT} \propto P^{-1}</script><p>物态方程为理想气体物态方程。</p>
+<p>若气体受动力学扰动被压缩，分为两个过程：<br>第一步$(V,P,N)\rightarrow(V’,P’,N)$。令粒子数不变，体积减小导致压强增大，从而$x$减小（复合增强）。<br>第二步$(V’,P’,N)\rightarrow(V’,P’’,N’)$，令体积不变，上一步复合增强导致$N’ &lt; N$，从而$P’’ &lt; P’$。认为压缩过程满足绝热物态方程，$P=k_a\rho^{\gamma_a}$，复合过程不改变密度，则有$\gamma_a’’ &lt; \gamma_a’$。有可能$\gamma_a’’ &lt; 4/3$，导致动力学不稳定。</p>
+<p>3.6节中给出过：</p>
+<script type="math/tex; mode=display">\gamma_{\mathrm{a}}(x)=\frac{5+\left(\frac{5}{2}+\frac{\chi}{kT}\right)^{2} x(1-x)}{3+\left[\frac{3}{2}+\left(\frac{3}{2}+\frac{\chi}{k T}\right)^{2}\right] x(1-x)}</script><ul>
+<li>对完全中性和完全电离气体，都有$\gamma_a=5/3$</li>
+<li>对部分电离气体：  <ul>
+<li>取$kT\approx \chi=13.6\mathrm{eV}$，当$18\% &lt; x &lt; 82\%$时$\gamma_a &lt; 4/3$</li>
+<li>取$kT\approx \chi/10$（低温），当$5\% &lt; x &lt; 95\%$时$\gamma_a &lt; 4/3$</li>
+</ul>
+</li>
+</ul>
+<p>讨论：</p>
+<ul>
+<li>在恒星内核，温度足够高，$\mathrm{H},\mathrm{He}$几乎完全电离，$x=1$。从而核区是动力学稳定的。</li>
+<li>在外围壳层，温度较低，$x&lt;1$，一般$\gamma_a&lt;4/3$，但$P/\rho$也较小，从而整个恒星的动力学积分$I_\mathrm{dyn}&gt;0$，整个系统仍是动力学稳定的。</li>
+<li>极高温的内核发生光致解离效应，对恒星稳定性的影响不可忽略</li>
+</ul>
+<h2 id="对流不稳定性"><a href="#对流不稳定性" class="headerlink" title="对流不稳定性"></a>对流不稳定性</h2><p>对流的物理图像：恒星内部壳层温度较高，密度小；外部温度较低，密度大；导致气体在恒星自引力场中循环流动，形成对流。</p>
+<p>对流的效果：</p>
+<ul>
+<li>高效率传热，辐射传热的重要补充</li>
+<li>将内外物质搅拌均匀，使恒星中各元素化学丰度近似形成均匀分布</li>
+</ul>
+<p>流体静力学平衡有</p>
+<script type="math/tex; mode=display">\kappa F < 4\pi cGm</script><p>而</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d} T}{\mathrm{d} m}=-\frac{3}{4 a c} \frac{\kappa}{T^{3}} \frac{F}{\left(4 \pi r^{2}\right)^{2}}</script><p>若$\kappa F$足够大，即$\left|\frac{\mathrm{d} T}{\mathrm{d} m}\right|$足够大，可以形成强对流，此时可能有$\kappa F&gt;4\pi cGm$，流体静力学平衡被打破。</p>
+<h3 id="对流产生的条件"><a href="#对流产生的条件" class="headerlink" title="对流产生的条件"></a>对流产生的条件</h3><p><img src="06-1-convection.png" alt=""></p>
+<p>如图，假如温度、压强为$(\rho<em>1,P_1)$的气体团块上浮一小段距离到密度、压强为$(\rho_2,P_2)$的壳层处，由于$P_1 &gt; P_2$，这一团块将会膨胀直到和环境压强平衡，即$P</em>{*}=P<em>2$。考虑恒星中的动力学时标远小于热力学时标，这一膨胀过程可以近似看为绝热的。绝热膨胀导致密度减小，如果密度比当前壳层的密度$\rho_2$大则下沉，此时是<strong>对流稳定</strong>的；否则气体团块将继续上浮，直到上升到$r</em>\mathrm{out}$处，绝热膨胀后的密度大于环境密度。这种情况下是<strong>对流不稳定</strong>的，$r<em>\mathrm{out}$即为对流区的外边界。一般$r</em>\mathrm{out} \ll R$。</p>
+<p><img src="06-2-density-pressure.png" alt=""></p>
+<p>如图，若环境为S构型，绝热膨胀的$\rho<em>{*}&lt;\rho_2$，从而质元上浮，对流区将不断发展，系统对流不稳定；若环境为S’构型，绝热膨胀的$ \rho</em>{*}&lt;\rho_2’$，质元下沉，系统对流稳定。</p>
+<p>对流稳定的条件可以写为：</p>
+<script type="math/tex; mode=display">\left(\frac{\mathrm{d}P}{\mathrm{d}\rho}\right)_\mathrm{star} < \left(\frac{\mathrm{d}P}{\mathrm{d}\rho}\right)_\mathrm{adiabatic}</script><p>由多方过程的物态方程</p>
+<script type="math/tex; mode=display">P = k\rho^{\gamma}</script><p>有</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P}{\mathrm{d}\rho} = \gamma \frac{P}{\rho}</script><p>对绝热过程$\gamma=\gamma<em>a$。达到平衡后$P$相等，$\rho_a&gt;\rho</em>\mathrm{star}$，从而对流稳定的条件也可以写为</p>
+<script type="math/tex; mode=display">\gamma < \gamma_a</script><p>对恒星中的理想气体，</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P}{P} = \frac{\mathrm{d}\rho}{\rho} + \frac{\mathrm{d}T}{T}</script><p>从而</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \gamma &= \frac{\rho}{\mathrm{d}\rho}\left(\frac{\mathrm{d}\rho}{\rho} + \frac{\mathrm{d}T}{T}\right)
+    \\&= 1+\frac{\rho}{T}\frac{\mathrm{d}T}{\mathrm{d}\rho}
+    \\&= 1+ \frac{\rho}{T}\frac{\mathrm{d}P}{\mathrm{d}\rho}\frac{\mathrm{d}T}{\mathrm{d}P}
+    \\&= 1+ \gamma\frac{P}{T}\frac{\mathrm{d}T}{\mathrm{d}P}
+\end{aligned}</script><p>从而对流稳定性条件成为</p>
+<script type="math/tex; mode=display">\frac{P}{T}\left(\frac{d T}{d P}\right)_{\mathrm{star}}<\frac{\gamma_{\mathrm{a}}-1}{\gamma_{\mathrm{a}}}</script><p>或者</p>
+<script type="math/tex; mode=display">\left|\frac{d T}{d r}\right|_{\mathrm{star}}<\left(\frac{\gamma_{\mathrm{a}}-1}{\gamma_{\mathrm{a}}}\right) \frac{T}{P}\left|\frac{d P}{d r}\right|_{\mathrm{star}}</script><h2 id="对流不稳定性的例子"><a href="#对流不稳定性的例子" class="headerlink" title="对流不稳定性的例子"></a>对流不稳定性的例子</h2><p>将热平衡方程和流体静力学平衡方程代入对流稳定性判据，得到</p>
+<script type="math/tex; mode=display">\kappa F<4 \pi c G m\left[4\left(\frac{\gamma_{\mathrm{a}}-1}{\gamma_{\mathrm{a}}}\right)(1-\beta)\right]</script><p>$右边\le 4\pi cGm$，等号在$\beta=0$时取得。<br>说明流体静力学平衡被打破之前，对流就可能发生。处于流体静力学平衡的恒星内部一部分壳层也可能存在对流区，与（太阳）观测一致。</p>
+<p>具体情况：</p>
+<ul>
+<li>部分电离区域（如恒星外围温度较低的区域），$\kappa$较大而$\gamma_a$较小，容易出现对流</li>
+<li>核区附近$\mathrm{H,He}$完全电离，$\kappa$几乎为常量，若磁流体不稳定性使核反应增强，$F$增大，可能出现对流</li>
+<li>在核区$q\propto T^n$，若$n$增大（如氢烧变成氦烧），也可能导致对流不稳定<br>Cowling的计算结果，<ul>
+<li>若$\kappa\sim\mathrm{const}$，$n&gt;3-4$时出现对流</li>
+<li>若$\kappa\sim \rho T^{-7/2}$，$n&gt;8$时出现对流</li>
+</ul>
+</li>
+<li>$\beta\rightarrow1$（气体压主导），$M$较小时容易出现对流。即小质量恒星内部对流区发达。</li>
+</ul>
+<h3 id="小对流云团带走的热量"><a href="#小对流云团带走的热量" class="headerlink" title="小对流云团带走的热量"></a>小对流云团带走的热量</h3><p>对流云团位于$r$处的壳层中，质量$m_c$，半径$r_c$，温度$T+\delta T$，密度$\rho+\delta\rho$。云团与环境达到热力学平衡，$\delta P=0$。由理想气体状态方程，</p>
+<script type="math/tex; mode=display">\frac{\delta T}{T} + \frac{\delta \rho}{\rho} = \frac{\delta P}{P} = 0</script><p>云团质心穿过$r_c$的时间称为穿越时标：$\tau=\frac{r_c}{v_c}$<br>若云团在球壳中均匀分布，此时传热以对流为主，在$\tau$时间内吸收的总热量即为</p>
+<script type="math/tex; mode=display">F(r)\frac{r_c}{v_c}</script><p>恒星自引力在$r$处产生的重力加速度</p>
+<script type="math/tex; mode=display">g'(r) = \frac{Gm(r)}{r^2}</script><p>减去当地的浮力，云团的加速度为：</p>
+<script type="math/tex; mode=display">\frac{Gm(r)}{r^2} \left|\frac{\delta \rho}{\rho}\right| = \frac{Gm(r)}{r^2} \left|\frac{\delta T}{T}\right|</script><p>从而云团上升$r_c$距离时的速度</p>
+<script type="math/tex; mode=display">v_c = \sqrt{\frac{Gm(r)}{r^2} \left|\frac{\delta T}{T}\right|r_c}</script><p>云团的比内能为$u$，$N$个云团吸热导致温度变化</p>
+<script type="math/tex; mode=display">\frac{\delta T}{T} \sim \frac{F\frac{r_c}{v_c}}{u\cdot Nm_c}</script><p>代入上面$v_c$的表达式，有：</p>
+<script type="math/tex; mode=display">\left(\frac{\delta T}{T}\right)^{3/2} = \frac{F(r)r_c}{uNm_c\sqrt{\frac{Gmr_c}{r^2}}}</script><p>量级估计，$F\sim L, m(r)\sim M, Num_c\sim U, r\sim R, r_c\sim R$，有</p>
+<script type="math/tex; mode=display">\left(\frac{\delta T}{T}\right)^{3/2} \sim \frac{L}{U}\frac{1}{\sqrt{\frac{GM}{R^3}}} \sim \tau_\mathrm{th}^{-1}\tau_\mathrm{dyn}</script><p>$\tau<em>\mathrm{th}$为热力学时标，$\tau</em>\mathrm{dyn}$为动力学时标。对太阳，$\tau<em>\mathrm{th}\sim 10^{15}\mathrm{s}, \tau</em>\mathrm{dyn}\sim 10^{3}\mathrm{s}$。$\frac{\delta T}{T}\sim 10^{-8}$</p>
+</body></html>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A9%E6%96%87/" rel="tag"># 天文</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/09/08/stellar-physics-05-equilibrium-star/" rel="next" title="恒星的内部结构——简单模型">
+                  <i class="fa fa-chevron-left"></i> 恒星的内部结构——简单模型
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/09/08/stellar-physics-07-stellar-evolution/" rel="prev" title="恒星的演化">
+                  恒星的演化 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%BF%E6%9C%9F%E7%83%AD%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">长期热稳定性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">热不稳定性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%B9%B6%E6%B0%94%E4%BD%93%E7%9A%84%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">简并气体的不稳定性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%96%84%E5%A3%B3%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">薄壳不稳定性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">动力学稳定性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E5%8A%9B%E5%AD%A6%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">4.</span> <span class="nav-text">动力学不稳定性的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E7%94%B5%E7%A6%BB"><span class="nav-number">4.1.</span> <span class="nav-text">部分电离</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%B5%81%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">对流不稳定性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E6%B5%81%E4%BA%A7%E7%94%9F%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">对流产生的条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%B5%81%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">6.</span> <span class="nav-text">对流不稳定性的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E5%AF%B9%E6%B5%81%E4%BA%91%E5%9B%A2%E5%B8%A6%E8%B5%B0%E7%9A%84%E7%83%AD%E9%87%8F"><span class="nav-number">6.1.</span> <span class="nav-text">小对流云团带走的热量</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="道山神連"
+    src="/images/kirin.gif">
+  <p class="site-author-name" itemprop="name">道山神連</p>
+  <div class="site-description" itemprop="description">宇宙的最不可理解之处在于它是可以被理解的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Li-mz" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;Li-mz" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5566902218" title="Weibo &amp;rarr; https:&#x2F;&#x2F;weibo.com&#x2F;5566902218" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/13024288" title="Bilibili &amp;rarr; https:&#x2F;&#x2F;space.bilibili.com&#x2F;13024288" rel="noopener" target="_blank"><i class="fa fa-fw fa-"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">道山神連</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.4.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22077,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      extensions: ["mediawiki-texvc.js"],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'GMC8JlmcdEXQuVhez2nFHNag-gzGzoHsz',
+    appKey: 'mICrom67f9LiUrnuDD9DOh7I',
+    placeholder: "Just go go",
+    avatar: 'identicon',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

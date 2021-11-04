@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Sakurai读书笔记（三）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="量子态的时间演化">
+<meta property="og:url" content="https://michiyamakaren.github.io/2020/10/08/sakurai-qm-03-time-evolution/index.html">
+<meta property="og:site_name" content="道山神連的博客">
+<meta property="og:description" content="Sakurai读书笔记（三）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-08T06:41:46.000Z">
+<meta property="article:modified_time" content="2021-04-18T04:38:24.712Z">
+<meta property="article:author" content="道山神連">
+<meta property="article:tag" content="物理">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://michiyamakaren.github.io/2020/10/08/sakurai-qm-03-time-evolution/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+<!-- from: https://www.cnblogs.com/wstong/p/12874732.html -->
+<!-- Live2DCubismCore script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/live2dcubismcore.js"></script>
+<!-- Build script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/bundle.js"></script>
+<canvas id="live2d" width="400" height="600" class="live2d" style="position: fixed; opacity: 0.8; left: -70px; bottom: -250px; z-index: 99999; pointer-events: none;"></canvas>
+
+<script type="text/javascript">
+    var resourcesPath = '/live2d_models/'; // 指定资源文件（模型）保存的路径
+    var backImageName = ''; // 指定背景图片
+    var modelDir = ['AijoKaren']; // 指定需要加载的模型
+    initDefine(resourcesPath, backImageName, modelDir); // 初始化模型
+</script>
+  <title>量子态的时间演化 | 道山神連的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">道山神連的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook" rel="section"><i class="fa fa-fw fa-comments"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies" rel="section"><i class="fa fa-fw fa-film"></i>电影</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://michiyamakaren.github.io/2020/10/08/sakurai-qm-03-time-evolution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/kirin.gif">
+      <meta itemprop="name" content="道山神連">
+      <meta itemprop="description" content="宇宙的最不可理解之处在于它是可以被理解的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="道山神連的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          量子态的时间演化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-08 14:41:46" itemprop="dateCreated datePublished" datetime="2020-10-08T14:41:46+08:00">2020-10-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-18 12:38:24" itemprop="dateModified" datetime="2021-04-18T12:38:24+08:00">2021-04-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/Sakurai%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">Sakurai量子力学笔记</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/08/sakurai-qm-03-time-evolution/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/08/sakurai-qm-03-time-evolution/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">Sakurai读书笔记（三）</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body></body></html><html><head></head><body><h2 id="时间演化算符"><a href="#时间演化算符" class="headerlink" title="时间演化算符"></a>时间演化算符</h2><p>上一章讨论了态矢的定义和基本性质，以及同一态矢在不同表象下的表示，并特别考虑了位置表象和动量表象。这一章将讨论动力学，即量子态随时间的演化。需要说明的是这里时间并不是一个观测量，即没有时间算符，而是作为一个参量出现。这也体现了在量子力学中时空地位的不对等，而在相对论协变的量子场论中时间和空间才会有对等的地位。</p>
+<p>为了强调系统的时间演化，我们引入下面的记号，$t_0$时系统的状态为$\left|\alpha\right&gt;$，在$t$时的状态记为</p>
+<script type="math/tex; mode=display">\left|\alpha,t_0;t\right></script><p>另外，$\left|\alpha,t_0;t_0\right&gt;$就简记为$\left|\alpha,t_0\right&gt;$。我们要研究的便是$\left|\alpha,t_0\right&gt;$和$\left|\alpha,t_0;t\right&gt;$的关系。</p>
+<p>自然地，我们可以用一个算符联系$t_0$和$t$时的状态：</p>
+<script type="math/tex; mode=display">\left|\alpha,t_0;t\right> = \mathscr{U}(t,t_0) \left|\alpha,t_0\right></script><p>这就是<strong>时间演化算符</strong>$\mathscr{U}(t,t_0)$。下面根据我们希望时间演化算符满足的性质给出它的具体形式。</p>
+<p>首先我们考虑<strong>概率守恒</strong>，将粒子的初态写成某个观测量$A$本征态的叠加：</p>
+<script type="math/tex; mode=display">\left|\alpha,t_0\right> = \sum c_{a'}(t_0)\left|a'\right></script><p>将态矢归一化，则系数的模平方就是系统处于对应本征态上的概率。在时间$t$时，粒子的状态成为</p>
+<script type="math/tex; mode=display">\left|\alpha,t_0;t\right> = \sum c_{a'}(t)\left|a'\right></script><p>此时我们仍然希望，$\sum |c_{a’}(t)|^2 = 1$，即粒子处在$A$的所有本征态的概率之和还应是1，而不会凭空出现或消失。从而：</p>
+<script type="math/tex; mode=display">\left<\alpha,t_0;t|\alpha,t_0;t\right> = \left<\alpha,t_0;t|\mathscr{U}(t,t_0)^\dagger\mathscr{U}(t,t_0)|\alpha,t_0;t\right> = \left<\alpha,t_0|\alpha,t_0\right> = 1</script><p>可以看到，对概率守恒的要求给出的限制是，<strong>时间演化算符应该是幺正算符</strong>。</p>
+<p>另外显然需要满足的性质是：</p>
+<script type="math/tex; mode=display">\mathscr{U}(t_2,t_0) = \mathscr{U}(t_2,t_1)\mathscr{U}(t_1,t_0)</script><p>以及</p>
+<script type="math/tex; mode=display">\lim_{t\rightarrow 0} \mathscr{U}(t,t_0) = 1</script><p>考虑无穷小时间变换$\mathscr{U}(t_0+\mathrm{d}t,t_0)$，和前面无穷小平移算符的推导类似，我们可以给出无穷小时间变换应该有如下的形式：</p>
+<script type="math/tex; mode=display">\mathscr{U}(t_0+\mathrm{d}t,t_0) = 1 - i\Omega\mathrm{d}t</script><p>其中$\Omega$是一个厄米算符。</p>
+<p>$\Omega$具有频率的量纲，考虑经典力学中哈密顿量是时间演化的生成元，而能量量纲除以$\hbar$也有频率的量纲，我们取$\Omega=H/\hbar$，从而</p>
+<script type="math/tex; mode=display">\mathscr{U}(t_0+\mathrm{d}t,t_0) = 1 - iH\mathrm{d}t/\hbar</script><p>这里$\hbar$再一次出现，在后面我们会说明这和无穷小平移算符中的$\hbar$应该是同一个常量，这样运动方程才能回到经典近似。</p>
+<h2 id="薛定谔方程"><a href="#薛定谔方程" class="headerlink" title="薛定谔方程"></a>薛定谔方程</h2><h3 id="时间演化算符的薛定谔方程"><a href="#时间演化算符的薛定谔方程" class="headerlink" title="时间演化算符的薛定谔方程"></a>时间演化算符的薛定谔方程</h3><p>有了无穷小时间变换的形式，我们就可以导出更一般的时间演化算符。由</p>
+<script type="math/tex; mode=display">\mathscr{U}(t+\mathrm{d}t,t_0) = \mathscr{U}(t+\mathrm{d}t,t)\mathscr{U}(t,t_0) = (1 - iH\mathrm{d}t/\hbar)\mathscr{U}(t,t_0)</script><p>即</p>
+<script type="math/tex; mode=display">\mathscr{U}(t+\mathrm{d}t,t_0) - \mathscr{U}(t,t_0) =  - i\frac{H}{\hbar}\mathrm{d}t</script><p>即</p>
+<script type="math/tex; mode=display">i\hbar\frac{\partial}{\partial t}\mathscr{U}(t,t_0) = H\mathscr{U}(t,t_0)</script><p>这就是<strong>时间演化算符的薛定谔方程</strong>。</p>
+<p>将上式作用在态矢$\left|\alpha,t_0\right&gt;$上，即有：</p>
+<script type="math/tex; mode=display">i\hbar\frac{\partial}{\partial t}\left|\alpha,t_0;t\right> = H\left|\alpha,t_0;t\right></script><p>即为<strong>态矢的薛定谔方程</strong>。</p>
+<p>薛定谔方程可以让我们解出时间演化算符的具体形式，若哈密顿算符不含时，则有</p>
+<script type="math/tex; mode=display">\mathscr{U}(t,t_0) = \exp\left[\frac{-iH(t-t_0)}{\hbar}\right]</script><p>若哈密顿算符依赖时间，但不同时间的$H$对易，则时间演化算符可以写成</p>
+<script type="math/tex; mode=display">\mathscr{U}(t,t_0) = \exp\left[-\frac{i}{\hbar} \int_{t_0}^{t}H(t')\mathrm{d}t' \right]</script><p>而若不同时间的哈密顿算符不对易（例如，系统处在磁场中，哈密顿算符中会有$\mathbf{S}\cdot\mathbf{B}$的项，若磁场的方向随时间变化，由于不同方向的自旋不对易，从而不同时间的哈密顿算符不对易），此时的时间演化算符为</p>
+<script type="math/tex; mode=display">\mathscr{U}(t,t_0) = 1 + \sum_{n=1}^\infty \left(-\frac{i}{\hbar}\right)^n \int_{t_0}^{t}\mathrm{d}t_1\int_{t_0}^{t_1}\mathrm{d}t_2\cdots\int_{t_0}^{t_{n-1}}\mathrm{d}t_n H(t_1)H(t_2)\cdots H(t_{n})</script><p>这被称作戴森序列(Dyson series)。</p>
+<h3 id="哈密顿算符不含时情况下的演化"><a href="#哈密顿算符不含时情况下的演化" class="headerlink" title="哈密顿算符不含时情况下的演化"></a>哈密顿算符不含时情况下的演化</h3><p>下面讨论最简单的情况，即哈密顿量不含时时系统的演化。此时的时间演化算符为（简单起见，取$t_0=0$）</p>
+<script type="math/tex; mode=display">\mathscr{U}(t) = \exp\left(\frac{-iHt}{\hbar}\right)</script><p>时间演化算符作用在能量本征态上的结果是显而易见的，若$\left|a’\right&gt;$是一组能量本征态，对应的本征能量是$E_{a’}$，则</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \exp\left(\frac{-iHt}{\hbar}\right) &= \sum_{a'}\sum_{a''} \left|a''\right>\left<a''\right|\exp\left(\frac{-iHt}{\hbar}\right) \left|a'\right>\left<a'\right|
+    \\&= \sum_{a'} \exp\left(\frac{-i E_{a'} t}{\hbar}\right) \left|a'\right>\left<a'\right|
+\end{aligned}</script><p>对一个任意的态</p>
+<script type="math/tex; mode=display">\left|\alpha\right> = \sum_{a'} c_{a'}\left|a'\right></script><p>有</p>
+<script type="math/tex; mode=display">\left|\alpha,0;t\right> = \exp\left(\frac{-iHt}{\hbar}\right)\left|\alpha\right> = \sum_{a'} c_{a'}\exp\left(\frac{-i E_{a'} t}{\hbar}\right) \left|a'\right></script><p>即<strong>如果我们要考虑任意态的时间演化，需要将其分解为能量本征态的叠加</strong>。特别地，如果系统的初态就是能量本征态$\left|a’\right&gt;$，那么时间演化只是给其乘上了一个整体相位。</p>
+<p>态的时间演化自然会产生观测效应，但态矢本身是没法测量的，我们只能对各种观测量进行测量。这里比较重要的便是观测量的平均值。一个特别的情况是系统初态处在能量本征态，此时时间演化只是乘上了一个整体相位，不会产生观测效应：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left<B\right> &= \left<a',0;t|B|a',0;t\right>
+    \\&= \left<a'\right| \exp\left(\frac{-i E_{a'} t}{\hbar}\right) B \exp\left(\frac{-i E_{a'} t}{\hbar}\right) \left|a'\right>
+    \\&= \left<a'|B|a'\right>
+\end{aligned}</script><p>可见观测量$B$的平均值不会随时间变化。因此能量本征态也被称为<strong>定态</strong>。</p>
+<p>而对非定态，观测量的平均值的演化为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left<B\right> &= \left[\sum_{a'} c_{a'}^*\exp\left(\frac{i E_{a'} t}{\hbar}\right) \left<a'\right|\right] B \left[\sum_{a''} c_{a''}\exp\left(\frac{-i E_{a''} t}{\hbar}\right) \left|a''\right>\right]
+    \\&= \sum_{a',a''} c_{a'}c_{a''}^* \exp\left[\frac{-i (E_{a''}-E_{a'}) t}{\hbar}\right] \left<a'|B|a''\right>
+    \\&= \sum_{a',a''} c_{a'}c_{a''}^* \exp(-i\omega_{a''a'}t) \left<a'|B|a''\right>
+\end{aligned}</script><p>其中</p>
+<script type="math/tex; mode=display">\omega_{a''a'} = \frac{E_{a''}-E_{a'}}{\hbar}</script><p>即非定态的平均值为$n\times n$个角频率为$\omega_{a’’a’}$的周期震荡项之和。</p>
+<h3 id="能量-时间不确定性关系"><a href="#能量-时间不确定性关系" class="headerlink" title="能量-时间不确定性关系"></a>能量-时间不确定性关系</h3><p>在这一部分我们考虑随时间演化后的态和初态有多少相似，为此我们引入<strong>关联幅度</strong>：</p>
+<script type="math/tex; mode=display">C(t) = \left<\alpha|\alpha,0;t\right> = \left<\alpha|\mathscr{U}(t)|\alpha\right></script><p>这实际上就是末态和初态的内积，由于时间演化算符是幺正算符，态矢的模长并不会变化，因此内积的大小也就一定程度上反映了末态和初态的相似程度。</p>
+<p>容易写出关联幅度的表达式</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    C(t) &= \left<\alpha|\mathscr{U}(t)|\alpha\right>
+    \\&= \left(\sum_{a'} c_{a'}^* \left<a'\right| \right) \left[\sum_{a''} c_{a''}\exp\left(\frac{-iE_{a''}t}{\hbar}\right) \left|a'\right> \right]
+    \\&= \sum_{a'} |c_{a'}|^2 \exp\left(\frac{-iE_{a'}t}{\hbar}\right) 
+\end{aligned}</script><p>为了进一步讨论的方便，我们需要考虑能量分布的连续谱，此时态$\left|\alpha\right&gt;$可以写成：</p>
+<script type="math/tex; mode=display">\left|\alpha\right> = \int g(E)\left|a'\right> \rho(E)\mathrm{d}E</script><p>其中$\rho(E)$是$E$附近态密度，$g(E)$就是系数。关联幅度就成为</p>
+<script type="math/tex; mode=display">C(t) = \int |g(E)|^2 \exp\left(\frac{-iEt}{\hbar}\right) \rho(E)\mathrm{d}E</script><p>我们考虑这样的情况，能量只分布在$E_0$附近宽$\Delta E$的区间内（相当于能量有$\Delta E$的不确定度），将关联幅度写为</p>
+<script type="math/tex; mode=display">C(t) = \exp\left(\frac{-iE_0t}{\hbar}\right) \int |g(E)|^2 \exp\left[\frac{-i(E-E_0)t}{\hbar}\right] \rho(E)\mathrm{d}E</script><p>考虑积分中$\exp[-i(E-E_0)t/\hbar]$的项，当$t$很大时这一项会快速震荡，从而导致积分很快衰减为0。从而我们可以得到这样的特征时间，满足</p>
+<script type="math/tex; mode=display">\frac{\Delta E t}{\hbar} \simeq 1</script><p>或</p>
+<script type="math/tex; mode=display">\Delta t \Delta E \simeq \hbar</script><p>这就是<strong>能量-时间不确定性关系</strong>。其物理意义是初始能量有$\Delta E$的弥散的系统，其演化到与初态“面目全非”的时标就是$\Delta t$。特别地，考虑$\Delta E\sim 0$，初态趋近于能量本征态，此时$\Delta t\sim \infty$，也就是说初态处于能量本征态上的系统能一直保持其状态，这和我们前面的讨论相符合。</p>
+<h2 id="波动力学"><a href="#波动力学" class="headerlink" title="波动力学"></a>波动力学</h2><p>最后，我们进入波动力学的框架，考虑波函数$\psi(\mathbf{x’},t)=\left&lt;\mathbf{x’}|\alpha,t_0;t\right&gt;$的演化，将哈密顿算符写成</p>
+<script type="math/tex; mode=display">H = \frac{\mathbf{p}^2}{2m} + V(\mathbf{x},t)</script><p>带入上面的方程，</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    i\hbar\frac{\partial}{\partial t}\left<\mathbf{x'}|\alpha,t_0;t\right> &= \left< \mathbf{x'}\right|\frac{\mathbf{p}^2}{2m} + V(\mathbf{x},t) \left|\alpha,t_0;t\right>
+    \\&= \left(-\frac{\hbar^2}{2m}\nabla'^2 + V(\mathbf{x'},t)\right) \left<\mathbf{x'}|\alpha,t_0;t\right>
+\end{aligned}</script><p>即得到我们熟悉的<strong>波动力学中的薛定谔方程</strong>：</p>
+<script type="math/tex; mode=display">i\hbar\frac{\partial}{\partial t}\psi(\mathbf{x'},t) = \left(-\frac{\hbar^2}{2m}\nabla'^2 + V(\mathbf{x'},t)\right) \psi(\mathbf{x'},t)</script><p>若$V=V(\mathbf{x’})$是时间无关的，那么哈密顿算符也是时间无关的，上面的讨论告诉我们此时能量本征态的演化</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}|a',t_0;t\right> =\left<\mathbf{x'}|a',t_0\right> \exp\left(\frac{-iE_{a'}t}{\hbar}\right)</script><p>带入上面的薛定谔方程，分离时间和空间变量，得到<strong>定态薛定谔方程</strong>：</p>
+<script type="math/tex; mode=display">\left(-\frac{\hbar^2}{2m}\nabla^2 + V(\mathbf{x})\right) u_E(\mathbf{x}) = Eu_E(\mathbf{x})</script><p>这其实就是求解能量本征态的方程。</p>
+<h3 id="概率守恒"><a href="#概率守恒" class="headerlink" title="概率守恒"></a>概率守恒</h3><p>我们已经在上一章的讨论中知道，$\rho=|\left&lt;\mathbf{x}|\alpha\right&gt;|^2=|\psi(\mathbf{x})|^2$是$\mathbf{x}$处的概率密度。从而由薛定谔方程就可以得出</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}\rho}{\mathrm{d}t} + \nabla\cdot\mathbf{j} = 0</script><p>这有着连续性方程的形式。其中</p>
+<script type="math/tex; mode=display">\mathbf{j} = -\frac{i\hbar}{2m}\left(\psi^*\nabla\psi - \psi\nabla\psi^*\right)</script><p>为<strong>概率流密度</strong>。考虑其物理意义：</p>
+<script type="math/tex; mode=display">\int \mathbf{j}\mathrm{d}^3x = -\frac{i\hbar}{m}\int\psi^*\nabla\psi\mathrm{d}^3x = \frac{\left<\mathbf{p}\right>}{m}</script><p>$\mathbf{j}$在全空间的积分就是这一时刻动量的平均值除以质量，这在经典力学中就是粒子的“速度”，因此将$\mathbf{j}$定义为概率流密度是合理的。于是我们可以说，薛定谔方程蕴含了<strong>概率守恒</strong>。</p>
+<h3 id="经典近似"><a href="#经典近似" class="headerlink" title="经典近似"></a>经典近似</h3><p>进一步考虑波函数的物理意义，令</p>
+<script type="math/tex; mode=display">\psi(\mathbf{x},t) = \sqrt{\rho(\mathbf{x},t)}\exp\left(i\frac{S(\mathbf{x},t)}{\hbar}\right)</script><p>带入概率流密度的定义，有</p>
+<script type="math/tex; mode=display">\mathbf{j} = \frac{\rho\nabla S}{m}</script><p>即概率流密度和波函数的相位的梯度成正比。</p>
+<p>将上式带入薛定谔方程：</p>
+<script type="math/tex; mode=display">i\hbar\left(\frac{\partial \sqrt{\rho}}{\partial t} + i\frac{\sqrt{\rho}}{\hbar}\frac{\partial S}{\partial t}\right) \exp\left(i\frac{S(\mathbf{x},t)}{\hbar}\right) = \left[-\frac{\hbar^2}{2m}\left(\nabla^2\sqrt{\rho}-\sqrt{\rho}\frac{|\nabla S|^2}{\hbar^2}\right) + V\sqrt{\rho}\right] \exp\left(i\frac{S(\mathbf{x},t)}{\hbar}\right)</script><p>经典近似下$\hbar\rightarrow 0$，只保留零阶项，则得到</p>
+<script type="math/tex; mode=display">\frac{|\nabla S|^2}{2m} + V + \frac{\partial S}{\partial t} = 0</script><p>考虑哈密顿量为$H=p^2/2m+V$，这即是经典力学中的哈密顿-雅可比方程。这里的$S$，即波函数的相位乘$\hbar$，对应了经典的作用量。于是我们可以看到，在$\hbar\rightarrow 0$的经典近似下，量子力学回到了经典力学。</p>
+<p>考虑定态的时间演化，$\mathscr{U}=\exp(-iEt/\hbar)$，因此对定态，$S$的时间和空间依赖就可以分离变量，</p>
+<script type="math/tex; mode=display">S(\mathbf{x},t) = W(\mathbf{x}) - Et</script><p>$W$就是哈密顿特征函数。</p>
+<p>H-J方程会给出动量</p>
+<script type="math/tex; mode=display">\mathbf{p}_\mathrm{classical} = \nabla S</script><p>经典的动量的方向是等相位的波阵面的法向。回想在光学中，几何光学的光线在波动光学中就是波线，即垂直波阵面的直线。基于这样的相似性，我们可以说经典粒子就如同几何光学中的光线，波动力学回到经典力学就如同波动光学回到几何光学。</p>
+</body></html>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%89%A9%E7%90%86/" rel="tag"># 物理</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/09/08/stellar-physics-07-stellar-evolution/" rel="next" title="恒星的演化">
+                  <i class="fa fa-chevron-left"></i> 恒星的演化
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/10/17/sakurai-qm-04-schrodinger-picture-and-heisenberg-picture/" rel="prev" title="薛定谔绘景和海森堡绘景">
+                  薛定谔绘景和海森堡绘景 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E6%BC%94%E5%8C%96%E7%AE%97%E7%AC%A6"><span class="nav-number">1.</span> <span class="nav-text">时间演化算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%96%9B%E5%AE%9A%E8%B0%94%E6%96%B9%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">薛定谔方程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E6%BC%94%E5%8C%96%E7%AE%97%E7%AC%A6%E7%9A%84%E8%96%9B%E5%AE%9A%E8%B0%94%E6%96%B9%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">时间演化算符的薛定谔方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%88%E5%AF%86%E9%A1%BF%E7%AE%97%E7%AC%A6%E4%B8%8D%E5%90%AB%E6%97%B6%E6%83%85%E5%86%B5%E4%B8%8B%E7%9A%84%E6%BC%94%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">哈密顿算符不含时情况下的演化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%BD%E9%87%8F-%E6%97%B6%E9%97%B4%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%85%B3%E7%B3%BB"><span class="nav-number">2.3.</span> <span class="nav-text">能量-时间不确定性关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A2%E5%8A%A8%E5%8A%9B%E5%AD%A6"><span class="nav-number">3.</span> <span class="nav-text">波动力学</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E5%AE%88%E6%81%92"><span class="nav-number">3.1.</span> <span class="nav-text">概率守恒</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%8F%E5%85%B8%E8%BF%91%E4%BC%BC"><span class="nav-number">3.2.</span> <span class="nav-text">经典近似</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="道山神連"
+    src="/images/kirin.gif">
+  <p class="site-author-name" itemprop="name">道山神連</p>
+  <div class="site-description" itemprop="description">宇宙的最不可理解之处在于它是可以被理解的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Li-mz" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;Li-mz" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5566902218" title="Weibo &amp;rarr; https:&#x2F;&#x2F;weibo.com&#x2F;5566902218" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/13024288" title="Bilibili &amp;rarr; https:&#x2F;&#x2F;space.bilibili.com&#x2F;13024288" rel="noopener" target="_blank"><i class="fa fa-fw fa-"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">道山神連</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.4.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22077,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      extensions: ["mediawiki-texvc.js"],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'GMC8JlmcdEXQuVhez2nFHNag-gzGzoHsz',
+    appKey: 'mICrom67f9LiUrnuDD9DOh7I',
+    placeholder: "Just go go",
+    avatar: 'identicon',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="电动力学笔记（四）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电磁场方程">
+<meta property="og:url" content="https://michiyamakaren.github.io/2019/05/28/EM-field-equation/index.html">
+<meta property="og:site_name" content="道山神連的博客">
+<meta property="og:description" content="电动力学笔记（四）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-05-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-18T04:37:20.756Z">
+<meta property="article:author" content="道山神連">
+<meta property="article:tag" content="物理">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://michiyamakaren.github.io/2019/05/28/EM-field-equation/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+<!-- from: https://www.cnblogs.com/wstong/p/12874732.html -->
+<!-- Live2DCubismCore script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/live2dcubismcore.js"></script>
+<!-- Build script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/bundle.js"></script>
+<canvas id="live2d" width="400" height="600" class="live2d" style="position: fixed; opacity: 0.8; left: -70px; bottom: -250px; z-index: 99999; pointer-events: none;"></canvas>
+
+<script type="text/javascript">
+    var resourcesPath = '/live2d_models/'; // 指定资源文件（模型）保存的路径
+    var backImageName = ''; // 指定背景图片
+    var modelDir = ['AijoKaren']; // 指定需要加载的模型
+    initDefine(resourcesPath, backImageName, modelDir); // 初始化模型
+</script>
+  <title>电磁场方程 | 道山神連的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">道山神連的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook" rel="section"><i class="fa fa-fw fa-comments"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies" rel="section"><i class="fa fa-fw fa-film"></i>电影</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://michiyamakaren.github.io/2019/05/28/EM-field-equation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/kirin.gif">
+      <meta itemprop="name" content="道山神連">
+      <meta itemprop="description" content="宇宙的最不可理解之处在于它是可以被理解的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="道山神連的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          电磁场方程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-28 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-28T00:00:00+08:00">2019-05-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-18 12:37:20" itemprop="dateModified" datetime="2021-04-18T12:37:20+08:00">2021-04-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%94%B5%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">电动力学笔记</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/05/28/EM-field-equation/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/05/28/EM-field-equation/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">电动力学笔记（四）</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body></body></html><html><head></head><body><h1 id="1-拉氏量密度"><a href="#1-拉氏量密度" class="headerlink" title="1.拉氏量密度"></a>1.拉氏量密度</h1><p>电磁场体系完整的拉氏量为:</p>
+<script type="math/tex; mode=display">L = L_p + L_{pf} + L_f</script><p>这三项分别为粒子、粒子与场耦合和场的拉氏量。上一节只讨论了粒子在电磁场中的运动，故只涉及前两项，而现在要讨论的则是电磁场的方程，因此要关注的是后两项。</p>
+<p>我们之前接触的拉氏量使用来描述粒子的运动的，那么如何使用拉氏量描述场呢？简单起见，我们先来考虑一个标量场$\phi(t,\mathbf x)$：我们可以把$\phi$看做广义坐标，时空坐标为作为参量，那么可以找到一个合适的拉氏量，用最小作用量原理推出场的方程$f(\phi, \partial_{\mu}\phi, x^{\mu}) = 0$。与粒子不同的一点是，场具有无穷的自由度——$\phi$作为广义坐标，需要空间中每个点的$\phi$值才能确定场的分布；而在每个点上，自由度是有限的。这相当于系统中存在连续分布的粒子，多粒子体系的拉氏量是单独的粒子的拉氏量之和，那么对于在空间中连续分布的场，拉氏量应为：</p>
+<script type="math/tex; mode=display">L = \int \mathscr L dxdydz</script><p>$\mathscr L$为<strong>拉氏量密度</strong>。从上面的讨论也可以看出，在考虑场的方程时，应给出的是拉氏量密度。</p>
+<p>对拉氏量密度为$\mathscr L = \mathscr L(\phi, \partial_{\mu}\phi)$，则根据定义，作用量为：</p>
+<script type="math/tex; mode=display">S = \int\int \mathscr L d^3xdt = \int \mathscr L d\Omega</script><p>$d\Omega=dtdxdydz$是洛伦兹不变量，因此$\mathscr L$也应为洛伦兹不变量。下面用变分法推出场的E-L方程：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\delta S &= \int \left[\left( \frac{\partial \mathscr L}{\partial \phi} \right)\delta\phi + \frac{\partial \mathscr L}{\partial (\partial_{\mu}\phi)}\delta(\partial_{\mu}\phi) \right] d\Omega
+\\&= \int \left[\left( \frac{\partial \mathscr L}{\partial \phi} \right)\delta\phi + \frac{\partial \mathscr L}{\partial (\partial_{\mu}\phi)}\partial_{\mu}\delta\phi \right] d\Omega
+\\&= \int \left[\frac{\partial \mathscr L}{\partial \phi} - \frac{\partial}{\partial x^{\mu}}\frac{\partial \mathscr L}{\partial (\partial_{\mu}\phi)} \right] \delta\phi d\Omega
+\end{align*}</script><p>其中用到了分部积分，$\delta\phi$在边界上为0。场的E-L方程和粒子的E-L方程具有类似的形式：</p>
+<script type="math/tex; mode=display">\frac{\partial \mathscr L}{\partial \phi} - \frac{\partial}{\partial x^{\mu}}\frac{\partial \mathscr L}{\partial (\partial_{\mu}\phi)}=0</script><h1 id="2-电磁场的拉氏量密度"><a href="#2-电磁场的拉氏量密度" class="headerlink" title="2.电磁场的拉氏量密度"></a>2.电磁场的拉氏量密度</h1><h2 id="2-1-猜测电磁场的拉氏量密度"><a href="#2-1-猜测电磁场的拉氏量密度" class="headerlink" title="2.1 猜测电磁场的拉氏量密度"></a>2.1 猜测电磁场的拉氏量密度</h2><p>电磁场是矢量场，虽然和前面讨论的标量场不一样，但是E-L方程也有相同的形式：</p>
+<script type="math/tex; mode=display">\frac{\partial \mathscr L}{\partial A^{\nu}} - \frac{\partial}{\partial x^{\mu}}\frac{\partial \mathscr L}{\partial (\partial_{\mu}A^{\nu})}=0</script><p>即E-L方程对$A^{\nu}$的每个分量仍然成立。</p>
+<p>我们可以猜测一下电磁场的拉氏量密度$\mathscr L_f$的形式。它应该满足以下性质：</p>
+<ol>
+<li>如1小节所述，$\mathscr L_f$应该是洛伦兹不变量</li>
+<li>应该具有规范对称性</li>
+<li>电磁场应该满足叠加原理，即电磁场方程应该是线性的，则应该有$\mathscr L<em>f \sim (\partial</em>{\mu}A^{\nu})^2$</li>
+</ol>
+<p>事实上人们发现$\mathscr L_f$的形式是：</p>
+<script type="math/tex; mode=display">\mathscr L_f = -\frac 1 {4\mu_0 c} F^{\alpha\beta}F_{\alpha\beta}</script><p>很容易验证它是满足以上的要求的。</p>
+<h2 id="2-2-真空电磁场方程"><a href="#2-2-真空电磁场方程" class="headerlink" title="2.2 真空电磁场方程"></a>2.2 真空电磁场方程</h2><p>将电磁场的拉氏量带入E-L方程，求得真空中的（即只考虑$\mathscr L<em>f$，不考虑$\mathscr L</em>{pf}$）电磁场方程为：</p>
+<script type="math/tex; mode=display">\frac 1 {\mu_0 c} \frac{\partial F_{\nu}^{\cdot\mu}}{\partial x^{\mu}}=0</script><p>也可以乘$\eta_{\mu\gamma}$并改变自由指标得到：</p>
+<script type="math/tex; mode=display">\frac 1 {\mu_0 c} \frac{\partial F_{\nu\mu}}{\partial x^{\mu}}=0</script><p>将电磁场张量按照定义展开，得到：</p>
+<script type="math/tex; mode=display">\frac{\partial}{\partial x^{\nu}}\frac{\partial A^{\mu}}{\partial x^{\mu}}-\frac{\partial^2}{\partial x_{\mu}\partial x^{\mu}}A^{\nu}=0</script><p>选取洛伦兹规范：</p>
+<script type="math/tex; mode=display">\frac{\partial A^{\mu}}{\partial x^{\mu}}=0</script><p>则有：</p>
+<script type="math/tex; mode=display">\frac{\partial^2}{\partial x_{\mu}\partial x^{\mu}}A^{\nu}=0</script><p>这就是真空中的电磁场方程。</p>
+<p>写成分量的形式为：</p>
+<script type="math/tex; mode=display">
+\left(\frac 1 {c^2} \frac{\partial^2}{\partial t^2} - \nabla^2 \right)\phi=0
+\\ \left(\frac 1 {c^2} \frac{\partial^2}{\partial t^2} - \nabla^2 \right)\mathbf A=0</script><p>再利用洛伦兹规范：</p>
+<script type="math/tex; mode=display">\frac{\partial A^{\alpha}}{\partial x^{\alpha}} = \frac 1 {c^2} \frac{\partial \phi}{\partial t} + \nabla\cdot\mathbf A =0</script><p>则有：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\left(\frac 1 {c^2} \frac{\partial^2}{\partial t^2} - \nabla^2 \right)\phi &= \frac{\partial}{\partial t}(-\nabla\cdot\mathbf A) - \nabla^2\phi
+\\ &= \nabla\cdot(-\frac{\partial \mathbf A}{\partial t} - \nabla \phi) 
+\\ &= \nabla\cdot\mathbf E=0
+\end{align*}</script><p>以及：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\left(\frac 1 {c^2} \frac{\partial^2}{\partial t^2} - \nabla^2 \right)\mathbf A &= \frac 1 {c^2} \frac{\partial^2 \mathbf A}{\partial t^2} + \nabla\times(\nabla\times\mathbf A) - \nabla(\nabla\cdot\mathbf A)
+\\ &= \frac 1 {c^2} \frac{\partial^2 \mathbf A}{\partial t^2} + \nabla\times\mathbf B + \nabla\left(\frac 1 {c^2} \frac{\partial \phi}{\partial t} \right)
+\\ &= \nabla\times\mathbf B - \frac 1 {c^2}\frac{\partial \mathbf E}{\partial t} =0
+\end{align*}</script><p>我们得到了真空中的麦克斯韦方程组中的两个方程：</p>
+<script type="math/tex; mode=display">
+\nabla\cdot\mathbf E=0
+\\ \nabla\times\mathbf B = \frac 1 {c^2}\frac{\partial \mathbf E}{\partial t}</script><p>结合上一节中的两个方程，我们得到了全部真空中的麦克斯韦方程。</p>
+<h1 id="3-与粒子耦合的电磁场"><a href="#3-与粒子耦合的电磁场" class="headerlink" title="3.与粒子耦合的电磁场"></a>3.与粒子耦合的电磁场</h1><h2 id="3-1-电流密度"><a href="#3-1-电流密度" class="headerlink" title="3.1 电流密度"></a>3.1 电流密度</h2><p>我们下一步要做的事自然是考虑$S<em>{pf}$和$S_f$的耦合，但是在此之前，由于电磁场的项是用拉氏量密度表示的，所以我们也需要将$S</em>{pf}$也用拉氏量密度表示。</p>
+<p>对多个粒子的系统：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+S_{pf} &= -\int\sum_i q_iA_{\alpha}(t,\mathbf x_i)dx^{\alpha}
+\\ &= -\int \sum_i q_iA_{\alpha}(t,\mathbf{x})\delta(\mathbf x-\mathbf x_i) dVdx^{\alpha}
+\\ &= \int \mathscr L_{pf} d\Omega dt
+\end{align*}</script><p>在进行下一步之前需要说明，这里的$S<em>{pf}$是场与所有粒子的耦合项的作用量，求和的每一项中$A</em>{\alpha}$采用的是在粒子的位置上的值。其原因是电磁场的作用是局域的，即$A_{\alpha}$只有沿着粒子的运动轨迹取值才会对运动方程有贡献。</p>
+<p>我们可以定义电荷密度：</p>
+<script type="math/tex; mode=display">\rho(t,\mathbf x)=\sum_i q_i\delta(\mathbf x-\mathbf x_i)</script><p>注意到$\int \rho dV=Q$，为系统中电荷总量，是洛伦兹不变量。这说明$\rho$与体积微元$dV$相乘为洛伦兹不变量，即它可以作为某个4-矢量的时间分量。再考虑$S_{pf}$：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
+\\ &= -\int \rho A_{\alpha}\frac{dx^{\alpha}}{dt}\frac 1 c d\Omega dt 
+\end{align*}</script><p>对比上面的$\mathscr L_{pf}$定义，我们有：</p>
+<script type="math/tex; mode=display">\mathscr L_{pf} = -\frac 1 c \rho A_{\alpha}\frac{dx^{\alpha}}{dt} = -\frac 1 c A_{\alpha}j^{\alpha}</script><p>其中</p>
+<script type="math/tex; mode=display">j^{\alpha}=\rho\frac{dx^{\alpha}}{dt} = (\rho c,\mathbf j)</script><p>为四维电流密度矢量。由于$\rho$与时间具有相同变换规则，因此从其定义式可以得知四维电流密度矢量的确是一个4-矢量。其空间分量为$\mathbf j=\rho \mathbf v$，其物理意义为单位时间内通过单位截面的电荷量，即电流密度。需要说明的是，这里的速度$\mathbf v$并不是一定是某个单一粒子的速度，因为这里用的是点粒子的模型，并不阻止有多于一个粒子处在相同的位置而具有不同的速度。下面的推导可以说明$\mathbf v$的物理意义：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\rho \mathbf v &= \sum_i q_i\delta(\mathbf x-\mathbf x_i)\mathbf v
+\\ &= \sum_i q_i\delta(\mathbf x-\mathbf x_i)\mathbf v_i
+\\ &= \rho \frac{\sum q_i\delta(\mathbf x-\mathbf x_i)\mathbf v_i}{\sum q_i\delta(\mathbf x-\mathbf x_i)}
+\\ &= \rho \frac{\sum q_i\mathbf v_i}{\sum q_i} \tag{on one point}
+\end{align*}</script><p>这表明，$\mathbf v(\mathbf x_i)$实际上是这一点上速度关于电荷的加权平均。当然，实际上的粒子并不是点电荷，我们实际上是近似地取一个宏观小、微观大的邻域，在其中做加权平均。</p>
+<h2 id="3-2-电磁场方程"><a href="#3-2-电磁场方程" class="headerlink" title="3.2 电磁场方程"></a>3.2 电磁场方程</h2><p>我们有了电磁场的拉氏量密度：</p>
+<script type="math/tex; mode=display">\mathscr L = \mathscr L_f + \mathscr L_{pf} = -\frac 1 {4\mu_0c}F_{\alpha\beta}F^{\alpha\beta} - \frac 1 c j^{\alpha}A_{\alpha}</script><p>带入E-L方程，得到电磁场方程为：</p>
+<script type="math/tex; mode=display">\frac{\partial F_{\mu\nu}}{\partial x_{\mu}} = \mu_0 j_{\nu}</script><p>（也可以像前两节一样用变分导出，结果是一样的）</p>
+<p>利用电磁场张量的定义：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\frac{\partial F_{\mu\nu}}{\partial x_{\mu}} &=\partial^{\mu}(\partial_{\nu}A_{\mu}-\partial_{\mu}A_{\nu})
+\\ &= \partial_{\nu}\partial^{\mu}A_{\mu}-\partial^{\mu}\partial_{\mu}A_{\nu}
+\\ &= -\partial^{\mu}\partial_{\mu}A_{\nu} =\mu_0 j_{\nu}
+\end{align*}</script><p>（使用了洛伦兹规范）写成分量的形式：</p>
+<script type="math/tex; mode=display">
+\left(\frac 1 {c^2} \frac{\partial^2}{\partial t^2} - \nabla^2 \right)\phi = \frac{\rho}{\epsilon_0}
+\\ \left(\frac 1 {c^2} \frac{\partial^2}{\partial t^2} - \nabla^2 \right)\mathbf A = \mu_0\mathbf j</script><p>用电场和磁场的表示为：</p>
+<script type="math/tex; mode=display">
+\nabla\cdot\mathbf E = \frac{\rho}{\epsilon_0}
+\\ \nabla\times\mathbf B = \frac 1 {c^2}\frac{\partial \mathbf E}{\partial t} + \mu_0\mathbf j</script><p>至此，我们得到了麦克斯韦方程组中的全部方程。</p>
+<h2 id="3-3-电荷连续性方程"><a href="#3-3-电荷连续性方程" class="headerlink" title="3.3 电荷连续性方程"></a>3.3 电荷连续性方程</h2><p>考虑电荷密度的定义：</p>
+<script type="math/tex; mode=display">\rho = \sum_i q_i\delta(\mathbf x-\mathbf x_i(t))</script><p>我们有：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\frac{\partial \rho}{\partial t} &= \sum_i q_i \cdot -\frac{\partial \delta(\mathbf x-\mathbf x_i)}{\partial (\mathbf x-\mathbf x_i)}\frac{\partial \mathbf x}{\partial t}
+\\ &= -\sum_i q_i \nabla\delta(\mathbf x-\mathbf x_i) \mathbf v_i
+\\ &= -\nabla\left(\sum_i q_i\delta(\mathbf x-\mathbf x_i)\right)
+\\ &= -\nabla\cdot\mathbf j
+\end{align*}</script><p>即：</p>
+<script type="math/tex; mode=display">\frac{\partial \rho}{\partial t} + \nabla\cdot\mathbf j = 0</script><p>这就是<strong>电荷连续性方程</strong>。它有明确的物理意义：<br>在一个小的区域$\Delta V$内，电荷量的变化率等于单位时间流入的电荷，即:</p>
+<script type="math/tex; mode=display">\frac{dQ}{dt} = \int \frac{\partial \rho}{\partial t} dV = -\oint \mathbf j \cdot d\mathbf S = \int \nabla\cdot\mathbf j dV</script><p>满足电荷连续性方程表明电荷是守恒的，不会凭空出现或消失。</p>
+<p>一般情况下，物理量$A$不一定守恒，其连续性方程为：</p>
+<script type="math/tex; mode=display">\frac{\partial \rho_A}{\partial t} + \nabla\cdot\mathbf F_A = S_A</script><p>等式右边的$S_A$项表示$A$的源，即单位时间内产生的量。对矢量$\mathbf g$，则为：</p>
+<script type="math/tex; mode=display">\frac{\partial \mathbf g}{\partial t} + \nabla\cdot\mathsf G = \mathbf{S_g}</script><p>此时矢量的通量$\mathsf G = \mathbf{vg}$为一个二阶张量。</p>
+<h1 id="4-电磁场的能量和动量"><a href="#4-电磁场的能量和动量" class="headerlink" title="4.电磁场的能量和动量"></a>4.电磁场的能量和动量</h1><p>可以根据拉氏量密度，由诺特定理直接推出电磁场能量密度和动量密度，但是这里使用另一种方法。由能量守恒和动量守恒，电磁场的能量和动量的源就等于负的在电磁场中运动的粒子的能量和动量变化，由3.3节给出的连续性方程的一般形式，也可以得到能量和动量的表达式。</p>
+<h2 id="4-1-能量密度与能流密度"><a href="#4-1-能量密度与能流密度" class="headerlink" title="4.1 能量密度与能流密度"></a>4.1 能量密度与能流密度</h2><p>在$\Delta V$区域内粒子的能量：</p>
+<script type="math/tex; mode=display">\frac{dE}{dt} = \rho \Delta V(\mathbf E\cdot \mathbf v) = (\mathbf E\cdot \mathbf j)\Delta V</script><p>从而对电磁场：</p>
+<script type="math/tex; mode=display">\frac{d\epsilon}{dt} + \nabla\cdot\mathbf P = -\mathbf E\cdot \mathbf j</script><p>而由麦克斯韦方程，</p>
+<script type="math/tex; mode=display">\mathbf j = \frac 1 {\mu_0}\nabla\times\mathbf B - \epsilon_0\frac{\partial \mathbf E}{\partial t}</script><p>有：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+-\mathbf E\cdot \mathbf j &= -\frac 1 {\mu_0}[\mathbf B\cdot(\nabla\times\mathbf E) - \nabla\cdot(\mathbf E\times\mathbf B)] + \frac 1 2 \epsilon_0\frac{\partial E^2}{\partial t}
+\\ &= \frac 1 {\mu_0}\nabla\cdot(\mathbf E\times\mathbf B) + \frac 1 2 \epsilon_0\frac{\partial E^2}{\partial t} + \frac 1 {2\mu_0}\frac{\partial B^2}{\partial t}
+\\ &= \frac{d\epsilon}{dt} + \nabla\cdot\mathbf P
+\end{align*}</script><p>从而，电磁场的能量密度和能量通量（能流密度）为：</p>
+<script type="math/tex; mode=display">
+\epsilon = \frac 1 2 \epsilon_0 E^2 + \frac 1 {2\mu_0}B^2
+\\ \mathbf P = \frac 1 {\mu_0} \mathbf E\times\mathbf B</script><h2 id="4-2-动量密度与应力张量"><a href="#4-2-动量密度与应力张量" class="headerlink" title="4.2 动量密度与应力张量"></a>4.2 动量密度与应力张量</h2><p>粒子的动量变化率即为其在电磁场中受的力，为：</p>
+<script type="math/tex; mode=display">\frac{d\mathbf p}{dt} = (\rho\mathbf E + \rho\mathbf v\times\mathbf B)\Delta V = (\rho\mathbf E + \mathbf j\times\mathbf B)\Delta V</script><p>从而有：</p>
+<script type="math/tex; mode=display">\frac{\partial \mathbf g}{\partial t} + \nabla\cdot\mathsf G = -(\rho\mathbf E + \mathbf j\times\mathbf B)</script><p>经过类似的推导，可以得到：</p>
+<script type="math/tex; mode=display">
+\mathbf g = \epsilon_0\mathbf E\times\mathbf B
+\\ \mathsf G = -\mathsf T = -(\epsilon_0\mathbf E\mathbf E+\frac 1 {\mu_0}\mathbf B\mathbf B - \frac 1 2(\epsilon_0 E^2 + \frac 1 {\mu_0}B^2)\mathsf I)</script><p>（其中$\mathsf I$为单位张量）$\mathsf T$称为麦克斯韦应力张量。</p>
+<p>我们可以考虑一下$\mathsf G$的物理意义：它表示电磁场的动量通量，即单位时间内通过单位面积的动量大小。而动量在时间上的变化率正是力，也就是说它可以被理解为作用在各方向的单位面积上的力，即压强和切向应力。<br><br>对稳恒电磁场，$\frac{\partial \mathbf g}{\partial t}=0$，则一个区域内带电粒子的受力（动量变化率）即为流入该区域的动量流，为：</p>
+<script type="math/tex; mode=display">\mathbf F = -\int \nabla\cdot\mathsf G dV = \oint \mathsf T\cdot d\mathbf S</script><p>这一公式也可以用来计算电磁场之中的粒子的受力——前提是稳恒电磁场，且粒子并非是测试粒子，其自身产生的电磁场也必须计入考虑。</p>
+</body></html>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%89%A9%E7%90%86/" rel="tag"># 物理</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/05/06/distance-ladder/" rel="next" title="宇宙距离阶梯">
+                  <i class="fa fa-chevron-left"></i> 宇宙距离阶梯
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/07/07/NGWordGame-with-Nonebot/" rel="prev" title="基于NoneBot的NG词语游戏插件">
+                  基于NoneBot的NG词语游戏插件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%8B%89%E6%B0%8F%E9%87%8F%E5%AF%86%E5%BA%A6"><span class="nav-number">1.</span> <span class="nav-text">1.拉氏量密度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%94%B5%E7%A3%81%E5%9C%BA%E7%9A%84%E6%8B%89%E6%B0%8F%E9%87%8F%E5%AF%86%E5%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">2.电磁场的拉氏量密度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E7%8C%9C%E6%B5%8B%E7%94%B5%E7%A3%81%E5%9C%BA%E7%9A%84%E6%8B%89%E6%B0%8F%E9%87%8F%E5%AF%86%E5%BA%A6"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 猜测电磁场的拉氏量密度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E7%9C%9F%E7%A9%BA%E7%94%B5%E7%A3%81%E5%9C%BA%E6%96%B9%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 真空电磁场方程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E4%B8%8E%E7%B2%92%E5%AD%90%E8%80%A6%E5%90%88%E7%9A%84%E7%94%B5%E7%A3%81%E5%9C%BA"><span class="nav-number">3.</span> <span class="nav-text">3.与粒子耦合的电磁场</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E7%94%B5%E6%B5%81%E5%AF%86%E5%BA%A6"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 电流密度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E7%94%B5%E7%A3%81%E5%9C%BA%E6%96%B9%E7%A8%8B"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 电磁场方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E7%94%B5%E8%8D%B7%E8%BF%9E%E7%BB%AD%E6%80%A7%E6%96%B9%E7%A8%8B"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 电荷连续性方程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%94%B5%E7%A3%81%E5%9C%BA%E7%9A%84%E8%83%BD%E9%87%8F%E5%92%8C%E5%8A%A8%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text">4.电磁场的能量和动量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E8%83%BD%E9%87%8F%E5%AF%86%E5%BA%A6%E4%B8%8E%E8%83%BD%E6%B5%81%E5%AF%86%E5%BA%A6"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 能量密度与能流密度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E5%8A%A8%E9%87%8F%E5%AF%86%E5%BA%A6%E4%B8%8E%E5%BA%94%E5%8A%9B%E5%BC%A0%E9%87%8F"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 动量密度与应力张量</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="道山神連"
+    src="/images/kirin.gif">
+  <p class="site-author-name" itemprop="name">道山神連</p>
+  <div class="site-description" itemprop="description">宇宙的最不可理解之处在于它是可以被理解的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Li-mz" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;Li-mz" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5566902218" title="Weibo &amp;rarr; https:&#x2F;&#x2F;weibo.com&#x2F;5566902218" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/13024288" title="Bilibili &amp;rarr; https:&#x2F;&#x2F;space.bilibili.com&#x2F;13024288" rel="noopener" target="_blank"><i class="fa fa-fw fa-"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">道山神連</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.4.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22077,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      extensions: ["mediawiki-texvc.js"],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'GMC8JlmcdEXQuVhez2nFHNag-gzGzoHsz',
+    appKey: 'mICrom67f9LiUrnuDD9DOh7I',
+    placeholder: "Just go go",
+    avatar: 'identicon',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

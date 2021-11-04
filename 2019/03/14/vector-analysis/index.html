@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="电动力学笔记（一）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="矢量和分析和曲线坐标系">
+<meta property="og:url" content="https://michiyamakaren.github.io/2019/03/14/vector-analysis/index.html">
+<meta property="og:site_name" content="道山神連的博客">
+<meta property="og:description" content="电动力学笔记（一）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-18T04:39:22.619Z">
+<meta property="article:author" content="道山神連">
+<meta property="article:tag" content="物理">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://michiyamakaren.github.io/2019/03/14/vector-analysis/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+<!-- from: https://www.cnblogs.com/wstong/p/12874732.html -->
+<!-- Live2DCubismCore script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/live2dcubismcore.js"></script>
+<!-- Build script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/bundle.js"></script>
+<canvas id="live2d" width="400" height="600" class="live2d" style="position: fixed; opacity: 0.8; left: -70px; bottom: -250px; z-index: 99999; pointer-events: none;"></canvas>
+
+<script type="text/javascript">
+    var resourcesPath = '/live2d_models/'; // 指定资源文件（模型）保存的路径
+    var backImageName = ''; // 指定背景图片
+    var modelDir = ['AijoKaren']; // 指定需要加载的模型
+    initDefine(resourcesPath, backImageName, modelDir); // 初始化模型
+</script>
+  <title>矢量和分析和曲线坐标系 | 道山神連的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">道山神連的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook" rel="section"><i class="fa fa-fw fa-comments"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies" rel="section"><i class="fa fa-fw fa-film"></i>电影</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://michiyamakaren.github.io/2019/03/14/vector-analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/kirin.gif">
+      <meta itemprop="name" content="道山神連">
+      <meta itemprop="description" content="宇宙的最不可理解之处在于它是可以被理解的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="道山神連的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          矢量和分析和曲线坐标系
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-14T00:00:00+08:00">2019-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-18 12:39:22" itemprop="dateModified" datetime="2021-04-18T12:39:22+08:00">2021-04-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%94%B5%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">电动力学笔记</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/03/14/vector-analysis/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/03/14/vector-analysis/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">电动力学笔记（一）</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body></body></html><html><head></head><body><h1 id="1-矢量分析"><a href="#1-矢量分析" class="headerlink" title="1.矢量分析"></a>1.矢量分析</h1><h2 id="1-1-矢量的定义"><a href="#1-1-矢量的定义" class="headerlink" title="1.1 矢量的定义"></a>1.1 矢量的定义</h2><p>这里不深究矢量的定义，我们只考虑三维欧式空间$\mathbb{R}^3$中的矢量，它们有三个分量，并且分量在任意的坐标变换下与$\mathbf r=(x,y,z)$具有相同的变换形式。形象地说，“<strong>矢量应该像矢量那样变换</strong>”。</p>
+<h2 id="1-2-爱因斯坦求和约定"><a href="#1-2-爱因斯坦求和约定" class="headerlink" title="1.2 爱因斯坦求和约定"></a>1.2 爱因斯坦求和约定</h2><p>我们经常会遇到形式相同的几项求和的式子，比如：</p>
+<script type="math/tex; mode=display">
+\mathbf A \cdot \mathbf B = A_1B_1+A_2B_2+A_3B_3 = \sum_{i=1}^3 A_iB_i</script><p>我们可以省略求和符号$\sum$，仅使用$A_iB_i$来表示上式，在确定的上下文中这一般不会导致误会。</p>
+<p>具体地说，若在表达式中出现了重复指标（称作<strong>哑指标</strong>），那么自动对其求和。（严格地讲要求哑指标一上一下，但是在这里由于$\mathbb R^3$上的基和对偶基是相等的，故不对矢量的协变和逆变表示，即上下指标做区分。在下面曲线坐标系一节将介绍矢量的协变和逆变表示。）</p>
+<p>使用爱因斯坦求和约定的表达式还有以下规则：</p>
+<ol>
+<li>每一项中一个哑指标最多出现两次。比如不允许出现类似$A_iB_iC_i$的项</li>
+<li>一个表达式中所有项中包含的不被求和的指标（即<strong>自由指标</strong>），比如不允许出现类似$A_iB_iC_j+C_k$的表达式。<br>当然这些规定并不是不允许进行这样的运算，仅仅是说明在矢量分析中不会出现这样的表达式而已。其作用也在于，若推导出了不符合这两条规则的表达式，那么可能需要对计算过程重新检查。</li>
+</ol>
+<p>另外，使用爱因斯坦求和约定的表达式的一个常用的性质是，<strong>可以将哑指标替换为其他的指标而不改变表达式的值</strong>。例如：$A_iB_i+A_jB_j=A_iB_i+A_iB_i=2A_iB_i$。这一性质在表达式的化简中经常会用到。</p>
+<p>利用爱因斯坦求和约定，我们可以给出$\mathbb R^3$中的矢量的点乘和叉乘的分量形式：</p>
+<ul>
+<li>矢量$\mathbf A$用分量表示为$\mathbf A=A_i\mathbf e_i$</li>
+<li>从而矢量的点乘为：<script type="math/tex; mode=display">
+\mathbf A \cdot \mathbf B = A_i\mathbf e_i \cdot B_j \mathbf e_j = A_iB_j \mathbf e_i \cdot \mathbf e_j = A_iB_j \delta_{ij} = A_iB_i</script>其中克罗内克$\delta$函数定义为：<script type="math/tex; mode=display">
+\delta_{ij} = \left\{
+\begin{matrix}
+1 & (i=j)
+\\0 & (i \neq j)
+\end{matrix}
+\right.</script></li>
+<li>根据定义，矢量叉乘：<script type="math/tex; mode=display">
+\mathbf A \times \mathbf B = (A_2B_3-A_3B_2)\mathbf e_1 + (A_3B_1-A_1B_3)\mathbf e_2 + (A_1B_2-A_2B_1)\mathbf e_3</script>可以使用爱因斯坦求和标记记为：<script type="math/tex; mode=display">
+\mathbf A \times \mathbf B = \epsilon_{ijk}A_jB_k\mathbf e_i</script>其中Levi-Civita符号$\epsilon_{ijk}$定义为：<script type="math/tex; mode=display">
+\epsilon_{ijk}=\left\{
+\begin{matrix}
+1 & (i,j,k)是(1,2,3)的偶置换
+\\-1 & (i,j,k)是(1,2,3)的奇置换
+\\0 & 其他（即(i,j,k)中存在两者相等）
+\end{matrix}
+\right.</script>另外,Levi-Civita符号有一常用性质：<script type="math/tex; mode=display">
+\epsilon_{ijk}\epsilon_{imn} = \delta_{jm}\delta_{kn} - \delta_{jn}\delta_{km}</script></li>
+</ul>
+<h2 id="1-3-矢量分析"><a href="#1-3-矢量分析" class="headerlink" title="1.3 矢量分析"></a>1.3 矢量分析</h2><p>两个常用的公式是：</p>
+<script type="math/tex; mode=display">\mathbf A \times(\mathbf B \times \mathbf C)=(\mathbf A\cdot \mathbf C)\mathbf B-(\mathbf A\cdot\mathbf B)\mathbf C \tag{1.3.1}</script><script type="math/tex; mode=display">\mathbf A\cdot(\mathbf B\times\mathbf C)=\mathbf B\cdot(\mathbf C\times\mathbf A)=\mathbf C\cdot(\mathbf A\times\mathbf B) \tag{1.3.2}</script><p>在矢量分析的表达式中经常出现的是纳布拉算符$\nabla$（定义为$\nabla=\frac{\partial}{\partial x^i}\mathbf e_i$），作为微分算符，$\nabla$和分量为实数的矢量的运算规则不尽相同。下面对于出现$\nabla$的表达式，以$\nabla\times(\mathbf A\times \mathbf B)$为例介绍两种分析的方法：</p>
+<ol>
+<li>式中出现了两个矢量$\mathbf A$和$\mathbf B$，$\nabla$对二者都有作用，那么可以写成$\nabla<em>{\mathbf A}\times(\mathbf A\times\mathbf B)+\nabla</em>{\mathbf B}\times(\mathbf A\times\mathbf B)$，其中$\nabla<em>{\mathbf A}$只对$\mathbf A$作用，$\nabla</em>{\mathbf B}$只对$\mathbf B$作用。从而由(1.3.1)式，对第一项有：<script type="math/tex; mode=display">
+\nabla_{\mathbf A}\times(\mathbf A\times\mathbf B)=(\mathbf B\cdot\nabla_{\mathbf A})\mathbf A-(\nabla_{\mathbf A}\cdot\mathbf A)\mathbf B</script>这里$\nabla<em>{\mathbf A}$只对$\mathbf A$有作用，因此其与$\mathbf B$的点乘是可以交换的，进行恒等变换使得最后式中$\nabla</em>{\mathbf A}$只作用在$\mathbf A$上，从而保证在最后化回$\nabla$时不会引起歧义。<br>对$\nabla_{\mathbf B}$的式子同理，最后结果为：<script type="math/tex; mode=display">
+\begin{aligned}
+\nabla\times(\mathbf A\times \mathbf B)&=(\mathbf B\cdot\nabla_{\mathbf A})\mathbf A-(\nabla_{\mathbf A}\cdot\mathbf A)\mathbf B + (\nabla_{\mathbf B}\cdot\mathbf B)\mathbf A-(\mathbf A\cdot\nabla_{\mathbf B})\mathbf B
+\\&=(\mathbf B\cdot\nabla)\mathbf A-(\nabla\cdot\mathbf A)\mathbf B + (\nabla\cdot\mathbf B)\mathbf A-(\mathbf A\cdot\nabla)\mathbf B
+\end{aligned}</script></li>
+<li>使用爱因斯坦求和约定展开：<script type="math/tex; mode=display">
+\begin{aligned}
+\nabla\times(\mathbf A\times \mathbf B) &= \epsilon_{ijk}\frac{\partial}{\partial x^j}(\mathbf A\times\mathbf B)_k\mathbf e_i
+\\ &=\epsilon_{ijk}\frac{\partial}{\partial x^j}(\epsilon_{klm}A_lB_m)\mathbf e_i  = \epsilon_{kij}\frac{\partial}{\partial x^j}(\epsilon_{klm}A_lB_m)\mathbf e_i 
+\\&=(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})\frac{\partial}{\partial x^j}(A_lB_m)\mathbf e_i
+\\ &=\frac{\partial}{\partial x^j}(A_iB_j)\mathbf e_i-\frac{\partial}{\partial x^j}(A_jB_i)\mathbf e_i
+\\ &=B_j\frac{\partial A_i}{\partial x^j}\mathbf e_i + \frac{\partial B_j}{\partial x^j}A_i\mathbf e_i - \frac{\partial A_j}{\partial x^j}B_i\mathbf e_i - A_j\frac{\partial B_i}{\partial x^j}\mathbf e_i
+\\ &=(\mathbf B\cdot\nabla)\mathbf A + (\nabla\cdot\mathbf B)\mathbf A - (\nabla\cdot\mathbf A)\mathbf B -(\mathbf A\cdot\nabla)\mathbf B
+\end{aligned}</script></li>
+</ol>
+<p>两种方法都得到了正确结果。</p>
+<h1 id="2-曲线坐标系"><a href="#2-曲线坐标系" class="headerlink" title="2.曲线坐标系"></a>2.曲线坐标系</h1><p>这一部分的说明旨在表述具有一般性地给出在曲线坐标系对矢量的描述，并介绍同一个矢量的协变和逆变表示。注意我们仍在讨论$\mathbb{R}^3$中的矢量，而非在微分流形上定义的，虽然二者具有相似性，但这里的矢量基和对偶基处于同一个线性空间。</p>
+<p>本节内容来自<a target="_blank" rel="noopener" href="https://link.springer.com/book/10.1007%2F978-3-642-75595-8">《Flux Coordinates and Magnetic Field Structure》</a>。</p>
+<h2 id="2-1-矢量的对偶集合（reciprocal-sets）"><a href="#2-1-矢量的对偶集合（reciprocal-sets）" class="headerlink" title="2.1 矢量的对偶集合（reciprocal sets）"></a>2.1 矢量的对偶集合（reciprocal sets）</h2><p>称矢量集合${\mathbf A,\mathbf B,\mathbf C}$和${\mathbf a,\mathbf b,\mathbf c}$为对偶集合，若：</p>
+<script type="math/tex; mode=display">\mathbf A\cdot\mathbf a=\mathbf B\cdot\mathbf b=\mathbf C\cdot\mathbf c=1</script><script type="math/tex; mode=display">\mathbf A\cdot\mathbf b=\mathbf A\cdot\mathbf c=\cdots=0</script><p>。即，一个集合的每个元素都和另一个集合的一个元素的内积为1，并和另外两个元素正交。这两个集合中的元素都是线性无关的（否则，存在$\lambda,\mu,\gamma\neq0$，使$\lambda\mathbf A+\mu\mathbf B+\gamma\mathbf C=0$，从而$(\lambda\mathbf A+\mu\mathbf B+\gamma\mathbf C)\cdot\mathbf a=\lambda=0$，矛盾）。从而，对任意的矢量$\mathbf W$，都可以表示为这两个集合中的元素的线性组合：</p>
+<script type="math/tex; mode=display">\mathbf W=(\mathbf W\cdot\mathbf a)\mathbf A+(\mathbf W\cdot\mathbf b)\mathbf B+(\mathbf W\cdot\mathbf c)\mathbf C</script><p>或：</p>
+<script type="math/tex; mode=display">\mathbf W=(\mathbf W\cdot\mathbf A)\mathbf a+(\mathbf W\cdot\mathbf B)\mathbf b+(\mathbf W\cdot\mathbf C)\mathbf c</script><p>另外，由于${\mathbf A,\mathbf B,\mathbf C}$线性无关，其对偶集合是唯一的，可以表示为：</p>
+<script type="math/tex; mode=display">
+\mathbf a=\frac{\mathbf B\times\mathbf C}{\mathbf A\cdot(\mathbf B\times\mathbf C)} ,\mathbf b=\frac{\mathbf C\times\mathbf A}{\mathbf B\cdot(\mathbf C\times\mathbf A)} ,\mathbf c=\frac{\mathbf A\times\mathbf B}{\mathbf C\cdot(\mathbf A\times\mathbf B)} \tag{2.1.1}</script><p>容易验证(2.1.1)给出的对偶集合满足上面介绍的对偶集合的定义。</p>
+<h2 id="2-2-曲线坐标基"><a href="#2-2-曲线坐标基" class="headerlink" title="2.2 曲线坐标基"></a>2.2 曲线坐标基</h2><p>考虑坐标变换$\mathbf R(u^1,u^2,u^3)$：</p>
+<script type="math/tex; mode=display">x=x(u^1,u^2,u^3)</script><script type="math/tex; mode=display">y=y(u^1,u^2,u^3)</script><script type="math/tex; mode=display">z=z(u^1,u^2,u^3)</script><p>要求这个变换是独立的，即可以用$u^1,u^2,u^3$表示$x,y,z$（严谨地说，Jacobi行列式非零）。</p>
+<p>令$(u^1,u^2,u^3)$中一个坐标为定值，可以确定一个曲面，称为<strong>坐标曲面</strong>。令两个坐标为定值，则确定了一条曲线，称为<strong>坐标曲线</strong>。显然任意一条坐标曲线都可以看作两个坐标面的交线。</p>
+<p>对空间中的任意一点$P$，有三条经过$P$的坐标曲线，坐标曲线的切线方向可以定义一组基：</p>
+<script type="math/tex; mode=display">
+\mathbf e_1=\frac{\partial \mathbf R}{\partial u^1},\mathbf e_2=\frac{\partial \mathbf R}{\partial u^2},\mathbf e_3=\frac{\partial \mathbf R}{\partial u^3} \tag{2.2.1}</script><p>根据Jacobi行列式非零，${\mathbf e_1,\mathbf e_2,\mathbf e_3}$线性无关。这里与直角坐标系的区别在于，坐标基本身是位置的函数，不一定是常量。 </p>
+<p>另一方面，过同一点的三个坐标曲面的法线方向也可以定义另一组基。曲面某一点的法线方向应该与曲面上过这一点的曲线的切线方向垂直。注意到$\mathrm{d}u^i=\nabla u^i\cdot\mathrm{d}\mathbf{R}$，从而$\mathrm{d}\mathbf{R}=\frac{\partial \mathbf R}{\partial u^j}\mathbf du^j = \mathbf e_j\mathrm{d}u^j$，带回，$\mathrm{d}u^i=\nabla u^i\cdot\mathbf e_j\mathrm{d}u^j$，由于$u^1,u^2,u^3$互相独立，有：</p>
+<script type="math/tex; mode=display">\nabla u^i\cdot\mathbf e_j=\delta_j^i</script><p>这满足我们对曲线法线的期望，定义另外一组基如下：</p>
+<script type="math/tex; mode=display">\mathbf e^1=\nabla u^1,\mathbf e^2=\nabla u^2,\mathbf e^3=\nabla u^3 \tag{2.2.2}</script><p>另外由推导的过程我们知道，${\mathbf e_1,\mathbf e_2,\mathbf e_3}$和${\mathbf e^1,\mathbf e^2,\mathbf e^3}$是一对对偶矢量集合，分别称作<strong>基</strong>和<strong>对偶基</strong>。</p>
+<blockquote>
+<p>作为例子，让我们考虑球坐标：</p>
+<script type="math/tex; mode=display">x=r\sin\theta\cos\phi</script><script type="math/tex; mode=display">y=r\sin\theta\sin\phi</script><script type="math/tex; mode=display">z=r\cos\theta</script><p>根据2.2.1，坐标基为：</p>
+<script type="math/tex; mode=display">\mathbf{e_r}=\frac{\partial \mathbf R}{\partial r}=\sin\theta\cos\phi \mathbf{e_x}+\sin\theta\sin\phi \mathbf{e_y}+\cos\theta\mathbf{e_z}</script><script type="math/tex; mode=display">\mathbf{e_{\theta}}=\frac{\partial \mathbf R}{\partial \theta}=r\cos\theta\cos\phi \mathbf{e_x}+r\cos\theta\sin\phi \mathbf{e_y}-r\sin\theta\mathbf{e_z}</script><script type="math/tex; mode=display">\mathbf{e_{\phi}}=\frac{\partial \mathbf R}{\partial \theta}=-r\sin\theta\sin\phi \mathbf{e_x}+r\sin\theta\cos\phi \mathbf{e_y}</script><p>一般会对其进行归一化，这使它们成为坐标曲线的单位切向量，归一化的结果为：</p>
+<script type="math/tex; mode=display">\mathbf{e_r}=\sin\theta\cos\phi \mathbf{e_x}+\sin\theta\sin\phi \mathbf{e_y}+\cos\theta\mathbf{e_z}</script><script type="math/tex; mode=display">\mathbf{e_{\theta}}=\cos\theta\cos\phi \mathbf{e_x}+\cos\theta\sin\phi \mathbf{e_y}-\sin\theta\mathbf{e_z}</script><script type="math/tex; mode=display">\mathbf{e_{\phi}}=-\sin\theta\sin\phi \mathbf{e_x}+\sin\theta\cos\phi \mathbf{e_y}</script></blockquote>
+<h2 id="2-3-矢量的协变和逆变分量"><a href="#2-3-矢量的协变和逆变分量" class="headerlink" title="2.3 矢量的协变和逆变分量"></a>2.3 矢量的协变和逆变分量</h2><p>前面我们说过，可以用对偶矢量集合的线性叠加表示任意矢量，即：</p>
+<script type="math/tex; mode=display">
+\mathbf D = D^i\mathbf e_i = D_i\mathbf e^i</script><p>,其中：</p>
+<script type="math/tex; mode=display">D^i=\mathbf D\cdot\mathbf e^i</script><script type="math/tex; mode=display">D_i=\mathbf D\cdot\mathbf e_i</script><p>用上、下指标表示的分量$D^i,D_i$分别称作<strong>逆变分量</strong>、<strong>协变分量</strong>。</p>
+<p>下面的论述不完全准确地讨论了协变和逆变分量的含义。考虑不同于${\mathbf e<em>1,\mathbf e_2,\mathbf e_3}$的另一组线性无关的基${\mathbf e_1’,\mathbf e_2’,\mathbf e_3’}$，相应的对偶集合${\mathbf e^1{}’ ,\mathbf e^2{}’,\mathbf e^3{}’}$。两组基之间的坐标变换为$\mathbf e_i’=T_i^{\alpha}\mathbf e</em>{\alpha},\mathbf e^j{}’=T_{\beta}^j\mathbf e^{\beta}$。由对偶集合的定义，应有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \mathbf e_i'\cdot\mathbf e^j{}' &=  T_i^{\alpha}\mathbf e_{\alpha} \cdot T_{\beta}^j\mathbf e^{\beta} = T_i^{\alpha}T_{\beta}^j \delta_{\alpha}^{\beta} = T_i^{\alpha}T_{\alpha}^j
+    \\&= \delta_i^j
+\end{aligned}</script><p>说明基和对偶基的坐标变换矩阵$T<em>i^{\alpha}$和$T</em>{\beta}^j$的分量形式构成的矩阵互逆。矢量$\mathbf D$的协变分量$D<em>i=\mathbf D\cdot\mathbf e_i$，和基的变换方式相同，故称作协变；同理，逆变分量和对偶基的变换方式相同，其变换矩阵为基的逆矩阵，故称为逆变。（事实上$T_i^{\alpha}$和$T</em>{\beta}^j$不是两个矩阵，而是同一个张量在不同的基下的分量形式）</p>
+<p>需要注意矢量的协变表示和逆变表示与协变矢量和逆变矢量是不同的概念，在$\mathbb R^3$中不对后者进行区分。</p>
+<h2 id="2-4-度规"><a href="#2-4-度规" class="headerlink" title="2.4 度规"></a>2.4 度规</h2><p>对任意矢量$\mathbf D$，有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    D_i &= \mathbf D\cdot\mathbf e_i = (D^j\mathbf e_j)\cdot\mathbf e_i
+    \\&=D^j(\mathbf e_i\cdot\mathbf e_j) = g_{ij}D^j
+\end{aligned}</script><p>由此，根据分量：</p>
+<script type="math/tex; mode=display">
+g_{ij}=\mathbf e_i\cdot\mathbf e_j = \frac{\partial\mathbf R}{\partial u^i}\cdot\frac{\partial\mathbf R}{\partial u^j} \tag{2.4.1}</script><p>确定了一个二阶张量，称作<strong>度规</strong>。这里不准备展开介绍张量的定义，但需注意度规不仅仅是一个矩阵，而应被看做一个线性映射，它建立了基和对偶基下表示的矢量的联系。</p>
+<p>度规在对偶基下的分量形式为：</p>
+<script type="math/tex; mode=display">
+g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</script><p>由上面的讨论，我们知道，可以使用度规进行矢量协变和逆变分量的转换。根据爱因斯坦求和约定，可以很容易得到转换的表达式。例如，要得到根据矢量$\mathbf D$的协变分量（下指标）得到逆变分量（上指标），则需要使用度规在对偶基下的分量（两个上指标）进行运算，即哑指标一上一下，自由指标为上指标。从而得到：$D^i=g^{ij}D_j$。</p>
+<p>另外，借助度规，可以表示两个矢量的点乘和叉乘运算的同一类分量形式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \mathbf A\cdot\mathbf B &= (A^i\mathbf e_i)\cdot(B^j\mathbf e_j)=g_{ij}A^iB^j
+    \\&= (A_i\mathbf e^i)\cdot(B_j\mathbf e^j)=g^{ij}A_iB_j
+\end{aligned}</script><p>特别地，$\mathrm{d}\mathbf{R}\cdot\mathbf{dR} = g<em>{ij}(\mathrm{d}\mathbf{R})^i(\mathrm{d}\mathbf{R})^j = g</em>{ij}\mathbf{d}u^i\mathbf{d}u^j$。（其中$(\mathrm{d}\mathbf{R})^i = \nabla u^i\cdot\mathrm{d}\mathbf{R} = \mathbf du^i$），这告诉我们度规也蕴含了曲线坐标系中的线元长度。</p>
+<p>对矢量的叉乘：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \mathbf A\times\mathbf B &= A^iB^j(\mathbf e_i\times\mathbf e_j)
+\\&=A^iB^j\epsilon_{kij}\mathbf e^k(\mathbf e_k\cdot(\mathbf e_i\times\mathbf e_j))
+\\&=\epsilon_{kij}A^iB^j\mathbf e^k
+\end{aligned}</script><p>上面的推导用到了(2.1.1)式，当且仅当$(k,i,j)$是$(1,2,3)$的偶置换时有$\mathbf e^k = \frac{\mathbf e_i\times\mathbf e_j}{\mathbf e_k\cdot(\mathbf e_i\times\mathbf e_j)}$，且由(1.3.2)式，对所有偶置换，分母都相等。式中</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    J &= \mathbf e_1\cdot(\mathbf e_2\times\mathbf e_3) = \frac{\partial \mathbf R}{\partial u^1}\cdot(\frac{\partial \mathbf R}{\partial u^2}\times\frac{\partial \mathbf R}{\partial u^3})
+    \\&=
+    \begin{vmatrix}
+        \frac{\partial x}{\partial u^1} & \frac{\partial y}{\partial u^1} & \frac{\partial z}{\partial u^1} 
+        \\ \frac{\partial x}{\partial u^2} & \frac{\partial y}{\partial u^2} & \frac{\partial z}{\partial u^2}
+        \\ \frac{\partial x}{\partial u^3} & \frac{\partial y}{\partial u^3} & \frac{\partial z}{\partial u^3}
+    \end{vmatrix}
+\end{aligned}</script><p>为Jacobi行列式。把度规的分量$g<em>{ij}$写成矩阵，发现其元素$g</em>{ij}=\sum_{q=1}^{3}\frac{\partial \mathbf R^q}{\partial u^i}\cdot\frac{\partial \mathbf R^q}{\partial u^j}$，可以写成上面的Jacobi矩阵与其转置的积，那么我们有：</p>
+<script type="math/tex; mode=display">g=det(g_{ij})=J^2</script></body></html>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%89%A9%E7%90%86/" rel="tag"># 物理</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/03/30/motion-in-EM-field/" rel="prev" title="电磁场中运动的粒子">
+                  电磁场中运动的粒子 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%9F%A2%E9%87%8F%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">1.矢量分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E7%9F%A2%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 矢量的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E7%88%B1%E5%9B%A0%E6%96%AF%E5%9D%A6%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 爱因斯坦求和约定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E7%9F%A2%E9%87%8F%E5%88%86%E6%9E%90"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 矢量分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%9B%B2%E7%BA%BF%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">2.</span> <span class="nav-text">2.曲线坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E7%9F%A2%E9%87%8F%E7%9A%84%E5%AF%B9%E5%81%B6%E9%9B%86%E5%90%88%EF%BC%88reciprocal-sets%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 矢量的对偶集合（reciprocal sets）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%9B%B2%E7%BA%BF%E5%9D%90%E6%A0%87%E5%9F%BA"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 曲线坐标基</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E7%9F%A2%E9%87%8F%E7%9A%84%E5%8D%8F%E5%8F%98%E5%92%8C%E9%80%86%E5%8F%98%E5%88%86%E9%87%8F"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 矢量的协变和逆变分量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E5%BA%A6%E8%A7%84"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 度规</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="道山神連"
+    src="/images/kirin.gif">
+  <p class="site-author-name" itemprop="name">道山神連</p>
+  <div class="site-description" itemprop="description">宇宙的最不可理解之处在于它是可以被理解的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Li-mz" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;Li-mz" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5566902218" title="Weibo &amp;rarr; https:&#x2F;&#x2F;weibo.com&#x2F;5566902218" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/13024288" title="Bilibili &amp;rarr; https:&#x2F;&#x2F;space.bilibili.com&#x2F;13024288" rel="noopener" target="_blank"><i class="fa fa-fw fa-"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">道山神連</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.4.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22077,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      extensions: ["mediawiki-texvc.js"],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'GMC8JlmcdEXQuVhez2nFHNag-gzGzoHsz',
+    appKey: 'mICrom67f9LiUrnuDD9DOh7I',
+    placeholder: "Just go go",
+    avatar: 'identicon',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
