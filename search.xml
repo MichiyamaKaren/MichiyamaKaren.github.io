@@ -60,32 +60,6 @@
       </tags>
   </entry>
   <entry>
-    <title>在Docker上部署Jupyter Notebook</title>
-    <url>/2019/10/22/Docker-Jupyter/</url>
-    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>由于要用到只能在Linux上运行的python包，又懒得装双系统，就了解了一下Docker，配置了一个能在Windows上用的Jupyter Notebook环境。</p>
-<h2 id="Docker上Ubuntu的基础配置"><a href="#Docker上Ubuntu的基础配置" class="headerlink" title="Docker上Ubuntu的基础配置"></a>Docker上Ubuntu的基础配置</h2><p>去官网上下载一个Docker Desktop，然后pull一个ubuntu镜像。刚pull下来的ubuntu镜像里什么必要的工具也没有，需要自己apt-get安装。（改软件源的配置文件时需要注意按照对应的系统版本去搜索配置文件的写法，否则apt-get会报错）</p>
-<p>安装python, python3, pip, pip3, vim等必要软件。</p>
-<h2 id="配置Jupyter-Notebook"><a href="#配置Jupyter-Notebook" class="headerlink" title="配置Jupyter Notebook"></a>配置Jupyter Notebook</h2><p>参考了<a href="https://www.jianshu.com/p/21d5afc1c079">这篇博客</a>。</p>
-<p>首先安装Jupyter（我的电脑上pip3 config似乎有问题）：<br></p><figure class="highlight awk"><table><tbody><tr><td class="code"><pre><span class="line">pip3 install -i https:<span class="regexp">//</span>pypi.tuna.tsinghua.edu.cn/simple jupyter</span><br></pre></td></tr></tbody></table></figure><br>以及其他必要的第三方库。<br>然后生成Jupyter配置文件：<br><figure class="highlight verilog"><table><tbody><tr><td class="code"><pre><span class="line">jupyter notebook --<span class="keyword">generate</span>-<span class="keyword">config</span></span><br></pre></td></tr></tbody></table></figure><br>修改配置文件<code>~/.jupyter/jupyter_notebook_config.py</code>中的如下几项：<br><figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">c.NotebookApp.open_browser</span> = <span class="literal">False</span></span><br><span class="line"><span class="attr">c.NotebookApp.ip</span> = <span class="string">'*'</span></span><br><span class="line"><span class="attr">c.NotebookApp.port</span> = <span class="number">8888</span></span><br></pre></td></tr></tbody></table></figure><br>设置密码：<br><figure class="highlight ebnf"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attribute">jupyter notebook password</span></span><br></pre></td></tr></tbody></table></figure><br>然后把当前容器commit到notebook镜像。<p></p>
-<p>需要启动Jupyter Notebook时，用如下命令启动notebook容器：<br></p><figure class="highlight awk"><table><tbody><tr><td class="code"><pre><span class="line">docker run -d --name jupyter_pycbc -p <span class="number">8888</span>:<span class="number">8888</span> -v <span class="regexp">//</span>D<span class="regexp">/DockerShare/</span>:<span class="regexp">/home/</span>FromHost notebook jupyter notebook --allow-root /home</span><br></pre></td></tr></tbody></table></figure><br>各参数的含义为：<p></p>
-<ul>
-<li>-d：在后台运行</li>
-<li>-p：将容器的8888端口映射到宿主机的8888端口</li>
-<li>-v：将容器的<code>/home/FromHost</code>目录挂载到宿主机的<code>D:DockerShare</code>目录下。注意Windows中D盘DockerShare文件夹的表示方式为<code>//D/DockerShare</code>。</li>
-</ul>
-<p>在宿主机访问<code>localhost:8888</code>即可使用Jupyter Notebook。</p>
-<h2 id="配置多个python"><a href="#配置多个python" class="headerlink" title="配置多个python"></a>配置多个python</h2><p>参考了<a href="https://blog.csdn.net/hohaizx/article/details/89633203">这篇博客</a>。</p>
-<p>之前配置的Jupyter Notebook只能使用python3，现在要同时使用python2和python3，需要进一步配置。</p>
-<p>这只需添加python2的ipython kernel：<br></p><figure class="highlight jboss-cli"><table><tbody><tr><td class="code"><pre><span class="line">pip install -i https:<span class="string">//pypi.tuna.tsinghua.edu.cn/simple</span> ipykernel</span><br><span class="line">python -m ipykernel install <span class="params">--user</span> <span class="params">--name</span> python27 <span class="params">--display-name</span> <span class="string">"python27"</span></span><br></pre></td></tr></tbody></table></figure><br>再次启动Jupyter Notebook，即可看到两个python。<p></p>
-</body></html>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2020年度总结</title>
     <url>/2021/01/01/2020-review/</url>
     <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>这里应该有个开头，但不知道怎么开，就算了。毕竟是2020年的总结，不守规矩一点倒更符合。</p>
@@ -143,26 +117,101 @@
       </tags>
   </entry>
   <entry>
-    <title>基于NoneBot的NG词语游戏插件</title>
-    <url>/2019/07/07/NGWordGame-with-Nonebot/</url>
-    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><h1 id="NoneBot"><a href="#NoneBot" class="headerlink" title="NoneBot"></a>NoneBot</h1><p>NoneBot是基于酷Q的一个QQ机器人框架，其基本介绍和使用参见其<a href="https://none.rclab.tk/">文档</a>。本段旨在补充一些目前在文档中还未点出的有关NoneBot的一些性质，它们在NG词语游戏插件的编写中是不可或缺的。</p>
-<p>当QQ机器人接收到一条消息时，它会首先对消息进行parsing，解析出当前消息对应的指令和参数。随后，它会根据上下文——即CoolQ HTTP API中<a href="https://cqhttp.cc/docs/4.10/#/Post?id=%E4%BA%8B%E4%BB%B6%E5%88%97%E8%A1%A8">事件上报</a>的数据的字典，包含消息和发信人的信息——中的发信人信息来生成一个唯一的<code>ctx_id</code>。这个<code>ctx_id</code>的作用是标记仍然有效的命令会话（如果是开始运行收到的第一条信息，那么不会有可用的命令会话）。NoneBot指令是要通过命令会话和用户进行数据交互的，而这里的意义是让同一个命令会话只响应<code>ctx_id</code>相同的用户的输入，也就是说两个<code>ctx_id</code>不同的用户调用同一条指令的时候会产生两个命令会话分别根据他们输入的参数实现不同的操作，从而不会互相干扰。默认的<code>ctx_id</code>是对每个用户都唯一的，这显然不利于我们的实现——我们希望多个玩家参与到这个游戏中来，要让同一个命令会话响应所有人发出的消息。好在<code>ctx_id</code>的实现中允许我们给来自同一个群的所有消息赋予同样的<code>ctx_id</code>，这需要更改NoneBot的源码，将<code>nonebot\command\__init__.py</code>中525行：<br></p><figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">ctx_id</span> = context_id(ctx)</span><br></pre></td></tr></tbody></table></figure><br>改为：<br><figure class="highlight reasonml"><table><tbody><tr><td class="code"><pre><span class="line">ctx_id = context<span class="constructor">_id(<span class="params">ctx</span>, <span class="params">mode</span>='<span class="params">group</span>')</span></span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>如果没有获取到可用的命令会话，并且解析出来了消息对应的指令的话，那么将会创建一个新的命令会话，然后进行处理。至此我们可以暂时离开消息的解析和响应的层面，在处理命令的层面考虑机器人的逻辑。对于一个已经被正确识别的命令，命令会话将首先进入参数解析器arg_parser（没有arg_parser也可以），然后进入命令处理器。命令会话类<code>CommandSession</code>有几个属性和方法是需要用到的：</p>
+    <title>舞台少女将站上名为自己的舞台</title>
+    <url>/2022/01/03/202201-revue-starlight-gekijoban/</url>
+    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>从很久之前开始我就一直在想，我总是要写点什么的，这并不是因为我的见解多深刻或视角多独特以至于一定要写出来才行，只是试图借文字理清我那些不怎么清楚的想法和感受。我一直认为作品是只有被它的观众看到的那一刻才算完成了的，而将看到的画面和听到的声音转化为自己能够理解的东西本身就是一种再创作，所以我的行为大概可以被解释为一种致敬，对少女歌剧这样难得的优秀作品进行的模仿创作。虽然是拙劣的模仿，但我想这是我一定要做的，如同剧场版中的舞台少女们一样，完成一直以来没能完成的执念，然后才可能走向下一个舞台。</p>
+<h2 id="两人的高速公路"><a href="#两人的高速公路" class="headerlink" title="两人的高速公路"></a>两人的高速公路</h2><p>作为wi(l)d-screen baroque的第一幕，花叶revue也承担了展示剧场版中revue的风格的作用。对revue的解读存在很多的讨论和说法，这里我并不想过多纠结死的设定，我采用这样的理解：revue即是舞台，而在revue中发生的一切，包括revue本身，也都属于舞台的范畴。剧场版的revue的风格的明显变化也是符合这一理解的，不再起选拔作用的revue的内容也不再仅仅是舞台少女们以试图砍掉对方的披肩的形式分个胜负。这无疑更加增加了revue的表现能力。</p>
+<p>另外一个值得注意的点是，舞台脱离了圣翔音乐学院的地下，而是在未知的地点，或者是不属于世界上任何一个位置的地点上演。在花叶revue的最开始，我们仍然可以看到熟悉的东京塔和我们预期的会在revue中出现的内容。</p>
+<p><img src="futakao-0.png" alt=""></p>
+<p><img src="futakao-1.png" alt=""></p>
+<div align="center"> 即用刀斧打架 </div>
+
+<p>而在双叶说出“我是为了你好”之后，场景发生了转换。可以看出这里的舞台设定是心虚的男人和已经知道一切的女人互相摊牌，这无疑也是与花叶符合的。双叶不继续留在香子身边当然不都是为了香子，而香子对这点也是心知肚明，因此能够怼得双叶说不出话来。内容上，这是对花叶过去的关系的持续的否定，而这里的舞台整体风格的改变也可以看做在另外一个维度上的，对TV中已经定型的revue形式的否定。这种否定，或是说创新，也可以很容易地在后面的revue中发现。</p>
+<p>当然，（好不容易做得这么好的）TV的内容也并没有被完全否定。与约定的revue香子试图割断自己的披肩那里类似，怨恨的revue止于香子自己把自己的车开了下去。</p>
+<p><img src="futakao-2.png" alt=""></p>
+<p>这也是我在花叶revue中最受到冲击的画面（<del>不觉得和odd taxi最终话的名场面很像吗</del>）这里的相似在于，事实上香子从头到尾都明白一切，她的行为只是为了看到双叶表现出的行动。在TV中是希望得到双叶的挽留以确认她对自己的重视，而在这里要确认的大概就是双叶离她而去追寻自己的舞台的决心。让她满足的不是“为了你好”的讲不通的表面话，而是“不能继续在一起了”的真心。在最后的最后，双叶虽然离开香子，但仍然由不讲理的任性延续了她们的缘分。这也是颇有花叶风味的展开，一向被任性的双叶在最后提出了最大的任性，而从岔路口分开抵达不同目的地的两人也可能以不是“追逐与被追逐”的形式重逢。</p>
+<h2 id="用演技表达的真心"><a href="#用演技表达的真心" class="headerlink" title="用演技表达的真心"></a>用演技表达的真心</h2><p>纵观剧场版的所有revue，光昼revue的独特性在于其高潮部分的真情流露并不是借由revue的演出的内容，而是借由表演这一行为本身。真昼的一连串嘲讽和恐吓当然不是真心话，其目的如果仅仅是为了让小光正视她和华恋的舞台上还存在没做完的事，那么自然存在更多更温和的方式，而真昼的选择是拉小光来到由她表演的舞台。这里真昼的性质得到强烈的表现，如果我们不去管在戏里和戏外都被过分强调的真昼身上的扭曲戏份，她实际上也是热爱舞台、渴望闪耀的舞台少女。从动画里考虑，这场revue是在让小光表达她没做完的事；而从动画之外考虑，这也是在完成真昼在摆脱对华恋病态的依赖之后的缺失的塑造。在正午的阳光的背景之中闪耀，投下温暖的光芒，这才是名为露崎真昼的星。</p>
+<p>另外，revue中的恐怖表现也让我惊艳。我确实从未预期过能在少女歌剧中看到恐怖的演出，这也确实是无法预料的舞台了。</p>
+<p><img src="hikamahi-1.png" alt=""></p>
+<div align="center"> 真挺吓人的 </div>
+
+<p>最后是一些完全的个人内容，由于一些早期的原因，我对光昼这对组合心里一直有些意见，因此在被剧透到剧场版会有这一场revue时，我心里确实存在些许担心，会不会整一些我不愿看到的烂活。但毕竟少女歌剧是少女歌剧，能让我乖乖放下成见感动到落泪，这也是这部作品所拥有的能力啊。</p>
+<p><img src="hikamahi-2.png" alt=""></p>
+<div align="center"> 三句话，让光昼雷为光昼revue落泪 </div>
+
+<h2 id="耀眼之物处在自己的舞台"><a href="#耀眼之物处在自己的舞台" class="headerlink" title="耀眼之物处在自己的舞台"></a>耀眼之物处在自己的舞台</h2><p>很遗憾地承认，在看了很多遍之后，我仍然没法抓到一个解读蕉纯revue的头绪。不过即便如此，我的感受也并非只是“我不懂”，因为这里仍然存在一些能让我可以抓住的点。</p>
+<p>可以注意到的是这场revue中关于蕉纯二人存在很多的对称性，例如最开始和最后的“给她弄哭了啊”，被斩断的纯那的名言（“星”）和奈奈的刀，甚至这个像是Python切片表达式的歌名在某种程度上也可以看做是一种对称。</p>
+<p><img src="jnnn-1.png" alt=""></p>
+<div align="center"> 这个position zero形状的路也是镜像对称的，好吧这可能不怎么重要 </div>
+
+<p>这种大量存在的对称性大概也可以理解为对蕉纯本身的关系的隐喻，因为我们可以看得到奈奈对纯那“届不到”的否定（这里蕉斩断了纯的“星”）使纯那意识到单纯复读名言是不行的，从而将名言的力量真正转化为自身的力量；而纯那对奈奈预期的打破（这里纯斩断了蕉的刀）则使奈奈最终放弃了仅存在于他人身上和过去的再演。可以认为蕉纯二人在对方的心态转变上都起到了类似的作用。</p>
+<p>在revue的最后，奈奈感叹“我的再演在现在结束了”。这必然不是指对99届圣翔祭的再演，它在一年前（或三年前）就结束了，我对这句话的理解是，这里的“再演”指的是将自己的舞台放在他人身上的行为。如同对99届圣翔祭的再演中奈奈告诉自己的她在试图从她以为的可怖的未来中保护大家，此时她所需要看到的也是纯那保持她认为的“我的纯那酱”的形象，即使这意味着作为舞台少女的枯萎凋零。也和羁绊的revue的华恋类似，纯那斩断了奈奈为她制作的舞台，从而终止了奈奈的再演。此时的蕉纯的前方都是只属于自己的舞台，只在那里她们能找到自己的闪耀之物。</p>
+<p><img src="jnnn-2.png" alt=""></p>
+<div align="center"> 破坏之后的复合，这个画面实在过于浪漫…… </div>
+
+<h2 id="展露灵魂的毕业演出"><a href="#展露灵魂的毕业演出" class="headerlink" title="展露灵魂的毕业演出"></a>展露灵魂的毕业演出</h2><p>迷宫的revue大概可以说是剧场版中最华丽的一场，同时也可以说是最“舞台”的一场。和其余的revue要处理的人物如何向不同的前路迈进不同，迷宫revue给我的感觉更多是一场集大成的毕业演出。舞台的不同阶段内容差异巨大，衔接却十分流畅，比起仅仅在这一出舞台上演出的内容，理解成长久以来的心意的互相显露倒更自然一些。</p>
+<p>当然，这并不意味着这场revue的存在不那么重要。因为迷宫revue中要讲述的不是如何登上舞台，而是如何从完美的舞台之神的容器退化为存在缺陷与污点的人。这大概也可以用于理解这场revue的结局，只有成为存在缺陷的人的真矢的眼睛才能看到同样存在缺陷的克洛却也如此的美丽。</p>
+<p>至于华丽的演出效果，虽然我更享受的是这个，但并不容易用文字描述。这里只说一处，让我最震撼的是在最后，真矢惊叹于克洛的美丽，和舞台的设定一样，展现出了她未曾见过的光芒的克洛让真矢展露出了她的灵魂。随着契约兑现，整座舞台燃起熊熊烈火。很难讲述震撼的由来，只能说这是最适合华丽的舞台的华丽的终结方式了吧。</p>
+<p><img src="mayakuro-1.png" alt=""></p>
+<h2 id="你即是我，我即是你"><a href="#你即是我，我即是你" class="headerlink" title="你即是我，我即是你"></a>你即是我，我即是你</h2><p>这部分会长一点，因为我的成分，懂的都懂。</p>
+<h3 id="华恋的内面"><a href="#华恋的内面" class="headerlink" title="华恋的内面"></a>华恋的内面</h3><p>我第一次体会到少歌的美和震撼是在第不知多少次再演时，大概也是从那一刻起我就是华恋推了，虽然当时我可能还没意识到这一点。我记不起那是什么时候，一个我能记起的时间点是在20年初我剪完约定之塔的MAD之后，那时我意识到TV中华恋的形象似乎存在一些两面性。在舞台上的华恋是不讲理的傲慢的，她在TV的revue中的表现，即对对方说的话强行进行不相关的否定（即non non哒哟）即是出于这样的傲慢，也是由这份傲慢，她才能够连舞台的运转规则和既定的命运都否定掉，才能跳入舞台续写starlight的结局。而另一方面，舞台下的（或者更具体一点，在光面前的）华恋是小心谨慎的，在4话和11话小光离开之后的满城寻找和魂不守舍，其中能看到的更多是焦虑和不安。不过TV中被更多强调的仍是华恋的傲慢的一面，因此那时的我也并不能完全确定华恋心里是否也存在这另外一面，只是作为了心中的一个疑问和期待留存下来。因此在剧场版中华恋中不安的一面得到重点表现，对我来说比起意外更多能感觉到惊喜。我们得以看到更清楚的华恋的细腻的内心，可以看到她对约定的执着之外的更多包含的“不看，不听，不搜”小心翼翼，以及除了向着目标一直线之外也会像每个人一样会拥有的烦恼与迷茫。</p>
+<p><img src="karen-1.png" alt=""></p>
+<div align="center"> 眼镜小哥就是我啊 </div>
+
+<p>仍然需要说明的是，剧场版对华恋的描写在我看来是增添而不是补完，即我并不认为TV中的华恋是一个不完整的形象，其原因在上面已经讲述过。我们回顾TV可以看到的是华恋即使心中存在着不安与恐惧，却仍然能够去向星伸出手，去改写已成定数的结局，颠覆不可颠覆的命运，这仍然是我们不该忘记的TV告诉我们的华恋身上存在的独特魅力。</p>
+<h3 id="重生的舞台"><a href="#重生的舞台" class="headerlink" title="重生的舞台"></a>重生的舞台</h3><p>这大概是每个少歌人都想过的问题，在TV讲述完了这么一个完整而独立的故事之后，演绎完了完整的starlight的舞台少女们又要走向何方？剧场版在皆殺し的revue中给出了答案——她们死了。我并没有单独开一段讨论皆殺し的revue，因为要讨论的话就只能讨论假药了，而我不怎么喜欢假药，无论是做还是吃。比起假药我更喜欢谜语一点，所以我说谜语：华恋在皆殺し的revue中并没有出现，这大概是因为她在那之前就死了，不是在之后在光面前她的番茄裂开的时候，而是在演完starlight之后失去新的目标的瞬间。亦或是再之前，在她认定自己的舞台只能是starlight的那时。此时的华恋甚至也可以说是被她自己囚禁在了和光的约定之塔中。</p>
+<p><img src="karehika-1.png" alt=""></p>
+<div align="center"> 这里约定之塔成了华恋的轨道的终点 </div>
+
+<p>当然，具体的华恋的死仍然发生在和小光重新见面时，在华恋将目光从她已完成的约定和小光身上移开，转到只属于她自己的舞台，并为自己的空无一物感到恐惧之时。值得注意的是恋光在这里的表现和在过去两人许下约定时的表现是完全一致的。这也正是对恋光两人对对方的意义的绝佳概括——“你即是我，我即是你”。</p>
+<p><img src="karehika-2.png" alt=""></p>
+<p><img src="karehika-3.png" alt=""></p>
+<p>和在过去华恋拉住小光的手要与她一同前往舞台，成为star使光作为舞台少女重生相同，此时光的信落到华恋身上，这或许也是一个不需要被点明的约定——作为舞台少女，无论多少次都要再次踏上舞台。</p>
+<p><img src="karehika-4.png" alt=""></p>
+<p>于是登上列车的华恋进行了她的再生产，在这次我们看到的最后的再生产中，华恋过去的一切，包括曾经与小光的约定都被燃烧殆尽，让她得以新生，以崭新的姿态站在舞台上。</p>
+<p><img src="karehika-5.png" alt=""></p>
+<p><img src="karehika-6.png" alt=""></p>
+<p>然而wi(l)d-screen baroque在此时还未结束，华恋还有一定要说的最后的台词。值得注意这里并不是一场revue，而仅仅是“最后的台词”。</p>
+<p><img src="karehika-7.png" alt=""></p>
+<div align="center"> 没有revue名 </div>
+
+<p>可以采用这样的理解，华恋所需要进行的再生产在回到舞台之前便已完成，她需要最后在revue starlight舞台上让这个舞台落下帷幕。在故事的开端，由于华恋的约定走上舞台的光此时绽放出无比的闪耀，正是这份闪耀促使了华恋的重生，也是切实接收了这份闪耀使得华恋的执着的对象变成了舞台本身。被光的闪耀迷住双眼的华恋说出最后的台词“我也不想输给光”，无数的position zero从她之中迸发而出，将约定之塔撕裂成两端，让她来到了舞台中心。</p>
+<p><img src="karehika-8.png" alt=""></p>
+<p><img src="karehika-9.png" alt=""></p>
+<p>在这场舞台中更为耀眼的确是光，但这不再是互相争夺闪耀的revue，而是让revue starlight画下句号的，舞台少女爱城华恋新生的舞台。正是在这一刻，华恋和所有舞台少女们都终于可以迈出starlight之后新的一步，如同她们摘下的披风一样，可以无依托地在空中自由地被放飞。重新成为心中空无一物的华恋，却也是未被涂画过的白纸，在她的舞台上存在着无限的可能性，而她也定会找到一个又一个仅属于自己的舞台。</p>
+<h2 id="舞台之外"><a href="#舞台之外" class="headerlink" title="舞台之外"></a>舞台之外</h2><p>写这篇观后感并不是在我第一次看剧场版之后，也肯定不会是最后一次。第一次看完的时候我哭得很厉害，既是因为没有任何预想的初见时面对这样的情感和信息的洪流没什么抵抗能力，也是因为我也很清楚剧场版的结局对我和一起走过三年的少女歌剧来说意味着什么。舞台是消耗物，动画也是，但被消耗的并不是作品本身，而是去观看作品的人。有些感受是只有初见才能体会的到的，有些可能会随着时间的流逝产生变化，有些曾有过的感受可能在从不知道第几次再演开始再也不会出现。我曾很害怕这一点，害怕变成一个完全不一样的自己，害怕曾经有过的情感在某一天再也找不回来，害怕曾经让我感受到无比闪耀的东西也会随着我的改变而褪色，对少女歌剧这样带给了我未曾想象过的感受的作品就更是如此。</p>
+<p><img src="after-1.png" alt=""></p>
+<p>但我想剧场版还是给了我一些改变的。剧场版给我的并非只有结束的信息，重要的是让我感受到了从未感受过的满足。我说不清是为什么，虽然我也没有什么过于耀眼而看不清的未来，但大概这点满足也就够了。我确是最空虚的，也是最满足的。在今后我还会再演不知道多少次，再遥远的之后可能即使再演也唤不起来现在的感受，但这份满足感大概会烙印在我身上，我会一直记得一部叫做《少女歌剧 Revue Starlight》的动画给过我如此多这样新的体验。</p>
+<p>但那是未来的事，至于现在，我还有很多没法归纳成语言的感受不知该如何表达。我想我只好复读一遍初看之后那天晚上归结的一句话：</p>
+<p><img src="after-2.png" alt=""></p>
+<p>看到最后了，Revue Starlight。</p>
+</body></html>]]></content>
+      <categories>
+        <category>ACG</category>
+      </categories>
+      <tags>
+        <tag>ACG</tag>
+        <tag>随想</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在Docker上部署Jupyter Notebook</title>
+    <url>/2019/10/22/Docker-Jupyter/</url>
+    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>由于要用到只能在Linux上运行的python包，又懒得装双系统，就了解了一下Docker，配置了一个能在Windows上用的Jupyter Notebook环境。</p>
+<h2 id="Docker上Ubuntu的基础配置"><a href="#Docker上Ubuntu的基础配置" class="headerlink" title="Docker上Ubuntu的基础配置"></a>Docker上Ubuntu的基础配置</h2><p>去官网上下载一个Docker Desktop，然后pull一个ubuntu镜像。刚pull下来的ubuntu镜像里什么必要的工具也没有，需要自己apt-get安装。（改软件源的配置文件时需要注意按照对应的系统版本去搜索配置文件的写法，否则apt-get会报错）</p>
+<p>安装python, python3, pip, pip3, vim等必要软件。</p>
+<h2 id="配置Jupyter-Notebook"><a href="#配置Jupyter-Notebook" class="headerlink" title="配置Jupyter Notebook"></a>配置Jupyter Notebook</h2><p>参考了<a href="https://www.jianshu.com/p/21d5afc1c079">这篇博客</a>。</p>
+<p>首先安装Jupyter（我的电脑上pip3 config似乎有问题）：<br></p><figure class="highlight awk"><table><tbody><tr><td class="code"><pre><span class="line">pip3 install -i https:<span class="regexp">//</span>pypi.tuna.tsinghua.edu.cn/simple jupyter</span><br></pre></td></tr></tbody></table></figure><br>以及其他必要的第三方库。<br>然后生成Jupyter配置文件：<br><figure class="highlight verilog"><table><tbody><tr><td class="code"><pre><span class="line">jupyter notebook --<span class="keyword">generate</span>-<span class="keyword">config</span></span><br></pre></td></tr></tbody></table></figure><br>修改配置文件<code>~/.jupyter/jupyter_notebook_config.py</code>中的如下几项：<br><figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">c.NotebookApp.open_browser</span> = <span class="literal">False</span></span><br><span class="line"><span class="attr">c.NotebookApp.ip</span> = <span class="string">'*'</span></span><br><span class="line"><span class="attr">c.NotebookApp.port</span> = <span class="number">8888</span></span><br></pre></td></tr></tbody></table></figure><br>设置密码：<br><figure class="highlight ebnf"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attribute">jupyter notebook password</span></span><br></pre></td></tr></tbody></table></figure><br>然后把当前容器commit到notebook镜像。<p></p>
+<p>需要启动Jupyter Notebook时，用如下命令启动notebook容器：<br></p><figure class="highlight awk"><table><tbody><tr><td class="code"><pre><span class="line">docker run -d --name jupyter_pycbc -p <span class="number">8888</span>:<span class="number">8888</span> -v <span class="regexp">//</span>D<span class="regexp">/DockerShare/</span>:<span class="regexp">/home/</span>FromHost notebook jupyter notebook --allow-root /home</span><br></pre></td></tr></tbody></table></figure><br>各参数的含义为：<p></p>
 <ul>
-<li><code>_current_arg_text</code>：字符串，消息的纯文本部分，剥离了命令部分并去除前部分空格的消息。</li>
-<li><code>_state</code>：字典类型，用于存储希望被保存在会话中的局部变量。</li>
-<li><code>send()</code>：文档中也介绍过，向当前会话发送信息（群聊或私聊），传入参数<code>at_sender=True</code>可以在消息首部@发送者。</li>
-<li><code>pause()</code>：正常情况下一个命令会话会在响应完用户的一条消息后就过期，但是如果调用了<code>pause()</code>，那么命令会话会被暂停并保存，接收到下一条<code>ctx_id</code>相同的用户（考虑到上一段的修改，即同一个群里的下一条消息或来自同一个人的私聊）时会被重新运行一次。</li>
-<li><code>is_first_run</code>：bool类型，如果会话是第一次创建则为<code>True</code>，如果会话是调用了<code>pause()</code>被重新调起则为<code>False</code>。</li>
+<li>-d：在后台运行</li>
+<li>-p：将容器的8888端口映射到宿主机的8888端口</li>
+<li>-v：将容器的<code>/home/FromHost</code>目录挂载到宿主机的<code>D:DockerShare</code>目录下。注意Windows中D盘DockerShare文件夹的表示方式为<code>//D/DockerShare</code>。</li>
 </ul>
-<p>以上并非是<code>CommandSession</code>提供的全部接口，但是对于实现NG词语游戏的插件已足够。</p>
-<h1 id="NG词语游戏的实现——基于状态机"><a href="#NG词语游戏的实现——基于状态机" class="headerlink" title="NG词语游戏的实现——基于状态机"></a>NG词语游戏的实现——基于状态机</h1><p>NG词语游戏出自漫画《辉夜大小姐想让我告白～天才们的恋爱头脑战～》，规则为参与游戏的每个玩家为下一个玩家设置一个“NG词”， 设置完成后展示之，使得除了自己的每个人都能知道自己的NG词。之后所有玩家进行自由谈话，说出自己的NG词的玩家判负，退场。直至只剩一人为止。</p>
-<p>在命令会话中实现的操作是获取局部变量-&gt;根据不同的游戏进程对用户的输入做出不同的回应-&gt;写回局部变量，这很容易让人联想到状态机，而NoneBot提供的框架对于基于状态机的实现也是很方便的，因此我们选择基于状态机实现。</p>
-<p>游戏状态有三个：玩家注册状态，设置NG词状态，监听状态；状态跳转也是很简单的注册-&gt;设置-&gt;监听。状态机类<code>NGFSM</code>存储所有玩家的列表，每次接收发送者的信息，然后把要向会话（也就是群聊）和要私聊发送的信息返回给命令处理器。最初我是把状态机直接写在了命令处理器里，相比之下这样的交互方式可能有些冗杂，但是我认为游戏的逻辑实现部分和更底层一些的通信部分不应该耦合在一起，因此花了一些功夫把状态机单独提出来一个类。下面介绍每个状态的实现：</p>
-<h2 id="注册状态"><a href="#注册状态" class="headerlink" title="注册状态"></a>注册状态</h2><p>这个状态要接收每个希望参与游戏的玩家的注册，规定注册需要回复<code>sign in</code>，响应所有注册的用户的回复，根据上下文记录QQ号、称呼信息，加到玩家列表中。另外，响应超级用户发出的<code>stop signing</code>，结束注册，状态跳到设置状态。</p>
-<h2 id="设置状态"><a href="#设置状态" class="headerlink" title="设置状态"></a>设置状态</h2><p>由于游戏性质，设置NG词不能在群聊中进行，而是要和机器人私聊设置。这为实现带来了一个难点——设置NG词的命令会话和游戏的会话不能是一个，那么它们之间该如何通信呢？我的解决方法是单独设置另外一个命令用于设置NG词，这个命令响应玩家的设置之后将NG词存储在磁盘上，当所有玩家设置完成之后，由超级用户手动在群聊中发出<code>check</code>指令通知游戏会话已设置完毕，然后从磁盘中读取设置的数据，从而实现IO的同步。当然，这一过程可以足够用户友好——只要在进入设置状态前把群聊的号码记录到磁盘上，就可以在所有玩家都设置完之后主动调用CQHTTP API，自动向群聊里发送一条提醒消息。<code>check</code>之后，读出所有玩家的NG词，进入监听状态。</p>
-<h2 id="监听状态"><a href="#监听状态" class="headerlink" title="监听状态"></a>监听状态</h2><p>这一状态中只需要监听玩家发出的消息，只要有人的消息中包含自己的NG词就向会话发出提醒信息，判该玩家出局，然后继续监听，直至只剩一人。</p>
-<p>项目代码已上传到GitHub仓库<a href="https://github.com/Li-mz/NGWordGame">NGWordGame</a>。</p>
+<p>在宿主机访问<code>localhost:8888</code>即可使用Jupyter Notebook。</p>
+<h2 id="配置多个python"><a href="#配置多个python" class="headerlink" title="配置多个python"></a>配置多个python</h2><p>参考了<a href="https://blog.csdn.net/hohaizx/article/details/89633203">这篇博客</a>。</p>
+<p>之前配置的Jupyter Notebook只能使用python3，现在要同时使用python2和python3，需要进一步配置。</p>
+<p>这只需添加python2的ipython kernel：<br></p><figure class="highlight jboss-cli"><table><tbody><tr><td class="code"><pre><span class="line">pip install -i https:<span class="string">//pypi.tuna.tsinghua.edu.cn/simple</span> ipykernel</span><br><span class="line">python -m ipykernel install <span class="params">--user</span> <span class="params">--name</span> python27 <span class="params">--display-name</span> <span class="string">"python27"</span></span><br></pre></td></tr></tbody></table></figure><br>再次启动Jupyter Notebook，即可看到两个python。<p></p>
 </body></html>]]></content>
       <categories>
         <category>技术</category>
@@ -192,11 +241,11 @@
 <ol>
 <li>如1小节所述，$\mathscr L_f$应该是洛伦兹不变量</li>
 <li>应该具有规范对称性</li>
-<li>电磁场应该满足叠加原理，即电磁场方程应该是线性的，则应该有$\mathscr L<em>f \sim (\partial</em>{\mu}A^{\nu})^2$</li>
+<li>电磁场应该满足叠加原理，即电磁场方程应该是线性的，则应该有$\mathscr L_f \sim (\partial_{\mu}A^{\nu})^2$</li>
 </ol>
 <p>事实上人们发现$\mathscr L_f$的形式是：</p>
 <script type="math/tex; mode=display">\mathscr L_f = -\frac 1 {4\mu_0 c} F^{\alpha\beta}F_{\alpha\beta}</script><p>很容易验证它是满足以上的要求的。</p>
-<h2 id="2-2-真空电磁场方程"><a href="#2-2-真空电磁场方程" class="headerlink" title="2.2 真空电磁场方程"></a>2.2 真空电磁场方程</h2><p>将电磁场的拉氏量带入E-L方程，求得真空中的（即只考虑$\mathscr L<em>f$，不考虑$\mathscr L</em>{pf}$）电磁场方程为：</p>
+<h2 id="2-2-真空电磁场方程"><a href="#2-2-真空电磁场方程" class="headerlink" title="2.2 真空电磁场方程"></a>2.2 真空电磁场方程</h2><p>将电磁场的拉氏量带入E-L方程，求得真空中的（即只考虑$\mathscr L_f$，不考虑$\mathscr L_{pf}$）电磁场方程为：</p>
 <script type="math/tex; mode=display">\frac 1 {\mu_0 c} \frac{\partial F_{\nu}^{\cdot\mu}}{\partial x^{\mu}}=0</script><p>也可以乘$\eta_{\mu\gamma}$并改变自由指标得到：</p>
 <script type="math/tex; mode=display">\frac 1 {\mu_0 c} \frac{\partial F_{\nu\mu}}{\partial x^{\mu}}=0</script><p>将电磁场张量按照定义展开，得到：</p>
 <script type="math/tex; mode=display">\frac{\partial}{\partial x^{\nu}}\frac{\partial A^{\mu}}{\partial x^{\mu}}-\frac{\partial^2}{\partial x_{\mu}\partial x^{\mu}}A^{\nu}=0</script><p>选取洛伦兹规范：</p>
@@ -222,14 +271,14 @@
 <script type="math/tex; mode=display">
 \nabla\cdot\mathbf E=0
 \\ \nabla\times\mathbf B = \frac 1 {c^2}\frac{\partial \mathbf E}{\partial t}</script><p>结合上一节中的两个方程，我们得到了全部真空中的麦克斯韦方程。</p>
-<h1 id="3-与粒子耦合的电磁场"><a href="#3-与粒子耦合的电磁场" class="headerlink" title="3.与粒子耦合的电磁场"></a>3.与粒子耦合的电磁场</h1><h2 id="3-1-电流密度"><a href="#3-1-电流密度" class="headerlink" title="3.1 电流密度"></a>3.1 电流密度</h2><p>我们下一步要做的事自然是考虑$S<em>{pf}$和$S_f$的耦合，但是在此之前，由于电磁场的项是用拉氏量密度表示的，所以我们也需要将$S</em>{pf}$也用拉氏量密度表示。</p>
+<h1 id="3-与粒子耦合的电磁场"><a href="#3-与粒子耦合的电磁场" class="headerlink" title="3.与粒子耦合的电磁场"></a>3.与粒子耦合的电磁场</h1><h2 id="3-1-电流密度"><a href="#3-1-电流密度" class="headerlink" title="3.1 电流密度"></a>3.1 电流密度</h2><p>我们下一步要做的事自然是考虑$S_{pf}$和$S_f$的耦合，但是在此之前，由于电磁场的项是用拉氏量密度表示的，所以我们也需要将$S_{pf}$也用拉氏量密度表示。</p>
 <p>对多个粒子的系统：</p>
 <script type="math/tex; mode=display">
 \begin{align*}
 S_{pf} &= -\int\sum_i q_iA_{\alpha}(t,\mathbf x_i)dx^{\alpha}
 \\ &= -\int \sum_i q_iA_{\alpha}(t,\mathbf{x})\delta(\mathbf x-\mathbf x_i) dVdx^{\alpha}
 \\ &= \int \mathscr L_{pf} d\Omega dt
-\end{align*}</script><p>在进行下一步之前需要说明，这里的$S<em>{pf}$是场与所有粒子的耦合项的作用量，求和的每一项中$A</em>{\alpha}$采用的是在粒子的位置上的值。其原因是电磁场的作用是局域的，即$A_{\alpha}$只有沿着粒子的运动轨迹取值才会对运动方程有贡献。</p>
+\end{align*}</script><p>在进行下一步之前需要说明，这里的$S_{pf}$是场与所有粒子的耦合项的作用量，求和的每一项中$A_{\alpha}$采用的是在粒子的位置上的值。其原因是电磁场的作用是局域的，即$A_{\alpha}$只有沿着粒子的运动轨迹取值才会对运动方程有贡献。</p>
 <p>我们可以定义电荷密度：</p>
 <script type="math/tex; mode=display">\rho(t,\mathbf x)=\sum_i q_i\delta(\mathbf x-\mathbf x_i)</script><p>注意到$\int \rho dV=Q$，为系统中电荷总量，是洛伦兹不变量。这说明$\rho$与体积微元$dV$相乘为洛伦兹不变量，即它可以作为某个4-矢量的时间分量。再考虑$S_{pf}$：</p>
 <script type="math/tex; mode=display">
@@ -307,6 +356,35 @@ S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
       </tags>
   </entry>
   <entry>
+    <title>基于NoneBot的NG词语游戏插件</title>
+    <url>/2019/07/07/NGWordGame-with-Nonebot/</url>
+    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><h1 id="NoneBot"><a href="#NoneBot" class="headerlink" title="NoneBot"></a>NoneBot</h1><p>NoneBot是基于酷Q的一个QQ机器人框架，其基本介绍和使用参见其<a href="https://none.rclab.tk/">文档</a>。本段旨在补充一些目前在文档中还未点出的有关NoneBot的一些性质，它们在NG词语游戏插件的编写中是不可或缺的。</p>
+<p>当QQ机器人接收到一条消息时，它会首先对消息进行parsing，解析出当前消息对应的指令和参数。随后，它会根据上下文——即CoolQ HTTP API中<a href="https://cqhttp.cc/docs/4.10/#/Post?id=%E4%BA%8B%E4%BB%B6%E5%88%97%E8%A1%A8">事件上报</a>的数据的字典，包含消息和发信人的信息——中的发信人信息来生成一个唯一的<code>ctx_id</code>。这个<code>ctx_id</code>的作用是标记仍然有效的命令会话（如果是开始运行收到的第一条信息，那么不会有可用的命令会话）。NoneBot指令是要通过命令会话和用户进行数据交互的，而这里的意义是让同一个命令会话只响应<code>ctx_id</code>相同的用户的输入，也就是说两个<code>ctx_id</code>不同的用户调用同一条指令的时候会产生两个命令会话分别根据他们输入的参数实现不同的操作，从而不会互相干扰。默认的<code>ctx_id</code>是对每个用户都唯一的，这显然不利于我们的实现——我们希望多个玩家参与到这个游戏中来，要让同一个命令会话响应所有人发出的消息。好在<code>ctx_id</code>的实现中允许我们给来自同一个群的所有消息赋予同样的<code>ctx_id</code>，这需要更改NoneBot的源码，将<code>nonebot\command\__init__.py</code>中525行：<br></p><figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">ctx_id</span> = context_id(ctx)</span><br></pre></td></tr></tbody></table></figure><br>改为：<br><figure class="highlight reasonml"><table><tbody><tr><td class="code"><pre><span class="line">ctx_id = context<span class="constructor">_id(<span class="params">ctx</span>, <span class="params">mode</span>='<span class="params">group</span>')</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>如果没有获取到可用的命令会话，并且解析出来了消息对应的指令的话，那么将会创建一个新的命令会话，然后进行处理。至此我们可以暂时离开消息的解析和响应的层面，在处理命令的层面考虑机器人的逻辑。对于一个已经被正确识别的命令，命令会话将首先进入参数解析器arg_parser（没有arg_parser也可以），然后进入命令处理器。命令会话类<code>CommandSession</code>有几个属性和方法是需要用到的：</p>
+<ul>
+<li><code>_current_arg_text</code>：字符串，消息的纯文本部分，剥离了命令部分并去除前部分空格的消息。</li>
+<li><code>_state</code>：字典类型，用于存储希望被保存在会话中的局部变量。</li>
+<li><code>send()</code>：文档中也介绍过，向当前会话发送信息（群聊或私聊），传入参数<code>at_sender=True</code>可以在消息首部@发送者。</li>
+<li><code>pause()</code>：正常情况下一个命令会话会在响应完用户的一条消息后就过期，但是如果调用了<code>pause()</code>，那么命令会话会被暂停并保存，接收到下一条<code>ctx_id</code>相同的用户（考虑到上一段的修改，即同一个群里的下一条消息或来自同一个人的私聊）时会被重新运行一次。</li>
+<li><code>is_first_run</code>：bool类型，如果会话是第一次创建则为<code>True</code>，如果会话是调用了<code>pause()</code>被重新调起则为<code>False</code>。</li>
+</ul>
+<p>以上并非是<code>CommandSession</code>提供的全部接口，但是对于实现NG词语游戏的插件已足够。</p>
+<h1 id="NG词语游戏的实现——基于状态机"><a href="#NG词语游戏的实现——基于状态机" class="headerlink" title="NG词语游戏的实现——基于状态机"></a>NG词语游戏的实现——基于状态机</h1><p>NG词语游戏出自漫画《辉夜大小姐想让我告白～天才们的恋爱头脑战～》，规则为参与游戏的每个玩家为下一个玩家设置一个“NG词”， 设置完成后展示之，使得除了自己的每个人都能知道自己的NG词。之后所有玩家进行自由谈话，说出自己的NG词的玩家判负，退场。直至只剩一人为止。</p>
+<p>在命令会话中实现的操作是获取局部变量-&gt;根据不同的游戏进程对用户的输入做出不同的回应-&gt;写回局部变量，这很容易让人联想到状态机，而NoneBot提供的框架对于基于状态机的实现也是很方便的，因此我们选择基于状态机实现。</p>
+<p>游戏状态有三个：玩家注册状态，设置NG词状态，监听状态；状态跳转也是很简单的注册-&gt;设置-&gt;监听。状态机类<code>NGFSM</code>存储所有玩家的列表，每次接收发送者的信息，然后把要向会话（也就是群聊）和要私聊发送的信息返回给命令处理器。最初我是把状态机直接写在了命令处理器里，相比之下这样的交互方式可能有些冗杂，但是我认为游戏的逻辑实现部分和更底层一些的通信部分不应该耦合在一起，因此花了一些功夫把状态机单独提出来一个类。下面介绍每个状态的实现：</p>
+<h2 id="注册状态"><a href="#注册状态" class="headerlink" title="注册状态"></a>注册状态</h2><p>这个状态要接收每个希望参与游戏的玩家的注册，规定注册需要回复<code>sign in</code>，响应所有注册的用户的回复，根据上下文记录QQ号、称呼信息，加到玩家列表中。另外，响应超级用户发出的<code>stop signing</code>，结束注册，状态跳到设置状态。</p>
+<h2 id="设置状态"><a href="#设置状态" class="headerlink" title="设置状态"></a>设置状态</h2><p>由于游戏性质，设置NG词不能在群聊中进行，而是要和机器人私聊设置。这为实现带来了一个难点——设置NG词的命令会话和游戏的会话不能是一个，那么它们之间该如何通信呢？我的解决方法是单独设置另外一个命令用于设置NG词，这个命令响应玩家的设置之后将NG词存储在磁盘上，当所有玩家设置完成之后，由超级用户手动在群聊中发出<code>check</code>指令通知游戏会话已设置完毕，然后从磁盘中读取设置的数据，从而实现IO的同步。当然，这一过程可以足够用户友好——只要在进入设置状态前把群聊的号码记录到磁盘上，就可以在所有玩家都设置完之后主动调用CQHTTP API，自动向群聊里发送一条提醒消息。<code>check</code>之后，读出所有玩家的NG词，进入监听状态。</p>
+<h2 id="监听状态"><a href="#监听状态" class="headerlink" title="监听状态"></a>监听状态</h2><p>这一状态中只需要监听玩家发出的消息，只要有人的消息中包含自己的NG词就向会话发出提醒信息，判该玩家出局，然后继续监听，直至只剩一人。</p>
+<p>项目代码已上传到GitHub仓库<a href="https://github.com/Li-mz/NGWordGame">NGWordGame</a>。</p>
+</body></html>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>为什么我们不该相信阴谋论</title>
     <url>/2020/02/08/bayes-theorem-and-occams-razor/</url>
     <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>最近在B站偶然看到了一个介绍地平论的视频，这倒不是什么新鲜事，地平论也不是我第一次听说，不过下面称赞他们的独立思考能力和质疑精神的评论还是让我惊掉了下巴。地平论，顾名思义，主张地球不是个球体而是个圆盘，“地盘”的中心是北极，而南极洲是环绕圆盘外围的一圈冰墙。日月是在地盘上面绕转的两道光束，万有引力也不存在，地球在以$9.8m/s^2$的加速度向上加速运动，重力其实是地球系中的惯性力（草）。至于那些地球的照片等等，也都是伪造出来的。至于各国政府为什么要这么做，这大概隐藏着不可告人的惊 天 阴 谋吧（大草原）。</p>
@@ -342,10 +420,10 @@ S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
 </ul>
 <p>一般情况下贝叶斯公式会被用作估计模型的参数的后验分布$P(M,\boldsymbol{\theta}|D)$，这时上面的$P(M)$可以看做$P(M,\boldsymbol{\theta})$把参数$\boldsymbol{\theta}$积分掉的边缘分布。</p>
 <p>现在我们假设有了数据$D$，模型$M_1$和$M_2$都可以用于解释它。对$M_1$和$M_2$我们没有主观的偏好，因此取相同的先验$P(M_1)=P(M_2)$。它们的<strong>概率比</strong>(odds ratio)就成为：</p>
-<script type="math/tex; mode=display">O_{21}=\frac{P(M_2|D)}{P(M_1|D)}=\frac{P(D|M_2)}{P(D|M_1)}</script><p>如果模型$M<em>1$只有一个参数$\mu$，可以取$\mu$的先验为在$-\Delta</em>{\mu}/2$到$\Delta<em>{\mu}/2$之间的均匀分布。假设似然函数可以用中心为使似然取最大值的$\mu=\mu^0$，方差为$\sigma</em>\mu^2$的高斯分布来描述。一般情况下先验只能给出一个大致的范围，而数据能告诉我们更多关于参数的信息，也就是说$\sigma<em>{\mu}\ll\Delta</em>{\mu}$。我们就有：</p>
+<script type="math/tex; mode=display">O_{21}=\frac{P(M_2|D)}{P(M_1|D)}=\frac{P(D|M_2)}{P(D|M_1)}</script><p>如果模型$M_1$只有一个参数$\mu$，可以取$\mu$的先验为在$-\Delta_{\mu}/2$到$\Delta_{\mu}/2$之间的均匀分布。假设似然函数可以用中心为使似然取最大值的$\mu=\mu^0$，方差为$\sigma_\mu^2$的高斯分布来描述。一般情况下先验只能给出一个大致的范围，而数据能告诉我们更多关于参数的信息，也就是说$\sigma_{\mu}\ll\Delta_{\mu}$。我们就有：</p>
 <script type="math/tex; mode=display">P(D|M_1)=\int P(D|M_1,\mu)p(\mu) \mathrm{d}\mu \sim L^0(M_1)\frac{\sigma_\mu}{\Delta_\mu}</script><p>这里$L^0(M_1)=\max(P(D|M_1,\mu))$。</p>
-<p>注意到$\sigma<em>\mu/\Delta</em>\mu \ll 1$，这表明我们<strong>每在模型中增加一个独立参数，都会在$P(D|M)$中乘上一个远小于1的系数</strong>。如果$M_2$有两个独立参数$p$和$q$，那么：</p>
-<script type="math/tex; mode=display">O_{21} \sim \frac{L^0(M_2)}{L^0(M_1)}\frac{(\sigma_p/\Delta_p)(\sigma_q/\Delta_q)}{\sigma_\mu/\Delta_\mu}</script><p>如果$M<em>1$和$M_2$对数据的解释能力相近，即$L^0(M_1)\sim L^0(M_2)$，那么就有$O</em>{21}\ll 1$，我们就有很大把握选择$M_1$而拒绝$M_2$。</p>
+<p>注意到$\sigma_\mu/\Delta_\mu \ll 1$，这表明我们<strong>每在模型中增加一个独立参数，都会在$P(D|M)$中乘上一个远小于1的系数</strong>。如果$M_2$有两个独立参数$p$和$q$，那么：</p>
+<script type="math/tex; mode=display">O_{21} \sim \frac{L^0(M_2)}{L^0(M_1)}\frac{(\sigma_p/\Delta_p)(\sigma_q/\Delta_q)}{\sigma_\mu/\Delta_\mu}</script><p>如果$M_1$和$M_2$对数据的解释能力相近，即$L^0(M_1)\sim L^0(M_2)$，那么就有$O_{21}\ll 1$，我们就有很大把握选择$M_1$而拒绝$M_2$。</p>
 <p>这一原则可以被简单地概括为，<strong>对同样能解释观测到的现象的模型，我们总是选择所作的假设更少的的那个</strong>。或者说，“若非必要，勿增实体”——没错，这正是大名鼎鼎的<strong>奥卡姆剃刀</strong>。</p>
 <p>现在回到标题，为什么我们不该相信阴谋论？答案不证自明——阴谋论并没有提供更符合的解释，却凭空多出了相当多的假设，这也就使它的后验概率变得低得多。阴谋论最多做到自圆其说，但这并不是终点，为了质疑而产生的质疑也不会更能解释问题。</p>
 </body></html>]]></content>
@@ -354,6 +432,41 @@ S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
       </categories>
       <tags>
         <tag>科普</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何部署一个转推bot</title>
+    <url>/2021/08/24/deploy-t2b-bot/</url>
+    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>经过一段时间的运行和升级，转推bot目前已经达到较为平稳的状态。虽然还没有打包上PyPI的勇气，不过至少拿来直接用应该是没问题了。本教程针对有想法自己部署一个转推bot（将你关注的推特自动转发到B站动态）的人给出具体的操作指导。</p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>为了使转推bot能够工作，你需要有：</p>
+<ul>
+<li><strong>一个可以正常发动态的B站账号</strong>：不会有人没有吧</li>
+<li><strong>一个推特开发者账号</strong>：只要你有推特账号，就可以去推特的开发者平台申请成为开发者账号以获得调用推特API的权限。具体的申请流程和注意事项网上有很多教程，这里就不赘述了。需要强调的是推特开发者账号的申请是要经过人工审核的，且申请失败就不能再申请了，因此务必要慎重。</li>
+<li><strong>一个可以访问到不存在网站的神奇主机</strong>：懂的都懂。需要配置好Python3.7+环境。</li>
+</ul>
+<h2 id="部署流程"><a href="#部署流程" class="headerlink" title="部署流程"></a>部署流程</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>首先将twitter2bilibili代码clone到本地：<br></p><figure class="highlight crmsh"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>@github.com:MichiyamaKaren/twitter2bilibili.git</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>进入twitter2bilibili目录，安装依赖的Python库：<br></p><figure class="highlight cmake"><table><tbody><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="填写配置项"><a href="#填写配置项" class="headerlink" title="填写配置项"></a>填写配置项</h3><p>创建<code>config.py</code>文件，这是整个项目的配置文件。需要填写的配置项可以参照<code>config_example.py</code>文件</p>
+<p><img src="config-example.png" alt="config_example.py的截图"></p>
+<p>其中以BILI开头的三项为调用B站API所需要的身份认证信息，你可以在<a href="https://www.moyu.moe/bilibili-api/#/get-credential">bilibili-api的文档</a>中看到如何获取。</p>
+<p><strong>须知</strong>：bilibili-api所要求的这三个key是长期有效，但不是永久有效的。在网页端退出登录后，身份认证将会过期（直接关闭网页则不会），此时如果继续使用旧的key则会出错，会由接口返回错误代码-6。</p>
+<p><code>TWITTER_BEARER_TOKEN</code>是推特开发者账号的Bearer Token，在开发者平台上创建应用即可获取。</p>
+<p><code>subscribe_users</code>记录了要转推的推特账号，每一项代表一名用户，<code>username</code>为推特用户名（不是昵称），<code>name</code>为转推bot要显示的名字。</p>
+<p>最后，<code>display_timezone</code>是转推bot要显示时间的时区，其应为<code>pytz</code>库所接受的时区格式。</p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>运行<code>main.py</code>文件，即可使转推bot开始运行。日志将会保存到<code>t2b.log</code>文件中。</p>
+<h2 id="个性化调整"><a href="#个性化调整" class="headerlink" title="个性化调整"></a>个性化调整</h2><p>如果你熟悉Python，你可以通过继承<code>T2BForwarder</code>类对转推bot的行为进行一些个性化修改。</p>
+<h3 id="T2BForwarder类介绍"><a href="#T2BForwarder类介绍" class="headerlink" title="T2BForwarder类介绍"></a><code>T2BForwarder</code>类介绍</h3><p><code>T2BForwarder</code>类负责处理接收到的推文（定义在<code>tweet.py</code>中<code>Tweet</code>对象），将其发送到B站动态。具体地说，其中包含了一个<code>TwitterListener</code>对象，负责通过推特API获取关注的推特用户的推文。而其<code>handler</code>方法就作为这个listener的回调函数，每当listener收到一条推文，它就会创建一个<code>Tweet</code>对象，交由<code>handler</code>处理。</p>
+<p>不过事实上，处理推文的逻辑并不在<code>handler</code>方法之中。B站动态区的操作有三种形式：发动态、转发动态、发评论，因此<code>handler</code>会调用<code>get_forward_action</code>方法，这会根据接收到的<code>Tweet</code>对象内容判断要进行的行为，然后调用<code>on_send_dynamic</code>、<code>on_repost</code>或<code>on_comment</code>方法。发动态、转发动态或发评论的具体行为就在其中实现。</p>
+<p>因此，如果要改变转推行为，那么应该重载的就是<code>get_forward_action</code>、<code>on_send_dynamic</code>、<code>on_repost</code>和<code>on_comment</code>方法。查看项目代码可以发现<code>get_forward_action</code>返回的不仅有行为（action，字符串），也有一个<code>dynamic_id</code>，而后三个方法接收的参数都是<code>tweet</code>和<code>dynamic_id</code>。这个<code>dynamic_id</code>参数就是用来实现B站动态的转发和评论，以及通过链接对动态进行引用的。如果需要更改接口，那<code>handler</code>方法也要被重载。</p>
+<p>另外可重载的是<code>query</code>属性（通过<code>@property</code>装饰器定义），这是发送给推特Filtered Stream的query内容，描述了要请求的<code>Tweet</code>对象的哪些域。如果你的新功能需要请求不同的域，那么你会需要修改query。query的具体格式和含义见推特开发者文档。</p>
+<hr>
+<p>如果你真的按照这篇教程用我的代码成功部署了自己的转推bot，请标注出<a href="https://github.com/MichiyamaKaren/twitter2bilibili">项目地址</a>。另外也请顺手给这个仓库点个star，这对我不是很重要，但还是求求你了。</p>
+</body></html>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -417,41 +530,6 @@ S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
       </tags>
   </entry>
   <entry>
-    <title>如何部署一个转推bot</title>
-    <url>/2021/08/24/deploy-t2b-bot/</url>
-    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>经过一段时间的运行和升级，转推bot目前已经达到较为平稳的状态。虽然还没有打包上PyPI的勇气，不过至少拿来直接用应该是没问题了。本教程针对有想法自己部署一个转推bot（将你关注的推特自动转发到B站动态）的人给出具体的操作指导。</p>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>为了使转推bot能够工作，你需要有：</p>
-<ul>
-<li><strong>一个可以正常发动态的B站账号</strong>：不会有人没有吧</li>
-<li><strong>一个推特开发者账号</strong>：只要你有推特账号，就可以去推特的开发者平台申请成为开发者账号以获得调用推特API的权限。具体的申请流程和注意事项网上有很多教程，这里就不赘述了。需要强调的是推特开发者账号的申请是要经过人工审核的，且申请失败就不能再申请了，因此务必要慎重。</li>
-<li><strong>一个可以访问到不存在网站的神奇主机</strong>：懂的都懂。需要配置好Python3.7+环境。</li>
-</ul>
-<h2 id="部署流程"><a href="#部署流程" class="headerlink" title="部署流程"></a>部署流程</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>首先将twitter2bilibili代码clone到本地：<br></p><figure class="highlight crmsh"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>@github.com:MichiyamaKaren/twitter2bilibili.git</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>进入twitter2bilibili目录，安装依赖的Python库：<br></p><figure class="highlight cmake"><table><tbody><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></tbody></table></figure><p></p>
-<h3 id="填写配置项"><a href="#填写配置项" class="headerlink" title="填写配置项"></a>填写配置项</h3><p>创建<code>config.py</code>文件，这是整个项目的配置文件。需要填写的配置项可以参照<code>config_example.py</code>文件</p>
-<p><img src="config-example.png" alt="config_example.py的截图"></p>
-<p>其中以BILI开头的三项为调用B站API所需要的身份认证信息，你可以在<a href="https://www.moyu.moe/bilibili-api/#/get-credential">bilibili-api的文档</a>中看到如何获取。</p>
-<p><strong>须知</strong>：bilibili-api所要求的这三个key是长期有效，但不是永久有效的。在网页端退出登录后，身份认证将会过期（直接关闭网页则不会），此时如果继续使用旧的key则会出错，会由接口返回错误代码-6。</p>
-<p><code>TWITTER_BEARER_TOKEN</code>是推特开发者账号的Bearer Token，在开发者平台上创建应用即可获取。</p>
-<p><code>subscribe_users</code>记录了要转推的推特账号，每一项代表一名用户，<code>username</code>为推特用户名（不是昵称），<code>name</code>为转推bot要显示的名字。</p>
-<p>最后，<code>display_timezone</code>是转推bot要显示时间的时区，其应为<code>pytz</code>库所接受的时区格式。</p>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>运行<code>main.py</code>文件，即可使转推bot开始运行。日志将会保存到<code>t2b.log</code>文件中。</p>
-<h2 id="个性化调整"><a href="#个性化调整" class="headerlink" title="个性化调整"></a>个性化调整</h2><p>如果你熟悉Python，你可以通过继承<code>T2BForwarder</code>类对转推bot的行为进行一些个性化修改。</p>
-<h3 id="T2BForwarder类介绍"><a href="#T2BForwarder类介绍" class="headerlink" title="T2BForwarder类介绍"></a><code>T2BForwarder</code>类介绍</h3><p><code>T2BForwarder</code>类负责处理接收到的推文（定义在<code>tweet.py</code>中<code>Tweet</code>对象），将其发送到B站动态。具体地说，其中包含了一个<code>TwitterListener</code>对象，负责通过推特API获取关注的推特用户的推文。而其<code>handler</code>方法就作为这个listener的回调函数，每当listener收到一条推文，它就会创建一个<code>Tweet</code>对象，交由<code>handler</code>处理。</p>
-<p>不过事实上，处理推文的逻辑并不在<code>handler</code>方法之中。B站动态区的操作有三种形式：发动态、转发动态、发评论，因此<code>handler</code>会调用<code>get_forward_action</code>方法，这会根据接收到的<code>Tweet</code>对象内容判断要进行的行为，然后调用<code>on_send_dynamic</code>、<code>on_repost</code>或<code>on_comment</code>方法。发动态、转发动态或发评论的具体行为就在其中实现。</p>
-<p>因此，如果要改变转推行为，那么应该重载的就是<code>get_forward_action</code>、<code>on_send_dynamic</code>、<code>on_repost</code>和<code>on_comment</code>方法。查看项目代码可以发现<code>get_forward_action</code>返回的不仅有行为（action，字符串），也有一个<code>dynamic_id</code>，而后三个方法接收的参数都是<code>tweet</code>和<code>dynamic_id</code>。这个<code>dynamic_id</code>参数就是用来实现B站动态的转发和评论，以及通过链接对动态进行引用的。如果需要更改接口，那<code>handler</code>方法也要被重载。</p>
-<p>另外可重载的是<code>query</code>属性（通过<code>@property</code>装饰器定义），这是发送给推特Filtered Stream的query内容，描述了要请求的<code>Tweet</code>对象的哪些域。如果你的新功能需要请求不同的域，那么你会需要修改query。query的具体格式和含义见推特开发者文档。</p>
-<hr>
-<p>如果你真的按照这篇教程用我的代码成功部署了自己的转推bot，请标注出<a href="https://github.com/MichiyamaKaren/twitter2bilibili">项目地址</a>。另外也请顺手给这个仓库点个star，这对我不是很重要，但还是求求你了。</p>
-</body></html>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用selenium下载eplus直播存档视频</title>
     <url>/2021/08/05/download-eplus-video/</url>
     <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>近日看了少歌#3的线上配信，想把留档的视频文件保存下来方便日后再演，奈何家里的宽带实在拉胯，录屏是没可能了，于是只能想办法把视频文件爬下来。</p>
@@ -505,11 +583,11 @@ S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
 <p>从而$L(s|\boldsymbol{\theta}) \propto \exp\left{-\frac{1}{2} \Gamma_{ij} \Delta\theta_i\Delta\theta_j \right}$，是协方差矩阵为$\Gamma^{-1}$的正态分布。如果选定先验分布为均匀分布，使用贝叶斯方法估计出的参数的后验分布也就是协方差矩阵为$\Gamma^{-1}$的正态分布。</p>
 <p>上面的推导给出了估计根据探测器接收到的引力波信号对参数进行限制的能力的方法：计算波形对参数的微分，得到Fisher矩阵，而对齐求逆就得到近似的参数的协方差矩阵。并且我们知道，在真实波形的参数附近，参数的概率分布近似为正态分布。对多个探测器组成的探测器网络，Fisher矩阵为每个探测器的Fisher矩阵的和。</p>
 <p>关于Fisher矩阵的推导和含义，更严谨的讨论见<a href="https://arxiv.org/abs/gr-qc/9209010">gr-qc/9209010</a>（Fisher矩阵给出频率论视角的方差的推导，即由于不同的噪声，最大似然估计的参数的变化）和<a href="https://arxiv.org/abs/gr-qc/0703086">gr-qc/0703086</a>（以三种不同的方式给出Fisher矩阵的结果，并讨论了其可应用的范围及需要注意之处）。</p>
-<h2 id="推导定位天区面积公式"><a href="#推导定位天区面积公式" class="headerlink" title="推导定位天区面积公式"></a>推导定位天区面积公式</h2><p>对单个参数，协方差矩阵$C=\Gamma^{-1}$可以简单地给出参数$\theta<em>i$的误差（标准差）$\sigma</em>{\theta<em>i} = \sqrt{C</em>{ii}}$。</p>
+<h2 id="推导定位天区面积公式"><a href="#推导定位天区面积公式" class="headerlink" title="推导定位天区面积公式"></a>推导定位天区面积公式</h2><p>对单个参数，协方差矩阵$C=\Gamma^{-1}$可以简单地给出参数$\theta_i$的误差（标准差）$\sigma_{\theta_i} = \sqrt{C_{ii}}$。</p>
 <p>一个重要的量是对波源定位的天区的大小，这可以由两个位置参数（如赤经、赤纬）的分布给出。方便起见，我们取参数$x=\cos\theta_0-\cos\theta, y=\phi-\phi_0$，$\theta$和$\phi$是球坐标，$\theta_0$和$\phi_0$是注入波形采取的波源的位置。则立体角就是$\mathrm{d}\Omega=\mathrm{d}x\mathrm{d}y$。由上节，将与位置无关的参数积掉，$x,y$的边缘分布就是均值为零的二维正态分布</p>
 <script type="math/tex; mode=display">p(x,y) = \frac{1}{2\pi |\det C|^{1/2}} e^{-\frac{1}{2}(C^{-1}_{11}x^2+C^{-1}_{22}y^2+2C^{-1}_{12}xy)}</script><p>这里的$C$是$x$和$y$的协方差矩阵，其元素为Fisher矩阵的逆的$x$和$y$对应行列的元素。</p>
 <p>概率$P$的定位天区面积$\Delta\Omega_P$为根据波源位置的后验分布，波源处在其中的概率为$P$的天区的面积。当然给定面积对应的天区并不唯一，具体地说，这里的区域是误差椭圆，即$xy$平面上等概率密度线内的区域。</p>
-<p>通过配方换元，$u^2+v^2=\frac{1}{2}(C^{-1}<em>{11}x^2+C^{-1}</em>{22}y^2+2C^{-1}_{12}xy)$，可以求出</p>
+<p>通过配方换元，$u^2+v^2=\frac{1}{2}(C^{-1}_{11}x^2+C^{-1}_{22}y^2+2C^{-1}_{12}xy)$，可以求出</p>
 <script type="math/tex; mode=display">\left|\frac{\partial(x,y)}{\partial(u,v)}\right| = 2\sqrt{\det C}</script><p>误差椭圆就是$u^2+v^2\le R^2$，其对应的概率为</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
@@ -539,47 +617,33 @@ S_{pf} &= -\int \rho A_{\alpha} dx^{\alpha}dV
       </tags>
   </entry>
   <entry>
-    <title>n维正态分布的似然估计</title>
-    <url>/2019/04/08/n-dim-normal-distribution/</url>
-    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>$n$维向量$\mathbf x=(x_1,\cdots,x_n)$满足正态分布，概率密度函数为：</p>
-<script type="math/tex; mode=display">p(\mathbf x) = \frac{1}{(2\pi)^{n/2}|\mathbf C|^{1/2}} \exp\left( -\frac 1 2 \sum_{i,j=1}^n (x_i-m_i)C_{ij}^{-1}(x_j-m_j) \right)</script><p>均值$\mathbf m$和协方差矩阵$\mathbf C$的定义为：</p>
-<script type="math/tex; mode=display">
-\mathbf m = E(\mathbf x)
-\\ \mathbf C = E\left((\mathbf x-\mathbf m)(\mathbf x-\mathbf m)^T\right)</script><p>现有$N$个样本$\mathbf x_1,\cdots,\mathbf x_N$，使用极大似然估计来估计$\mathbf m$和$\mathbf C$。似然函数为：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-H(\mathbf m, \mathbf C) &= \sum_{k=1}^N \ln p(\mathbf x_k)
-\\&= -\frac 1 2 \sum_{k=1}^N\sum_{i,j=1}^n (x_{ki}-m_i)C^{-1}_{ij}(x_{kj}-m_j) -\frac N 2 \ln |\mathbf C| -\frac{nN}2\ln 2\pi
-\end{aligned}</script><p>估计的参数应使$H$取极值。</p>
-<p>对$\mathbf m$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\frac{\partial H}{\partial m_l} &= \frac 1 2 \sum_{k=1}^N\sum_{i,j=1}^n C^{-1}_{ij}[\delta_{li}(x_{kj}-m_j)+\delta_{lj}(x_{ki}-m_i)]
-\\&= \frac 1 2\sum_{k=1}^N[\sum_{j=1}^n C^{-1}_{lj}(x_{kj}-m_j)+\sum_{i=1}^n C^{-1}_{il}(x_{ki}-m_i)]
-\\&= \sum_{k=1}^N\sum_{i=1}^n C^{-1}_{il}(x_{ki}-m_i) = 0
-\end{aligned}</script><p>最后一步是因为$\mathbf C$是对称矩阵（由定义显然）。从而有：</p>
-<script type="math/tex; mode=display">\sum_{i=1}^nC^{-1}_{il}(\sum_{k=1}^N x_{ki} - Nm_i) =0</script><p>对$l=0,\cdots,n$成立。写成矩阵形式，即为：</p>
-<script type="math/tex; mode=display">\mathbf C^{-1} (\sum_{k=1}^N \mathbf x_k - N\mathbf m) =0</script><p>由于$\mathbf C^{-1}$是可逆矩阵，要使上式成立，应有：</p>
-<script type="math/tex; mode=display">\mathbf{\hat m}=\frac 1 N \sum_{k=1}^N \mathbf x_k</script><p>即为$\mathbf m$的极大似然估计值。</p>
-<p>对$\mathbf C$，首先考虑$\mathbf C^{-1}$的行列式$|\mathbf C^{-1}|$对$C^{-1}<em>{lm}$的偏导数$\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}</em>{lm}}$：<br>将$|\mathbf C^{-1}|$按第$l$行展开，有：</p>
-<script type="math/tex; mode=display">|\mathbf C^{-1}|=\sum_{i=1}^n C^{-1}_{li}c_{li}</script><p>其中$c<em>{li}$是$C^{-1}</em>{li}$的代数余子式，同时也是$\mathbf C^{-1}$的伴随矩阵的$l,i$元素。对任意矩阵$\mathbf A$，其伴随矩阵$\mathbf A^* = |\mathbf A| \mathbf A^{-1} $，因此$c<em>{li} = |\mathbf C^{-1}|(C^{-1})^{-1}</em>{li} = |\mathbf C^{-1}|C<em>{li} $。<br>$l$行的代数余子式不显含$C^{-1}</em>{lm}$，从而有：</p>
-<script type="math/tex; mode=display">\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}_{lm}} = c_{lm} = |\mathbf C^{-1}|C_{lm}</script><p>故：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\frac{\partial H}{\partial C^{-1}_{lm}} &= -\frac 1 2 \sum_{k=1}^N (x_{kl}-m_l)(x_{km}-m_m) +\frac N {2|\mathbf C^{-1}|}\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}_{lm}}
-\\&= -\frac 1 2 \sum_{k=1}^N (x_{kl}-m_l)(x_{km}-m_m)  + \frac N 2 C_{lm} =0
-\end{aligned}</script><p>从而有$C_{lm}$的极大似然估计值：</p>
-<script type="math/tex; mode=display">\hat{C}_{lm} = \frac 1 N \sum_{k=1}^N (x_{kl}-\hat m_l)(x_{km}-\hat m_m)</script><p>写成矩阵形式：</p>
-<script type="math/tex; mode=display">\hat{\mathbf C} = \frac 1 N \sum_{k=1}^N (\mathbf x_k - \hat{\mathbf m})(\mathbf x_k - \hat{\mathbf m})^T</script></body></html>]]></content>
+    <title>Win10上安装openpose的一些坑</title>
+    <url>/2020/12/08/install-openpose-on-win10/</url>
+    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>我安装openpose的过程主要参考了以下两篇文章：<br><a href="https://blog.csdn.net/qq_18840365/article/details/102677183">win10下openpose安装与使用</a><br><a href="https://blog.csdn.net/Cheungleilei/article/details/102947875">Win10+Tensorflow+OpenPose超超超详细安装及各种遇到的问题解决</a></p>
+<p>其中第二篇文章记录了大部分可能遇到的问题，不过我安装时还遇到了一些额外的问题，记录如下：</p>
+<h3 id="TensorFlow和CUDA"><a href="#TensorFlow和CUDA" class="headerlink" title="TensorFlow和CUDA"></a>TensorFlow和CUDA</h3><p>关于tensorflow的版本的问题比较多，首先openpose是依赖tensorflow的1.x版本的，和tensorflow 2.x版本不能兼容，所以安装tensorflow时要注意只能安装tensorflow 1.x版本。</p>
+<p>另外，CUDA和tensorflow-gpu的版本要求对应的很严格，可能差几个版本号就没法正常运行了。这里可以参照tensorflow官网的<a href="https://tensorflow.google.cn/install/source_windows#gpu">对应表</a>。</p>
+<p><img src="CUDA-tensorflow-version.png" alt=""></p>
+<p>按照上面的对应表，CUDA 10.0以上的版本就没有测试过tensorflow 1.x了，但我意识到这个问题时已经装好了CUDA 10.1，试了一下别的教程中用过的配置，发现CUDA 10.1也是可以用的。最终我的成功配置是CUDA 10.1+cuDNN 8.0.5+python 3.6.8+tensorflow-gpu 1.15.0。</p>
+<h3 id="pycocotools"><a href="#pycocotools" class="headerlink" title="pycocotools"></a>pycocotools</h3><p>安装依赖包的pycocotools时，在conda环境中使用<code>pip install pycocotools</code>是会报错，提示需要安装Microsoft Visual C++ 14.0。我安装了VC 14.0之后还是报相同的错，但是退出conda环境之后就可以安装了。这个有点玄学，我也没查到编译python库是要依赖哪个环境变量，于是后面的操作都是关闭conda环境进行的。</p>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>最后在使用<code>python setup.py build_ext --inplace</code>安装openpose时，报错：</p>
+<figure class="highlight subunit"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">error: </span>Error executing cmd /u /c C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat x86_amd64 &amp;&amp; set</span><br></pre></td></tr></tbody></table></figure>
+<p>直接查这个报错信息没查出来怎么解决，可以看到错误是在执行<code>vcvarsall.bat</code>时出现的，单独运行一下这个脚本，会出现报错：</p>
+<p><img src="vcvarsall-error.png" alt="此时不应有 \Microsoft。"></p>
+<p>查一下这个报错信息，发现了<a href="https://www.cnblogs.com/happykoukou/p/6986350.html">这篇文章</a>。按照其中的解决方法，找出来环境变量中所有带双引号的变量（不只是<code>PATH</code>，我的情况是变量<code>LIB</code>和<code>INCLUDE</code>带了双引号），把双引号去掉，就可以正常编译安装了。</p>
+</body></html>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
       <tags>
-        <tag>数学</tag>
+        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
     <title>电磁场中运动的粒子</title>
     <url>/2019/03/30/motion-in-EM-field/</url>
     <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><h1 id="1-电磁场-粒子耦合作用量"><a href="#1-电磁场-粒子耦合作用量" class="headerlink" title="1.电磁场-粒子耦合作用量"></a>1.电磁场-粒子耦合作用量</h1><p><del>（目前还不存在的）</del>上一节告诉我们，闵氏时空中的自由粒子的作用量为：</p>
-<script type="math/tex; mode=display">S_p=\int mc^2\mathbf d\tau=\int \frac {mc^2} {\gamma} \mathbf dt</script><p>要描述一个在电磁场中运动的粒子，其作用量应再加上一项粒子与场的耦合项$S<em>{pf}$，即$S=S_p+S</em>{pf}$。</p>
+<script type="math/tex; mode=display">S_p=\int mc^2\mathbf d\tau=\int \frac {mc^2} {\gamma} \mathbf dt</script><p>要描述一个在电磁场中运动的粒子，其作用量应再加上一项粒子与场的耦合项$S_{pf}$，即$S=S_p+S_{pf}$。</p>
 <p>实验告诉我们，应该使用一个4-矢量$A^{\alpha}=(\phi/c,\mathbf A)$描述电磁场，我们会在后面看到$A^{\alpha}$的时间、空间分量的物理意义。另外，作用量应为标量。因此我们猜测$S_{pf}$的形式为：</p>
 <script type="math/tex; mode=display">S_{pf}=-q\int A_{\alpha}\mathbf dx^{\alpha}</script><p>其中$q$也是一个标量，它表示了粒子与电磁场耦合的强度。<br>从而，粒子的作用量：</p>
 <script type="math/tex; mode=display">
@@ -690,26 +754,40 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
       </tags>
   </entry>
   <entry>
-    <title>Win10上安装openpose的一些坑</title>
-    <url>/2020/12/08/install-openpose-on-win10/</url>
-    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>我安装openpose的过程主要参考了以下两篇文章：<br><a href="https://blog.csdn.net/qq_18840365/article/details/102677183">win10下openpose安装与使用</a><br><a href="https://blog.csdn.net/Cheungleilei/article/details/102947875">Win10+Tensorflow+OpenPose超超超详细安装及各种遇到的问题解决</a></p>
-<p>其中第二篇文章记录了大部分可能遇到的问题，不过我安装时还遇到了一些额外的问题，记录如下：</p>
-<h3 id="TensorFlow和CUDA"><a href="#TensorFlow和CUDA" class="headerlink" title="TensorFlow和CUDA"></a>TensorFlow和CUDA</h3><p>关于tensorflow的版本的问题比较多，首先openpose是依赖tensorflow的1.x版本的，和tensorflow 2.x版本不能兼容，所以安装tensorflow时要注意只能安装tensorflow 1.x版本。</p>
-<p>另外，CUDA和tensorflow-gpu的版本要求对应的很严格，可能差几个版本号就没法正常运行了。这里可以参照tensorflow官网的<a href="https://tensorflow.google.cn/install/source_windows#gpu">对应表</a>。</p>
-<p><img src="CUDA-tensorflow-version.png" alt=""></p>
-<p>按照上面的对应表，CUDA 10.0以上的版本就没有测试过tensorflow 1.x了，但我意识到这个问题时已经装好了CUDA 10.1，试了一下别的教程中用过的配置，发现CUDA 10.1也是可以用的。最终我的成功配置是CUDA 10.1+cuDNN 8.0.5+python 3.6.8+tensorflow-gpu 1.15.0。</p>
-<h3 id="pycocotools"><a href="#pycocotools" class="headerlink" title="pycocotools"></a>pycocotools</h3><p>安装依赖包的pycocotools时，在conda环境中使用<code>pip install pycocotools</code>是会报错，提示需要安装Microsoft Visual C++ 14.0。我安装了VC 14.0之后还是报相同的错，但是退出conda环境之后就可以安装了。这个有点玄学，我也没查到编译python库是要依赖哪个环境变量，于是后面的操作都是关闭conda环境进行的。</p>
-<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>最后在使用<code>python setup.py build_ext --inplace</code>安装openpose时，报错：</p>
-<figure class="highlight subunit"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">error: </span>Error executing cmd /u /c C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat x86_amd64 &amp;&amp; set</span><br></pre></td></tr></tbody></table></figure>
-<p>直接查这个报错信息没查出来怎么解决，可以看到错误是在执行<code>vcvarsall.bat</code>时出现的，单独运行一下这个脚本，会出现报错：</p>
-<p><img src="vcvarsall-error.png" alt="此时不应有 \Microsoft。"></p>
-<p>查一下这个报错信息，发现了<a href="https://www.cnblogs.com/happykoukou/p/6986350.html">这篇文章</a>。按照其中的解决方法，找出来环境变量中所有带双引号的变量（不只是<code>PATH</code>，我的情况是变量<code>LIB</code>和<code>INCLUDE</code>带了双引号），把双引号去掉，就可以正常编译安装了。</p>
-</body></html>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
+    <title>n维正态分布的似然估计</title>
+    <url>/2019/04/08/n-dim-normal-distribution/</url>
+    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>$n$维向量$\mathbf x=(x_1,\cdots,x_n)$满足正态分布，概率密度函数为：</p>
+<script type="math/tex; mode=display">p(\mathbf x) = \frac{1}{(2\pi)^{n/2}|\mathbf C|^{1/2}} \exp\left( -\frac 1 2 \sum_{i,j=1}^n (x_i-m_i)C_{ij}^{-1}(x_j-m_j) \right)</script><p>均值$\mathbf m$和协方差矩阵$\mathbf C$的定义为：</p>
+<script type="math/tex; mode=display">
+\mathbf m = E(\mathbf x)
+\\ \mathbf C = E\left((\mathbf x-\mathbf m)(\mathbf x-\mathbf m)^T\right)</script><p>现有$N$个样本$\mathbf x_1,\cdots,\mathbf x_N$，使用极大似然估计来估计$\mathbf m$和$\mathbf C$。似然函数为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+H(\mathbf m, \mathbf C) &= \sum_{k=1}^N \ln p(\mathbf x_k)
+\\&= -\frac 1 2 \sum_{k=1}^N\sum_{i,j=1}^n (x_{ki}-m_i)C^{-1}_{ij}(x_{kj}-m_j) -\frac N 2 \ln |\mathbf C| -\frac{nN}2\ln 2\pi
+\end{aligned}</script><p>估计的参数应使$H$取极值。</p>
+<p>对$\mathbf m$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial H}{\partial m_l} &= \frac 1 2 \sum_{k=1}^N\sum_{i,j=1}^n C^{-1}_{ij}[\delta_{li}(x_{kj}-m_j)+\delta_{lj}(x_{ki}-m_i)]
+\\&= \frac 1 2\sum_{k=1}^N[\sum_{j=1}^n C^{-1}_{lj}(x_{kj}-m_j)+\sum_{i=1}^n C^{-1}_{il}(x_{ki}-m_i)]
+\\&= \sum_{k=1}^N\sum_{i=1}^n C^{-1}_{il}(x_{ki}-m_i) = 0
+\end{aligned}</script><p>最后一步是因为$\mathbf C$是对称矩阵（由定义显然）。从而有：</p>
+<script type="math/tex; mode=display">\sum_{i=1}^nC^{-1}_{il}(\sum_{k=1}^N x_{ki} - Nm_i) =0</script><p>对$l=0,\cdots,n$成立。写成矩阵形式，即为：</p>
+<script type="math/tex; mode=display">\mathbf C^{-1} (\sum_{k=1}^N \mathbf x_k - N\mathbf m) =0</script><p>由于$\mathbf C^{-1}$是可逆矩阵，要使上式成立，应有：</p>
+<script type="math/tex; mode=display">\mathbf{\hat m}=\frac 1 N \sum_{k=1}^N \mathbf x_k</script><p>即为$\mathbf m$的极大似然估计值。</p>
+<p>对$\mathbf C$，首先考虑$\mathbf C^{-1}$的行列式$|\mathbf C^{-1}|$对$C^{-1}_{lm}$的偏导数$\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}_{lm}}$：<br>将$|\mathbf C^{-1}|$按第$l$行展开，有：</p>
+<script type="math/tex; mode=display">|\mathbf C^{-1}|=\sum_{i=1}^n C^{-1}_{li}c_{li}</script><p>其中$c_{li}$是$C^{-1}_{li}$的代数余子式，同时也是$\mathbf C^{-1}$的伴随矩阵的$l,i$元素。对任意矩阵$\mathbf A$，其伴随矩阵$\mathbf A^* = |\mathbf A| \mathbf A^{-1} $，因此$c_{li} = |\mathbf C^{-1}|(C^{-1})^{-1}_{li} = |\mathbf C^{-1}|C_{li} $。<br>$l$行的代数余子式不显含$C^{-1}_{lm}$，从而有：</p>
+<script type="math/tex; mode=display">\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}_{lm}} = c_{lm} = |\mathbf C^{-1}|C_{lm}</script><p>故：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial H}{\partial C^{-1}_{lm}} &= -\frac 1 2 \sum_{k=1}^N (x_{kl}-m_l)(x_{km}-m_m) +\frac N {2|\mathbf C^{-1}|}\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}_{lm}}
+\\&= -\frac 1 2 \sum_{k=1}^N (x_{kl}-m_l)(x_{km}-m_m)  + \frac N 2 C_{lm} =0
+\end{aligned}</script><p>从而有$C_{lm}$的极大似然估计值：</p>
+<script type="math/tex; mode=display">\hat{C}_{lm} = \frac 1 N \sum_{k=1}^N (x_{kl}-\hat m_l)(x_{km}-\hat m_m)</script><p>写成矩阵形式：</p>
+<script type="math/tex; mode=display">\hat{\mathbf C} = \frac 1 N \sum_{k=1}^N (\mathbf x_k - \hat{\mathbf m})(\mathbf x_k - \hat{\mathbf m})^T</script></body></html>]]></content>
       <tags>
-        <tag>技术</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -849,6 +927,116 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <p><strong>幺正等效观测量</strong>定义为：</p>
 <script type="math/tex; mode=display">B=UAU^{-1}</script><p>我们有：</p>
 <script type="math/tex; mode=display">UAU^{-1}(U\left|a'\right>)=B(U\left|a'\right>)=a'(U\left|a'\right>)</script><p>这符合上面的论述。</p>
+</body></html>]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Sakurai量子力学笔记</category>
+      </categories>
+      <tags>
+        <tag>物理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>位置算符、动量算符和波函数</title>
+    <url>/2019/11/28/sakurai-qm-02-position-and-momentum/</url>
+    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><h2 id="1-6-Position-Momentum-and-Translation"><a href="#1-6-Position-Momentum-and-Translation" class="headerlink" title="1.6 Position, Momentum and Translation"></a>1.6 Position, Momentum and Translation</h2><h3 id="连续谱"><a href="#连续谱" class="headerlink" title="连续谱"></a>连续谱</h3><p>前面讨论的观测量的本征值都是离散分布的，然而还有另一类观测量，其本征值是连续分布的。连续谱使用的数学和之前讨论的类似，只需要把求和换成积分，克罗内克符号$\delta_{a’a’’}$换成狄拉克函数$\delta(a’-a’’)$。连续谱下的基的正交归一化条件和完备性关系可以写为：</p>
+<script type="math/tex; mode=display">\left<\xi'|\xi''\right>=\delta(\xi'-\xi'')</script><script type="math/tex; mode=display">\int \left|\xi'\right>\left<\xi'\right|\mathrm{d}\xi'=1</script><h3 id="位置和波函数"><a href="#位置和波函数" class="headerlink" title="位置和波函数"></a>位置和波函数</h3><p><strong>位置</strong>就是这样一个本征值连续分布的观测量。对位置算符$x$的本征右矢$\left|x’\right&gt;$，有：</p>
+<script type="math/tex; mode=display">x\left|x'\right>=x'\left|x'\right></script><p>对任意的态$\left|\alpha\right&gt;$，由位置的完备性关系，可以在位置表象下展开：</p>
+<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|x'\right>\left<x'|\alpha\right>\mathrm{d}x'</script><p>如果我们用仪器测量一个处于$\left|\alpha\right&gt;$态上的粒子的位置，粒子会以一定概率塌缩到某个位置本征态。当然，物理的仪器都是有限精度的，我们只能得知粒子的位置在$x’$附近一个宽度为$\mathrm{d}x’$的区间内的概率为：</p>
+<script type="math/tex; mode=display">\left|\left<x'|\alpha\right>\right|^2\mathrm{d}x'</script><p>其中$\psi(x’)=\left&lt; x’|\psi \right&gt;$被称作<strong>波函数</strong>，其模平方就是粒子在空间中的概率密度。</p>
+<p>粒子一定会在空间中某处被发现，这给出了波函数和态矢的归一化条件：</p>
+<script type="math/tex; mode=display">\left<\alpha|\alpha\right>=\int\left|\left<x'|\alpha\right>\right|^2\mathrm{d}x'=\int\left|\Psi(x')\right|^2\mathrm{d}x'=1</script><p>三维的情况和一维类似，我们假设存在位置本征态$\left|\mathbf{x}\right&gt;$，这即是假设三个方向的位置算符有共同的本征态$\left|x’,y’,z’\right&gt;$（否则的话粒子在任意时刻都不会有确定的位置——它不同方向的位置甚至都不对易！我们不希望这样）。如果位置本征态是完备的，我们仍可以展开任意的态矢：</p>
+<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}</script><h3 id="无穷小平移"><a href="#无穷小平移" class="headerlink" title="无穷小平移"></a>无穷小平移</h3><p>我们定义<strong>无穷小平移算符</strong>$\mathscr{T}(\mathrm{d}\mathbf{x’})$，它作用在位置本征态$\left|\mathbf{x’}\right&gt;$上的结果为：</p>
+<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right></script><p>物理上，考虑任意态矢在坐标表象下的表示：$\left|\alpha\right&gt;=\int c_{\mathbf{x’}}\left|\mathbf{x’}\right&gt;$，无穷小平移使每个本征态$\left|\mathbf{x’}\right&gt;$都变成$\left|\mathbf{x’}+\mathrm{d}\mathbf{x’}\right&gt;$，相当于一个让物理系统平移了$\mathrm{d}\mathbf{x’}$的坐标变换（我们很快会看到，它的确是一个幺正算符）。</p>
+<p>下面来考虑$\mathscr{T}(\mathrm{d}\mathbf{x’})$的性质，将其作用在任意态矢上：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \mathscr{T}(\mathrm{d}\mathbf{x'})\left|\alpha\right>
+    &=\mathscr{T}(\mathrm{d}\mathbf{x'})\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}\\
+    &=\int \left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}-\mathrm{d}\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}
+    \\
+    &=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\mathscr{T}(\mathrm{d}\mathbf{x'})|\alpha\right>\mathrm{d}\mathbf{x'}
+\end{aligned}</script><p>这说明$\mathscr{T}(\mathrm{d}\mathbf{x’})$作用到本征左矢上结果为：</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}\right|\mathscr{T}(\mathrm{d}\mathbf{x'})=\left<\mathbf{x'}-\mathrm{d}\mathbf{x'}\right|</script><p>$\mathscr{T}(\mathrm{d}\mathbf{x’})$让左矢向相反方向平移了$\mathrm{d}\mathbf{x’}$。从而显然有$\mathscr{T}(\mathrm{d}\mathbf{x’})$的厄米共轭为：</p>
+<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})^\dagger=\mathscr{T}(-\mathrm{d}\mathbf{x'})</script><p>当然，根据定义，无穷小平移算符还应满足以下性质：</p>
+<ul>
+<li>$\mathscr{T}(\mathrm{d}\mathbf{x’})\mathscr{T}(\mathrm{d}\mathbf{x’’})=\mathscr{T}(\mathrm{d}\mathbf{x’}+\mathrm{d}\mathbf{x’’})$</li>
+<li>$\mathscr{T}(-\mathrm{d}\mathbf{x’})=\mathscr{T}^{-1}(\mathrm{d}\mathbf{x’})$</li>
+<li>根据上一条性质和$\mathscr{T}(\mathrm{d}\mathbf{x’})$的厄米共轭的表达式，它应该是幺正算符</li>
+</ul>
+<p>第一个性质要求$\mathscr{T}(\mathrm{d}\mathbf{x’})$是指数函数，即：</p>
+<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})=\exp \left(\mathbf{B}\cdot \mathrm{d}\mathbf{x'}\right)</script><p>由于$\mathrm{d}\mathbf{x’}$是无穷小量，可以展开并保留至一阶：</p>
+<script type="math/tex; mode=display">
+\mathscr{T}(\mathrm{d}\mathbf{x'})=1+\mathbf{B}\cdot \mathrm{d}\mathbf{x'}</script><p>上面厄米共轭的性质即成为：</p>
+<script type="math/tex; mode=display">1+\mathbf{B}^\dagger\cdot \mathrm{d}\mathbf{x'}=1-\mathbf{B}\cdot \mathrm{d}\mathbf{x'}</script><p>从而$\mathbf{B}$是反厄米算符，定义$\mathbf{B}=-i\mathbf{K}$，则$\mathbf{K}$是厄米算符。很容易验证$\mathscr{T}(\mathrm{d}\mathbf{x’})$的幺正性。</p>
+<p>总结一下，上面定义的无穷小平移算符有如下形式：</p>
+<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})=1-i\mathbf{K}\cdot \mathrm{d}\mathbf{x'}</script><p>下面考虑无穷小平移和位置算符的对易关系：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    &\mathbf{x}\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\mathbf{x}\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>=(\mathbf{x'}+\mathrm{d}\mathbf{x'})\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>
+    \\&\mathscr{T}(\mathrm{d}\mathbf{x'})\mathbf{x}\left|\mathbf{x'}\right>=\mathbf{x'}\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\mathbf{x'}\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>
+\end{aligned}</script><p>从而：</p>
+<script type="math/tex; mode=display">[\mathbf{x}, \mathscr{T}(\mathrm{d}\mathbf{x'})]=\mathrm{d}\mathbf{x'}</script><p>带入上面的形式，有：</p>
+<script type="math/tex; mode=display">[x_i,K_j]=i\delta_{ij}</script><h3 id="动量作为无穷小平移的生成元"><a href="#动量作为无穷小平移的生成元" class="headerlink" title="动量作为无穷小平移的生成元"></a>动量作为无穷小平移的生成元</h3><p>我们来考虑$\mathbf{K}$的物理意义。</p>
+<p>在经典力学中，上面的无穷小平移可以作为正则变换考虑：</p>
+<script type="math/tex; mode=display">\mathbf{x'}=\mathbf{X}=\mathbf{x}+\mathrm{d}\mathbf{x},\ \mathbf{p'}=\mathbf{P}=\mathbf{p}</script><p>这一变换的生成函数为：</p>
+<script type="math/tex; mode=display">F(\mathbf{x}, \mathbf{P})=\mathbf{x}\cdot\mathbf{P}+\mathbf{p}\cdot \mathrm{d}\mathbf{x}</script><p>考虑到单位变换（$\mathbf{X}=\mathbf{x},\mathbf{P}=\mathbf{p}$）的生成函数是$F(\mathbf{x}, \mathbf{P})=\mathbf{x}\cdot\mathbf{P}$，这个生成函数和无穷小平移算符有着非常相似的形式。基于此，可以建立这样的对应，$\mathbf{K}$应该就是动量除以一个具有作用量量纲的常数。量子力学中这个常数就是$\hbar$。无穷小平移算符就可以表示为：</p>
+<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})=1-i\mathbf{p}\cdot \mathrm{d}\mathbf{x'}/\hbar</script><p>从而坐标和动量的对易关系：</p>
+<script type="math/tex; mode=display">[x_i,p_j]=i\hbar\delta_{ij}</script><p>下面考虑动量的不同分量间的对易关系。不同方向上的无穷小平移算符是对易的（先在x方向平移再在y方向平移和先在y方向再在x方向平移是等效的），从而有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    [\mathscr{T}(\mathrm{d}x\hat{\mathbf{x}}),\mathscr{T}(\mathrm{d}x\hat{\mathbf{y}})]&=[1-ip_x\mathrm{d}x/\hbar, 1-ip_ydy/\hbar]
+    \\&=-\frac{\mathrm{d}xdy}{\hbar^2}[p_x,p_y]=0
+\end{aligned}</script><p>在其他方向上也同理，从而不同方向上的动量算符的对易关系为：</p>
+<script type="math/tex; mode=display">[p_i,p_j]=0</script><p>不同方向的动量是对易的，这说明和位置算符类似，也存在三维的动量本征态$\left|\mathbf{p’}\right&gt;$。</p>
+<h3 id="正则对易关系"><a href="#正则对易关系" class="headerlink" title="正则对易关系"></a>正则对易关系</h3><p>上面的对易关系：</p>
+<script type="math/tex; mode=display">[x_i,x_j]=0,[p_i,p_j]=0,[x_i,p_j]=i\hbar\delta_{ij}</script><p>被称为<strong>正则对易关系</strong>。</p>
+<p>注意到正则对易关系和经典力学中的泊松括号其实有着相似的形式，结果也是乘了一个$i\hbar$。一般地，量子力学中有经典对应的各种观测量的对易关系都可以对应为：</p>
+<script type="math/tex; mode=display">[,]_{classical}=\frac{[,]}{i\hbar}</script><p>泊松括号的一些性质也可以自然的被应用在对易子上，比如：</p>
+<script type="math/tex; mode=display">[A,BC]=[A,B]C+B[A,C]</script><script type="math/tex; mode=display">[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=0</script><h2 id="1-7-Wave-Functions-in-Position-and-Momentum-Space"><a href="#1-7-Wave-Functions-in-Position-and-Momentum-Space" class="headerlink" title="1.7 Wave Functions in Position and Momentum Space"></a>1.7 Wave Functions in Position and Momentum Space</h2><h3 id="位置空间波函数"><a href="#位置空间波函数" class="headerlink" title="位置空间波函数"></a>位置空间波函数</h3><p>位置表象的波函数为$\psi(x’)=\left&lt; x’|\psi \right&gt;$，从这一角度，我们可以得到波动力学中的一系列定义：</p>
+<script type="math/tex; mode=display">\left<\psi|\phi\right>=\int \left<\psi|x'\right>\left<x'|\phi\right>\mathrm{d}x'=\int \psi^*(x')\phi(x')\mathrm{d}x' \tag{1.7.2}</script><script type="math/tex; mode=display">
+\begin{aligned}
+    \left<\psi|A|\phi\right>&=\iint \left<\psi|x'\right>\left<x'|A|x''\right>\left<x''|\phi\right>\mathrm{d}x'\mathrm{d}x''
+    \\&=\iint \psi^*(x')\left<x'|A|x''\right>\phi(x'')\mathrm{d}x'\mathrm{d}x''
+\end{aligned}
+\tag{1.7.3}</script><p>对一个一般的算符，矩阵元$\left&lt; x’|A|x’’ \right&gt;$是$x’,x’’$的函数。而当$A$是位置算符的函数时（从而拥有相同的本征态），我们有：</p>
+<script type="math/tex; mode=display">\left<x'|f(x)|x''\right>=\left<x'|f(x'')|x''\right>=f(x'')\delta(x'-x'')</script><p>上面的乘积就可以写为：</p>
+<script type="math/tex; mode=display">\left<\psi|f(x)|\phi\right>=\int \psi^*(x')f(x')\phi(x')\mathrm{d}x'</script><h3 id="动量空间波函数"><a href="#动量空间波函数" class="headerlink" title="动量空间波函数"></a>动量空间波函数</h3><p>下面我们来考虑动量表象下波函数和位置空间波函数的关系，从无穷小平移算符出发：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left(1-\frac{ip\delta x'}{\hbar}\right)\left|\alpha\right>&=\int \mathscr{T}(\delta x')\left|x'\right>\left<x'|\alpha\right>\mathrm{d}x'
+    \\&=\int \left|x'+\delta x'\right>\left<x'|\alpha\right>\mathrm{d}x'
+    \\&=\int \left|x'\right>\left<x'-\delta x'|\alpha\right>\mathrm{d}x'
+    \\&=\int \left|x'\right>\left(\left<x'|\alpha\right>-\delta x'\frac{\partial}{\partial x'}\left<x'|\alpha\right>\right)\mathrm{d}x'
+\end{aligned}</script><p>对比等式两边，我们有：</p>
+<script type="math/tex; mode=display">p\left|\alpha\right>=-i\hbar\int \left|x'\right>\frac{\partial}{\partial x'}\left<x'|\alpha\right>\mathrm{d}x'</script><p>从而：</p>
+<script type="math/tex; mode=display">
+\left<x'|p|\phi\right>=-i\hbar\frac{\partial}{\partial x'}\left<x'|\phi\right> \tag{1.7.4}</script><p>等式两边其实都是波函数，因此这定义了一个波函数空间上的线性映射，将波函数映射为动量算符作用后的态矢对应的波函数。这也和波动力学中动量算符的定义一致：</p>
+<script type="math/tex; mode=display">p=-i\hbar\frac{\partial}{\partial x'}</script><p>现在我们可以考虑态矢在动量表象下的展开，即动量空间波函数。利用完备性关系，我们有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left|\phi\right>&=\int \left|p'\right>\left<p'|\phi\right>\mathrm{d}p'
+    \\&=\iint \left|p'\right>\left<p'|x'\right>\left<x'|\phi\right>\mathrm{d}p'\mathrm{d}x'
+    \\&=\int \mathrm{d}p'\left|p'\right>\int \left<p'|x'\right>\phi(x')\mathrm{d}x'
+\end{aligned}</script><p>对其中出现的$\left&lt; p’|x’ \right&gt;$，考虑1.7.4中任意态$\phi$为动量本征态的情况，有：</p>
+<script type="math/tex; mode=display">\left<x'|p|p'\right>=p'\left<x'|p'\right>=-i\hbar\frac{\partial}{\partial x'}\left<x'|p'\right></script><p>从而：</p>
+<script type="math/tex; mode=display">\left<x'|p'\right>=N\exp\left(\frac{ip'x'}{\hbar}\right)</script><p>其中$N$是归一化常数，考虑$\left&lt; x’|x’’ \right&gt;$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \left<x'|x''\right>&=\delta(x'-x'')
+    \\&=\int \left<x'|p'\right>\left<p'|x''\right>\mathrm{d}p'
+    \\&=\int \left|N\right|^2\exp\left[\frac{ip'(x'-x'')}{\hbar}\right]\mathrm{d}p'
+    \\&=2\pi\hbar\left|N\right|^2\delta(x'-x'')
+\end{aligned}</script><p>从而有：</p>
+<script type="math/tex; mode=display">\left<x'|p'\right>=\frac{1}{\sqrt{2\pi\hbar}}\exp\left(\frac{ip'x'}{\hbar}\right) \tag{1.7.5}</script><p>从而我们得到位置空间波函数到动量空间波函数的变换：</p>
+<script type="math/tex; mode=display">\phi_p(p')=\frac{1}{\sqrt{2\pi\hbar}}\int \phi_x(x')\exp\left(\frac{ip'x'}{\hbar}\right)\mathrm{d}x' \tag{1.7.6}</script><p>相似的，可以得到动量空间到位置空间的变换：</p>
+<script type="math/tex; mode=display">\phi_x(x')=\frac{1}{\sqrt{2\pi\hbar}}\int \phi_p(p')\exp\left(-\frac{ip'x'}{\hbar}\right)\mathrm{d}p' \tag{1.7.7}</script><p>这是傅里叶变换和傅里叶逆变换的形式。</p>
+<h3 id="推广至三维"><a href="#推广至三维" class="headerlink" title="推广至三维"></a>推广至三维</h3><p>三维的归一化条件和完备性关系成为：</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{x''}\right>=\delta^3(\mathbf{x'}-\mathbf{x''})</script><script type="math/tex; mode=display">\int d^3\mathbf{x'}\left|\mathbf{x'}\right>\left<\mathbf{x'}\right|=1</script><p>对动量本征态也是同样。</p>
+<p>三维的动量算符作用在波函数上，微分成为梯度，1.7.4成为：</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{p}|\phi\right>=-i\hbar\nabla'\left<\mathbf{x'}|\phi\right></script><p>1.7.5成为：</p>
+<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{p'}\right>=\frac{1}{[2\pi\hbar]^{3/2}}\exp\left(\frac{i\mathbf{x'}\cdot\mathbf{p'}}{\hbar}\right)</script><p>位置空间和动量空间波函数间的变换也成为三维傅里叶变换：</p>
+<script type="math/tex; mode=display">\phi_p(\mathbf{p'})=\frac{1}{[2\pi\hbar]^{3/2}}\int \phi_x(\mathbf{x'})\exp\left(\frac{i\mathbf{p'}\cdot\mathbf{x'}}{\hbar}\right)\mathrm{d}\mathbf{x'} \tag{1.7.6}</script><script type="math/tex; mode=display">\phi_x(\mathbf{x'})=\frac{1}{[2\pi\hbar]^{3/2}}\int \phi_p(\mathbf{p'})\exp\left(-\frac{i\mathbf{p'}\cdot\mathbf{x'}}{\hbar}\right)\mathrm{d}\mathbf{p'} \tag{1.7.7}</script><p>注意三维中位置波函数的量纲即成为长度的-3/2次方，这样粒子在全空间被发现的概率才仍然会是无量纲的1。</p>
 </body></html>]]></content>
       <categories>
         <category>笔记</category>
@@ -1012,7 +1200,7 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <hr>
 <h2 id="恒星的表面温度"><a href="#恒星的表面温度" class="headerlink" title="恒星的表面温度"></a>恒星的表面温度</h2><h3 id="有效温度"><a href="#有效温度" class="headerlink" title="有效温度"></a>有效温度</h3><p>面元$\mathrm{d}\delta$向方向$\theta$（与法向夹角）的单位立体角$\mathrm{d}\Omega$内频率范围在$\mathrm{d}\nu$的光在时间$\mathrm{d}t$内辐射了能量$\mathrm{d}E$，辐射强度定义为：</p>
 <script type="math/tex; mode=display">I_{\nu}=\frac{\mathrm{d}E}{\cos\theta\mathrm{d}\delta\mathrm{d}\Omega\mathrm{d}\nu\mathrm{d}t}</script><p>对所有方向求平均，得到平均辐射强度：</p>
-<script type="math/tex; mode=display">J_{\nu}=\frac{1}{4\pi}\oint I_\nu \mathrm{d}\Omega</script><p>对各向同性辐射场就有$I<em>{\nu}=J</em>{\nu}$。</p>
+<script type="math/tex; mode=display">J_{\nu}=\frac{1}{4\pi}\oint I_\nu \mathrm{d}\Omega</script><p>对各向同性辐射场就有$I_{\nu}=J_{\nu}$。</p>
 <p>各向同性辐射场沿法向辐射的一束电磁波，$\mathrm{d}t$时间内覆盖了体积$\mathrm{d}V=c\mathrm{d}t\mathrm{d}\delta$，从而这个方向上传播的能量密度为：</p>
 <script type="math/tex; mode=display">u=\frac{\mathrm{d}E}{\mathrm{d}V}=\frac{I_\nu}{c}</script><p>对所有方向积分，单色辐射的能量密度则为：</p>
 <script type="math/tex; mode=display">U_\nu=\oint u\mathrm{d}\Omega=\frac{4\pi}{c}J_\nu</script><p>对各向同性辐射场，即为：</p>
@@ -1064,13 +1252,13 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <script type="math/tex; mode=display">\frac{m_r}{M} = \frac{4\pi r^3\rho/3}{4\pi R^3\rho/3} = \left(\frac{r}{R}\right)^3</script><p>从而：</p>
 <script type="math/tex; mode=display">E_G = -\frac{GM^{1/3}}{R}\int_0^M m_r^{2/3}\mathrm{d}m_r = -\frac{3GM^2}{5R}</script><p>$-E_G&gt;2E_T$时气体云可以塌缩，此时</p>
 <script type="math/tex; mode=display">M>M_J=\left(\frac{3}{4\pi\rho}\right)^{1/2}\left(\frac{5kT}{G\mu}\right)^{3/2}</script><p>这是根据位力定理定义的新的“金斯质量”。</p>
-<p>带入HI气体云的环境，金斯质量$M<em>J\sim 10^5M</em>{\odot}$，而观测到的恒星质量为$0.1-120M<em>\odot$，而星团的质量更接近$10^5M</em>{\odot}$。这说明气体云在塌缩形成恒星的过程中还会碎裂。</p>
+<p>带入HI气体云的环境，金斯质量$M_J\sim 10^5M_{\odot}$，而观测到的恒星质量为$0.1-120M_\odot$，而星团的质量更接近$10^5M_{\odot}$。这说明气体云在塌缩形成恒星的过程中还会碎裂。</p>
 <h3 id="碎裂的过程"><a href="#碎裂的过程" class="headerlink" title="碎裂的过程"></a>碎裂的过程</h3><p>原始的气体云是光学薄的，塌缩过程中产生的温度可以无阻碍的辐射出去，可以看做<strong>等温过程</strong>，$M_J\sim\rho^{-1/2}$。塌缩使$\rho$变大，金斯质量减小。因此气体云在塌缩的过程中会因为局部的引力不稳定性碎裂。</p>
 <p>云团继续塌缩，气体密度变高，形成光学厚的云团，热量不能辐射出去，进行的是<strong>绝热过程</strong>。绝热过程中$V^{\gamma-1}T=\mathrm{const.}$，从而$T\sim\rho^{2/3}$，从而$M_J\sim\rho^{1/2}$。随气体塌缩，金斯质量变大，塌缩逐渐停止。</p>
 <p>总引力能$E_G\sim GM^2/R$，塌缩时标$\tau_G\sim(G\rho)^{1/2}$，从而单位时间产生的引力势能为：</p>
 <script type="math/tex; mode=display">L_G\sim\frac{E_G}{\tau_G}\sim \left(\frac{3}{4\pi}\right)^{1/2}\frac{G^{3/2}M^{5/2}}{R^{5/2}}</script><p>系统的辐射功率可以看作相同温度和体积的黑体辐射乘一个小于1的系数$f$（存在吸收），</p>
 <script type="math/tex; mode=display">L_C = f \cdot 4\pi R^2 \sigma T^4</script><p>等温过程中，$L_G\ll L_C$，塌缩产生的引力势能全被辐射出去。<br>绝热过程中，$L_G&gt;L_C$，引力能不被完全辐射出去。<br>$L_G=L_C$时的临界质量：</p>
-<script type="math/tex; mode=display">M_{J}=\left(\frac{\pi^{9}}{9}\right)^{1 / 4}\left(\sigma G^{3}\right)^{-1 / 2}\left(\frac{k}{\mu}\right)^{9 / 4} f^{-1 / 2} T^{1 / 4}</script><p>令$\mu=1,T=1000\mathrm{K},f=0.1$，得到$M<em>J=1/3M</em>{\odot}$，和恒星质量的量级吻合。</p>
+<script type="math/tex; mode=display">M_{J}=\left(\frac{\pi^{9}}{9}\right)^{1 / 4}\left(\sigma G^{3}\right)^{-1 / 2}\left(\frac{k}{\mu}\right)^{9 / 4} f^{-1 / 2} T^{1 / 4}</script><p>令$\mu=1,T=1000\mathrm{K},f=0.1$，得到$M_J=1/3M_{\odot}$，和恒星质量的量级吻合。</p>
 </body></html>]]></content>
       <categories>
         <category>笔记</category>
@@ -1081,121 +1269,11 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
       </tags>
   </entry>
   <entry>
-    <title>位置算符、动量算符和波函数</title>
-    <url>/2019/11/28/sakurai-qm-02-position-and-momentum/</url>
-    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><h2 id="1-6-Position-Momentum-and-Translation"><a href="#1-6-Position-Momentum-and-Translation" class="headerlink" title="1.6 Position, Momentum and Translation"></a>1.6 Position, Momentum and Translation</h2><h3 id="连续谱"><a href="#连续谱" class="headerlink" title="连续谱"></a>连续谱</h3><p>前面讨论的观测量的本征值都是离散分布的，然而还有另一类观测量，其本征值是连续分布的。连续谱使用的数学和之前讨论的类似，只需要把求和换成积分，克罗内克符号$\delta_{a’a’’}$换成狄拉克函数$\delta(a’-a’’)$。连续谱下的基的正交归一化条件和完备性关系可以写为：</p>
-<script type="math/tex; mode=display">\left<\xi'|\xi''\right>=\delta(\xi'-\xi'')</script><script type="math/tex; mode=display">\int \left|\xi'\right>\left<\xi'\right|\mathrm{d}\xi'=1</script><h3 id="位置和波函数"><a href="#位置和波函数" class="headerlink" title="位置和波函数"></a>位置和波函数</h3><p><strong>位置</strong>就是这样一个本征值连续分布的观测量。对位置算符$x$的本征右矢$\left|x’\right&gt;$，有：</p>
-<script type="math/tex; mode=display">x\left|x'\right>=x'\left|x'\right></script><p>对任意的态$\left|\alpha\right&gt;$，由位置的完备性关系，可以在位置表象下展开：</p>
-<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|x'\right>\left<x'|\alpha\right>\mathrm{d}x'</script><p>如果我们用仪器测量一个处于$\left|\alpha\right&gt;$态上的粒子的位置，粒子会以一定概率塌缩到某个位置本征态。当然，物理的仪器都是有限精度的，我们只能得知粒子的位置在$x’$附近一个宽度为$\mathrm{d}x’$的区间内的概率为：</p>
-<script type="math/tex; mode=display">\left|\left<x'|\alpha\right>\right|^2\mathrm{d}x'</script><p>其中$\psi(x’)=\left&lt; x’|\psi \right&gt;$被称作<strong>波函数</strong>，其模平方就是粒子在空间中的概率密度。</p>
-<p>粒子一定会在空间中某处被发现，这给出了波函数和态矢的归一化条件：</p>
-<script type="math/tex; mode=display">\left<\alpha|\alpha\right>=\int\left|\left<x'|\alpha\right>\right|^2\mathrm{d}x'=\int\left|\Psi(x')\right|^2\mathrm{d}x'=1</script><p>三维的情况和一维类似，我们假设存在位置本征态$\left|\mathbf{x}\right&gt;$，这即是假设三个方向的位置算符有共同的本征态$\left|x’,y’,z’\right&gt;$（否则的话粒子在任意时刻都不会有确定的位置——它不同方向的位置甚至都不对易！我们不希望这样）。如果位置本征态是完备的，我们仍可以展开任意的态矢：</p>
-<script type="math/tex; mode=display">\left|\alpha\right>=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}</script><h3 id="无穷小平移"><a href="#无穷小平移" class="headerlink" title="无穷小平移"></a>无穷小平移</h3><p>我们定义<strong>无穷小平移算符</strong>$\mathscr{T}(\mathrm{d}\mathbf{x’})$，它作用在位置本征态$\left|\mathbf{x’}\right&gt;$上的结果为：</p>
-<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right></script><p>物理上，考虑任意态矢在坐标表象下的表示：$\left|\alpha\right&gt;=\int c_{\mathbf{x’}}\left|\mathbf{x’}\right&gt;$，无穷小平移使每个本征态$\left|\mathbf{x’}\right&gt;$都变成$\left|\mathbf{x’}+\mathrm{d}\mathbf{x’}\right&gt;$，相当于一个让物理系统平移了$\mathrm{d}\mathbf{x’}$的坐标变换（我们很快会看到，它的确是一个幺正算符）。</p>
-<p>下面来考虑$\mathscr{T}(\mathrm{d}\mathbf{x’})$的性质，将其作用在任意态矢上：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \mathscr{T}(\mathrm{d}\mathbf{x'})\left|\alpha\right>
-    &=\mathscr{T}(\mathrm{d}\mathbf{x'})\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}\\
-    &=\int \left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>\left<\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}-\mathrm{d}\mathbf{x'}|\alpha\right>\mathrm{d}\mathbf{x'}
-    \\
-    &=\int \left|\mathbf{x'}\right>\left<\mathbf{x'}|\mathscr{T}(\mathrm{d}\mathbf{x'})|\alpha\right>\mathrm{d}\mathbf{x'}
-\end{aligned}</script><p>这说明$\mathscr{T}(\mathrm{d}\mathbf{x’})$作用到本征左矢上结果为：</p>
-<script type="math/tex; mode=display">\left<\mathbf{x'}\right|\mathscr{T}(\mathrm{d}\mathbf{x'})=\left<\mathbf{x'}-\mathrm{d}\mathbf{x'}\right|</script><p>$\mathscr{T}(\mathrm{d}\mathbf{x’})$让左矢向相反方向平移了$\mathrm{d}\mathbf{x’}$。从而显然有$\mathscr{T}(\mathrm{d}\mathbf{x’})$的厄米共轭为：</p>
-<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})^\dagger=\mathscr{T}(-\mathrm{d}\mathbf{x'})</script><p>当然，根据定义，无穷小平移算符还应满足以下性质：</p>
-<ul>
-<li>$\mathscr{T}(\mathrm{d}\mathbf{x’})\mathscr{T}(\mathrm{d}\mathbf{x’’})=\mathscr{T}(\mathrm{d}\mathbf{x’}+\mathrm{d}\mathbf{x’’})$</li>
-<li>$\mathscr{T}(-\mathrm{d}\mathbf{x’})=\mathscr{T}^{-1}(\mathrm{d}\mathbf{x’})$</li>
-<li>根据上一条性质和$\mathscr{T}(\mathrm{d}\mathbf{x’})$的厄米共轭的表达式，它应该是幺正算符</li>
-</ul>
-<p>第一个性质要求$\mathscr{T}(\mathrm{d}\mathbf{x’})$是指数函数，即：</p>
-<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})=\exp \left(\mathbf{B}\cdot \mathrm{d}\mathbf{x'}\right)</script><p>由于$\mathrm{d}\mathbf{x’}$是无穷小量，可以展开并保留至一阶：</p>
-<script type="math/tex; mode=display">
-\mathscr{T}(\mathrm{d}\mathbf{x'})=1+\mathbf{B}\cdot \mathrm{d}\mathbf{x'}</script><p>上面厄米共轭的性质即成为：</p>
-<script type="math/tex; mode=display">1+\mathbf{B}^\dagger\cdot \mathrm{d}\mathbf{x'}=1-\mathbf{B}\cdot \mathrm{d}\mathbf{x'}</script><p>从而$\mathbf{B}$是反厄米算符，定义$\mathbf{B}=-i\mathbf{K}$，则$\mathbf{K}$是厄米算符。很容易验证$\mathscr{T}(\mathrm{d}\mathbf{x’})$的幺正性。</p>
-<p>总结一下，上面定义的无穷小平移算符有如下形式：</p>
-<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})=1-i\mathbf{K}\cdot \mathrm{d}\mathbf{x'}</script><p>下面考虑无穷小平移和位置算符的对易关系：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    &\mathbf{x}\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\mathbf{x}\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>=(\mathbf{x'}+\mathrm{d}\mathbf{x'})\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>
-    \\&\mathscr{T}(\mathrm{d}\mathbf{x'})\mathbf{x}\left|\mathbf{x'}\right>=\mathbf{x'}\mathscr{T}(\mathrm{d}\mathbf{x'})\left|\mathbf{x'}\right>=\mathbf{x'}\left|\mathbf{x'}+\mathrm{d}\mathbf{x'}\right>
-\end{aligned}</script><p>从而：</p>
-<script type="math/tex; mode=display">[\mathbf{x}, \mathscr{T}(\mathrm{d}\mathbf{x'})]=\mathrm{d}\mathbf{x'}</script><p>带入上面的形式，有：</p>
-<script type="math/tex; mode=display">[x_i,K_j]=i\delta_{ij}</script><h3 id="动量作为无穷小平移的生成元"><a href="#动量作为无穷小平移的生成元" class="headerlink" title="动量作为无穷小平移的生成元"></a>动量作为无穷小平移的生成元</h3><p>我们来考虑$\mathbf{K}$的物理意义。</p>
-<p>在经典力学中，上面的无穷小平移可以作为正则变换考虑：</p>
-<script type="math/tex; mode=display">\mathbf{x'}=\mathbf{X}=\mathbf{x}+\mathrm{d}\mathbf{x},\ \mathbf{p'}=\mathbf{P}=\mathbf{p}</script><p>这一变换的生成函数为：</p>
-<script type="math/tex; mode=display">F(\mathbf{x}, \mathbf{P})=\mathbf{x}\cdot\mathbf{P}+\mathbf{p}\cdot \mathrm{d}\mathbf{x}</script><p>考虑到单位变换（$\mathbf{X}=\mathbf{x},\mathbf{P}=\mathbf{p}$）的生成函数是$F(\mathbf{x}, \mathbf{P})=\mathbf{x}\cdot\mathbf{P}$，这个生成函数和无穷小平移算符有着非常相似的形式。基于此，可以建立这样的对应，$\mathbf{K}$应该就是动量除以一个具有作用量量纲的常数。量子力学中这个常数就是$\hbar$。无穷小平移算符就可以表示为：</p>
-<script type="math/tex; mode=display">\mathscr{T}(\mathrm{d}\mathbf{x'})=1-i\mathbf{p}\cdot \mathrm{d}\mathbf{x'}/\hbar</script><p>从而坐标和动量的对易关系：</p>
-<script type="math/tex; mode=display">[x_i,p_j]=i\hbar\delta_{ij}</script><p>下面考虑动量的不同分量间的对易关系。不同方向上的无穷小平移算符是对易的（先在x方向平移再在y方向平移和先在y方向再在x方向平移是等效的），从而有：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    [\mathscr{T}(\mathrm{d}x\hat{\mathbf{x}}),\mathscr{T}(\mathrm{d}x\hat{\mathbf{y}})]&=[1-ip_x\mathrm{d}x/\hbar, 1-ip_ydy/\hbar]
-    \\&=-\frac{\mathrm{d}xdy}{\hbar^2}[p_x,p_y]=0
-\end{aligned}</script><p>在其他方向上也同理，从而不同方向上的动量算符的对易关系为：</p>
-<script type="math/tex; mode=display">[p_i,p_j]=0</script><p>不同方向的动量是对易的，这说明和位置算符类似，也存在三维的动量本征态$\left|\mathbf{p’}\right&gt;$。</p>
-<h3 id="正则对易关系"><a href="#正则对易关系" class="headerlink" title="正则对易关系"></a>正则对易关系</h3><p>上面的对易关系：</p>
-<script type="math/tex; mode=display">[x_i,x_j]=0,[p_i,p_j]=0,[x_i,p_j]=i\hbar\delta_{ij}</script><p>被称为<strong>正则对易关系</strong>。</p>
-<p>注意到正则对易关系和经典力学中的泊松括号其实有着相似的形式，结果也是乘了一个$i\hbar$。一般地，量子力学中有经典对应的各种观测量的对易关系都可以对应为：</p>
-<script type="math/tex; mode=display">[,]_{classical}=\frac{[,]}{i\hbar}</script><p>泊松括号的一些性质也可以自然的被应用在对易子上，比如：</p>
-<script type="math/tex; mode=display">[A,BC]=[A,B]C+B[A,C]</script><script type="math/tex; mode=display">[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=0</script><h2 id="1-7-Wave-Functions-in-Position-and-Momentum-Space"><a href="#1-7-Wave-Functions-in-Position-and-Momentum-Space" class="headerlink" title="1.7 Wave Functions in Position and Momentum Space"></a>1.7 Wave Functions in Position and Momentum Space</h2><h3 id="位置空间波函数"><a href="#位置空间波函数" class="headerlink" title="位置空间波函数"></a>位置空间波函数</h3><p>位置表象的波函数为$\psi(x’)=\left&lt; x’|\psi \right&gt;$，从这一角度，我们可以得到波动力学中的一系列定义：</p>
-<script type="math/tex; mode=display">\left<\psi|\phi\right>=\int \left<\psi|x'\right>\left<x'|\phi\right>\mathrm{d}x'=\int \psi^*(x')\phi(x')\mathrm{d}x' \tag{1.7.2}</script><script type="math/tex; mode=display">
-\begin{aligned}
-    \left<\psi|A|\phi\right>&=\iint \left<\psi|x'\right>\left<x'|A|x''\right>\left<x''|\phi\right>\mathrm{d}x'\mathrm{d}x''
-    \\&=\iint \psi^*(x')\left<x'|A|x''\right>\phi(x'')\mathrm{d}x'\mathrm{d}x''
-\end{aligned}
-\tag{1.7.3}</script><p>对一个一般的算符，矩阵元$\left&lt; x’|A|x’’ \right&gt;$是$x’,x’’$的函数。而当$A$是位置算符的函数时（从而拥有相同的本征态），我们有：</p>
-<script type="math/tex; mode=display">\left<x'|f(x)|x''\right>=\left<x'|f(x'')|x''\right>=f(x'')\delta(x'-x'')</script><p>上面的乘积就可以写为：</p>
-<script type="math/tex; mode=display">\left<\psi|f(x)|\phi\right>=\int \psi^*(x')f(x')\phi(x')\mathrm{d}x'</script><h3 id="动量空间波函数"><a href="#动量空间波函数" class="headerlink" title="动量空间波函数"></a>动量空间波函数</h3><p>下面我们来考虑动量表象下波函数和位置空间波函数的关系，从无穷小平移算符出发：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \left(1-\frac{ip\delta x'}{\hbar}\right)\left|\alpha\right>&=\int \mathscr{T}(\delta x')\left|x'\right>\left<x'|\alpha\right>\mathrm{d}x'
-    \\&=\int \left|x'+\delta x'\right>\left<x'|\alpha\right>\mathrm{d}x'
-    \\&=\int \left|x'\right>\left<x'-\delta x'|\alpha\right>\mathrm{d}x'
-    \\&=\int \left|x'\right>\left(\left<x'|\alpha\right>-\delta x'\frac{\partial}{\partial x'}\left<x'|\alpha\right>\right)\mathrm{d}x'
-\end{aligned}</script><p>对比等式两边，我们有：</p>
-<script type="math/tex; mode=display">p\left|\alpha\right>=-i\hbar\int \left|x'\right>\frac{\partial}{\partial x'}\left<x'|\alpha\right>\mathrm{d}x'</script><p>从而：</p>
-<script type="math/tex; mode=display">
-\left<x'|p|\phi\right>=-i\hbar\frac{\partial}{\partial x'}\left<x'|\phi\right> \tag{1.7.4}</script><p>等式两边其实都是波函数，因此这定义了一个波函数空间上的线性映射，将波函数映射为动量算符作用后的态矢对应的波函数。这也和波动力学中动量算符的定义一致：</p>
-<script type="math/tex; mode=display">p=-i\hbar\frac{\partial}{\partial x'}</script><p>现在我们可以考虑态矢在动量表象下的展开，即动量空间波函数。利用完备性关系，我们有：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \left|\phi\right>&=\int \left|p'\right>\left<p'|\phi\right>\mathrm{d}p'
-    \\&=\iint \left|p'\right>\left<p'|x'\right>\left<x'|\phi\right>\mathrm{d}p'\mathrm{d}x'
-    \\&=\int \mathrm{d}p'\left|p'\right>\int \left<p'|x'\right>\phi(x')\mathrm{d}x'
-\end{aligned}</script><p>对其中出现的$\left&lt; p’|x’ \right&gt;$，考虑1.7.4中任意态$\phi$为动量本征态的情况，有：</p>
-<script type="math/tex; mode=display">\left<x'|p|p'\right>=p'\left<x'|p'\right>=-i\hbar\frac{\partial}{\partial x'}\left<x'|p'\right></script><p>从而：</p>
-<script type="math/tex; mode=display">\left<x'|p'\right>=N\exp\left(\frac{ip'x'}{\hbar}\right)</script><p>其中$N$是归一化常数，考虑$\left&lt; x’|x’’ \right&gt;$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \left<x'|x''\right>&=\delta(x'-x'')
-    \\&=\int \left<x'|p'\right>\left<p'|x''\right>\mathrm{d}p'
-    \\&=\int \left|N\right|^2\exp\left[\frac{ip'(x'-x'')}{\hbar}\right]\mathrm{d}p'
-    \\&=2\pi\hbar\left|N\right|^2\delta(x'-x'')
-\end{aligned}</script><p>从而有：</p>
-<script type="math/tex; mode=display">\left<x'|p'\right>=\frac{1}{\sqrt{2\pi\hbar}}\exp\left(\frac{ip'x'}{\hbar}\right) \tag{1.7.5}</script><p>从而我们得到位置空间波函数到动量空间波函数的变换：</p>
-<script type="math/tex; mode=display">\phi_p(p')=\frac{1}{\sqrt{2\pi\hbar}}\int \phi_x(x')\exp\left(\frac{ip'x'}{\hbar}\right)\mathrm{d}x' \tag{1.7.6}</script><p>相似的，可以得到动量空间到位置空间的变换：</p>
-<script type="math/tex; mode=display">\phi_x(x')=\frac{1}{\sqrt{2\pi\hbar}}\int \phi_p(p')\exp\left(-\frac{ip'x'}{\hbar}\right)\mathrm{d}p' \tag{1.7.7}</script><p>这是傅里叶变换和傅里叶逆变换的形式。</p>
-<h3 id="推广至三维"><a href="#推广至三维" class="headerlink" title="推广至三维"></a>推广至三维</h3><p>三维的归一化条件和完备性关系成为：</p>
-<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{x''}\right>=\delta^3(\mathbf{x'}-\mathbf{x''})</script><script type="math/tex; mode=display">\int d^3\mathbf{x'}\left|\mathbf{x'}\right>\left<\mathbf{x'}\right|=1</script><p>对动量本征态也是同样。</p>
-<p>三维的动量算符作用在波函数上，微分成为梯度，1.7.4成为：</p>
-<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{p}|\phi\right>=-i\hbar\nabla'\left<\mathbf{x'}|\phi\right></script><p>1.7.5成为：</p>
-<script type="math/tex; mode=display">\left<\mathbf{x'}|\mathbf{p'}\right>=\frac{1}{[2\pi\hbar]^{3/2}}\exp\left(\frac{i\mathbf{x'}\cdot\mathbf{p'}}{\hbar}\right)</script><p>位置空间和动量空间波函数间的变换也成为三维傅里叶变换：</p>
-<script type="math/tex; mode=display">\phi_p(\mathbf{p'})=\frac{1}{[2\pi\hbar]^{3/2}}\int \phi_x(\mathbf{x'})\exp\left(\frac{i\mathbf{p'}\cdot\mathbf{x'}}{\hbar}\right)\mathrm{d}\mathbf{x'} \tag{1.7.6}</script><script type="math/tex; mode=display">\phi_x(\mathbf{x'})=\frac{1}{[2\pi\hbar]^{3/2}}\int \phi_p(\mathbf{p'})\exp\left(-\frac{i\mathbf{p'}\cdot\mathbf{x'}}{\hbar}\right)\mathrm{d}\mathbf{p'} \tag{1.7.7}</script><p>注意三维中位置波函数的量纲即成为长度的-3/2次方，这样粒子在全空间被发现的概率才仍然会是无量纲的1。</p>
-</body></html>]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>Sakurai量子力学笔记</category>
-      </categories>
-      <tags>
-        <tag>物理</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>恒星演化方程</title>
     <url>/2020/09/08/stellar-physics-02-stellar-evolution-equations/</url>
     <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>恒星：等离子气体球，辐射，离子、电子、光子频繁碰撞。在同一壳层$r\sim r+\mathrm{d}r$中密度、温度近似相同，处于局部动态热平衡。</p>
 <h2 id="局域热平衡-LTE"><a href="#局域热平衡-LTE" class="headerlink" title="局域热平衡(LTE)"></a>局域热平衡(LTE)</h2><p>光子穿过厚$\mathrm{d}s$的气体时，辐射强度相对变化（光深）：</p>
-<script type="math/tex; mode=display">\mathrm{d}\tau_\nu = \frac{\mathrm{d}I_\nu}{I_\nu} = -\kappa_\nu \mathrm{d}s</script><p>$\kappa<em>\nu$称为吸收系数，在均匀介质中，$\kappa</em>\nu$不依赖位置。<br>根据朗伯定律，</p>
+<script type="math/tex; mode=display">\mathrm{d}\tau_\nu = \frac{\mathrm{d}I_\nu}{I_\nu} = -\kappa_\nu \mathrm{d}s</script><p>$\kappa_\nu$称为吸收系数，在均匀介质中，$\kappa_\nu$不依赖位置。<br>根据朗伯定律，</p>
 <script type="math/tex; mode=display">\kappa_\nu=\frac{1}{\lambda}</script><p>其中$\lambda$是粒子的平均自由程。<br>即：</p>
 <script type="math/tex; mode=display">
 \tau_\nu=\frac{s}{\lambda}=\left\{
@@ -1396,15 +1474,15 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <script type="math/tex; mode=display">\gamma_a = \frac{\Phi+1}{\Phi}</script><p>为绝热指数。</p>
 <p>对非相对论气体，$\Phi=3/2$，$\gamma_a=5/3$。<br>对相对论性气体，$\Phi=3$，$\gamma_a=4/3$。<br>而对一般物态（气体和辐射混合，或中等速度的气体），$\gamma_a$介于二者之间。</p>
 <h3 id="部分电离"><a href="#部分电离" class="headerlink" title="部分电离"></a>部分电离</h3><p>定义电离度</p>
-<script type="math/tex; mode=display">x = \frac{n_+}{n_0+n_+}</script><p>其中$n<em>0$为中性氢的数密度，$n</em>+$为氢离子（电子）的数密度。</p>
+<script type="math/tex; mode=display">x = \frac{n_+}{n_0+n_+}</script><p>其中$n_0$为中性氢的数密度，$n_+$为氢离子（电子）的数密度。</p>
 <p>对混合理想气体，物态方程为</p>
 <script type="math/tex; mode=display">P=nkT</script><p>粒子的总数密度为</p>
 <script type="math/tex; mode=display">n=n_0+n_e+n_+ = (x+1)(n_0+n_+)</script><p>从而物态方程成为</p>
 <script type="math/tex; mode=display">P=(x+1)(n_0+n_+)\mathcal{R}m_HT = (x+1)\mathcal{R}\rho T</script><p>在温度$T$下，离子电离和复合过程达到动态平衡，满足<strong>Saha方程</strong>：</p>
 <script type="math/tex; mode=display">\frac{n_+n_e}{n_0} = \frac{g}{h^3}(2\pi m_ekT)^{3/2} e^{-\chi/kT}</script><p>其中$\chi$为电子的电离势能。</p>
 <p>根据电离度的定义：</p>
-<script type="math/tex; mode=display">\frac{n_+n_e}{n_0} = \frac{x^2(n_0+n_+)^2}{(n_0+n_+)-x(n_0+n_+)} = \frac{x^2}{1-x}(n_0+n_+)</script><p>对Saha方程两边乘因子$1/((1+x)(n<em>0+n</em>+))=1/n$，成为：</p>
-<script type="math/tex; mode=display">\frac{x^2}{1-x^2} = \frac{g}{h^3}\frac{(2\pi m_e)^{3/2}(kT)^{5/2}}{P} e^{-\chi/kT}</script><p>单位体积内$n<em>+$个氢原子被电离，释放电离能$\chi n</em>+$都转化为气体内能。从而电离对气体比内能的贡献为</p>
+<script type="math/tex; mode=display">\frac{n_+n_e}{n_0} = \frac{x^2(n_0+n_+)^2}{(n_0+n_+)-x(n_0+n_+)} = \frac{x^2}{1-x}(n_0+n_+)</script><p>对Saha方程两边乘因子$1/((1+x)(n_0+n_+))=1/n$，成为：</p>
+<script type="math/tex; mode=display">\frac{x^2}{1-x^2} = \frac{g}{h^3}\frac{(2\pi m_e)^{3/2}(kT)^{5/2}}{P} e^{-\chi/kT}</script><p>单位体积内$n_+$个氢原子被电离，释放电离能$\chi n_+$都转化为气体内能。从而电离对气体比内能的贡献为</p>
 <script type="math/tex; mode=display">\frac{\chi n_+}{\rho} = \frac{\chi n_+}{(n_0+n_+)m_H} = \frac{\chi}{m_H}x</script><p>从而部分电离气体的比内能为</p>
 <script type="math/tex; mode=display">u = \frac{3}{2}\frac{P}{\rho} + \frac{\chi}{m_H}x</script><p>对$u$全微分，绝热过程</p>
 <script type="math/tex; mode=display">
@@ -1431,7 +1509,7 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 </ul>
 <h2 id="辐射转移"><a href="#辐射转移" class="headerlink" title="辐射转移"></a>辐射转移</h2><h3 id="辐射的吸收"><a href="#辐射的吸收" class="headerlink" title="辐射的吸收"></a>辐射的吸收</h3><p>定义辐射流量$H$为单位时间通过单位横截面的能量。</p>
 <p>辐射通过厚$\mathrm{d}r$的介质薄层，流量减少$-\mathrm{d}H$。对密度$\rho$的介质，有经验公式</p>
-<script type="math/tex; mode=display">\mathrm{d}H = -\kappa H\rho\mathrm{d}r = -k_\nu H \mathrm{d}r</script><p>常数$\kappa$称为<strong>不透明度系数</strong>。称$k<em>\nu=\kappa\rho$为介质的<strong>吸收系数</strong>（依赖辐射的频率）。<br>$k</em>\nu$为具长度-1次方量纲，统计物理给出$k_\nu^{-1}$的物理意义即为光子的平均自由程。</p>
+<script type="math/tex; mode=display">\mathrm{d}H = -\kappa H\rho\mathrm{d}r = -k_\nu H \mathrm{d}r</script><p>常数$\kappa$称为<strong>不透明度系数</strong>。称$k_\nu=\kappa\rho$为介质的<strong>吸收系数</strong>（依赖辐射的频率）。<br>$k_\nu$为具长度-1次方量纲，统计物理给出$k_\nu^{-1}$的物理意义即为光子的平均自由程。</p>
 <p>定义$\mathrm{d}\tau=k_\nu\mathrm{d}r$，称为介质的<strong>光深</strong>。<br>在恒星内部，对辐射不透明，$\tau\sim\infty$；光球层和以外，对辐射透明，$\tau\sim 1$。</p>
 <p>对厚$R$的均匀介质，积分有</p>
 <script type="math/tex; mode=display">H = H_0 e^{-\kappa\rho R}</script><p>出射流量按指数衰减。</p>
@@ -1474,7 +1552,7 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
     <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>恒星的能源来自热核反应，$\Delta E=\Delta mc^2$。</p>
 <h2 id="原子的结合能"><a href="#原子的结合能" class="headerlink" title="原子的结合能"></a>原子的结合能</h2><h3 id="核反应释放的能量"><a href="#核反应释放的能量" class="headerlink" title="核反应释放的能量"></a>核反应释放的能量</h3><p>核反应</p>
 <script type="math/tex; mode=display">I(A_i,Z_i)+J(A_j,Z_j) \rightleftharpoons K(A_k,Z_k) + L(A_l,Z_l)</script><p>正反应与逆反应平衡时，称处于核统计平衡。<br>释放核能</p>
-<script type="math/tex; mode=display">Q_{ijk} = (M_i+M_j-M_k-M_l)c^2</script><p>原子核$I$形成前，$A<em>i$个相距无穷远的核子的质量为$A_im_H$，$Q</em>{ijk}$可以写为：</p>
+<script type="math/tex; mode=display">Q_{ijk} = (M_i+M_j-M_k-M_l)c^2</script><p>原子核$I$形成前，$A_i$个相距无穷远的核子的质量为$A_im_H$，$Q_{ijk}$可以写为：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
     Q_{ijk} = &[(M_i-A_im_H)+(M_j-A_jm_H)-(M_k-A_km_H)+(M_l-A_lm_H)]c^2
@@ -1508,7 +1586,7 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <p>另外，$I$和$J$原子发生核反应会有短暂的中间态：</p>
 <script type="math/tex; mode=display">I+J \rightarrow (I+J)^* \rightarrow K+L</script><p>$(I+J)^*$是处于量子共振态的复合核。这一效应也可以提高核反应率。</p>
 <h3 id="核反应时标"><a href="#核反应时标" class="headerlink" title="核反应时标"></a>核反应时标</h3><p>$\tau_i$为$I$元素在$I$于$J$发生核反应被消耗的特征时标。</p>
-<script type="math/tex; mode=display">\tau_i = (n_jR_{ijk})^{-1}</script><p>单位时间、单位体积内$n<em>jR</em>{ijk}$个$J$原子核和$I$原子核发生了核反应。其倒数就是消耗一个$I$原子核的特征时间。</p>
+<script type="math/tex; mode=display">\tau_i = (n_jR_{ijk})^{-1}</script><p>单位时间、单位体积内$n_jR_{ijk}$个$J$原子核和$I$原子核发生了核反应。其倒数就是消耗一个$I$原子核的特征时间。</p>
 <h3 id="对温度依赖"><a href="#对温度依赖" class="headerlink" title="对温度依赖"></a>对温度依赖</h3><p>$R_{ijk}$十分依赖温度，发生核反应需要大于某一点火温度。</p>
 <p>对核产能率$q$，有经验关系</p>
 <script type="math/tex; mode=display">q = q_0 \rho T^n</script><p>对不同的核反应有不同的$n$。</p>
@@ -1549,7 +1627,7 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <h2 id="氦燃烧：-3-alpha-过程"><a href="#氦燃烧：-3-alpha-过程" class="headerlink" title="氦燃烧：$3\alpha$过程"></a>氦燃烧：$3\alpha$过程</h2><p>恒星氢燃料耗尽后，会收缩释放引力势能，点燃氦聚变。</p>
 <p>两个氦核会发生反应</p>
 <script type="math/tex; mode=display">{}_2^4\mathrm{He} + {}_2^4\mathrm{He} \rightarrow {}_4^8\mathrm{Be}</script><p>${}_4^8Be$的寿命很短，在$10^{-16}\mathrm{s}$内就会衰变成两个氦核（逆反应），反应无法进行下去。</p>
-<p>在$T\ge 10^8\mathrm{K}$时，且$n<em>{^8\mathrm{Be}}/n</em>{^4\mathrm{He}}\sim 10^{-9}$时，正反应可以为主导反应。此时一部分${}^8\mathrm{Be}$可以进一步反应：</p>
+<p>在$T\ge 10^8\mathrm{K}$时，且$n_{^8\mathrm{Be}}/n_{^4\mathrm{He}}\sim 10^{-9}$时，正反应可以为主导反应。此时一部分${}^8\mathrm{Be}$可以进一步反应：</p>
 <script type="math/tex; mode=display">{}_4^8\mathrm{Be} + {}_2^4\mathrm{He} \rightarrow {}_{\ \ 6}^{12}\mathrm{C}^* \rightarrow {}_{\ \ 6}^{12}\mathrm{C} + \gamma</script><p>其中${}_{\ \ 6}^{12}\mathrm{C}^*$是激发量子共振态，后一个反应就是量子共振态的退激发。</p>
 <p>总反应为：</p>
 <script type="math/tex; mode=display">3{}_{2}^{4}\mathrm{He} \rightarrow {}_{\ \ 6}^{12}\mathrm{C} + \gamma</script><p>称为 <strong>$3\alpha$过程</strong>。</p>
@@ -1559,7 +1637,7 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <p>核产能率的经验公式</p>
 <script type="math/tex; mode=display">q_{3\alpha} \approx \rho^2T^{40}</script><p>对温度依赖敏感。</p>
 <p>${}_{\ \ 6}^{12}\mathrm{C}$还可以进一步俘获$\alpha$粒子：</p>
-<script type="math/tex; mode=display">{}_{\ \ 6}^{12}\mathrm{C} + {}_{2}^{4}\mathrm{He} \rightarrow {}_{\ \ 8}^{16}\mathrm{O}</script><p>${}<em>{\ \ 8}^{16}\mathrm{O}$的库伦势垒已经很大，难以进一步俘获$\alpha$粒子进行反应。从而${}</em>{\ \ 8}^{16}\mathrm{O}$可以在恒星中累积。</p>
+<script type="math/tex; mode=display">{}_{\ \ 6}^{12}\mathrm{C} + {}_{2}^{4}\mathrm{He} \rightarrow {}_{\ \ 8}^{16}\mathrm{O}</script><p>${}_{\ \ 8}^{16}\mathrm{O}$的库伦势垒已经很大，难以进一步俘获$\alpha$粒子进行反应。从而${}_{\ \ 8}^{16}\mathrm{O}$可以在恒星中累积。</p>
 <h2 id="碳和氧的燃烧"><a href="#碳和氧的燃烧" class="headerlink" title="碳和氧的燃烧"></a>碳和氧的燃烧</h2><p>氦耗尽后，恒星进一步收缩升温，可以触发碳和氧的燃烧。</p>
 <p>碳燃烧：</p>
 <script type="math/tex; mode=display">{}_{\ \ 6}^{12}\mathrm{C} + {}_{\ \ 6}^{12}\mathrm{C} \rightarrow {}_{12}^{24}\mathrm{Mg}^* \rightarrow {}_{12}^{24}\mathrm{Mg} + \gamma</script><p>${}_{12}^{24}\mathrm{Mg}$可能发生如下几种衰变：</p>
@@ -1592,10 +1670,259 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <p>由于黑体辐射的普朗克频谱有高能尾巴，只需要$T\ge10^9\mathrm{K}$，也可以有大量gamma光子，进行对产生。</p>
 <p>类似地，氢原子的光致电离过程需要$h\nu \ge 13.6\mathrm{eV}$，对应$T\sim 10^5\mathrm{K}$，而事实上$T\sim 10^4\mathrm{K}$就有较多光子可以电离氢原子，因此恒星气体中有较多比例的电离氢。</p>
 <h2 id="铁核光致解离"><a href="#铁核光致解离" class="headerlink" title="铁核光致解离"></a>铁核光致解离</h2><p>${}_{26}^{56}\mathrm{Fe}$核吸收光子，被逐步剥离</p>
-<script type="math/tex; mode=display">{}_{26}^{56}\mathrm{Fe} + \gamma \rightarrow 13{}_{2}^{4}\mathrm{He} + 4{}_0^1\mathrm{n}</script><p>光子要克服铁核的强相互作用，需要能量$h\nu\sim 100\mathrm{MeV}$，需要很高的温度。此时${}<em>{2}^{4}\mathrm{He}$的丰度可能超过${}</em>{26}^{56}\mathrm{Fe}$。</p>
+<script type="math/tex; mode=display">{}_{26}^{56}\mathrm{Fe} + \gamma \rightarrow 13{}_{2}^{4}\mathrm{He} + 4{}_0^1\mathrm{n}</script><p>光子要克服铁核的强相互作用，需要能量$h\nu\sim 100\mathrm{MeV}$，需要很高的温度。此时${}_{2}^{4}\mathrm{He}$的丰度可能超过${}_{26}^{56}\mathrm{Fe}$。</p>
 <p>若温度继续升高，可能出现${}_{2}^{4}\mathrm{He}$的光致解离，</p>
 <script type="math/tex; mode=display">{}_{2}^{4}\mathrm{He} + \gamma \rightarrow 2{}_{1}^{1}\mathrm{p} + 2{}_0^1\mathrm{n}</script><p>主序星的温度要可以点火核聚变，且重核不会完全解离，故</p>
 <script type="math/tex; mode=display">10^6\mathrm{K} < T < 10^9\mathrm{K}</script><p>和观测结果一致。</p>
+</body></html>]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>恒星物理笔记</category>
+      </categories>
+      <tags>
+        <tag>天文</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>恒星的稳定性</title>
+    <url>/2020/09/08/stellar-physics-06-stability/</url>
+    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>平衡态按二阶导数分为稳定平衡、不稳定平衡、随遇平衡</p>
+<p>恒星处于热平衡、流体静力学平衡。稳定平衡的恒星受热扰动、动力学扰动，应该可以回到平衡态。</p>
+<h2 id="长期热稳定性"><a href="#长期热稳定性" class="headerlink" title="长期热稳定性"></a>长期热稳定性</h2><p>2.4节（维里定理）里推出过</p>
+<script type="math/tex; mode=display">3\int_{0}^{M} \frac{P}{\rho} \mathrm{d}m = -\Omega</script><p>而</p>
+<script type="math/tex; mode=display">\frac{P}{\rho} = \frac{P_\mathrm{gas}}{\rho} + \frac{P_\mathrm{rad}}{\rho} = \frac{2}{3}u_\mathrm{gas} + \frac{1}{3}u_\mathrm{rad}</script><p>从而</p>
+<script type="math/tex; mode=display">U_\mathrm{gas} = -\frac{1}{2}(\Omega + U_\mathrm{rad})</script><p>$ E=U_ \mathrm{gas}+U_ \mathrm{rad}+\Omega=-U_ \mathrm{gas}&lt;0$，系统处于束缚态。123<br>定义等效引力势能 $ \Omega_\mathrm{eff} = \Omega+U_\mathrm{rad}$，能保留维里定理的形式 $2U_\mathrm{gas}+\Omega_\mathrm{eff}=0 $。<br>恒星收缩时，$|\Omega_\mathrm{eff}| $增大，即$U_\mathrm{gas}$ 增大，恒星温度升高（释放的引力势能用来加热恒星气体）。</p>
+<p>恒星总能的变化率</p>
+<script type="math/tex; mode=display">\dot{E} = L_\mathrm{nuc} - L</script><p>在平衡态上，$ L_\mathrm{nuc}=L,E=\mathrm{const} $。<br>设系统受扰动略微偏离平衡态，使$ L_\mathrm{nuc}&gt;L$，此时$\dot{E}&gt;0$，$ |E|$ 减小，从而 $|\Omega_\mathrm{eff}|$减小，恒星膨胀，温度降低，导致核产能率降低，回到原平衡态。从而即使恒星有很多短时标的不稳定性，其在长时标上还是稳定的。</p>
+<h2 id="热不稳定性"><a href="#热不稳定性" class="headerlink" title="热不稳定性"></a>热不稳定性</h2><h3 id="简并气体的不稳定性"><a href="#简并气体的不稳定性" class="headerlink" title="简并气体的不稳定性"></a>简并气体的不稳定性</h3><p>多方球模型中</p>
+<script type="math/tex; mode=display">P_c = (4\pi)^{1/3}B_n GM^{2/3} \rho_c^{4/3} = C_1\rho_c^{4/3}</script><p>($C_1$为常数)。求对数并取全微分，</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P_c}{P_c} = \frac{4}{3}\frac{\mathrm{d}\rho_c}{\rho_c} \tag{2.1}</script><p>一般地,气体状态方程$P = C_3\rho^aT^b$，有：</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P_c}{P_c} = a\frac{\mathrm{d}\rho_c}{\rho_c} + b\frac{\mathrm{d}T_c}{T_c} \tag{2.2}</script><p>对比(2.1)和(2.2)，有</p>
+<script type="math/tex; mode=display">\left(\frac{4}{3}-a\right) \frac{\mathrm{d}\rho_c}{\rho_c} = b\frac{\mathrm{d}T_c}{T_c} \tag{2.3}</script><p>分析下面两种情况：</p>
+<ul>
+<li>若核区为理想气体，<script type="math/tex; mode=display">P = \frac{\mathcal{R}}{\mu}\rho T</script>即$a=b=1$，(2.3)给出<script type="math/tex; mode=display">\frac{1}{3} \frac{\mathrm{d}\rho_c}{\rho_c} = \frac{\mathrm{d}T_c}{T_c}</script>若引力不稳定性导致核区稍微收缩，$\rho_c$增大，则$T_c$增大，从而$q$迅速增大，产生大量热量，使辐射压增大，又导致核区膨胀，从而可以维持稳定。</li>
+<li>若核区为简并电子气，非相对论性的和相对论性的物态方程分别为<script type="math/tex; mode=display">P_\mathrm{e,deg} = k_1\rho^{5/3}T^b</script><script type="math/tex; mode=display">P_\mathrm{e,r,deg} = k_2\rho^{4/3}T^b</script>其中$0 &lt; b \ll 1$。<br>这两种物态方程都有$a \ge 4/3$，即密度减小时温度增大。当核区等离子体不稳定性使$L_\mathrm{nuc} &gt; L$时，辐射压增大导致核区膨胀，$\rho_c$减小，而$T_c$将增大，使$q$进一步增大，核区将会持续膨胀，偏离平衡态，这一过程称为<strong>runaway</strong>。<br>若膨胀到一定程度使密度减小到解除简并态，核区重新成为稳定的理想气体，这一特例下runaway可以被避免。</li>
+</ul>
+<h3 id="薄壳不稳定性"><a href="#薄壳不稳定性" class="headerlink" title="薄壳不稳定性"></a>薄壳不稳定性</h3><p>考虑半径$r_0\sim r$处，厚$\ell=r-r_0$，质量$\Delta m$的薄壳，$\ell\ll R$，认为这一薄壳中温度、密度均匀，近似处于热平衡态。</p>
+<p>由流体静力学平衡条件，薄壳中的总压力即为$r$内的物质对$r\sim R$的质量为$\Delta \tilde{m}$的壳层的自引力，而压强是各向同性的，从而</p>
+<script type="math/tex; mode=display">P(r) \approx \frac{1}{4\pi r^2}\frac{Gm\Delta\tilde{m}}{r^2} \sim \frac{1}{r^4}</script><p>即</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P}{P} = -4\frac{\mathrm{d}r}{r}</script><p>质量$\Delta m=\rho(r)(4\pi r^2\ell)$保持不变时，有$\rho\sim\ell^{-1}$，即</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}\rho}{\rho} = -\frac{\mathrm{d}\ell}{\ell} = -\frac{\mathrm{d}r}{\ell} = -\frac{\mathrm{d}r}{r}\frac{r}{\ell}</script><p>即</p>
+<script type="math/tex; mode=display">-\frac{\mathrm{d}r}{r} = \frac{\ell}{r}\frac{\mathrm{d}\rho}{\rho}</script><p>从而</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P}{P} = 4\frac{\ell}{r}\frac{\mathrm{d}\rho}{\rho}</script><p>联立(2.2)式，</p>
+<script type="math/tex; mode=display">\left(4\frac{\ell}{r}-a\right) \frac{\mathrm{d}\rho_c}{\rho_c} = b\frac{\mathrm{d}T_c}{T_c}</script><p>同简并气体不稳定性的分析，壳层热扰动下能维持平衡的条件是$4\frac{\ell}{r}&gt;a$。远离核区的气体近似为理想气体，稳定条件即$4\frac{\ell}{r}&gt;1$。而薄壳$\ell\ll r$，因此薄壳在热扰动下是不稳定的。</p>
+<p>白矮星表面上会残留没燃烧的氢，若经历热扰动，表面亮度会急剧增加，形成核闪耀，使本不可见的白矮星变得可见，观测上称为新星。</p>
+<p>最后需要说明的是，上面的讨论中没有考虑温度的变化也会导致光度$L$的变化。如果恒星壳层的膨胀导致温度升高，但同时光度也升高使$L_\mathrm{nuc} &lt; L$，此时壳层也会失去能量而收缩，使其不至于runaway。不过事实上$L\sim T^4$，而相比之下$q$对温度要敏感的多，因此忽略$L$的变化也是合理的。</p>
+<h2 id="动力学稳定性"><a href="#动力学稳定性" class="headerlink" title="动力学稳定性"></a>动力学稳定性</h2><p>恒星$r$处压强产生各向同性扰动$\delta P$，收缩至半径$r’$。若收缩后还能向外膨胀恢复到原来的位置，则认为系统是动力学稳定的。</p>
+<p>令</p>
+<script type="math/tex; mode=display">r' = r(1-\epsilon)</script><p>$0&lt;\epsilon\ll 1$。<br>由质量连续性方程，</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \rho'(r') &= \frac{1}{4\pi r'^2}\frac{\mathrm{d}m}{\mathrm{d}r'} = \frac{1}{4\pi r^2(1-\epsilon)^2}\frac{\mathrm{d}m}{\mathrm{d}r}\frac{\mathrm{d}r}{\mathrm{d}r'}
+    \\&= \frac{\rho(r)}{(1-\epsilon)^3}
+    \\&\approx \rho(r)(1+3\epsilon)
+\end{aligned}</script><p>设压缩过程为绝热的（忽略辐射冷却，也忽略辐射压），绝热指数$\gamma_a$。气体的物态方程为$PV^{\gamma_a}=\mathrm{const}$，即$P\rho^{-\gamma_a}=\mathrm{const}$。从而有</p>
+<script type="math/tex; mode=display">P' = P(1+3\epsilon)^{\gamma_a} \approx P(1+3\gamma_a\epsilon)</script><p>另一方面，$r’$处自引力产生的压强为</p>
+<script type="math/tex; mode=display">P_h' = \int_m^M \frac{Gm}{4\pi r^4(1-\epsilon)^4} \mathrm{d}m = (1-\epsilon)^{-4}P \approx (1+4\epsilon)P</script><p>若要使壳层能膨胀会原来的状态，应有$P’&gt;P_h’$，即</p>
+<script type="math/tex; mode=display">\gamma_a > \frac{4}{3}</script><p>这一条件需要在恒星中任何位置都成立，称为<strong>动力学稳定（强）判据</strong>。</p>
+<p>强判据成立意味着系统是动力学稳定的，但只有部分区域的$\gamma_a&lt;4/3$是否就意味着动力学不稳定还需要进一步考虑。整体的动力学稳定性取决于<strong>动力学积分</strong>：</p>
+<script type="math/tex; mode=display">I_\mathrm{dyn} = \int \left(\gamma_a-\frac{4}{3}\right)\frac{P}{\rho}\mathrm{d}m</script><p>$I_\mathrm{dyn}&lt;0$时系统是动力学不稳定的。</p>
+<ul>
+<li>若$\gamma_a&lt;4/3$在核区较大范围内成立，由于中心部分$P/\rho$较大，$I_\mathrm{dyn}&lt;0$，系统动力学不稳定。</li>
+<li>若$\gamma_a&lt;4/3$仅在表面附近的壳层成立，这一区域对应$P/\rho$很小，因此积分由内部区域主导，$I_\mathrm{dyn}&gt;0$，系统是动力学稳定的。</li>
+</ul>
+<h2 id="动力学不稳定性的例子"><a href="#动力学不稳定性的例子" class="headerlink" title="动力学不稳定性的例子"></a>动力学不稳定性的例子</h2><ol>
+<li>相对论性简并电子气<br>$n=3,\gamma_a=4/3$。系统为白矮星，$M\rightarrow M_\mathrm{ch}$。<br>若吸附质量$\delta M$使$M+\delta M&gt;M_\mathrm{ch}$，此时简并压不足以抵抗引力，星体将进行引力塌缩，白矮星结构破坏，因此是动力学不稳定的。</li>
+<li>辐射压主导<br>非相对论性气体$n=3/2,\gamma_a=5/3$<br>相对论性气体和辐射$n=3,\gamma=4/3$<br>因此辐射主导的恒星是动力学不稳定的。</li>
+</ol>
+<p>另一方面，对辐射，$u_\mathrm{rad}=3P/\rho$，从而</p>
+<script type="math/tex; mode=display">-\Omega = 3\int_{0}^{M} \frac{P}{\rho} \mathrm{d}m = 3\int_{0}^{M} \frac{1}{3}u_\mathrm{rad} \mathrm{d}m = U_\mathrm{rad}</script><p>即辐射压主导的恒星的$E=U+\Omega\approx 0$，即系统是非束缚的。也能说明系统是动力学不稳定的。</p>
+<h3 id="部分电离"><a href="#部分电离" class="headerlink" title="部分电离"></a>部分电离</h3><p>考虑部分电离的气体，满足Saha方程</p>
+<script type="math/tex; mode=display">\frac{x^2}{1-x^2} = \frac{g}{h^3}\frac{(2\pi m_ekT)^{3/2}(kT)^{5/2}}{P} e^{-\chi/kT} \propto P^{-1}</script><p>物态方程为理想气体物态方程。</p>
+<p>若气体受动力学扰动被压缩，分为两个过程：<br>第一步$(V,P,N)\rightarrow(V’,P’,N)$。令粒子数不变，体积减小导致压强增大，从而$x$减小（复合增强）。<br>第二步$(V’,P’,N)\rightarrow(V’,P’’,N’)$，令体积不变，上一步复合增强导致$N’ &lt; N$，从而$P’’ &lt; P’$。认为压缩过程满足绝热物态方程，$P=k_a\rho^{\gamma_a}$，复合过程不改变密度，则有$\gamma_a’’ &lt; \gamma_a’$。有可能$\gamma_a’’ &lt; 4/3$，导致动力学不稳定。</p>
+<p>3.6节中给出过：</p>
+<script type="math/tex; mode=display">\gamma_{\mathrm{a}}(x)=\frac{5+\left(\frac{5}{2}+\frac{\chi}{kT}\right)^{2} x(1-x)}{3+\left[\frac{3}{2}+\left(\frac{3}{2}+\frac{\chi}{k T}\right)^{2}\right] x(1-x)}</script><ul>
+<li>对完全中性和完全电离气体，都有$\gamma_a=5/3$</li>
+<li>对部分电离气体：  <ul>
+<li>取$kT\approx \chi=13.6\mathrm{eV}$，当$18\% &lt; x &lt; 82\%$时$\gamma_a &lt; 4/3$</li>
+<li>取$kT\approx \chi/10$（低温），当$5\% &lt; x &lt; 95\%$时$\gamma_a &lt; 4/3$</li>
+</ul>
+</li>
+</ul>
+<p>讨论：</p>
+<ul>
+<li>在恒星内核，温度足够高，$\mathrm{H},\mathrm{He}$几乎完全电离，$x=1$。从而核区是动力学稳定的。</li>
+<li>在外围壳层，温度较低，$x&lt;1$，一般$\gamma_a&lt;4/3$，但$P/\rho$也较小，从而整个恒星的动力学积分$I_\mathrm{dyn}&gt;0$，整个系统仍是动力学稳定的。</li>
+<li>极高温的内核发生光致解离效应，对恒星稳定性的影响不可忽略</li>
+</ul>
+<h2 id="对流不稳定性"><a href="#对流不稳定性" class="headerlink" title="对流不稳定性"></a>对流不稳定性</h2><p>对流的物理图像：恒星内部壳层温度较高，密度小；外部温度较低，密度大；导致气体在恒星自引力场中循环流动，形成对流。</p>
+<p>对流的效果：</p>
+<ul>
+<li>高效率传热，辐射传热的重要补充</li>
+<li>将内外物质搅拌均匀，使恒星中各元素化学丰度近似形成均匀分布</li>
+</ul>
+<p>流体静力学平衡有</p>
+<script type="math/tex; mode=display">\kappa F < 4\pi cGm</script><p>而</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d} T}{\mathrm{d} m}=-\frac{3}{4 a c} \frac{\kappa}{T^{3}} \frac{F}{\left(4 \pi r^{2}\right)^{2}}</script><p>若$\kappa F$足够大，即$\left|\frac{\mathrm{d} T}{\mathrm{d} m}\right|$足够大，可以形成强对流，此时可能有$\kappa F&gt;4\pi cGm$，流体静力学平衡被打破。</p>
+<h3 id="对流产生的条件"><a href="#对流产生的条件" class="headerlink" title="对流产生的条件"></a>对流产生的条件</h3><p><img src="06-1-convection.png" alt=""></p>
+<p>如图，假如温度、压强为$(\rho_1,P_1)$的气体团块上浮一小段距离到密度、压强为$(\rho_2,P_2)$的壳层处，由于$P_1 &gt; P_2$，这一团块将会膨胀直到和环境压强平衡，即$P_{*}=P_2$。考虑恒星中的动力学时标远小于热力学时标，这一膨胀过程可以近似看为绝热的。绝热膨胀导致密度减小，如果密度比当前壳层的密度$\rho_2$大则下沉，此时是<strong>对流稳定</strong>的；否则气体团块将继续上浮，直到上升到$r_\mathrm{out}$处，绝热膨胀后的密度大于环境密度。这种情况下是<strong>对流不稳定</strong>的，$r_\mathrm{out}$即为对流区的外边界。一般$r_\mathrm{out} \ll R$。</p>
+<p><img src="06-2-density-pressure.png" alt=""></p>
+<p>如图，若环境为S构型，绝热膨胀的$\rho_{*}&lt;\rho_2$，从而质元上浮，对流区将不断发展，系统对流不稳定；若环境为S’构型，绝热膨胀的$ \rho_{*}&lt;\rho_2’$，质元下沉，系统对流稳定。</p>
+<p>对流稳定的条件可以写为：</p>
+<script type="math/tex; mode=display">\left(\frac{\mathrm{d}P}{\mathrm{d}\rho}\right)_\mathrm{star} < \left(\frac{\mathrm{d}P}{\mathrm{d}\rho}\right)_\mathrm{adiabatic}</script><p>由多方过程的物态方程</p>
+<script type="math/tex; mode=display">P = k\rho^{\gamma}</script><p>有</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P}{\mathrm{d}\rho} = \gamma \frac{P}{\rho}</script><p>对绝热过程$\gamma=\gamma_a$。达到平衡后$P$相等，$\rho_a&gt;\rho_\mathrm{star}$，从而对流稳定的条件也可以写为</p>
+<script type="math/tex; mode=display">\gamma < \gamma_a</script><p>对恒星中的理想气体，</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P}{P} = \frac{\mathrm{d}\rho}{\rho} + \frac{\mathrm{d}T}{T}</script><p>从而</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \gamma &= \frac{\rho}{\mathrm{d}\rho}\left(\frac{\mathrm{d}\rho}{\rho} + \frac{\mathrm{d}T}{T}\right)
+    \\&= 1+\frac{\rho}{T}\frac{\mathrm{d}T}{\mathrm{d}\rho}
+    \\&= 1+ \frac{\rho}{T}\frac{\mathrm{d}P}{\mathrm{d}\rho}\frac{\mathrm{d}T}{\mathrm{d}P}
+    \\&= 1+ \gamma\frac{P}{T}\frac{\mathrm{d}T}{\mathrm{d}P}
+\end{aligned}</script><p>从而对流稳定性条件成为</p>
+<script type="math/tex; mode=display">\frac{P}{T}\left(\frac{d T}{d P}\right)_{\mathrm{star}}<\frac{\gamma_{\mathrm{a}}-1}{\gamma_{\mathrm{a}}}</script><p>或者</p>
+<script type="math/tex; mode=display">\left|\frac{d T}{d r}\right|_{\mathrm{star}}<\left(\frac{\gamma_{\mathrm{a}}-1}{\gamma_{\mathrm{a}}}\right) \frac{T}{P}\left|\frac{d P}{d r}\right|_{\mathrm{star}}</script><h2 id="对流不稳定性的例子"><a href="#对流不稳定性的例子" class="headerlink" title="对流不稳定性的例子"></a>对流不稳定性的例子</h2><p>将热平衡方程和流体静力学平衡方程代入对流稳定性判据，得到</p>
+<script type="math/tex; mode=display">\kappa F<4 \pi c G m\left[4\left(\frac{\gamma_{\mathrm{a}}-1}{\gamma_{\mathrm{a}}}\right)(1-\beta)\right]</script><p>$右边\le 4\pi cGm$，等号在$\beta=0$时取得。<br>说明流体静力学平衡被打破之前，对流就可能发生。处于流体静力学平衡的恒星内部一部分壳层也可能存在对流区，与（太阳）观测一致。</p>
+<p>具体情况：</p>
+<ul>
+<li>部分电离区域（如恒星外围温度较低的区域），$\kappa$较大而$\gamma_a$较小，容易出现对流</li>
+<li>核区附近$\mathrm{H,He}$完全电离，$\kappa$几乎为常量，若磁流体不稳定性使核反应增强，$F$增大，可能出现对流</li>
+<li>在核区$q\propto T^n$，若$n$增大（如氢烧变成氦烧），也可能导致对流不稳定<br>Cowling的计算结果，<ul>
+<li>若$\kappa\sim\mathrm{const}$，$n&gt;3-4$时出现对流</li>
+<li>若$\kappa\sim \rho T^{-7/2}$，$n&gt;8$时出现对流</li>
+</ul>
+</li>
+<li>$\beta\rightarrow1$（气体压主导），$M$较小时容易出现对流。即小质量恒星内部对流区发达。</li>
+</ul>
+<h3 id="小对流云团带走的热量"><a href="#小对流云团带走的热量" class="headerlink" title="小对流云团带走的热量"></a>小对流云团带走的热量</h3><p>对流云团位于$r$处的壳层中，质量$m_c$，半径$r_c$，温度$T+\delta T$，密度$\rho+\delta\rho$。云团与环境达到热力学平衡，$\delta P=0$。由理想气体状态方程，</p>
+<script type="math/tex; mode=display">\frac{\delta T}{T} + \frac{\delta \rho}{\rho} = \frac{\delta P}{P} = 0</script><p>云团质心穿过$r_c$的时间称为穿越时标：$\tau=\frac{r_c}{v_c}$<br>若云团在球壳中均匀分布，此时传热以对流为主，在$\tau$时间内吸收的总热量即为</p>
+<script type="math/tex; mode=display">F(r)\frac{r_c}{v_c}</script><p>恒星自引力在$r$处产生的重力加速度</p>
+<script type="math/tex; mode=display">g'(r) = \frac{Gm(r)}{r^2}</script><p>减去当地的浮力，云团的加速度为：</p>
+<script type="math/tex; mode=display">\frac{Gm(r)}{r^2} \left|\frac{\delta \rho}{\rho}\right| = \frac{Gm(r)}{r^2} \left|\frac{\delta T}{T}\right|</script><p>从而云团上升$r_c$距离时的速度</p>
+<script type="math/tex; mode=display">v_c = \sqrt{\frac{Gm(r)}{r^2} \left|\frac{\delta T}{T}\right|r_c}</script><p>云团的比内能为$u$，$N$个云团吸热导致温度变化</p>
+<script type="math/tex; mode=display">\frac{\delta T}{T} \sim \frac{F\frac{r_c}{v_c}}{u\cdot Nm_c}</script><p>代入上面$v_c$的表达式，有：</p>
+<script type="math/tex; mode=display">\left(\frac{\delta T}{T}\right)^{3/2} = \frac{F(r)r_c}{uNm_c\sqrt{\frac{Gmr_c}{r^2}}}</script><p>量级估计，$F\sim L, m(r)\sim M, Num_c\sim U, r\sim R, r_c\sim R$，有</p>
+<script type="math/tex; mode=display">\left(\frac{\delta T}{T}\right)^{3/2} \sim \frac{L}{U}\frac{1}{\sqrt{\frac{GM}{R^3}}} \sim \tau_\mathrm{th}^{-1}\tau_\mathrm{dyn}</script><p>$\tau_\mathrm{th}$为热力学时标，$\tau_\mathrm{dyn}$为动力学时标。对太阳，$\tau_\mathrm{th}\sim 10^{15}\mathrm{s}, \tau_\mathrm{dyn}\sim 10^{3}\mathrm{s}$。$\frac{\delta T}{T}\sim 10^{-8}$</p>
+</body></html>]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>恒星物理笔记</category>
+      </categories>
+      <tags>
+        <tag>天文</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>恒星的演化</title>
+    <url>/2020/09/08/stellar-physics-07-stellar-evolution/</url>
+    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>恒星的几个时标：</p>
+<script type="math/tex; mode=display">\tau_\mathrm{dyn} \ll \tau_\mathrm{th} \ll \tau_\mathrm{nuc}</script><p>恒星的演化时标为核反应时标，在长时标下可能发生多次热演化的随机涨落，但会被统计抹平。中心核区，或中心点源$(T_c,\rho_c)$的演化将主导恒星的状态。这一章研究中心点$(\log T_c,\log \rho_c)$的演化轨迹。</p>
+<h2 id="log-T-log-rho-平面的特征"><a href="#log-T-log-rho-平面的特征" class="headerlink" title="$(\log T,\log \rho)$平面的特征"></a>$(\log T,\log \rho)$平面的特征</h2><h3 id="EoS区域"><a href="#EoS区域" class="headerlink" title="EoS区域"></a>EoS区域</h3><p><img src="07-1-rho-T-diagram-EoS.png" alt=""></p>
+<p>不同EoS在$(\log T,\log \rho)$平面上划分出下面四个区域</p>
+<ul>
+<li>(I)理想气体：$P=\frac{\mathcal{R}}{\mu}\rho T=k_0\rho T$  </li>
+<li>(II)简并电子气：$P_\mathrm{e,deg}=k_1\rho^{5/3}$ </li>
+<li>(III)相对论性简并电子气：$P_\mathrm{e,r-deg}=k_2\rho^{4/3}$ </li>
+<li>(IV)辐射压主导，$P\approx P_\mathrm{rad}=\frac{1}{3}aT^4$。</li>
+</ul>
+<p>区域间的分界线：</p>
+<ul>
+<li>在(I)和(II)相变的临界点，$P_\mathrm{ideal}\approx P_\mathrm{e,deg}$，从而有<script type="math/tex; mode=display">\log\rho=1.5\log T+\mathrm{const}</script></li>
+<li>(II)和(III)相变的临界点$P_\mathrm{e,deg}\approx P_\mathrm{e,r-deg}$，<script type="math/tex; mode=display">\log\rho = \mathrm{const}</script></li>
+<li>若自引力收缩快，(I)区可直接进入(III)区，$P_\mathrm{ideal}\approx P_\mathrm{e,r-deg}$，<script type="math/tex; mode=display">\log\rho = 3\log T + \mathrm{const}</script></li>
+<li>(I)到(IV)的相变，不妨假设$P_\mathrm{rad}\approx 10P_\mathrm{gas}$。有<script type="math/tex; mode=display">\log\rho = 3\log T + \mathrm{const}</script></li>
+</ul>
+<h3 id="核燃烧区域"><a href="#核燃烧区域" class="headerlink" title="核燃烧区域"></a>核燃烧区域</h3><p>一般只考虑$q&gt;q_\mathrm{min}=0.1\mathrm{J\cdot kg^{-1}\cdot s^{-1}}$的核过程（更小的核过程的光度过小，不会被观测到）</p>
+<p>在可以被观测到的临界点上：</p>
+<script type="math/tex; mode=display">q = q_\mathrm{min} = q_0 \rho^m T^n</script><p>即</p>
+<script type="math/tex; mode=display">\log\rho = -\frac{n}{m}\log T + \frac{1}{m}\log\left(\frac{q_\mathrm{min}}{q_0}\right) \tag{*}</script><p>给出$(\log T,\log \rho)$平面上一条负斜率的直线。</p>
+<p>一般$m=1,n\gg 1$。在较大的温度范围上，$n$不是常数，而是$T$的函数，此时(*)式描述的是一条曲线。当恒星核区参数在边界曲线上方时，该反应才能被触发。<br>实际上边界线对应的$\rho$有一定弥散，从而有一定宽度。实际的各核反应的边界带如下图：</p>
+<p><img src="07-2-rho-T-diagram-nuc-process.png" alt=""></p>
+<h3 id="不稳定性区域"><a href="#不稳定性区域" class="headerlink" title="不稳定性区域"></a>不稳定性区域</h3><p>$\gamma_a&gt;4/3$导致动力学不稳定，由各区域的EoS:</p>
+<ul>
+<li>简并电子气区，$\gamma_a\rightarrow 4/3$</li>
+<li>辐射压主导区，$\gamma_a\rightarrow 4/3$</li>
+<li>铁核光致解离，$\gamma_a&lt; 4/3$</li>
+<li>正负电子对产生，$\gamma_a&lt; 4/3$</li>
+</ul>
+<p>简并气体和相对论性气体是热不稳定的。</p>
+<p>如下图：</p>
+<p><img src="07-3-rho-T-diagram-instability.png" alt=""></p>
+<h2 id="中心点的演化"><a href="#中心点的演化" class="headerlink" title="中心点的演化"></a>中心点的演化</h2><p>多方球模型给出</p>
+<script type="math/tex; mode=display">P_c = (4\pi)^{1/3}B_n GM^{2/3} \rho_c^{4/3}</script><p>设中心点初始处于理想气体区，$P_c=\frac{\mathcal{R}}{\mu}\rho_c T_c=k_0\rho_c T_c$。联立两式，有</p>
+<script type="math/tex; mode=display">\rho_c = \frac{k_0^3}{4\pi B_n^3G^3}\frac{T_c^3}{M^2}</script><ul>
+<li>$B_n$对不同的$n$变化很小，可以看做常量。对$M=\mathrm{const}$给定的情况，此时有<script type="math/tex; mode=display">\log\rho_c = 3\log T_c + \mathrm{const}</script>中心点$(\log\rho_c.\log T_c)$沿斜率为$3$的轨迹演化。演化过程中温度逐渐升高，向右上移动。</li>
+<li>对不同的$M$，$M$增大导致$\rho_c$减小，即大质量恒星的演化轨迹是将小质量恒星的轨迹向下平移的得到。</li>
+<li>如图，中心点处于I区要求质量范围约为$0.1M_\odot\sim 100M_\odot$</li>
+</ul>
+<p><img src="07-4-central-evolution.png" alt=""></p>
+<p>若随着恒星的演化，中心点进入II区（非相对论性简并电子气），$P_c=k_1\rho_c^{5/3}$，此时</p>
+<script type="math/tex; mode=display">\rho_c = 4\pi \left(\frac{B_{1.5}G}{k_1}\right)^3M^2</script><ul>
+<li>对固定的$M$，$\log\rho_c=\mathrm{const}$，中心点的演化轨迹是一条水平的直线。由于核燃料基本耗尽，温度随着辐射冷却不断降低，从而演化方向是水平向左移动。</li>
+<li>对更大的$M$，$\rho_c$更大，演化轨迹线是向上平移的。</li>
+<li>I区演化到II区的过渡过程是平滑的，这一阶段发生的是量子相变。<br>对$M\sim 0.1M_\odot$的矮星，将结束后将稳定在II区。<br>对$M\gtrsim M_\odot$，拐折后的轨迹最终进入III区。<br>对$M\rightarrow M_\mathrm{ch}$，恒星将沿I区和III区的边界线（在I区和III区这条线都是等质量线）不断收缩（$\rho_c\rightarrow\infty$），直到进入中子简并态。</li>
+</ul>
+<h2 id="恒星演化：中心值"><a href="#恒星演化：中心值" class="headerlink" title="恒星演化：中心值"></a>恒星演化：中心值</h2><p>初态$(T_c,\rho_c)$较低，位于I区。</p>
+<p><img src="07-5-MS-central-evolution.png" alt=""></p>
+<p>如图，小质量恒星的核反应为p-p链主导，大质量恒星的核反应为CNO循环主导。</p>
+<p>恒星质量的下限$M_\mathrm{min}\sim 0.08M_\odot$，更小的质量无法点燃核反应，质量在下限附近的恒星称为褐矮星；上限$M_\mathrm{max}\sim 100M_\odot$，此时光度达到爱丁顿极限，恒星处于辐射压主导的IV区，系统不稳定，寿命短，称为蓝巨星。</p>
+<p>$M_\odot &lt; M &lt;50M_\odot$的恒星可以穿越多个核燃烧曲线，发生多个核反应，形成铁核+外围多壳层燃烧的洋葱结构。</p>
+<p>小结：</p>
+<ul>
+<li>对$M\le M_\odot$，中心点初始在I区，向上演化并拐折进入II区或III区，形成白矮星</li>
+<li>对$M\ge M_\mathrm{ch}$，沿斜率为$3$的直线不断收缩，最终形成中子星</li>
+<li>对$M&gt;(8-10)M_\odot$，可能最终形成黑洞</li>
+</ul>
+<h2 id="主序理论"><a href="#主序理论" class="headerlink" title="主序理论"></a>主序理论</h2><p>赫罗图上主序带：</p>
+<script type="math/tex; mode=display">\log L = \alpha\log T_\mathrm{eff} + \mathrm{const}</script><p>（有一定弥散）<br>系数$\alpha$不是常数，$L$变大时$|\alpha|$变大。</p>
+<p>另外，主序星有质光关系：</p>
+<script type="math/tex; mode=display">\log L = \nu\log M + \mathrm{const}</script><p>本节用已有的理论解释这两个经验关系。</p>
+<p>假设：</p>
+<ul>
+<li>中心核区为氢燃烧</li>
+<li>系统处于热平衡和流体静力学平衡</li>
+<li>化学丰度均匀、恒定</li>
+<li>辐射平衡</li>
+<li>气体压主导</li>
+<li>不透明度$\kappa\sim\mathrm{const}$</li>
+</ul>
+<p>对恒星结构方程组进行量纲分析：</p>
+<p>定义分数质量$x=m/M$，$0\le x \le 1$。选择特征尺度$R_*$，可以有：</p>
+<script type="math/tex; mode=display">r = f_1(x)R_*</script><p>其中$f_1(x)$也是无量纲的。对压强、密度、温度、辐射通量也可以如下定义。</p>
+<script type="math/tex; mode=display">P(x) = f_{2}(x) P_*</script><script type="math/tex; mode=display">\rho(x) = f_{3}(x) \rho_*</script><script type="math/tex; mode=display">T(x) = f_{4}(x) T_*</script><script type="math/tex; mode=display">F(x) = f_{5}(x) F_*</script><p>从而得到无量纲化的方程：</p>
+<p>流体静力学平衡方程成为</p>
+<script type="math/tex; mode=display">P_* = \frac{GM^2}{R_*^4} \tag{1}</script><script type="math/tex; mode=display">\frac{\mathrm{d}f_2}{\mathrm{d}x} = -\frac{x}{4\pi f_1^4}</script><p>类似地，连续性方程成为</p>
+<script type="math/tex; mode=display">\rho_* = \frac{M}{R_*^3} \tag{2}</script><script type="math/tex; mode=display">\frac{\mathrm{d}f_1}{\mathrm{d}x} = \frac{1}{4\pi f_1^2 f_3}</script><p>理想气体的EoS $P=\frac{\mathcal{R}}{\mu}\rho T$成为</p>
+<script type="math/tex; mode=display">P_* = \frac{\mathcal{R}}{\mu}\rho_* T_* \tag{3}</script><script type="math/tex; mode=display">f_2 = f_3f_4</script><p>辐射转移方程成为</p>
+<script type="math/tex; mode=display">F_* = \frac{ac}{\kappa}\frac{T_*^4R_*^4}{M} \tag{4}</script><script type="math/tex; mode=display">\frac{\mathrm{d}f_4}{\mathrm{d}x} = -\frac{3f_5}{4f_4^3(4\pi f_1^2)^2}</script><p>热平衡方程成为</p>
+<script type="math/tex; mode=display">F_* = q_0\rho_*T_*^nM \tag{5}</script><script type="math/tex; mode=display">\frac{\mathrm{d}f_5}{\mathrm{d}x} = f_3f_4^n</script><p>无量纲化的方程对所有恒星都有相同的形式，这种性质称为<strong>同系性/同调性</strong>。</p>
+<p>联立量纲方程(1)(2)(3)(4)，</p>
+<script type="math/tex; mode=display">F_* = \frac{ac}{\kappa}\left(\frac{\mu G}{\mathcal{R}}\right)^4 M^3 \tag{6}</script><p>即有</p>
+<script type="math/tex; mode=display">F_* \sim L \sim M^3</script><p>得到<strong>质光关系</strong>。</p>
+<p>再联系(2)(4)(5)，得到<strong>质量-半径关系</strong></p>
+<script type="math/tex; mode=display">R_* \propto M^{\frac{n-1}{n+3}} \tag{*}</script><p>以及</p>
+<script type="math/tex; mode=display">\rho_* \propto M^{\frac{6-2n}{3+n}}=M^\alpha</script><p>一般核反应都有$n&gt;3$，从而$\rho_*$和$M$是负相关的。（可以在之前的$(\log\rho,\log T)$图中看出）</p>
+<p>由光度$L\sim 4\pi R_*^2 \sigma T_\mathrm{eff}^4$，联立质量-半径关系有</p>
+<script type="math/tex; mode=display">L^{\frac{n+11}{3n+9}} \propto T_\mathrm{eff}^4</script><p>对$M\le M_\odot$的恒星，p-p链主导，$n=4$，</p>
+<script type="math/tex; mode=display">\log L = 5.6\log T_\mathrm{eff} + \mathrm{const}</script><p>对$M&gt;M_\odot$的恒星，CNO循环主导，$n=16$，</p>
+<script type="math/tex; mode=display">\log L = 8.4\log T_\mathrm{eff} + \mathrm{const}</script><p>得到和上面主序带相同的结果，质量越大（光度越大）$\log T_\mathrm{eff}$的系数越大。</p>
+<p>演化时标</p>
+<script type="math/tex; mode=display">\tau_\mathrm{MS} \sim \frac{Mc^2}{L} \sim M^{-2}</script><p>即更大质量恒星在主序上停留时间更短，演化更快。</p>
+<p>中心温度</p>
+<script type="math/tex; mode=display">T_c \sim T_* \sim M^{\frac{4}{n+3}}</script><p>对$M\le M_\odot$的恒星，p-p链主导，$n=4$，$T_c\sim M^{4/7}$。要求$T_c\ge T_\mathrm{min}$，估算得到最小值量$M_\mathrm{min}\sim 0.1M_\odot,L_\mathrm{min}\sim 10^{-3}L_\odot$。</p>
+<p>如果考虑$\kappa$不是常数，Kramers不透明度$\kappa=\kappa_0 \rho T^{-7/2}$。此时$L\sim M^{\frac{5+31/2n}{1+5/2n}}$。对p-p链主导的小质量恒星，$L\sim M^{5.46}$，与观测$L\sim M^{4.5}$基本一致。</p>
+<p>对大量恒星样本的观测，由于形成时间不同，$\mu$也不同，因此在赫罗图上有一定的弥散。</p>
+<h2 id="演化后期恒星的结构"><a href="#演化后期恒星的结构" class="headerlink" title="演化后期恒星的结构"></a>演化后期恒星的结构</h2><p>用$(\log T,\log\rho)$平面上一系列点描述恒星内部不同壳层的温度和密度，中心点应是曲线右上端点而表面是左下端点（温度最低，密度$\rightarrow0$）</p>
+<p><img src="07-3-rho-T-diagram-structure.png" alt=""></p>
+<p>对如图的恒星，</p>
+<ul>
+<li>在主序阶段（曲线A），只有中心点O在核反应曲线上方，即只有核区能发生核燃烧。</li>
+<li>演化到曲线B，核区氢燃料耗尽，发生自引力收缩，使中心点向右上方移动，但还未触发氦燃烧；而核区外围的中间壳层可以触发氢燃烧，此时恒星成为红巨星(Red Giant)。<br>若收缩过程为准静态过程，维里定理成立，且系统能量守恒，即引力势能和内能都守恒。为保持引力势能守恒，核区收缩时外壳应膨胀，为保持内能守恒，核区温度升高时外壳温度降低，即外壳绝热膨胀。<br>考虑距中心$r_0$处两个相等的质量元，$\Delta m_1=\Delta m_2=\Delta m$，$\Delta m_1$向内收缩$r_0\rightarrow r_1$，而$\Delta m_2$向外膨胀$r_0\rightarrow r_2$使引力势能不变：<script type="math/tex; mode=display">-\frac{Gm(r_0)\cdot 2\Delta m}{r_0} = -\frac{Gm(r_0)\Delta m}{r_1}-\frac{Gm(r_0)\Delta m}{r_2}</script>得到$r_2=(2-r_0/r_1)^{-1}r_0$。核区略微收缩可以导致外壳膨胀很多。<br>红巨星外壳的绝热膨胀导致$T_\mathrm{eff}$和$L$都降低，恒星将离开主序带。</li>
+<li>若核区收缩使中心温度达到$3\alpha$反应的条件，核区的氦燃烧将被点燃（曲线C）。此时恒星核区的氦燃烧和外围的氢燃烧同时进行</li>
+<li>大质量恒星经过多次引力收缩和加热，将形成多壳层燃烧的洋葱结构。</li>
+<li>最后，核区重元素的燃烧也停止，将触发超新星爆炸，外围壳层被吹散到星际空间形成ISM，中心形成中子星或黑洞。</li>
+</ul>
 </body></html>]]></content>
       <categories>
         <category>笔记</category>
@@ -1645,8 +1972,8 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <h2 id="1-3-矢量分析"><a href="#1-3-矢量分析" class="headerlink" title="1.3 矢量分析"></a>1.3 矢量分析</h2><p>两个常用的公式是：</p>
 <script type="math/tex; mode=display">\mathbf A \times(\mathbf B \times \mathbf C)=(\mathbf A\cdot \mathbf C)\mathbf B-(\mathbf A\cdot\mathbf B)\mathbf C \tag{1.3.1}</script><script type="math/tex; mode=display">\mathbf A\cdot(\mathbf B\times\mathbf C)=\mathbf B\cdot(\mathbf C\times\mathbf A)=\mathbf C\cdot(\mathbf A\times\mathbf B) \tag{1.3.2}</script><p>在矢量分析的表达式中经常出现的是纳布拉算符$\nabla$（定义为$\nabla=\frac{\partial}{\partial x^i}\mathbf e_i$），作为微分算符，$\nabla$和分量为实数的矢量的运算规则不尽相同。下面对于出现$\nabla$的表达式，以$\nabla\times(\mathbf A\times \mathbf B)$为例介绍两种分析的方法：</p>
 <ol>
-<li>式中出现了两个矢量$\mathbf A$和$\mathbf B$，$\nabla$对二者都有作用，那么可以写成$\nabla<em>{\mathbf A}\times(\mathbf A\times\mathbf B)+\nabla</em>{\mathbf B}\times(\mathbf A\times\mathbf B)$，其中$\nabla<em>{\mathbf A}$只对$\mathbf A$作用，$\nabla</em>{\mathbf B}$只对$\mathbf B$作用。从而由(1.3.1)式，对第一项有：<script type="math/tex; mode=display">
-\nabla_{\mathbf A}\times(\mathbf A\times\mathbf B)=(\mathbf B\cdot\nabla_{\mathbf A})\mathbf A-(\nabla_{\mathbf A}\cdot\mathbf A)\mathbf B</script>这里$\nabla<em>{\mathbf A}$只对$\mathbf A$有作用，因此其与$\mathbf B$的点乘是可以交换的，进行恒等变换使得最后式中$\nabla</em>{\mathbf A}$只作用在$\mathbf A$上，从而保证在最后化回$\nabla$时不会引起歧义。<br>对$\nabla_{\mathbf B}$的式子同理，最后结果为：<script type="math/tex; mode=display">
+<li>式中出现了两个矢量$\mathbf A$和$\mathbf B$，$\nabla$对二者都有作用，那么可以写成$\nabla_{\mathbf A}\times(\mathbf A\times\mathbf B)+\nabla_{\mathbf B}\times(\mathbf A\times\mathbf B)$，其中$\nabla_{\mathbf A}$只对$\mathbf A$作用，$\nabla_{\mathbf B}$只对$\mathbf B$作用。从而由(1.3.1)式，对第一项有：<script type="math/tex; mode=display">
+\nabla_{\mathbf A}\times(\mathbf A\times\mathbf B)=(\mathbf B\cdot\nabla_{\mathbf A})\mathbf A-(\nabla_{\mathbf A}\cdot\mathbf A)\mathbf B</script>这里$\nabla_{\mathbf A}$只对$\mathbf A$有作用，因此其与$\mathbf B$的点乘是可以交换的，进行恒等变换使得最后式中$\nabla_{\mathbf A}$只作用在$\mathbf A$上，从而保证在最后化回$\nabla$时不会引起歧义。<br>对$\nabla_{\mathbf B}$的式子同理，最后结果为：<script type="math/tex; mode=display">
 \begin{aligned}
 \nabla\times(\mathbf A\times \mathbf B)&=(\mathbf B\cdot\nabla_{\mathbf A})\mathbf A-(\nabla_{\mathbf A}\cdot\mathbf A)\mathbf B + (\nabla_{\mathbf B}\cdot\mathbf B)\mathbf A-(\mathbf A\cdot\nabla_{\mathbf B})\mathbf B
 \\&=(\mathbf B\cdot\nabla)\mathbf A-(\nabla\cdot\mathbf A)\mathbf B + (\nabla\cdot\mathbf B)\mathbf A-(\mathbf A\cdot\nabla)\mathbf B
@@ -1688,12 +2015,12 @@ E_x(x)=E_x'(x')=E_x'(\gamma x)=\frac 1 {\gamma^2}E_x'(x)</script><p>$y,z$方向�
 <script type="math/tex; mode=display">
 \mathbf D = D^i\mathbf e_i = D_i\mathbf e^i</script><p>,其中：</p>
 <script type="math/tex; mode=display">D^i=\mathbf D\cdot\mathbf e^i</script><script type="math/tex; mode=display">D_i=\mathbf D\cdot\mathbf e_i</script><p>用上、下指标表示的分量$D^i,D_i$分别称作<strong>逆变分量</strong>、<strong>协变分量</strong>。</p>
-<p>下面的论述不完全准确地讨论了协变和逆变分量的含义。考虑不同于${\mathbf e<em>1,\mathbf e_2,\mathbf e_3}$的另一组线性无关的基${\mathbf e_1’,\mathbf e_2’,\mathbf e_3’}$，相应的对偶集合${\mathbf e^1{}’ ,\mathbf e^2{}’,\mathbf e^3{}’}$。两组基之间的坐标变换为$\mathbf e_i’=T_i^{\alpha}\mathbf e</em>{\alpha},\mathbf e^j{}’=T_{\beta}^j\mathbf e^{\beta}$。由对偶集合的定义，应有：</p>
+<p>下面的论述不完全准确地讨论了协变和逆变分量的含义。考虑不同于${\mathbf e_1,\mathbf e_2,\mathbf e_3}$的另一组线性无关的基${\mathbf e_1’,\mathbf e_2’,\mathbf e_3’}$，相应的对偶集合${\mathbf e^1{}’ ,\mathbf e^2{}’,\mathbf e^3{}’}$。两组基之间的坐标变换为$\mathbf e_i’=T_i^{\alpha}\mathbf e_{\alpha},\mathbf e^j{}’=T_{\beta}^j\mathbf e^{\beta}$。由对偶集合的定义，应有：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
     \mathbf e_i'\cdot\mathbf e^j{}' &=  T_i^{\alpha}\mathbf e_{\alpha} \cdot T_{\beta}^j\mathbf e^{\beta} = T_i^{\alpha}T_{\beta}^j \delta_{\alpha}^{\beta} = T_i^{\alpha}T_{\alpha}^j
     \\&= \delta_i^j
-\end{aligned}</script><p>说明基和对偶基的坐标变换矩阵$T<em>i^{\alpha}$和$T</em>{\beta}^j$的分量形式构成的矩阵互逆。矢量$\mathbf D$的协变分量$D<em>i=\mathbf D\cdot\mathbf e_i$，和基的变换方式相同，故称作协变；同理，逆变分量和对偶基的变换方式相同，其变换矩阵为基的逆矩阵，故称为逆变。（事实上$T_i^{\alpha}$和$T</em>{\beta}^j$不是两个矩阵，而是同一个张量在不同的基下的分量形式）</p>
+\end{aligned}</script><p>说明基和对偶基的坐标变换矩阵$T_i^{\alpha}$和$T_{\beta}^j$的分量形式构成的矩阵互逆。矢量$\mathbf D$的协变分量$D_i=\mathbf D\cdot\mathbf e_i$，和基的变换方式相同，故称作协变；同理，逆变分量和对偶基的变换方式相同，其变换矩阵为基的逆矩阵，故称为逆变。（事实上$T_i^{\alpha}$和$T_{\beta}^j$不是两个矩阵，而是同一个张量在不同的基下的分量形式）</p>
 <p>需要注意矢量的协变表示和逆变表示与协变矢量和逆变矢量是不同的概念，在$\mathbb R^3$中不对后者进行区分。</p>
 <h2 id="2-4-度规"><a href="#2-4-度规" class="headerlink" title="2.4 度规"></a>2.4 度规</h2><p>对任意矢量$\mathbf D$，有：</p>
 <script type="math/tex; mode=display">
@@ -1711,7 +2038,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 \begin{aligned}
     \mathbf A\cdot\mathbf B &= (A^i\mathbf e_i)\cdot(B^j\mathbf e_j)=g_{ij}A^iB^j
     \\&= (A_i\mathbf e^i)\cdot(B_j\mathbf e^j)=g^{ij}A_iB_j
-\end{aligned}</script><p>特别地，$\mathrm{d}\mathbf{R}\cdot\mathbf{dR} = g<em>{ij}(\mathrm{d}\mathbf{R})^i(\mathrm{d}\mathbf{R})^j = g</em>{ij}\mathbf{d}u^i\mathbf{d}u^j$。（其中$(\mathrm{d}\mathbf{R})^i = \nabla u^i\cdot\mathrm{d}\mathbf{R} = \mathbf du^i$），这告诉我们度规也蕴含了曲线坐标系中的线元长度。</p>
+\end{aligned}</script><p>特别地，$\mathrm{d}\mathbf{R}\cdot\mathbf{dR} = g_{ij}(\mathrm{d}\mathbf{R})^i(\mathrm{d}\mathbf{R})^j = g_{ij}\mathbf{d}u^i\mathbf{d}u^j$。（其中$(\mathrm{d}\mathbf{R})^i = \nabla u^i\cdot\mathrm{d}\mathbf{R} = \mathbf du^i$），这告诉我们度规也蕴含了曲线坐标系中的线元长度。</p>
 <p>对矢量的叉乘：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
@@ -1728,7 +2055,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
         \\ \frac{\partial x}{\partial u^2} & \frac{\partial y}{\partial u^2} & \frac{\partial z}{\partial u^2}
         \\ \frac{\partial x}{\partial u^3} & \frac{\partial y}{\partial u^3} & \frac{\partial z}{\partial u^3}
     \end{vmatrix}
-\end{aligned}</script><p>为Jacobi行列式。把度规的分量$g<em>{ij}$写成矩阵，发现其元素$g</em>{ij}=\sum_{q=1}^{3}\frac{\partial \mathbf R^q}{\partial u^i}\cdot\frac{\partial \mathbf R^q}{\partial u^j}$，可以写成上面的Jacobi矩阵与其转置的积，那么我们有：</p>
+\end{aligned}</script><p>为Jacobi行列式。把度规的分量$g_{ij}$写成矩阵，发现其元素$g_{ij}=\sum_{q=1}^{3}\frac{\partial \mathbf R^q}{\partial u^i}\cdot\frac{\partial \mathbf R^q}{\partial u^j}$，可以写成上面的Jacobi矩阵与其转置的积，那么我们有：</p>
 <script type="math/tex; mode=display">g=det(g_{ij})=J^2</script></body></html>]]></content>
       <categories>
         <category>笔记</category>
@@ -1736,255 +2063,6 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
       </categories>
       <tags>
         <tag>物理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>恒星的稳定性</title>
-    <url>/2020/09/08/stellar-physics-06-stability/</url>
-    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>平衡态按二阶导数分为稳定平衡、不稳定平衡、随遇平衡</p>
-<p>恒星处于热平衡、流体静力学平衡。稳定平衡的恒星受热扰动、动力学扰动，应该可以回到平衡态。</p>
-<h2 id="长期热稳定性"><a href="#长期热稳定性" class="headerlink" title="长期热稳定性"></a>长期热稳定性</h2><p>2.4节（维里定理）里推出过</p>
-<script type="math/tex; mode=display">3\int_{0}^{M} \frac{P}{\rho} \mathrm{d}m = -\Omega</script><p>而</p>
-<script type="math/tex; mode=display">\frac{P}{\rho} = \frac{P_\mathrm{gas}}{\rho} + \frac{P_\mathrm{rad}}{\rho} = \frac{2}{3}u_\mathrm{gas} + \frac{1}{3}u_\mathrm{rad}</script><p>从而</p>
-<script type="math/tex; mode=display">U_\mathrm{gas} = -\frac{1}{2}(\Omega + U_\mathrm{rad})</script><p>$E=U<em>\mathrm{gas}+U</em>\mathrm{rad}+\Omega=-U<em>\mathrm{gas}&lt;0$，系统处于束缚态。<br>定义等效引力势能$\Omega</em>\mathrm{eff}=\Omega+U<em>\mathrm{rad}$，能保留维里定理的形式$2U</em>\mathrm{gas}+\Omega<em>\mathrm{eff}=0$。<br>恒星收缩时，$|\Omega</em>\mathrm{eff}|$增大，即$U_\mathrm{gas}$增大，恒星温度升高（释放的引力势能用来加热恒星气体）。</p>
-<p>恒星总能的变化率</p>
-<script type="math/tex; mode=display">\dot{E} = L_\mathrm{nuc} - L</script><p>在平衡态上，$L<em>\mathrm{nuc}=L,E=\mathrm{const}$。<br>设系统受扰动略微偏离平衡态，使$L</em>\mathrm{nuc}&gt;L$，此时$\dot{E}&gt;0$，$|E|$减小，从而$|\Omega_\mathrm{eff}|$减小，恒星膨胀，温度降低，导致核产能率降低，回到原平衡态。从而即使恒星有很多短时标的不稳定性，其在长时标上还是稳定的。</p>
-<h2 id="热不稳定性"><a href="#热不稳定性" class="headerlink" title="热不稳定性"></a>热不稳定性</h2><h3 id="简并气体的不稳定性"><a href="#简并气体的不稳定性" class="headerlink" title="简并气体的不稳定性"></a>简并气体的不稳定性</h3><p>多方球模型中</p>
-<script type="math/tex; mode=display">P_c = (4\pi)^{1/3}B_n GM^{2/3} \rho_c^{4/3} = C_1\rho_c^{4/3}</script><p>($C_1$为常数)。求对数并取全微分，</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}P_c}{P_c} = \frac{4}{3}\frac{\mathrm{d}\rho_c}{\rho_c} \tag{2.1}</script><p>一般地,气体状态方程$P = C_3\rho^aT^b$，有：</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}P_c}{P_c} = a\frac{\mathrm{d}\rho_c}{\rho_c} + b\frac{\mathrm{d}T_c}{T_c} \tag{2.2}</script><p>对比(2.1)和(2.2)，有</p>
-<script type="math/tex; mode=display">\left(\frac{4}{3}-a\right) \frac{\mathrm{d}\rho_c}{\rho_c} = b\frac{\mathrm{d}T_c}{T_c} \tag{2.3}</script><p>分析下面两种情况：</p>
-<ul>
-<li>若核区为理想气体，<script type="math/tex; mode=display">P = \frac{\mathcal{R}}{\mu}\rho T</script>即$a=b=1$，(2.3)给出<script type="math/tex; mode=display">\frac{1}{3} \frac{\mathrm{d}\rho_c}{\rho_c} = \frac{\mathrm{d}T_c}{T_c}</script>若引力不稳定性导致核区稍微收缩，$\rho_c$增大，则$T_c$增大，从而$q$迅速增大，产生大量热量，使辐射压增大，又导致核区膨胀，从而可以维持稳定。</li>
-<li>若核区为简并电子气，非相对论性的和相对论性的物态方程分别为<script type="math/tex; mode=display">P_\mathrm{e,deg} = k_1\rho^{5/3}T^b</script><script type="math/tex; mode=display">P_\mathrm{e,r,deg} = k_2\rho^{4/3}T^b</script>其中$0 &lt; b \ll 1$。<br>这两种物态方程都有$a \ge 4/3$，即密度减小时温度增大。当核区等离子体不稳定性使$L_\mathrm{nuc} &gt; L$时，辐射压增大导致核区膨胀，$\rho_c$减小，而$T_c$将增大，使$q$进一步增大，核区将会持续膨胀，偏离平衡态，这一过程称为<strong>runaway</strong>。<br>若膨胀到一定程度使密度减小到解除简并态，核区重新成为稳定的理想气体，这一特例下runaway可以被避免。</li>
-</ul>
-<h3 id="薄壳不稳定性"><a href="#薄壳不稳定性" class="headerlink" title="薄壳不稳定性"></a>薄壳不稳定性</h3><p>考虑半径$r_0\sim r$处，厚$\ell=r-r_0$，质量$\Delta m$的薄壳，$\ell\ll R$，认为这一薄壳中温度、密度均匀，近似处于热平衡态。</p>
-<p>由流体静力学平衡条件，薄壳中的总压力即为$r$内的物质对$r\sim R$的质量为$\Delta \tilde{m}$的壳层的自引力，而压强是各向同性的，从而</p>
-<script type="math/tex; mode=display">P(r) \approx \frac{1}{4\pi r^2}\frac{Gm\Delta\tilde{m}}{r^2} \sim \frac{1}{r^4}</script><p>即</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}P}{P} = -4\frac{\mathrm{d}r}{r}</script><p>质量$\Delta m=\rho(r)(4\pi r^2\ell)$保持不变时，有$\rho\sim\ell^{-1}$，即</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}\rho}{\rho} = -\frac{\mathrm{d}\ell}{\ell} = -\frac{\mathrm{d}r}{\ell} = -\frac{\mathrm{d}r}{r}\frac{r}{\ell}</script><p>即</p>
-<script type="math/tex; mode=display">-\frac{\mathrm{d}r}{r} = \frac{\ell}{r}\frac{\mathrm{d}\rho}{\rho}</script><p>从而</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}P}{P} = 4\frac{\ell}{r}\frac{\mathrm{d}\rho}{\rho}</script><p>联立(2.2)式，</p>
-<script type="math/tex; mode=display">\left(4\frac{\ell}{r}-a\right) \frac{\mathrm{d}\rho_c}{\rho_c} = b\frac{\mathrm{d}T_c}{T_c}</script><p>同简并气体不稳定性的分析，壳层热扰动下能维持平衡的条件是$4\frac{\ell}{r}&gt;a$。远离核区的气体近似为理想气体，稳定条件即$4\frac{\ell}{r}&gt;1$。而薄壳$\ell\ll r$，因此薄壳在热扰动下是不稳定的。</p>
-<p>白矮星表面上会残留没燃烧的氢，若经历热扰动，表面亮度会急剧增加，形成核闪耀，使本不可见的白矮星变得可见，观测上称为新星。</p>
-<p>最后需要说明的是，上面的讨论中没有考虑温度的变化也会导致光度$L$的变化。如果恒星壳层的膨胀导致温度升高，但同时光度也升高使$L_\mathrm{nuc} &lt; L$，此时壳层也会失去能量而收缩，使其不至于runaway。不过事实上$L\sim T^4$，而相比之下$q$对温度要敏感的多，因此忽略$L$的变化也是合理的。</p>
-<h2 id="动力学稳定性"><a href="#动力学稳定性" class="headerlink" title="动力学稳定性"></a>动力学稳定性</h2><p>恒星$r$处压强产生各向同性扰动$\delta P$，收缩至半径$r’$。若收缩后还能向外膨胀恢复到原来的位置，则认为系统是动力学稳定的。</p>
-<p>令</p>
-<script type="math/tex; mode=display">r' = r(1-\epsilon)</script><p>$0&lt;\epsilon\ll 1$。<br>由质量连续性方程，</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \rho'(r') &= \frac{1}{4\pi r'^2}\frac{\mathrm{d}m}{\mathrm{d}r'} = \frac{1}{4\pi r^2(1-\epsilon)^2}\frac{\mathrm{d}m}{\mathrm{d}r}\frac{\mathrm{d}r}{\mathrm{d}r'}
-    \\&= \frac{\rho(r)}{(1-\epsilon)^3}
-    \\&\approx \rho(r)(1+3\epsilon)
-\end{aligned}</script><p>设压缩过程为绝热的（忽略辐射冷却，也忽略辐射压），绝热指数$\gamma_a$。气体的物态方程为$PV^{\gamma_a}=\mathrm{const}$，即$P\rho^{-\gamma_a}=\mathrm{const}$。从而有</p>
-<script type="math/tex; mode=display">P' = P(1+3\epsilon)^{\gamma_a} \approx P(1+3\gamma_a\epsilon)</script><p>另一方面，$r’$处自引力产生的压强为</p>
-<script type="math/tex; mode=display">P_h' = \int_m^M \frac{Gm}{4\pi r^4(1-\epsilon)^4} \mathrm{d}m = (1-\epsilon)^{-4}P \approx (1+4\epsilon)P</script><p>若要使壳层能膨胀会原来的状态，应有$P’&gt;P_h’$，即</p>
-<script type="math/tex; mode=display">\gamma_a > \frac{4}{3}</script><p>这一条件需要在恒星中任何位置都成立，称为<strong>动力学稳定（强）判据</strong>。</p>
-<p>强判据成立意味着系统是动力学稳定的，但只有部分区域的$\gamma_a&lt;4/3$是否就意味着动力学不稳定还需要进一步考虑。整体的动力学稳定性取决于<strong>动力学积分</strong>：</p>
-<script type="math/tex; mode=display">I_\mathrm{dyn} = \int \left(\gamma_a-\frac{4}{3}\right)\frac{P}{\rho}\mathrm{d}m</script><p>$I_\mathrm{dyn}&lt;0$时系统是动力学不稳定的。</p>
-<ul>
-<li>若$\gamma<em>a&lt;4/3$在核区较大范围内成立，由于中心部分$P/\rho$较大，$I</em>\mathrm{dyn}&lt;0$，系统动力学不稳定。</li>
-<li>若$\gamma<em>a&lt;4/3$仅在表面附近的壳层成立，这一区域对应$P/\rho$很小，因此积分由内部区域主导，$I</em>\mathrm{dyn}&gt;0$，系统是动力学稳定的。</li>
-</ul>
-<h2 id="动力学不稳定性的例子"><a href="#动力学不稳定性的例子" class="headerlink" title="动力学不稳定性的例子"></a>动力学不稳定性的例子</h2><ol>
-<li>相对论性简并电子气<br>$n=3,\gamma<em>a=4/3$。系统为白矮星，$M\rightarrow M</em>\mathrm{ch}$。<br>若吸附质量$\delta M$使$M+\delta M&gt;M_\mathrm{ch}$，此时简并压不足以抵抗引力，星体将进行引力塌缩，白矮星结构破坏，因此是动力学不稳定的。</li>
-<li>辐射压主导<br>非相对论性气体$n=3/2,\gamma_a=5/3$<br>相对论性气体和辐射$n=3,\gamma=4/3$<br>因此辐射主导的恒星是动力学不稳定的。</li>
-</ol>
-<p>另一方面，对辐射，$u_\mathrm{rad}=3P/\rho$，从而</p>
-<script type="math/tex; mode=display">-\Omega = 3\int_{0}^{M} \frac{P}{\rho} \mathrm{d}m = 3\int_{0}^{M} \frac{1}{3}u_\mathrm{rad} \mathrm{d}m = U_\mathrm{rad}</script><p>即辐射压主导的恒星的$E=U+\Omega\approx 0$，即系统是非束缚的。也能说明系统是动力学不稳定的。</p>
-<h3 id="部分电离"><a href="#部分电离" class="headerlink" title="部分电离"></a>部分电离</h3><p>考虑部分电离的气体，满足Saha方程</p>
-<script type="math/tex; mode=display">\frac{x^2}{1-x^2} = \frac{g}{h^3}\frac{(2\pi m_ekT)^{3/2}(kT)^{5/2}}{P} e^{-\chi/kT} \propto P^{-1}</script><p>物态方程为理想气体物态方程。</p>
-<p>若气体受动力学扰动被压缩，分为两个过程：<br>第一步$(V,P,N)\rightarrow(V’,P’,N)$。令粒子数不变，体积减小导致压强增大，从而$x$减小（复合增强）。<br>第二步$(V’,P’,N)\rightarrow(V’,P’’,N’)$，令体积不变，上一步复合增强导致$N’ &lt; N$，从而$P’’ &lt; P’$。认为压缩过程满足绝热物态方程，$P=k_a\rho^{\gamma_a}$，复合过程不改变密度，则有$\gamma_a’’ &lt; \gamma_a’$。有可能$\gamma_a’’ &lt; 4/3$，导致动力学不稳定。</p>
-<p>3.6节中给出过：</p>
-<script type="math/tex; mode=display">\gamma_{\mathrm{a}}(x)=\frac{5+\left(\frac{5}{2}+\frac{\chi}{kT}\right)^{2} x(1-x)}{3+\left[\frac{3}{2}+\left(\frac{3}{2}+\frac{\chi}{k T}\right)^{2}\right] x(1-x)}</script><ul>
-<li>对完全中性和完全电离气体，都有$\gamma_a=5/3$</li>
-<li>对部分电离气体：  <ul>
-<li>取$kT\approx \chi=13.6\mathrm{eV}$，当$18\% &lt; x &lt; 82\%$时$\gamma_a &lt; 4/3$</li>
-<li>取$kT\approx \chi/10$（低温），当$5\% &lt; x &lt; 95\%$时$\gamma_a &lt; 4/3$</li>
-</ul>
-</li>
-</ul>
-<p>讨论：</p>
-<ul>
-<li>在恒星内核，温度足够高，$\mathrm{H},\mathrm{He}$几乎完全电离，$x=1$。从而核区是动力学稳定的。</li>
-<li>在外围壳层，温度较低，$x&lt;1$，一般$\gamma_a&lt;4/3$，但$P/\rho$也较小，从而整个恒星的动力学积分$I_\mathrm{dyn}&gt;0$，整个系统仍是动力学稳定的。</li>
-<li>极高温的内核发生光致解离效应，对恒星稳定性的影响不可忽略</li>
-</ul>
-<h2 id="对流不稳定性"><a href="#对流不稳定性" class="headerlink" title="对流不稳定性"></a>对流不稳定性</h2><p>对流的物理图像：恒星内部壳层温度较高，密度小；外部温度较低，密度大；导致气体在恒星自引力场中循环流动，形成对流。</p>
-<p>对流的效果：</p>
-<ul>
-<li>高效率传热，辐射传热的重要补充</li>
-<li>将内外物质搅拌均匀，使恒星中各元素化学丰度近似形成均匀分布</li>
-</ul>
-<p>流体静力学平衡有</p>
-<script type="math/tex; mode=display">\kappa F < 4\pi cGm</script><p>而</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d} T}{\mathrm{d} m}=-\frac{3}{4 a c} \frac{\kappa}{T^{3}} \frac{F}{\left(4 \pi r^{2}\right)^{2}}</script><p>若$\kappa F$足够大，即$\left|\frac{\mathrm{d} T}{\mathrm{d} m}\right|$足够大，可以形成强对流，此时可能有$\kappa F&gt;4\pi cGm$，流体静力学平衡被打破。</p>
-<h3 id="对流产生的条件"><a href="#对流产生的条件" class="headerlink" title="对流产生的条件"></a>对流产生的条件</h3><p><img src="06-1-convection.png" alt=""></p>
-<p>如图，假如温度、压强为$(\rho<em>1,P_1)$的气体团块上浮一小段距离到密度、压强为$(\rho_2,P_2)$的壳层处，由于$P_1 &gt; P_2$，这一团块将会膨胀直到和环境压强平衡，即$P</em>{*}=P<em>2$。考虑恒星中的动力学时标远小于热力学时标，这一膨胀过程可以近似看为绝热的。绝热膨胀导致密度减小，如果密度比当前壳层的密度$\rho_2$大则下沉，此时是<strong>对流稳定</strong>的；否则气体团块将继续上浮，直到上升到$r</em>\mathrm{out}$处，绝热膨胀后的密度大于环境密度。这种情况下是<strong>对流不稳定</strong>的，$r<em>\mathrm{out}$即为对流区的外边界。一般$r</em>\mathrm{out} \ll R$。</p>
-<p><img src="06-2-density-pressure.png" alt=""></p>
-<p>如图，若环境为S构型，绝热膨胀的$\rho<em>{*}&lt;\rho_2$，从而质元上浮，对流区将不断发展，系统对流不稳定；若环境为S’构型，绝热膨胀的$ \rho</em>{*}&lt;\rho_2’$，质元下沉，系统对流稳定。</p>
-<p>对流稳定的条件可以写为：</p>
-<script type="math/tex; mode=display">\left(\frac{\mathrm{d}P}{\mathrm{d}\rho}\right)_\mathrm{star} < \left(\frac{\mathrm{d}P}{\mathrm{d}\rho}\right)_\mathrm{adiabatic}</script><p>由多方过程的物态方程</p>
-<script type="math/tex; mode=display">P = k\rho^{\gamma}</script><p>有</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}P}{\mathrm{d}\rho} = \gamma \frac{P}{\rho}</script><p>对绝热过程$\gamma=\gamma<em>a$。达到平衡后$P$相等，$\rho_a&gt;\rho</em>\mathrm{star}$，从而对流稳定的条件也可以写为</p>
-<script type="math/tex; mode=display">\gamma < \gamma_a</script><p>对恒星中的理想气体，</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}P}{P} = \frac{\mathrm{d}\rho}{\rho} + \frac{\mathrm{d}T}{T}</script><p>从而</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-    \gamma &= \frac{\rho}{\mathrm{d}\rho}\left(\frac{\mathrm{d}\rho}{\rho} + \frac{\mathrm{d}T}{T}\right)
-    \\&= 1+\frac{\rho}{T}\frac{\mathrm{d}T}{\mathrm{d}\rho}
-    \\&= 1+ \frac{\rho}{T}\frac{\mathrm{d}P}{\mathrm{d}\rho}\frac{\mathrm{d}T}{\mathrm{d}P}
-    \\&= 1+ \gamma\frac{P}{T}\frac{\mathrm{d}T}{\mathrm{d}P}
-\end{aligned}</script><p>从而对流稳定性条件成为</p>
-<script type="math/tex; mode=display">\frac{P}{T}\left(\frac{d T}{d P}\right)_{\mathrm{star}}<\frac{\gamma_{\mathrm{a}}-1}{\gamma_{\mathrm{a}}}</script><p>或者</p>
-<script type="math/tex; mode=display">\left|\frac{d T}{d r}\right|_{\mathrm{star}}<\left(\frac{\gamma_{\mathrm{a}}-1}{\gamma_{\mathrm{a}}}\right) \frac{T}{P}\left|\frac{d P}{d r}\right|_{\mathrm{star}}</script><h2 id="对流不稳定性的例子"><a href="#对流不稳定性的例子" class="headerlink" title="对流不稳定性的例子"></a>对流不稳定性的例子</h2><p>将热平衡方程和流体静力学平衡方程代入对流稳定性判据，得到</p>
-<script type="math/tex; mode=display">\kappa F<4 \pi c G m\left[4\left(\frac{\gamma_{\mathrm{a}}-1}{\gamma_{\mathrm{a}}}\right)(1-\beta)\right]</script><p>$右边\le 4\pi cGm$，等号在$\beta=0$时取得。<br>说明流体静力学平衡被打破之前，对流就可能发生。处于流体静力学平衡的恒星内部一部分壳层也可能存在对流区，与（太阳）观测一致。</p>
-<p>具体情况：</p>
-<ul>
-<li>部分电离区域（如恒星外围温度较低的区域），$\kappa$较大而$\gamma_a$较小，容易出现对流</li>
-<li>核区附近$\mathrm{H,He}$完全电离，$\kappa$几乎为常量，若磁流体不稳定性使核反应增强，$F$增大，可能出现对流</li>
-<li>在核区$q\propto T^n$，若$n$增大（如氢烧变成氦烧），也可能导致对流不稳定<br>Cowling的计算结果，<ul>
-<li>若$\kappa\sim\mathrm{const}$，$n&gt;3-4$时出现对流</li>
-<li>若$\kappa\sim \rho T^{-7/2}$，$n&gt;8$时出现对流</li>
-</ul>
-</li>
-<li>$\beta\rightarrow1$（气体压主导），$M$较小时容易出现对流。即小质量恒星内部对流区发达。</li>
-</ul>
-<h3 id="小对流云团带走的热量"><a href="#小对流云团带走的热量" class="headerlink" title="小对流云团带走的热量"></a>小对流云团带走的热量</h3><p>对流云团位于$r$处的壳层中，质量$m_c$，半径$r_c$，温度$T+\delta T$，密度$\rho+\delta\rho$。云团与环境达到热力学平衡，$\delta P=0$。由理想气体状态方程，</p>
-<script type="math/tex; mode=display">\frac{\delta T}{T} + \frac{\delta \rho}{\rho} = \frac{\delta P}{P} = 0</script><p>云团质心穿过$r_c$的时间称为穿越时标：$\tau=\frac{r_c}{v_c}$<br>若云团在球壳中均匀分布，此时传热以对流为主，在$\tau$时间内吸收的总热量即为</p>
-<script type="math/tex; mode=display">F(r)\frac{r_c}{v_c}</script><p>恒星自引力在$r$处产生的重力加速度</p>
-<script type="math/tex; mode=display">g'(r) = \frac{Gm(r)}{r^2}</script><p>减去当地的浮力，云团的加速度为：</p>
-<script type="math/tex; mode=display">\frac{Gm(r)}{r^2} \left|\frac{\delta \rho}{\rho}\right| = \frac{Gm(r)}{r^2} \left|\frac{\delta T}{T}\right|</script><p>从而云团上升$r_c$距离时的速度</p>
-<script type="math/tex; mode=display">v_c = \sqrt{\frac{Gm(r)}{r^2} \left|\frac{\delta T}{T}\right|r_c}</script><p>云团的比内能为$u$，$N$个云团吸热导致温度变化</p>
-<script type="math/tex; mode=display">\frac{\delta T}{T} \sim \frac{F\frac{r_c}{v_c}}{u\cdot Nm_c}</script><p>代入上面$v_c$的表达式，有：</p>
-<script type="math/tex; mode=display">\left(\frac{\delta T}{T}\right)^{3/2} = \frac{F(r)r_c}{uNm_c\sqrt{\frac{Gmr_c}{r^2}}}</script><p>量级估计，$F\sim L, m(r)\sim M, Num_c\sim U, r\sim R, r_c\sim R$，有</p>
-<script type="math/tex; mode=display">\left(\frac{\delta T}{T}\right)^{3/2} \sim \frac{L}{U}\frac{1}{\sqrt{\frac{GM}{R^3}}} \sim \tau_\mathrm{th}^{-1}\tau_\mathrm{dyn}</script><p>$\tau<em>\mathrm{th}$为热力学时标，$\tau</em>\mathrm{dyn}$为动力学时标。对太阳，$\tau<em>\mathrm{th}\sim 10^{15}\mathrm{s}, \tau</em>\mathrm{dyn}\sim 10^{3}\mathrm{s}$。$\frac{\delta T}{T}\sim 10^{-8}$</p>
-</body></html>]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>恒星物理笔记</category>
-      </categories>
-      <tags>
-        <tag>天文</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>恒星的演化</title>
-    <url>/2020/09/08/stellar-physics-07-stellar-evolution/</url>
-    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>恒星的几个时标：</p>
-<script type="math/tex; mode=display">\tau_\mathrm{dyn} \ll \tau_\mathrm{th} \ll \tau_\mathrm{nuc}</script><p>恒星的演化时标为核反应时标，在长时标下可能发生多次热演化的随机涨落，但会被统计抹平。中心核区，或中心点源$(T_c,\rho_c)$的演化将主导恒星的状态。这一章研究中心点$(\log T_c,\log \rho_c)$的演化轨迹。</p>
-<h2 id="log-T-log-rho-平面的特征"><a href="#log-T-log-rho-平面的特征" class="headerlink" title="$(\log T,\log \rho)$平面的特征"></a>$(\log T,\log \rho)$平面的特征</h2><h3 id="EoS区域"><a href="#EoS区域" class="headerlink" title="EoS区域"></a>EoS区域</h3><p><img src="07-1-rho-T-diagram-EoS.png" alt=""></p>
-<p>不同EoS在$(\log T,\log \rho)$平面上划分出下面四个区域</p>
-<ul>
-<li>(I)理想气体：$P=\frac{\mathcal{R}}{\mu}\rho T=k_0\rho T$  </li>
-<li>(II)简并电子气：$P_\mathrm{e,deg}=k_1\rho^{5/3}$ </li>
-<li>(III)相对论性简并电子气：$P_\mathrm{e,r-deg}=k_2\rho^{4/3}$ </li>
-<li>(IV)辐射压主导，$P\approx P_\mathrm{rad}=\frac{1}{3}aT^4$。</li>
-</ul>
-<p>区域间的分界线：</p>
-<ul>
-<li>在(I)和(II)相变的临界点，$P<em>\mathrm{ideal}\approx P</em>\mathrm{e,deg}$，从而有<script type="math/tex; mode=display">\log\rho=1.5\log T+\mathrm{const}</script></li>
-<li>(II)和(III)相变的临界点$P<em>\mathrm{e,deg}\approx P</em>\mathrm{e,r-deg}$，<script type="math/tex; mode=display">\log\rho = \mathrm{const}</script></li>
-<li>若自引力收缩快，(I)区可直接进入(III)区，$P<em>\mathrm{ideal}\approx P</em>\mathrm{e,r-deg}$，<script type="math/tex; mode=display">\log\rho = 3\log T + \mathrm{const}</script></li>
-<li>(I)到(IV)的相变，不妨假设$P<em>\mathrm{rad}\approx 10P</em>\mathrm{gas}$。有<script type="math/tex; mode=display">\log\rho = 3\log T + \mathrm{const}</script></li>
-</ul>
-<h3 id="核燃烧区域"><a href="#核燃烧区域" class="headerlink" title="核燃烧区域"></a>核燃烧区域</h3><p>一般只考虑$q&gt;q_\mathrm{min}=0.1\mathrm{J\cdot kg^{-1}\cdot s^{-1}}$的核过程（更小的核过程的光度过小，不会被观测到）</p>
-<p>在可以被观测到的临界点上：</p>
-<script type="math/tex; mode=display">q = q_\mathrm{min} = q_0 \rho^m T^n</script><p>即</p>
-<script type="math/tex; mode=display">\log\rho = -\frac{n}{m}\log T + \frac{1}{m}\log\left(\frac{q_\mathrm{min}}{q_0}\right) \tag{*}</script><p>给出$(\log T,\log \rho)$平面上一条负斜率的直线。</p>
-<p>一般$m=1,n\gg 1$。在较大的温度范围上，$n$不是常数，而是$T$的函数，此时(*)式描述的是一条曲线。当恒星核区参数在边界曲线上方时，该反应才能被触发。<br>实际上边界线对应的$\rho$有一定弥散，从而有一定宽度。实际的各核反应的边界带如下图：</p>
-<p><img src="07-2-rho-T-diagram-nuc-process.png" alt=""></p>
-<h3 id="不稳定性区域"><a href="#不稳定性区域" class="headerlink" title="不稳定性区域"></a>不稳定性区域</h3><p>$\gamma_a&gt;4/3$导致动力学不稳定，由各区域的EoS:</p>
-<ul>
-<li>简并电子气区，$\gamma_a\rightarrow 4/3$</li>
-<li>辐射压主导区，$\gamma_a\rightarrow 4/3$</li>
-<li>铁核光致解离，$\gamma_a&lt; 4/3$</li>
-<li>正负电子对产生，$\gamma_a&lt; 4/3$</li>
-</ul>
-<p>简并气体和相对论性气体是热不稳定的。</p>
-<p>如下图：</p>
-<p><img src="07-3-rho-T-diagram-instability.png" alt=""></p>
-<h2 id="中心点的演化"><a href="#中心点的演化" class="headerlink" title="中心点的演化"></a>中心点的演化</h2><p>多方球模型给出</p>
-<script type="math/tex; mode=display">P_c = (4\pi)^{1/3}B_n GM^{2/3} \rho_c^{4/3}</script><p>设中心点初始处于理想气体区，$P_c=\frac{\mathcal{R}}{\mu}\rho_c T_c=k_0\rho_c T_c$。联立两式，有</p>
-<script type="math/tex; mode=display">\rho_c = \frac{k_0^3}{4\pi B_n^3G^3}\frac{T_c^3}{M^2}</script><ul>
-<li>$B_n$对不同的$n$变化很小，可以看做常量。对$M=\mathrm{const}$给定的情况，此时有<script type="math/tex; mode=display">\log\rho_c = 3\log T_c + \mathrm{const}</script>中心点$(\log\rho_c.\log T_c)$沿斜率为$3$的轨迹演化。演化过程中温度逐渐升高，向右上移动。</li>
-<li>对不同的$M$，$M$增大导致$\rho_c$减小，即大质量恒星的演化轨迹是将小质量恒星的轨迹向下平移的得到。</li>
-<li>如图，中心点处于I区要求质量范围约为$0.1M<em>\odot\sim 100M</em>\odot$</li>
-</ul>
-<p><img src="07-4-central-evolution.png" alt=""></p>
-<p>若随着恒星的演化，中心点进入II区（非相对论性简并电子气），$P_c=k_1\rho_c^{5/3}$，此时</p>
-<script type="math/tex; mode=display">\rho_c = 4\pi \left(\frac{B_{1.5}G}{k_1}\right)^3M^2</script><ul>
-<li>对固定的$M$，$\log\rho_c=\mathrm{const}$，中心点的演化轨迹是一条水平的直线。由于核燃料基本耗尽，温度随着辐射冷却不断降低，从而演化方向是水平向左移动。</li>
-<li>对更大的$M$，$\rho_c$更大，演化轨迹线是向上平移的。</li>
-<li>I区演化到II区的过渡过程是平滑的，这一阶段发生的是量子相变。<br>对$M\sim 0.1M<em>\odot$的矮星，将结束后将稳定在II区。<br>对$M\gtrsim M</em>\odot$，拐折后的轨迹最终进入III区。<br>对$M\rightarrow M_\mathrm{ch}$，恒星将沿I区和III区的边界线（在I区和III区这条线都是等质量线）不断收缩（$\rho_c\rightarrow\infty$），直到进入中子简并态。</li>
-</ul>
-<h2 id="恒星演化：中心值"><a href="#恒星演化：中心值" class="headerlink" title="恒星演化：中心值"></a>恒星演化：中心值</h2><p>初态$(T_c,\rho_c)$较低，位于I区。</p>
-<p><img src="07-5-MS-central-evolution.png" alt=""></p>
-<p>如图，小质量恒星的核反应为p-p链主导，大质量恒星的核反应为CNO循环主导。</p>
-<p>恒星质量的下限$M<em>\mathrm{min}\sim 0.08M</em>\odot$，更小的质量无法点燃核反应，质量在下限附近的恒星称为褐矮星；上限$M<em>\mathrm{max}\sim 100M</em>\odot$，此时光度达到爱丁顿极限，恒星处于辐射压主导的IV区，系统不稳定，寿命短，称为蓝巨星。</p>
-<p>$M<em>\odot &lt; M &lt;50M</em>\odot$的恒星可以穿越多个核燃烧曲线，发生多个核反应，形成铁核+外围多壳层燃烧的洋葱结构。</p>
-<p>小结：</p>
-<ul>
-<li>对$M\le M_\odot$，中心点初始在I区，向上演化并拐折进入II区或III区，形成白矮星</li>
-<li>对$M\ge M_\mathrm{ch}$，沿斜率为$3$的直线不断收缩，最终形成中子星</li>
-<li>对$M&gt;(8-10)M_\odot$，可能最终形成黑洞</li>
-</ul>
-<h2 id="主序理论"><a href="#主序理论" class="headerlink" title="主序理论"></a>主序理论</h2><p>赫罗图上主序带：</p>
-<script type="math/tex; mode=display">\log L = \alpha\log T_\mathrm{eff} + \mathrm{const}</script><p>（有一定弥散）<br>系数$\alpha$不是常数，$L$变大时$|\alpha|$变大。</p>
-<p>另外，主序星有质光关系：</p>
-<script type="math/tex; mode=display">\log L = \nu\log M + \mathrm{const}</script><p>本节用已有的理论解释这两个经验关系。</p>
-<p>假设：</p>
-<ul>
-<li>中心核区为氢燃烧</li>
-<li>系统处于热平衡和流体静力学平衡</li>
-<li>化学丰度均匀、恒定</li>
-<li>辐射平衡</li>
-<li>气体压主导</li>
-<li>不透明度$\kappa\sim\mathrm{const}$</li>
-</ul>
-<p>对恒星结构方程组进行量纲分析：</p>
-<p>定义分数质量$x=m/M$，$0\le x \le 1$。选择特征尺度$R_*$，可以有：</p>
-<script type="math/tex; mode=display">r = f_1(x)R_*</script><p>其中$f_1(x)$也是无量纲的。对压强、密度、温度、辐射通量也可以如下定义。</p>
-<script type="math/tex; mode=display">P(x) = f_{2}(x) P_*</script><script type="math/tex; mode=display">\rho(x) = f_{3}(x) \rho_*</script><script type="math/tex; mode=display">T(x) = f_{4}(x) T_*</script><script type="math/tex; mode=display">F(x) = f_{5}(x) F_*</script><p>从而得到无量纲化的方程：</p>
-<p>流体静力学平衡方程成为</p>
-<script type="math/tex; mode=display">P_* = \frac{GM^2}{R_*^4} \tag{1}</script><script type="math/tex; mode=display">\frac{\mathrm{d}f_2}{\mathrm{d}x} = -\frac{x}{4\pi f_1^4}</script><p>类似地，连续性方程成为</p>
-<script type="math/tex; mode=display">\rho_* = \frac{M}{R_*^3} \tag{2}</script><script type="math/tex; mode=display">\frac{\mathrm{d}f_1}{\mathrm{d}x} = \frac{1}{4\pi f_1^2 f_3}</script><p>理想气体的EoS $P=\frac{\mathcal{R}}{\mu}\rho T$成为</p>
-<script type="math/tex; mode=display">P_* = \frac{\mathcal{R}}{\mu}\rho_* T_* \tag{3}</script><script type="math/tex; mode=display">f_2 = f_3f_4</script><p>辐射转移方程成为</p>
-<script type="math/tex; mode=display">F_* = \frac{ac}{\kappa}\frac{T_*^4R_*^4}{M} \tag{4}</script><script type="math/tex; mode=display">\frac{\mathrm{d}f_4}{\mathrm{d}x} = -\frac{3f_5}{4f_4^3(4\pi f_1^2)^2}</script><p>热平衡方程成为</p>
-<script type="math/tex; mode=display">F_* = q_0\rho_*T_*^nM \tag{5}</script><script type="math/tex; mode=display">\frac{\mathrm{d}f_5}{\mathrm{d}x} = f_3f_4^n</script><p>无量纲化的方程对所有恒星都有相同的形式，这种性质称为<strong>同系性/同调性</strong>。</p>
-<p>联立量纲方程(1)(2)(3)(4)，</p>
-<script type="math/tex; mode=display">F_* = \frac{ac}{\kappa}\left(\frac{\mu G}{\mathcal{R}}\right)^4 M^3 \tag{6}</script><p>即有</p>
-<script type="math/tex; mode=display">F_* \sim L \sim M^3</script><p>得到<strong>质光关系</strong>。</p>
-<p>再联系(2)(4)(5)，得到<strong>质量-半径关系</strong></p>
-<script type="math/tex; mode=display">R_* \propto M^{\frac{n-1}{n+3}} \tag{*}</script><p>以及</p>
-<script type="math/tex; mode=display">\rho_* \propto M^{\frac{6-2n}{3+n}}=M^\alpha</script><p>一般核反应都有$n&gt;3$，从而$\rho_*$和$M$是负相关的。（可以在之前的$(\log\rho,\log T)$图中看出）</p>
-<p>由光度$L\sim 4\pi R<em>*^2 \sigma T</em>\mathrm{eff}^4$，联立质量-半径关系有</p>
-<script type="math/tex; mode=display">L^{\frac{n+11}{3n+9}} \propto T_\mathrm{eff}^4</script><p>对$M\le M_\odot$的恒星，p-p链主导，$n=4$，</p>
-<script type="math/tex; mode=display">\log L = 5.6\log T_\mathrm{eff} + \mathrm{const}</script><p>对$M&gt;M_\odot$的恒星，CNO循环主导，$n=16$，</p>
-<script type="math/tex; mode=display">\log L = 8.4\log T_\mathrm{eff} + \mathrm{const}</script><p>得到和上面主序带相同的结果，质量越大（光度越大）$\log T_\mathrm{eff}$的系数越大。</p>
-<p>演化时标</p>
-<script type="math/tex; mode=display">\tau_\mathrm{MS} \sim \frac{Mc^2}{L} \sim M^{-2}</script><p>即更大质量恒星在主序上停留时间更短，演化更快。</p>
-<p>中心温度</p>
-<script type="math/tex; mode=display">T_c \sim T_* \sim M^{\frac{4}{n+3}}</script><p>对$M\le M<em>\odot$的恒星，p-p链主导，$n=4$，$T_c\sim M^{4/7}$。要求$T_c\ge T</em>\mathrm{min}$，估算得到最小值量$M<em>\mathrm{min}\sim 0.1M</em>\odot,L<em>\mathrm{min}\sim 10^{-3}L</em>\odot$。</p>
-<p>如果考虑$\kappa$不是常数，Kramers不透明度$\kappa=\kappa_0 \rho T^{-7/2}$。此时$L\sim M^{\frac{5+31/2n}{1+5/2n}}$。对p-p链主导的小质量恒星，$L\sim M^{5.46}$，与观测$L\sim M^{4.5}$基本一致。</p>
-<p>对大量恒星样本的观测，由于形成时间不同，$\mu$也不同，因此在赫罗图上有一定的弥散。</p>
-<h2 id="演化后期恒星的结构"><a href="#演化后期恒星的结构" class="headerlink" title="演化后期恒星的结构"></a>演化后期恒星的结构</h2><p>用$(\log T,\log\rho)$平面上一系列点描述恒星内部不同壳层的温度和密度，中心点应是曲线右上端点而表面是左下端点（温度最低，密度$\rightarrow0$）</p>
-<p><img src="07-3-rho-T-diagram-structure.png" alt=""></p>
-<p>对如图的恒星，</p>
-<ul>
-<li>在主序阶段（曲线A），只有中心点O在核反应曲线上方，即只有核区能发生核燃烧。</li>
-<li>演化到曲线B，核区氢燃料耗尽，发生自引力收缩，使中心点向右上方移动，但还未触发氦燃烧；而核区外围的中间壳层可以触发氢燃烧，此时恒星成为红巨星(Red Giant)。<br>若收缩过程为准静态过程，维里定理成立，且系统能量守恒，即引力势能和内能都守恒。为保持引力势能守恒，核区收缩时外壳应膨胀，为保持内能守恒，核区温度升高时外壳温度降低，即外壳绝热膨胀。<br>考虑距中心$r_0$处两个相等的质量元，$\Delta m_1=\Delta m_2=\Delta m$，$\Delta m_1$向内收缩$r_0\rightarrow r_1$，而$\Delta m_2$向外膨胀$r_0\rightarrow r_2$使引力势能不变：<script type="math/tex; mode=display">-\frac{Gm(r_0)\cdot 2\Delta m}{r_0} = -\frac{Gm(r_0)\Delta m}{r_1}-\frac{Gm(r_0)\Delta m}{r_2}</script>得到$r<em>2=(2-r_0/r_1)^{-1}r_0$。核区略微收缩可以导致外壳膨胀很多。<br>红巨星外壳的绝热膨胀导致$T</em>\mathrm{eff}$和$L$都降低，恒星将离开主序带。</li>
-<li>若核区收缩使中心温度达到$3\alpha$反应的条件，核区的氦燃烧将被点燃（曲线C）。此时恒星核区的氦燃烧和外围的氢燃烧同时进行</li>
-<li>大质量恒星经过多次引力收缩和加热，将形成多壳层燃烧的洋葱结构。</li>
-<li>最后，核区重元素的燃烧也停止，将触发超新星爆炸，外围壳层被吹散到星际空间形成ISM，中心形成中子星或黑洞。</li>
-</ul>
-</body></html>]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>恒星物理笔记</category>
-      </categories>
-      <tags>
-        <tag>天文</tag>
       </tags>
   </entry>
   <entry>
@@ -2022,7 +2100,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 <ul>
 <li>压强$P$从内到外单调下降</li>
 <li>温度$T$从内到外单调下降，在厚$\Delta r\ll R$的壳层内$T\sim\mathrm{const}$，近似有局域热动平衡(LTE)</li>
-<li>$q$通常对温度非常敏感，导致在远离中心的壳层中$q(r)\ll q<em>\mathrm{core}$，对总光度的贡献可以忽略不计<br>因此可以近似认为核反应只在中心核区$r</em>\mathrm{core}\ll R$发生，可以近似为点源，核区$q=q<em>\mathrm{nuc}$<br>恒星结构方程各参数相耦合，因此$q</em>\mathrm{nuc}$是可以决定恒星结构和演化的关键的量</li>
+<li>$q$通常对温度非常敏感，导致在远离中心的壳层中$q(r)\ll q_\mathrm{core}$，对总光度的贡献可以忽略不计<br>因此可以近似认为核反应只在中心核区$r_\mathrm{core}\ll R$发生，可以近似为点源，核区$q=q_\mathrm{nuc}$<br>恒星结构方程各参数相耦合，因此$q_\mathrm{nuc}$是可以决定恒星结构和演化的关键的量</li>
 </ul>
 <h2 id="多方球理论"><a href="#多方球理论" class="headerlink" title="多方球理论"></a>多方球理论</h2><p>恒星气体的物态方程给出$P=P(\rho,T)$，$P$对$T$的依赖导致恒星结构方程前两个和后两个的耦合。如果能独立地给出$T=T(\rho)$，可以使前两个方程与后两个解耦。</p>
 <p>流体静力学平衡方程</p>
@@ -2081,20 +2159,20 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 <script type="math/tex; mode=display">M_{\mathrm{ch}} = 4\pi M_3 \left(\frac{k_2}{\pi G}\right)^{3/2} = 5.83\mu_e^{-2}M_\odot</script><p>为钱德拉塞卡质量，是白矮星质量的上限。</p>
 <p>$\mu_e$有两种情况：</p>
 <ul>
-<li>氢耗尽，主要是氦，此时$\mu<em>e\approx 2$，$M</em>{\mathrm{ch}}=1.46M_\odot$</li>
-<li>中心铁核，此时$\mu<em>e\approx 2.15$，$M</em>{\mathrm{ch}}=1.26M_\odot$</li>
+<li>氢耗尽，主要是氦，此时$\mu_e\approx 2$，$M_{\mathrm{ch}}=1.46M_\odot$</li>
+<li>中心铁核，此时$\mu_e\approx 2.15$，$M_{\mathrm{ch}}=1.26M_\odot$</li>
 </ul>
 <h2 id="爱丁顿（极限）光度"><a href="#爱丁顿（极限）光度" class="headerlink" title="爱丁顿（极限）光度"></a>爱丁顿（极限）光度</h2><p>由辐射转移方程，</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}r} = -\frac{\kappa \rho H}{c} = -\frac{\kappa \rho}{c} \frac{F}{4 \pi r^{2}}</script><p>再根据流体静力学平衡</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d} P}{\mathrm{d} r}=-\rho \frac{G m}{r^{2}}</script><p>有</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}P} = \frac{\kappa F}{4\pi cGm}</script><p>主序星辐射的能流向外，$F&gt;0$，从而$\mathrm{d}P$和$\mathrm{d}P<em>\mathrm{rad}$符号相同。由于从内向外$P$和$P</em>\mathrm{gas}$都减小，故$\mathrm{d}P_\mathrm{rad}&lt;\mathrm{d}P$，从而有</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}P} = \frac{\kappa F}{4\pi cGm}</script><p>主序星辐射的能流向外，$F&gt;0$，从而$\mathrm{d}P$和$\mathrm{d}P_\mathrm{rad}$符号相同。由于从内向外$P$和$P_\mathrm{gas}$都减小，故$\mathrm{d}P_\mathrm{rad}&lt;\mathrm{d}P$，从而有</p>
 <script type="math/tex; mode=display">\kappa F < 4\pi cGm</script><p>注意：在恒星外围壳层的对流区，氢氦充分电离，存在大量自由电子。若核区的磁流体不稳定性使核燃烧增强，$F$增大，导致更强的光致电离，使$n_e$增大，导致汤姆逊散射主导的$\kappa$增大。此时可能有$\kappa F&gt;4\pi cGm$，需要引入对流机制转移多余的辐射的能量。</p>
 <p>考虑热平衡方程</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}F}{\mathrm{d}m} = q</script><ul>
 <li>中心$F(0)=0$，在中心附近，$F=q_cm$。<br>$\kappa F&lt;4\pi cGm$给出<script type="math/tex; mode=display">q_c < \frac{4\pi cG}{\kappa}</script></li>
-<li>外边界$F(M)=L$， $\kappa F&lt;4\pi cGm$给出<script type="math/tex; mode=display">L < \frac{4\pi cGM}{\kappa}</script>恒星外壳层产生不透明度的机制主要是汤姆逊散射，$\kappa\approx \kappa<em>{\mathrm{es}}$<br>理论上$\kappa</em>\mathrm{es}=\frac{\sigma_T}{m_Hc}$，其中$\sigma_T=6.25\times10^{-25} \mathrm{cm}^2$为电子的汤姆逊散射截面。<br>从而<script type="math/tex; mode=display">L < L_\mathrm{Edd} = \frac{4\pi m_Hc^2GM}{\sigma_T} = 1.3\times10^{38} \left(\frac{M}{M_\odot}\right) \mathrm{erg\cdot s^{-1}}</script>即对质量$M$给定的恒星，其光度有上限$L_\mathrm{Edd}$，称为爱丁顿光度。</li>
+<li>外边界$F(M)=L$， $\kappa F&lt;4\pi cGm$给出<script type="math/tex; mode=display">L < \frac{4\pi cGM}{\kappa}</script>恒星外壳层产生不透明度的机制主要是汤姆逊散射，$\kappa\approx \kappa_{\mathrm{es}}$<br>理论上$\kappa_\mathrm{es}=\frac{\sigma_T}{m_Hc}$，其中$\sigma_T=6.25\times10^{-25} \mathrm{cm}^2$为电子的汤姆逊散射截面。<br>从而<script type="math/tex; mode=display">L < L_\mathrm{Edd} = \frac{4\pi m_Hc^2GM}{\sigma_T} = 1.3\times10^{38} \left(\frac{M}{M_\odot}\right) \mathrm{erg\cdot s^{-1}}</script>即对质量$M$给定的恒星，其光度有上限$L_\mathrm{Edd}$，称为爱丁顿光度。</li>
 </ul>
-<p>若由于内部扰动，$L$超过$L<em>\mathrm{Edd}$，流体静力学平衡被破坏，$P</em>\mathrm{rad}$的值很大形成强星风，吹散恒星外包层，使恒星质量减小。</p>
+<p>若由于内部扰动，$L$超过$L_\mathrm{Edd}$，流体静力学平衡被破坏，$P_\mathrm{rad}$的值很大形成强星风，吹散恒星外包层，使恒星质量减小。</p>
 <p>观测上，主序星有质光关系</p>
 <script type="math/tex; mode=display">\log L \propto n\log M</script><p>结合$L &lt; L_\mathrm{Edd}$，表明恒星质量存在上限。</p>
 <h2 id="标准模型（爱丁顿模型）"><a href="#标准模型（爱丁顿模型）" class="headerlink" title="标准模型（爱丁顿模型）"></a>标准模型（爱丁顿模型）</h2><h3 id="光度"><a href="#光度" class="headerlink" title="光度"></a>光度</h3><p>引入无量纲参数$\eta$，使</p>
@@ -2125,7 +2203,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 <ul>
 <li>小质量恒星$\beta\approx 1$，气体压主导，较稳定</li>
 <li>大质量恒星$\beta\approx 0$，辐射压主导，不稳定</li>
-<li>带入太阳丰度$\mu\approx 0.61$，对应质量范围$0.5M<em>\odot\le M \le 50M</em>\odot$，与观测基本一致。</li>
+<li>带入太阳丰度$\mu\approx 0.61$，对应质量范围$0.5M_\odot\le M \le 50M_\odot$，与观测基本一致。</li>
 <li>对$\mu=\mathrm{const}$，小的$\beta$对应更大的$M$。</li>
 <li>结合$L=L_\mathrm{Edd}(1-\beta)$，有：<script type="math/tex; mode=display">\frac{L}{L_\odot} = 0.003\frac{4\pi cGM_\odot}{\kappa_s L_\odot}\mu^4\beta^4\left(\frac{M}{M_\odot}\right)^3</script>即约有$L\sim M^3$，称为恒星的<strong>质光关系</strong>。<br>上面的结果忽略了不同恒星化学组成不同，实际上由于$\beta=\beta(M,\mu)$，实际观测结果会有偏差</li>
 <li>考虑相同质量，不同阶段（氢烧-&gt;氦烧-&gt;碳氧烧）的恒星，$\mu$增大，$\beta$减小，辐射压增大。光度接近爱丁顿光度时，会形成强烈的星风，吹散恒星外包层，使$M$下降，形成负反馈。</li>
@@ -2139,12 +2217,12 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 <li>质量连续性方程<script type="math/tex; mode=display">\frac{\mathrm{d}m}{\mathrm{d}r} = 4\pi r^2\rho</script></li>
 <li>气体压<script type="math/tex; mode=display">P_\mathrm{gas} = \frac{\mathcal{R}}{\mu}\rho T</script></li>
 </ul>
-<p>进一步假设不确定度经验公式中$a=b=0$，即$\kappa=\kappa<em>0=\mathrm{const}$，联立流体静力学平衡和辐射转移方程，并结合$P=P</em>\mathrm{gas}+P_\mathrm{rad}$，有</p>
+<p>进一步假设不确定度经验公式中$a=b=0$，即$\kappa=\kappa_0=\mathrm{const}$，联立流体静力学平衡和辐射转移方程，并结合$P=P_\mathrm{gas}+P_\mathrm{rad}$，有</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{gas}}{\mathrm{d}P_\mathrm{rad}} = \frac{4\pi cG}{\kappa_0 L}m - 1</script><p>对$r$求导，</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}^2 P_\mathrm{gas}}{\mathrm{d}P_\mathrm{rad}^2}\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}r} = \frac{4\pi cG}{\kappa_0 L}\frac{\mathrm{d}m}{\mathrm{d}r}</script><p>代入辐射转移和质量连续性方程，</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}^2 P_\mathrm{gas}}{\mathrm{d}P_\mathrm{rad}^2} = -\frac{64\pi^3 c^2G}{\kappa_0^2 L^2}r^4 \tag{7.1}</script><p>由气体的物态方程，</p>
 <script type="math/tex; mode=display">\rho = \frac{\mu}{\mathcal{R}}\frac{P_\mathrm{gas}}{T} = \frac{\mu}{\mathcal{R}}\left(\frac{a}{3}\right)^{1/4} {P_\mathrm{gas}}P_\mathcal{rad}^{-1/4}</script><p>从而辐射转移方程的倒数：</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}\left(\frac{1}{r}\right)}{\mathrm{d}P_\mathrm{rad}} = \frac{4\pi c}{\kappa_0 L\rho} = \frac{4\pi c}{\kappa_0 L}\frac{\mathcal{R}}{\mu}\left(\frac{3}{a}\right)^{1/4} {P_\mathrm{gas}}^{-1}P_\mathcal{rad}^{1/4} \tag{7.2}</script><p>(7.1)和(7.2)建立了变量$P<em>\mathrm{gas},P</em>\mathrm{rad},\frac{1}{r}$之间的关系。可以用数值方法求解。结果表明恒星存在质光关系</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}\left(\frac{1}{r}\right)}{\mathrm{d}P_\mathrm{rad}} = \frac{4\pi c}{\kappa_0 L\rho} = \frac{4\pi c}{\kappa_0 L}\frac{\mathcal{R}}{\mu}\left(\frac{3}{a}\right)^{1/4} {P_\mathrm{gas}}^{-1}P_\mathcal{rad}^{1/4} \tag{7.2}</script><p>(7.1)和(7.2)建立了变量$P_\mathrm{gas},P_\mathrm{rad},\frac{1}{r}$之间的关系。可以用数值方法求解。结果表明恒星存在质光关系</p>
 <script type="math/tex; mode=display">\log L\propto n\log M</script><p>对中等质量恒星$n$较大（$n\sim 4.5$），对大质量恒星$n$较小（$n\sim 3.0$）。<br>对小质量矮星，内部部分处于量子简并态，该方程组不适用。</p>
 </body></html>]]></content>
       <categories>
@@ -2181,7 +2259,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 <script type="math/tex; mode=display">x\le x \tag{T3}</script><p>各定理的顺序和原书不一定相同，不过为了尊重原书（以及方便），序号还是和原书保持一致。</p>
 <p>(T3)容易由对创造日的归纳法给出，$x\le x$即是说$X_L\ngeq x$且$x\ngeq X_R$。而$x_L\ge x$蕴含$X_L\ngeq x_L$，其中必然有$x_L\ngeq x_L$，这和归纳假设矛盾。从而$X_L\ngeq x$成立，$x\ngeq X_R$也可以用相同方法证明。</p>
 <p>从而可以证明下面的引理：</p>
-<script type="math/tex; mode=display">X_L\le x,x\le X_R \tag{T2}</script><p>仍然使用归纳法，$x<em>L\nleq x$即是说存在一个$x</em>{LL}\ge x$或$x<em>L\ge x_R$。后者违反了规则(1)（数的定义）。而前者由归纳假设$x</em>{LL}\le x<em>L$和传递律有$x\le x</em>{LL}\le x_L$，则$X_L\ngeq x_L$，这和(T3)矛盾。</p>
+<script type="math/tex; mode=display">X_L\le x,x\le X_R \tag{T2}</script><p>仍然使用归纳法，$x_L\nleq x$即是说存在一个$x_{LL}\ge x$或$x_L\ge x_R$。后者违反了规则(1)（数的定义）。而前者由归纳假设$x_{LL}\le x_L$和传递律有$x\le x_{LL}\le x_L$，则$X_L\ngeq x_L$，这和(T3)矛盾。</p>
 <p>$y\nleq x$即是存在$x_L\ge y$或$x\ge y_R$。由(T2)，这即是说$y\le x_L\le x$或$y\le y_R\le x$。这即是$\le$的<strong>完全性</strong>：</p>
 <script type="math/tex; mode=display">x\nleq y \Rightarrow y\le x \tag{T4}</script><p>从而我们可以把$x\ngeq y$定义为$x&lt;y$。显然$x&lt;y$蕴含了$x\le y$，于是下面两条传递律也成立：</p>
 <script type="math/tex; mode=display">x<y, y\le z\  \Rightarrow\ x<z \tag{T5}</script><script type="math/tex; mode=display">x\le y, y<z\  \Rightarrow\ x\le z \tag{T6}</script><p>同时$x\le y$的定义也可以改写为：</p>
@@ -2238,7 +2316,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 <p>令$z=(X_L\cup Y_L, X_R\cup Y_R)$。由(T2’)显然有$Z_L=X_L\cup Y_L&lt; x$，$z&lt;z_R\Rightarrow z&lt;X_R$，即$z\le x$。$z\ge x$也易证。从而$x\equiv z$。</p>
 <p>进一步的，我们有一个大胆的猜测：若在第$n$日时彼此不相似的数为</p>
 <script type="math/tex; mode=display">x_1 < x_2 < \cdots < x_m</script><p>则第$n+1$日创造出的新数只有：</p>
-<script type="math/tex; mode=display">\left(\emptyset,\left\{x_{1}\right\}\right),\left(\left\{x_{1}\right\},\left\{x_{2}\right\}\right), \ldots,\left(\left\{x_{m-1}\right\},\left\{x_{m}\right\}\right),\left(\left\{x_{m}\right\}, \emptyset\right)</script><p>要证明这一猜想，由(T7)，只需要考察$x<em>1\cdots x_m$中两个数构造出的数$(\left{x</em>{i-1}\right},\left{x_{j+1}\right})$，证明其相似于上面的某一数。</p>
+<script type="math/tex; mode=display">\left(\emptyset,\left\{x_{1}\right\}\right),\left(\left\{x_{1}\right\},\left\{x_{2}\right\}\right), \ldots,\left(\left\{x_{m-1}\right\},\left\{x_{m}\right\}\right),\left(\left\{x_{m}\right\}, \emptyset\right)</script><p>要证明这一猜想，由(T7)，只需要考察$x_1\cdots x_m$中两个数构造出的数$(\left{x_{i-1}\right},\left{x_{j+1}\right})$，证明其相似于上面的某一数。</p>
 <p>为此，我们可以证明下面这个更一般性的定理：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
@@ -2246,7 +2324,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
     \\ &则x\equiv y。
 \end{aligned}
 \tag{T8}</script><p>由于$x_L$和$x_R$比$x$更早创造，从而$Y_L&lt;x_L&lt;Y_R$和$Y_L&lt;x_R&lt;Y_R$不成立，且$x_L&lt;x&lt;x_R$，从而存在$y_L,y_R$，使$x_L&lt;y_L&lt;y&lt;y_R&lt;x_R$。故$x$满足(T7)的条件，从而$x\equiv y$。 </p>
-<p>从而$(\left{x<em>{i-1}\right},\left{x</em>{j+1}\right})$相似于$x_i\cdots x_j$中最先被创造的数，不是一个新数。</p>
+<p>从而$(\left{x_{i-1}\right},\left{x_{j+1}\right})$相似于$x_i\cdots x_j$中最先被创造的数，不是一个新数。</p>
 <h3 id="有限天内可以创造的数"><a href="#有限天内可以创造的数" class="headerlink" title="有限天内可以创造的数"></a>有限天内可以创造的数</h3><p>我们有第一天构造的数</p>
 <script type="math/tex; mode=display">0=(\emptyset,\emptyset)</script><p>以及第二天</p>
 <script type="math/tex; mode=display">-1=(\emptyset,\{0\}),\qquad 1=(\{0\},\emptyset)</script><p>（容易验证$-1$是$1$的加法逆元，我们采用的记号是没问题的）</p>
@@ -2254,7 +2332,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 <script type="math/tex; mode=display">(\emptyset,\{-1\}),(\{-1\},\{0\}),(\{0\},\{1\}),(\{1\},\emptyset)</script><p>试着做一下加法：</p>
 <script type="math/tex; mode=display">1+1=(\{0+1\},\emptyset)=(\{1\},\emptyset)</script><p>我们把$1+1$定义为$2$，即$2\equiv ({1},\emptyset)$。<br>而对$b=({0},{1})$，</p>
 <script type="math/tex; mode=display">b+b=(\{0+b\},\{1+b\})=(\{b\},\{1+b\})</script><p>由于$0&lt;b&lt;1$，$1$就是$b$和$1+b$之间最早创造出来的数，由(T8)，$b+b\equiv 1$，从而可以称$b\equiv\frac{1}{2}$。<br><img src="number-creation.png" alt=""></p>
-<p>我们看到数的构造似乎有这样的规律，对在第$n$天已经创造出来的数中相邻的两个数$x<em>i,x</em>{i+1}$，由它们创造的数$y=({x<em>i},{x</em>{i+1}})$满足$y+y=x<em>i+x</em>{i+1}$。因此我们假设在第$n$天所有被创造出来的数为：</p>
+<p>我们看到数的构造似乎有这样的规律，对在第$n$天已经创造出来的数中相邻的两个数$x_i,x_{i+1}$，由它们创造的数$y=({x_i},{x_{i+1}})$满足$y+y=x_i+x_{i+1}$。因此我们假设在第$n$天所有被创造出来的数为：</p>
 <script type="math/tex; mode=display">0,\pm\frac{1}{2^{n}},\cdots,\pm 1,\pm\left(1+\frac{1}{2^{n-1}}\right),\cdots,n+1</script><p>（为了方便，这里我们称$1$和$-1$被创造出来的那天为第$0$天。）<br>（即$0-1$之间是$\frac{i}{2^n}$，$1-2$之间是$1+\frac{i}{2^{n-1}}$······当然我们还没定义乘法和乘方，这里的$\frac{k}{2^n}$可以递归地定义为满足$\frac{k}{2^n}+\frac{k}{2^n}=\frac{k}{2^{n-1}}$的数，其唯一性容易验证，而$\frac{k}{2^0}=k$。）</p>
 <p>这一假设等价于在第$n$天创造出来的数</p>
 <script type="math/tex; mode=display">n-i+\frac{k}{2^i} \equiv \left(\left\{n-i+\frac{(k-1)/2}{2^{i-1}}\right\}, \left\{n-i+\frac{(k+1)/2}{2^{i-1}}\right\}\right)</script><p>（$k$是奇数，否则会更早被创造出来）</p>
@@ -2314,84 +2392,6 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
       </categories>
       <tags>
         <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>舞台少女将站上名为自己的舞台</title>
-    <url>/2022/01/03/202201-revue-starlight-gekijoban/</url>
-    <content><![CDATA[<html><head></head><body></body></html><html><head></head><body><p>从很久之前开始我就一直在想，我总是要写点什么的，这并不是因为我的见解多深刻或视角多独特以至于一定要写出来才行，只是试图借文字理清我那些不怎么清楚的想法和感受。我一直认为作品是只有被它的观众看到的那一刻才算完成了的，而将看到的画面和听到的声音转化为自己能够理解的东西本身就是一种再创作，所以我的行为大概可以被解释为一种致敬，对少女歌剧这样难得的优秀作品进行的模仿创作。虽然是拙劣的模仿，但我想这是我一定要做的，如同剧场版中的舞台少女们一样，完成一直以来没能完成的执念，然后才可能走向下一个舞台。</p>
-<h2 id="两人的高速公路"><a href="#两人的高速公路" class="headerlink" title="两人的高速公路"></a>两人的高速公路</h2><p>作为wi(l)d-screen baroque的第一幕，花叶revue也承担了展示剧场版中revue的风格的作用。对revue的解读存在很多的讨论和说法，这里我并不想过多纠结死的设定，我采用这样的理解：revue即是舞台，而在revue中发生的一切，包括revue本身，也都属于舞台的范畴。剧场版的revue的风格的明显变化也是符合这一理解的，不再起选拔作用的revue的内容也不再仅仅是舞台少女们以试图砍掉对方的披肩的形式分个胜负。这无疑更加增加了revue的表现能力。</p>
-<p>另外一个值得注意的点是，舞台脱离了圣翔音乐学院的地下，而是在未知的地点，或者是不属于世界上任何一个位置的地点上演。在花叶revue的最开始，我们仍然可以看到熟悉的东京塔和我们预期的会在revue中出现的内容。</p>
-<p><img src="futakao-0.png" alt=""></p>
-<p><img src="futakao-1.png" alt=""></p>
-<div align="center"> 即用刀斧打架 </div>
-
-<p>而在双叶说出“我是为了你好”之后，场景发生了转换。可以看出这里的舞台设定是心虚的男人和已经知道一切的女人互相摊牌，这无疑也是与花叶符合的。双叶不继续留在香子身边当然不都是为了香子，而香子对这点也是心知肚明，因此能够怼得双叶说不出话来。内容上，这是对花叶过去的关系的持续的否定，而这里的舞台整体风格的改变也可以看做在另外一个维度上的，对TV中已经定型的revue形式的否定。这种否定，或是说创新，也可以很容易地在后面的revue中发现。</p>
-<p>当然，（好不容易做得这么好的）TV的内容也并没有被完全否定。与约定的revue香子试图割断自己的披肩那里类似，怨恨的revue止于香子自己把自己的车开了下去。</p>
-<p><img src="futakao-2.png" alt=""></p>
-<p>这也是我在花叶revue中最受到冲击的画面（<del>不觉得和odd taxi最终话的名场面很像吗</del>）这里的相似在于，事实上香子从头到尾都明白一切，她的行为只是为了看到双叶表现出的行动。在TV中是希望得到双叶的挽留以确认她对自己的重视，而在这里要确认的大概就是双叶离她而去追寻自己的舞台的决心。让她满足的不是“为了你好”的讲不通的表面话，而是“不能继续在一起了”的真心。在最后的最后，双叶虽然离开香子，但仍然由不讲理的任性延续了她们的缘分。这也是颇有花叶风味的展开，一向被任性的双叶在最后提出了最大的任性，而从岔路口分开抵达不同目的地的两人也可能以不是“追逐与被追逐”的形式重逢。</p>
-<h2 id="用演技表达的真心"><a href="#用演技表达的真心" class="headerlink" title="用演技表达的真心"></a>用演技表达的真心</h2><p>纵观剧场版的所有revue，光昼revue的独特性在于其高潮部分的真情流露并不是借由revue的演出的内容，而是借由表演这一行为本身。真昼的一连串嘲讽和恐吓当然不是真心话，其目的如果仅仅是为了让小光正视她和华恋的舞台上还存在没做完的事，那么自然存在更多更温和的方式，而真昼的选择是拉小光来到由她表演的舞台。这里真昼的性质得到强烈的表现，如果我们不去管在戏里和戏外都被过分强调的真昼身上的扭曲戏份，她实际上也是热爱舞台、渴望闪耀的舞台少女。从动画里考虑，这场revue是在让小光表达她没做完的事；而从动画之外考虑，这也是在完成真昼在摆脱对华恋病态的依赖之后的缺失的塑造。在正午的阳光的背景之中闪耀，投下温暖的光芒，这才是名为露崎真昼的星。</p>
-<p>另外，revue中的恐怖表现也让我惊艳。我确实从未预期过能在少女歌剧中看到恐怖的演出，这也确实是无法预料的舞台了。</p>
-<p><img src="hikamahi-1.png" alt=""></p>
-<div align="center"> 真挺吓人的 </div>
-
-<p>最后是一些完全的个人内容，由于一些早期的原因，我对光昼这对组合心里一直有些意见，因此在被剧透到剧场版会有这一场revue时，我心里确实存在些许担心，会不会整一些我不愿看到的烂活。但毕竟少女歌剧是少女歌剧，能让我乖乖放下成见感动到落泪，这也是这部作品所拥有的能力啊。</p>
-<p><img src="hikamahi-2.png" alt=""></p>
-<div align="center"> 三句话，让光昼雷为光昼revue落泪 </div>
-
-<h2 id="耀眼之物处在自己的舞台"><a href="#耀眼之物处在自己的舞台" class="headerlink" title="耀眼之物处在自己的舞台"></a>耀眼之物处在自己的舞台</h2><p>很遗憾地承认，在看了很多遍之后，我仍然没法抓到一个解读蕉纯revue的头绪。不过即便如此，我的感受也并非只是“我不懂”，因为这里仍然存在一些能让我可以抓住的点。</p>
-<p>可以注意到的是这场revue中关于蕉纯二人存在很多的对称性，例如最开始和最后的“给她弄哭了啊”，被斩断的纯那的名言（“星”）和奈奈的刀，甚至这个像是Python切片表达式的歌名在某种程度上也可以看做是一种对称。</p>
-<p><img src="jnnn-1.png" alt=""></p>
-<div align="center"> 这个position zero形状的路也是镜像对称的，好吧这可能不怎么重要 </div>
-
-<p>这种大量存在的对称性大概也可以理解为对蕉纯本身的关系的隐喻，因为我们可以看得到奈奈对纯那“届不到”的否定（这里蕉斩断了纯的“星”）使纯那意识到单纯复读名言是不行的，从而将名言的力量真正转化为自身的力量；而纯那对奈奈预期的打破（这里纯斩断了蕉的刀）则使奈奈最终放弃了仅存在于他人身上和过去的再演。可以认为蕉纯二人在对方的心态转变上都起到了类似的作用。</p>
-<p>在revue的最后，奈奈感叹“我的再演在现在结束了”。这必然不是指对99届圣翔祭的再演，它在一年前（或三年前）就结束了，我对这句话的理解是，这里的“再演”指的是将自己的舞台放在他人身上的行为。如同对99届圣翔祭的再演中奈奈告诉自己的她在试图从她以为的可怖的未来中保护大家，此时她所需要看到的也是纯那保持她认为的“我的纯那酱”的形象，即使这意味着作为舞台少女的枯萎凋零。也和羁绊的revue的华恋类似，纯那斩断了奈奈为她制作的舞台，从而终止了奈奈的再演。此时的蕉纯的前方都是只属于自己的舞台，只在那里她们能找到自己的闪耀之物。</p>
-<p><img src="jnnn-2.png" alt=""></p>
-<div align="center"> 破坏之后的复合，这个画面实在过于浪漫…… </div>
-
-<h2 id="展露灵魂的毕业演出"><a href="#展露灵魂的毕业演出" class="headerlink" title="展露灵魂的毕业演出"></a>展露灵魂的毕业演出</h2><p>迷宫的revue大概可以说是剧场版中最华丽的一场，同时也可以说是最“舞台”的一场。和其余的revue要处理的人物如何向不同的前路迈进不同，迷宫revue给我的感觉更多是一场集大成的毕业演出。舞台的不同阶段内容差异巨大，衔接却十分流畅，比起仅仅在这一出舞台上演出的内容，理解成长久以来的心意的互相显露倒更自然一些。</p>
-<p>当然，这并不意味着这场revue的存在不那么重要。因为迷宫revue中要讲述的不是如何登上舞台，而是如何从完美的舞台之神的容器退化为存在缺陷与污点的人。这大概也可以用于理解这场revue的结局，只有成为存在缺陷的人的真矢的眼睛才能看到同样存在缺陷的克洛却也如此的美丽。</p>
-<p>至于华丽的演出效果，虽然我更享受的是这个，但并不容易用文字描述。这里只说一处，让我最震撼的是在最后，真矢惊叹于克洛的美丽，和舞台的设定一样，展现出了她未曾见过的光芒的克洛让真矢展露出了她的灵魂。随着契约兑现，整座舞台燃起熊熊烈火。很难讲述震撼的由来，只能说这是最适合华丽的舞台的华丽的终结方式了吧。</p>
-<p><img src="mayakuro-1.png" alt=""></p>
-<h2 id="你即是我，我即是你"><a href="#你即是我，我即是你" class="headerlink" title="你即是我，我即是你"></a>你即是我，我即是你</h2><p>这部分会长一点，因为我的成分，懂的都懂。</p>
-<h3 id="华恋的内面"><a href="#华恋的内面" class="headerlink" title="华恋的内面"></a>华恋的内面</h3><p>我第一次体会到少歌的美和震撼是在第不知多少次再演时，大概也是从那一刻起我就是华恋推了，虽然当时我可能还没意识到这一点。我记不起那是什么时候，一个我能记起的时间点是在20年初我剪完约定之塔的MAD之后，那时我意识到TV中华恋的形象似乎存在一些两面性。在舞台上的华恋是不讲理的傲慢的，她在TV的revue中的表现，即对对方说的话强行进行不相关的否定（即non non哒哟）即是出于这样的傲慢，也是由这份傲慢，她才能够连舞台的运转规则和既定的命运都否定掉，才能跳入舞台续写starlight的结局。而另一方面，舞台下的（或者更具体一点，在光面前的）华恋是小心谨慎的，在4话和11话小光离开之后的满城寻找和魂不守舍，其中能看到的更多是焦虑和不安。不过TV中被更多强调的仍是华恋的傲慢的一面，因此那时的我也并不能完全确定华恋心里是否也存在这另外一面，只是作为了心中的一个疑问和期待留存下来。因此在剧场版中华恋中不安的一面得到重点表现，对我来说比起意外更多能感觉到惊喜。我们得以看到更清楚的华恋的细腻的内心，可以看到她对约定的执着之外的更多包含的“不看，不听，不搜”小心翼翼，以及除了向着目标一直线之外也会像每个人一样会拥有的烦恼与迷茫。</p>
-<p><img src="karen-1.png" alt=""></p>
-<div align="center"> 眼镜小哥就是我啊 </div>
-
-<p>仍然需要说明的是，剧场版对华恋的描写在我看来是增添而不是补完，即我并不认为TV中的华恋是一个不完整的形象，其原因在上面已经讲述过。我们回顾TV可以看到的是华恋即使心中存在着不安与恐惧，却仍然能够去向星伸出手，去改写已成定数的结局，颠覆不可颠覆的命运，这仍然是我们不该忘记的TV告诉我们的华恋身上存在的独特魅力。</p>
-<h3 id="重生的舞台"><a href="#重生的舞台" class="headerlink" title="重生的舞台"></a>重生的舞台</h3><p>这大概是每个少歌人都想过的问题，在TV讲述完了这么一个完整而独立的故事之后，演绎完了完整的starlight的舞台少女们又要走向何方？剧场版在皆殺し的revue中给出了答案——她们死了。我并没有单独开一段讨论皆殺し的revue，因为要讨论的话就只能讨论假药了，而我不怎么喜欢假药，无论是做还是吃。比起假药我更喜欢谜语一点，所以我说谜语：华恋在皆殺し的revue中并没有出现，这大概是因为她在那之前就死了，不是在之后在光面前她的番茄裂开的时候，而是在演完starlight之后失去新的目标的瞬间。亦或是再之前，在她认定自己的舞台只能是starlight的那时。此时的华恋甚至也可以说是被她自己囚禁在了和光的约定之塔中。</p>
-<p><img src="karehika-1.png" alt=""></p>
-<div align="center"> 这里约定之塔成了华恋的轨道的终点 </div>
-
-<p>当然，具体的华恋的死仍然发生在和小光重新见面时，在华恋将目光从她已完成的约定和小光身上移开，转到只属于她自己的舞台，并为自己的空无一物感到恐惧之时。值得注意的是恋光在这里的表现和在过去两人许下约定时的表现是完全一致的。这也正是对恋光两人对对方的意义的绝佳概括——“你即是我，我即是你”。</p>
-<p><img src="karehika-2.png" alt=""></p>
-<p><img src="karehika-3.png" alt=""></p>
-<p>和在过去华恋拉住小光的手要与她一同前往舞台，成为star使光作为舞台少女重生相同，此时光的信落到华恋身上，这或许也是一个不需要被点明的约定——作为舞台少女，无论多少次都要再次踏上舞台。</p>
-<p><img src="karehika-4.png" alt=""></p>
-<p>于是登上列车的华恋进行了她的再生产，在这次我们看到的最后的再生产中，华恋过去的一切，包括曾经与小光的约定都被燃烧殆尽，让她得以新生，以崭新的姿态站在舞台上。</p>
-<p><img src="karehika-5.png" alt=""></p>
-<p><img src="karehika-6.png" alt=""></p>
-<p>然而wi(l)d-screen baroque在此时还未结束，华恋还有一定要说的最后的台词。值得注意这里并不是一场revue，而仅仅是“最后的台词”。</p>
-<p><img src="karehika-7.png" alt=""></p>
-<div align="center"> 没有revue名 </div>
-
-<p>可以采用这样的理解，华恋所需要进行的再生产在回到舞台之前便已完成，她需要最后在revue starlight舞台上让这个舞台落下帷幕。在故事的开端，由于华恋的约定走上舞台的光此时绽放出无比的闪耀，正是这份闪耀促使了华恋的重生，也是切实接收了这份闪耀使得华恋的执着的对象变成了舞台本身。被光的闪耀迷住双眼的华恋说出最后的台词“我也不想输给光”，无数的position zero从她之中迸发而出，将约定之塔撕裂成两端，让她来到了舞台中心。</p>
-<p><img src="karehika-8.png" alt=""></p>
-<p><img src="karehika-9.png" alt=""></p>
-<p>在这场舞台中更为耀眼的确是光，但这不再是互相争夺闪耀的revue，而是让revue starlight画下句号的，舞台少女爱城华恋新生的舞台。正是在这一刻，华恋和所有舞台少女们都终于可以迈出starlight之后新的一步，如同她们摘下的披风一样，可以无依托地在空中自由地被放飞。重新成为心中空无一物的华恋，却也是未被涂画过的白纸，在她的舞台上存在着无限的可能性，而她也定会找到一个又一个仅属于自己的舞台。</p>
-<h2 id="舞台之外"><a href="#舞台之外" class="headerlink" title="舞台之外"></a>舞台之外</h2><p>写这篇观后感并不是在我第一次看剧场版之后，也肯定不会是最后一次。第一次看完的时候我哭得很厉害，既是因为没有任何预想的初见时面对这样的情感和信息的洪流没什么抵抗能力，也是因为我也很清楚剧场版的结局对我和一起走过三年的少女歌剧来说意味着什么。舞台是消耗物，动画也是，但被消耗的并不是作品本身，而是去观看作品的人。有些感受是只有初见才能体会的到的，有些可能会随着时间的流逝产生变化，有些曾有过的感受可能在从不知道第几次再演开始再也不会出现。我曾很害怕这一点，害怕变成一个完全不一样的自己，害怕曾经有过的情感在某一天再也找不回来，害怕曾经让我感受到无比闪耀的东西也会随着我的改变而褪色，对少女歌剧这样带给了我未曾想象过的感受的作品就更是如此。</p>
-<p><img src="after-1.png" alt=""></p>
-<p>但我想剧场版还是给了我一些改变的。剧场版给我的并非只有结束的信息，重要的是让我感受到了从未感受过的满足。我说不清是为什么，虽然我也没有什么过于耀眼而看不清的未来，但大概这点满足也就够了。我确是最空虚的，也是最满足的。在今后我还会再演不知道多少次，再遥远的之后可能即使再演也唤不起来现在的感受，但这份满足感大概会烙印在我身上，我会一直记得一部叫做《少女歌剧 Revue Starlight》的动画给过我如此多这样新的体验。</p>
-<p>但那是未来的事，至于现在，我还有很多没法归纳成语言的感受不知该如何表达。我想我只好复读一遍初看之后那天晚上归结的一句话：</p>
-<p><img src="after-2.png" alt=""></p>
-<p>看到最后了，Revue Starlight。</p>
-</body></html>]]></content>
-      <categories>
-        <category>ACG</category>
-      </categories>
-      <tags>
-        <tag>ACG</tag>
-        <tag>随想</tag>
       </tags>
   </entry>
 </search>

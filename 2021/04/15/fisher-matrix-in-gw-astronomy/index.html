@@ -332,11 +332,11 @@
 <p>从而$L(s|\boldsymbol{\theta}) \propto \exp\left{-\frac{1}{2} \Gamma_{ij} \Delta\theta_i\Delta\theta_j \right}$，是协方差矩阵为$\Gamma^{-1}$的正态分布。如果选定先验分布为均匀分布，使用贝叶斯方法估计出的参数的后验分布也就是协方差矩阵为$\Gamma^{-1}$的正态分布。</p>
 <p>上面的推导给出了估计根据探测器接收到的引力波信号对参数进行限制的能力的方法：计算波形对参数的微分，得到Fisher矩阵，而对齐求逆就得到近似的参数的协方差矩阵。并且我们知道，在真实波形的参数附近，参数的概率分布近似为正态分布。对多个探测器组成的探测器网络，Fisher矩阵为每个探测器的Fisher矩阵的和。</p>
 <p>关于Fisher矩阵的推导和含义，更严谨的讨论见<a target="_blank" rel="noopener" href="https://arxiv.org/abs/gr-qc/9209010">gr-qc/9209010</a>（Fisher矩阵给出频率论视角的方差的推导，即由于不同的噪声，最大似然估计的参数的变化）和<a target="_blank" rel="noopener" href="https://arxiv.org/abs/gr-qc/0703086">gr-qc/0703086</a>（以三种不同的方式给出Fisher矩阵的结果，并讨论了其可应用的范围及需要注意之处）。</p>
-<h2 id="推导定位天区面积公式"><a href="#推导定位天区面积公式" class="headerlink" title="推导定位天区面积公式"></a>推导定位天区面积公式</h2><p>对单个参数，协方差矩阵$C=\Gamma^{-1}$可以简单地给出参数$\theta<em>i$的误差（标准差）$\sigma</em>{\theta<em>i} = \sqrt{C</em>{ii}}$。</p>
+<h2 id="推导定位天区面积公式"><a href="#推导定位天区面积公式" class="headerlink" title="推导定位天区面积公式"></a>推导定位天区面积公式</h2><p>对单个参数，协方差矩阵$C=\Gamma^{-1}$可以简单地给出参数$\theta_i$的误差（标准差）$\sigma_{\theta_i} = \sqrt{C_{ii}}$。</p>
 <p>一个重要的量是对波源定位的天区的大小，这可以由两个位置参数（如赤经、赤纬）的分布给出。方便起见，我们取参数$x=\cos\theta_0-\cos\theta, y=\phi-\phi_0$，$\theta$和$\phi$是球坐标，$\theta_0$和$\phi_0$是注入波形采取的波源的位置。则立体角就是$\mathrm{d}\Omega=\mathrm{d}x\mathrm{d}y$。由上节，将与位置无关的参数积掉，$x,y$的边缘分布就是均值为零的二维正态分布</p>
 <script type="math/tex; mode=display">p(x,y) = \frac{1}{2\pi |\det C|^{1/2}} e^{-\frac{1}{2}(C^{-1}_{11}x^2+C^{-1}_{22}y^2+2C^{-1}_{12}xy)}</script><p>这里的$C$是$x$和$y$的协方差矩阵，其元素为Fisher矩阵的逆的$x$和$y$对应行列的元素。</p>
 <p>概率$P$的定位天区面积$\Delta\Omega_P$为根据波源位置的后验分布，波源处在其中的概率为$P$的天区的面积。当然给定面积对应的天区并不唯一，具体地说，这里的区域是误差椭圆，即$xy$平面上等概率密度线内的区域。</p>
-<p>通过配方换元，$u^2+v^2=\frac{1}{2}(C^{-1}<em>{11}x^2+C^{-1}</em>{22}y^2+2C^{-1}_{12}xy)$，可以求出</p>
+<p>通过配方换元，$u^2+v^2=\frac{1}{2}(C^{-1}_{11}x^2+C^{-1}_{22}y^2+2C^{-1}_{12}xy)$，可以求出</p>
 <script type="math/tex; mode=display">\left|\frac{\partial(x,y)}{\partial(u,v)}\right| = 2\sqrt{\det C}</script><p>误差椭圆就是$u^2+v^2\le R^2$，其对应的概率为</p>
 <script type="math/tex; mode=display">
 \begin{aligned}

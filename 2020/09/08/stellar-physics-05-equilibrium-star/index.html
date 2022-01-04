@@ -348,7 +348,7 @@
 <ul>
 <li>压强$P$从内到外单调下降</li>
 <li>温度$T$从内到外单调下降，在厚$\Delta r\ll R$的壳层内$T\sim\mathrm{const}$，近似有局域热动平衡(LTE)</li>
-<li>$q$通常对温度非常敏感，导致在远离中心的壳层中$q(r)\ll q<em>\mathrm{core}$，对总光度的贡献可以忽略不计<br>因此可以近似认为核反应只在中心核区$r</em>\mathrm{core}\ll R$发生，可以近似为点源，核区$q=q<em>\mathrm{nuc}$<br>恒星结构方程各参数相耦合，因此$q</em>\mathrm{nuc}$是可以决定恒星结构和演化的关键的量</li>
+<li>$q$通常对温度非常敏感，导致在远离中心的壳层中$q(r)\ll q_\mathrm{core}$，对总光度的贡献可以忽略不计<br>因此可以近似认为核反应只在中心核区$r_\mathrm{core}\ll R$发生，可以近似为点源，核区$q=q_\mathrm{nuc}$<br>恒星结构方程各参数相耦合，因此$q_\mathrm{nuc}$是可以决定恒星结构和演化的关键的量</li>
 </ul>
 <h2 id="多方球理论"><a href="#多方球理论" class="headerlink" title="多方球理论"></a>多方球理论</h2><p>恒星气体的物态方程给出$P=P(\rho,T)$，$P$对$T$的依赖导致恒星结构方程前两个和后两个的耦合。如果能独立地给出$T=T(\rho)$，可以使前两个方程与后两个解耦。</p>
 <p>流体静力学平衡方程</p>
@@ -407,20 +407,20 @@
 <script type="math/tex; mode=display">M_{\mathrm{ch}} = 4\pi M_3 \left(\frac{k_2}{\pi G}\right)^{3/2} = 5.83\mu_e^{-2}M_\odot</script><p>为钱德拉塞卡质量，是白矮星质量的上限。</p>
 <p>$\mu_e$有两种情况：</p>
 <ul>
-<li>氢耗尽，主要是氦，此时$\mu<em>e\approx 2$，$M</em>{\mathrm{ch}}=1.46M_\odot$</li>
-<li>中心铁核，此时$\mu<em>e\approx 2.15$，$M</em>{\mathrm{ch}}=1.26M_\odot$</li>
+<li>氢耗尽，主要是氦，此时$\mu_e\approx 2$，$M_{\mathrm{ch}}=1.46M_\odot$</li>
+<li>中心铁核，此时$\mu_e\approx 2.15$，$M_{\mathrm{ch}}=1.26M_\odot$</li>
 </ul>
 <h2 id="爱丁顿（极限）光度"><a href="#爱丁顿（极限）光度" class="headerlink" title="爱丁顿（极限）光度"></a>爱丁顿（极限）光度</h2><p>由辐射转移方程，</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}r} = -\frac{\kappa \rho H}{c} = -\frac{\kappa \rho}{c} \frac{F}{4 \pi r^{2}}</script><p>再根据流体静力学平衡</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d} P}{\mathrm{d} r}=-\rho \frac{G m}{r^{2}}</script><p>有</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}P} = \frac{\kappa F}{4\pi cGm}</script><p>主序星辐射的能流向外，$F&gt;0$，从而$\mathrm{d}P$和$\mathrm{d}P<em>\mathrm{rad}$符号相同。由于从内向外$P$和$P</em>\mathrm{gas}$都减小，故$\mathrm{d}P_\mathrm{rad}&lt;\mathrm{d}P$，从而有</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}P} = \frac{\kappa F}{4\pi cGm}</script><p>主序星辐射的能流向外，$F&gt;0$，从而$\mathrm{d}P$和$\mathrm{d}P_\mathrm{rad}$符号相同。由于从内向外$P$和$P_\mathrm{gas}$都减小，故$\mathrm{d}P_\mathrm{rad}&lt;\mathrm{d}P$，从而有</p>
 <script type="math/tex; mode=display">\kappa F < 4\pi cGm</script><p>注意：在恒星外围壳层的对流区，氢氦充分电离，存在大量自由电子。若核区的磁流体不稳定性使核燃烧增强，$F$增大，导致更强的光致电离，使$n_e$增大，导致汤姆逊散射主导的$\kappa$增大。此时可能有$\kappa F&gt;4\pi cGm$，需要引入对流机制转移多余的辐射的能量。</p>
 <p>考虑热平衡方程</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}F}{\mathrm{d}m} = q</script><ul>
 <li>中心$F(0)=0$，在中心附近，$F=q_cm$。<br>$\kappa F&lt;4\pi cGm$给出<script type="math/tex; mode=display">q_c < \frac{4\pi cG}{\kappa}</script></li>
-<li>外边界$F(M)=L$， $\kappa F&lt;4\pi cGm$给出<script type="math/tex; mode=display">L < \frac{4\pi cGM}{\kappa}</script>恒星外壳层产生不透明度的机制主要是汤姆逊散射，$\kappa\approx \kappa<em>{\mathrm{es}}$<br>理论上$\kappa</em>\mathrm{es}=\frac{\sigma_T}{m_Hc}$，其中$\sigma_T=6.25\times10^{-25} \mathrm{cm}^2$为电子的汤姆逊散射截面。<br>从而<script type="math/tex; mode=display">L < L_\mathrm{Edd} = \frac{4\pi m_Hc^2GM}{\sigma_T} = 1.3\times10^{38} \left(\frac{M}{M_\odot}\right) \mathrm{erg\cdot s^{-1}}</script>即对质量$M$给定的恒星，其光度有上限$L_\mathrm{Edd}$，称为爱丁顿光度。</li>
+<li>外边界$F(M)=L$， $\kappa F&lt;4\pi cGm$给出<script type="math/tex; mode=display">L < \frac{4\pi cGM}{\kappa}</script>恒星外壳层产生不透明度的机制主要是汤姆逊散射，$\kappa\approx \kappa_{\mathrm{es}}$<br>理论上$\kappa_\mathrm{es}=\frac{\sigma_T}{m_Hc}$，其中$\sigma_T=6.25\times10^{-25} \mathrm{cm}^2$为电子的汤姆逊散射截面。<br>从而<script type="math/tex; mode=display">L < L_\mathrm{Edd} = \frac{4\pi m_Hc^2GM}{\sigma_T} = 1.3\times10^{38} \left(\frac{M}{M_\odot}\right) \mathrm{erg\cdot s^{-1}}</script>即对质量$M$给定的恒星，其光度有上限$L_\mathrm{Edd}$，称为爱丁顿光度。</li>
 </ul>
-<p>若由于内部扰动，$L$超过$L<em>\mathrm{Edd}$，流体静力学平衡被破坏，$P</em>\mathrm{rad}$的值很大形成强星风，吹散恒星外包层，使恒星质量减小。</p>
+<p>若由于内部扰动，$L$超过$L_\mathrm{Edd}$，流体静力学平衡被破坏，$P_\mathrm{rad}$的值很大形成强星风，吹散恒星外包层，使恒星质量减小。</p>
 <p>观测上，主序星有质光关系</p>
 <script type="math/tex; mode=display">\log L \propto n\log M</script><p>结合$L &lt; L_\mathrm{Edd}$，表明恒星质量存在上限。</p>
 <h2 id="标准模型（爱丁顿模型）"><a href="#标准模型（爱丁顿模型）" class="headerlink" title="标准模型（爱丁顿模型）"></a>标准模型（爱丁顿模型）</h2><h3 id="光度"><a href="#光度" class="headerlink" title="光度"></a>光度</h3><p>引入无量纲参数$\eta$，使</p>
@@ -451,7 +451,7 @@
 <ul>
 <li>小质量恒星$\beta\approx 1$，气体压主导，较稳定</li>
 <li>大质量恒星$\beta\approx 0$，辐射压主导，不稳定</li>
-<li>带入太阳丰度$\mu\approx 0.61$，对应质量范围$0.5M<em>\odot\le M \le 50M</em>\odot$，与观测基本一致。</li>
+<li>带入太阳丰度$\mu\approx 0.61$，对应质量范围$0.5M_\odot\le M \le 50M_\odot$，与观测基本一致。</li>
 <li>对$\mu=\mathrm{const}$，小的$\beta$对应更大的$M$。</li>
 <li>结合$L=L_\mathrm{Edd}(1-\beta)$，有：<script type="math/tex; mode=display">\frac{L}{L_\odot} = 0.003\frac{4\pi cGM_\odot}{\kappa_s L_\odot}\mu^4\beta^4\left(\frac{M}{M_\odot}\right)^3</script>即约有$L\sim M^3$，称为恒星的<strong>质光关系</strong>。<br>上面的结果忽略了不同恒星化学组成不同，实际上由于$\beta=\beta(M,\mu)$，实际观测结果会有偏差</li>
 <li>考虑相同质量，不同阶段（氢烧-&gt;氦烧-&gt;碳氧烧）的恒星，$\mu$增大，$\beta$减小，辐射压增大。光度接近爱丁顿光度时，会形成强烈的星风，吹散恒星外包层，使$M$下降，形成负反馈。</li>
@@ -465,12 +465,12 @@
 <li>质量连续性方程<script type="math/tex; mode=display">\frac{\mathrm{d}m}{\mathrm{d}r} = 4\pi r^2\rho</script></li>
 <li>气体压<script type="math/tex; mode=display">P_\mathrm{gas} = \frac{\mathcal{R}}{\mu}\rho T</script></li>
 </ul>
-<p>进一步假设不确定度经验公式中$a=b=0$，即$\kappa=\kappa<em>0=\mathrm{const}$，联立流体静力学平衡和辐射转移方程，并结合$P=P</em>\mathrm{gas}+P_\mathrm{rad}$，有</p>
+<p>进一步假设不确定度经验公式中$a=b=0$，即$\kappa=\kappa_0=\mathrm{const}$，联立流体静力学平衡和辐射转移方程，并结合$P=P_\mathrm{gas}+P_\mathrm{rad}$，有</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}P_\mathrm{gas}}{\mathrm{d}P_\mathrm{rad}} = \frac{4\pi cG}{\kappa_0 L}m - 1</script><p>对$r$求导，</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}^2 P_\mathrm{gas}}{\mathrm{d}P_\mathrm{rad}^2}\frac{\mathrm{d}P_\mathrm{rad}}{\mathrm{d}r} = \frac{4\pi cG}{\kappa_0 L}\frac{\mathrm{d}m}{\mathrm{d}r}</script><p>代入辐射转移和质量连续性方程，</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}^2 P_\mathrm{gas}}{\mathrm{d}P_\mathrm{rad}^2} = -\frac{64\pi^3 c^2G}{\kappa_0^2 L^2}r^4 \tag{7.1}</script><p>由气体的物态方程，</p>
 <script type="math/tex; mode=display">\rho = \frac{\mu}{\mathcal{R}}\frac{P_\mathrm{gas}}{T} = \frac{\mu}{\mathcal{R}}\left(\frac{a}{3}\right)^{1/4} {P_\mathrm{gas}}P_\mathcal{rad}^{-1/4}</script><p>从而辐射转移方程的倒数：</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}\left(\frac{1}{r}\right)}{\mathrm{d}P_\mathrm{rad}} = \frac{4\pi c}{\kappa_0 L\rho} = \frac{4\pi c}{\kappa_0 L}\frac{\mathcal{R}}{\mu}\left(\frac{3}{a}\right)^{1/4} {P_\mathrm{gas}}^{-1}P_\mathcal{rad}^{1/4} \tag{7.2}</script><p>(7.1)和(7.2)建立了变量$P<em>\mathrm{gas},P</em>\mathrm{rad},\frac{1}{r}$之间的关系。可以用数值方法求解。结果表明恒星存在质光关系</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}\left(\frac{1}{r}\right)}{\mathrm{d}P_\mathrm{rad}} = \frac{4\pi c}{\kappa_0 L\rho} = \frac{4\pi c}{\kappa_0 L}\frac{\mathcal{R}}{\mu}\left(\frac{3}{a}\right)^{1/4} {P_\mathrm{gas}}^{-1}P_\mathcal{rad}^{1/4} \tag{7.2}</script><p>(7.1)和(7.2)建立了变量$P_\mathrm{gas},P_\mathrm{rad},\frac{1}{r}$之间的关系。可以用数值方法求解。结果表明恒星存在质光关系</p>
 <script type="math/tex; mode=display">\log L\propto n\log M</script><p>对中等质量恒星$n$较大（$n\sim 4.5$），对大质量恒星$n$较小（$n\sim 3.0$）。<br>对小质量矮星，内部部分处于量子简并态，该方程组不适用。</p>
 </body></html>
     </div>

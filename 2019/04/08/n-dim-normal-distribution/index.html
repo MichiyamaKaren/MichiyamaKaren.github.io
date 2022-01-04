@@ -316,8 +316,8 @@ H(\mathbf m, \mathbf C) &= \sum_{k=1}^N \ln p(\mathbf x_k)
 <script type="math/tex; mode=display">\sum_{i=1}^nC^{-1}_{il}(\sum_{k=1}^N x_{ki} - Nm_i) =0</script><p>对$l=0,\cdots,n$成立。写成矩阵形式，即为：</p>
 <script type="math/tex; mode=display">\mathbf C^{-1} (\sum_{k=1}^N \mathbf x_k - N\mathbf m) =0</script><p>由于$\mathbf C^{-1}$是可逆矩阵，要使上式成立，应有：</p>
 <script type="math/tex; mode=display">\mathbf{\hat m}=\frac 1 N \sum_{k=1}^N \mathbf x_k</script><p>即为$\mathbf m$的极大似然估计值。</p>
-<p>对$\mathbf C$，首先考虑$\mathbf C^{-1}$的行列式$|\mathbf C^{-1}|$对$C^{-1}<em>{lm}$的偏导数$\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}</em>{lm}}$：<br>将$|\mathbf C^{-1}|$按第$l$行展开，有：</p>
-<script type="math/tex; mode=display">|\mathbf C^{-1}|=\sum_{i=1}^n C^{-1}_{li}c_{li}</script><p>其中$c<em>{li}$是$C^{-1}</em>{li}$的代数余子式，同时也是$\mathbf C^{-1}$的伴随矩阵的$l,i$元素。对任意矩阵$\mathbf A$，其伴随矩阵$\mathbf A^* = |\mathbf A| \mathbf A^{-1} $，因此$c<em>{li} = |\mathbf C^{-1}|(C^{-1})^{-1}</em>{li} = |\mathbf C^{-1}|C<em>{li} $。<br>$l$行的代数余子式不显含$C^{-1}</em>{lm}$，从而有：</p>
+<p>对$\mathbf C$，首先考虑$\mathbf C^{-1}$的行列式$|\mathbf C^{-1}|$对$C^{-1}_{lm}$的偏导数$\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}_{lm}}$：<br>将$|\mathbf C^{-1}|$按第$l$行展开，有：</p>
+<script type="math/tex; mode=display">|\mathbf C^{-1}|=\sum_{i=1}^n C^{-1}_{li}c_{li}</script><p>其中$c_{li}$是$C^{-1}_{li}$的代数余子式，同时也是$\mathbf C^{-1}$的伴随矩阵的$l,i$元素。对任意矩阵$\mathbf A$，其伴随矩阵$\mathbf A^* = |\mathbf A| \mathbf A^{-1} $，因此$c_{li} = |\mathbf C^{-1}|(C^{-1})^{-1}_{li} = |\mathbf C^{-1}|C_{li} $。<br>$l$行的代数余子式不显含$C^{-1}_{lm}$，从而有：</p>
 <script type="math/tex; mode=display">\frac{\partial |\mathbf C^{-1}|}{\partial C^{-1}_{lm}} = c_{lm} = |\mathbf C^{-1}|C_{lm}</script><p>故：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}

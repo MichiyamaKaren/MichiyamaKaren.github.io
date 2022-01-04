@@ -351,8 +351,8 @@
 <h2 id="1-3-矢量分析"><a href="#1-3-矢量分析" class="headerlink" title="1.3 矢量分析"></a>1.3 矢量分析</h2><p>两个常用的公式是：</p>
 <script type="math/tex; mode=display">\mathbf A \times(\mathbf B \times \mathbf C)=(\mathbf A\cdot \mathbf C)\mathbf B-(\mathbf A\cdot\mathbf B)\mathbf C \tag{1.3.1}</script><script type="math/tex; mode=display">\mathbf A\cdot(\mathbf B\times\mathbf C)=\mathbf B\cdot(\mathbf C\times\mathbf A)=\mathbf C\cdot(\mathbf A\times\mathbf B) \tag{1.3.2}</script><p>在矢量分析的表达式中经常出现的是纳布拉算符$\nabla$（定义为$\nabla=\frac{\partial}{\partial x^i}\mathbf e_i$），作为微分算符，$\nabla$和分量为实数的矢量的运算规则不尽相同。下面对于出现$\nabla$的表达式，以$\nabla\times(\mathbf A\times \mathbf B)$为例介绍两种分析的方法：</p>
 <ol>
-<li>式中出现了两个矢量$\mathbf A$和$\mathbf B$，$\nabla$对二者都有作用，那么可以写成$\nabla<em>{\mathbf A}\times(\mathbf A\times\mathbf B)+\nabla</em>{\mathbf B}\times(\mathbf A\times\mathbf B)$，其中$\nabla<em>{\mathbf A}$只对$\mathbf A$作用，$\nabla</em>{\mathbf B}$只对$\mathbf B$作用。从而由(1.3.1)式，对第一项有：<script type="math/tex; mode=display">
-\nabla_{\mathbf A}\times(\mathbf A\times\mathbf B)=(\mathbf B\cdot\nabla_{\mathbf A})\mathbf A-(\nabla_{\mathbf A}\cdot\mathbf A)\mathbf B</script>这里$\nabla<em>{\mathbf A}$只对$\mathbf A$有作用，因此其与$\mathbf B$的点乘是可以交换的，进行恒等变换使得最后式中$\nabla</em>{\mathbf A}$只作用在$\mathbf A$上，从而保证在最后化回$\nabla$时不会引起歧义。<br>对$\nabla_{\mathbf B}$的式子同理，最后结果为：<script type="math/tex; mode=display">
+<li>式中出现了两个矢量$\mathbf A$和$\mathbf B$，$\nabla$对二者都有作用，那么可以写成$\nabla_{\mathbf A}\times(\mathbf A\times\mathbf B)+\nabla_{\mathbf B}\times(\mathbf A\times\mathbf B)$，其中$\nabla_{\mathbf A}$只对$\mathbf A$作用，$\nabla_{\mathbf B}$只对$\mathbf B$作用。从而由(1.3.1)式，对第一项有：<script type="math/tex; mode=display">
+\nabla_{\mathbf A}\times(\mathbf A\times\mathbf B)=(\mathbf B\cdot\nabla_{\mathbf A})\mathbf A-(\nabla_{\mathbf A}\cdot\mathbf A)\mathbf B</script>这里$\nabla_{\mathbf A}$只对$\mathbf A$有作用，因此其与$\mathbf B$的点乘是可以交换的，进行恒等变换使得最后式中$\nabla_{\mathbf A}$只作用在$\mathbf A$上，从而保证在最后化回$\nabla$时不会引起歧义。<br>对$\nabla_{\mathbf B}$的式子同理，最后结果为：<script type="math/tex; mode=display">
 \begin{aligned}
 \nabla\times(\mathbf A\times \mathbf B)&=(\mathbf B\cdot\nabla_{\mathbf A})\mathbf A-(\nabla_{\mathbf A}\cdot\mathbf A)\mathbf B + (\nabla_{\mathbf B}\cdot\mathbf B)\mathbf A-(\mathbf A\cdot\nabla_{\mathbf B})\mathbf B
 \\&=(\mathbf B\cdot\nabla)\mathbf A-(\nabla\cdot\mathbf A)\mathbf B + (\nabla\cdot\mathbf B)\mathbf A-(\mathbf A\cdot\nabla)\mathbf B
@@ -394,12 +394,12 @@
 <script type="math/tex; mode=display">
 \mathbf D = D^i\mathbf e_i = D_i\mathbf e^i</script><p>,其中：</p>
 <script type="math/tex; mode=display">D^i=\mathbf D\cdot\mathbf e^i</script><script type="math/tex; mode=display">D_i=\mathbf D\cdot\mathbf e_i</script><p>用上、下指标表示的分量$D^i,D_i$分别称作<strong>逆变分量</strong>、<strong>协变分量</strong>。</p>
-<p>下面的论述不完全准确地讨论了协变和逆变分量的含义。考虑不同于${\mathbf e<em>1,\mathbf e_2,\mathbf e_3}$的另一组线性无关的基${\mathbf e_1’,\mathbf e_2’,\mathbf e_3’}$，相应的对偶集合${\mathbf e^1{}’ ,\mathbf e^2{}’,\mathbf e^3{}’}$。两组基之间的坐标变换为$\mathbf e_i’=T_i^{\alpha}\mathbf e</em>{\alpha},\mathbf e^j{}’=T_{\beta}^j\mathbf e^{\beta}$。由对偶集合的定义，应有：</p>
+<p>下面的论述不完全准确地讨论了协变和逆变分量的含义。考虑不同于${\mathbf e_1,\mathbf e_2,\mathbf e_3}$的另一组线性无关的基${\mathbf e_1’,\mathbf e_2’,\mathbf e_3’}$，相应的对偶集合${\mathbf e^1{}’ ,\mathbf e^2{}’,\mathbf e^3{}’}$。两组基之间的坐标变换为$\mathbf e_i’=T_i^{\alpha}\mathbf e_{\alpha},\mathbf e^j{}’=T_{\beta}^j\mathbf e^{\beta}$。由对偶集合的定义，应有：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
     \mathbf e_i'\cdot\mathbf e^j{}' &=  T_i^{\alpha}\mathbf e_{\alpha} \cdot T_{\beta}^j\mathbf e^{\beta} = T_i^{\alpha}T_{\beta}^j \delta_{\alpha}^{\beta} = T_i^{\alpha}T_{\alpha}^j
     \\&= \delta_i^j
-\end{aligned}</script><p>说明基和对偶基的坐标变换矩阵$T<em>i^{\alpha}$和$T</em>{\beta}^j$的分量形式构成的矩阵互逆。矢量$\mathbf D$的协变分量$D<em>i=\mathbf D\cdot\mathbf e_i$，和基的变换方式相同，故称作协变；同理，逆变分量和对偶基的变换方式相同，其变换矩阵为基的逆矩阵，故称为逆变。（事实上$T_i^{\alpha}$和$T</em>{\beta}^j$不是两个矩阵，而是同一个张量在不同的基下的分量形式）</p>
+\end{aligned}</script><p>说明基和对偶基的坐标变换矩阵$T_i^{\alpha}$和$T_{\beta}^j$的分量形式构成的矩阵互逆。矢量$\mathbf D$的协变分量$D_i=\mathbf D\cdot\mathbf e_i$，和基的变换方式相同，故称作协变；同理，逆变分量和对偶基的变换方式相同，其变换矩阵为基的逆矩阵，故称为逆变。（事实上$T_i^{\alpha}$和$T_{\beta}^j$不是两个矩阵，而是同一个张量在不同的基下的分量形式）</p>
 <p>需要注意矢量的协变表示和逆变表示与协变矢量和逆变矢量是不同的概念，在$\mathbb R^3$中不对后者进行区分。</p>
 <h2 id="2-4-度规"><a href="#2-4-度规" class="headerlink" title="2.4 度规"></a>2.4 度规</h2><p>对任意矢量$\mathbf D$，有：</p>
 <script type="math/tex; mode=display">
@@ -417,7 +417,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
 \begin{aligned}
     \mathbf A\cdot\mathbf B &= (A^i\mathbf e_i)\cdot(B^j\mathbf e_j)=g_{ij}A^iB^j
     \\&= (A_i\mathbf e^i)\cdot(B_j\mathbf e^j)=g^{ij}A_iB_j
-\end{aligned}</script><p>特别地，$\mathrm{d}\mathbf{R}\cdot\mathbf{dR} = g<em>{ij}(\mathrm{d}\mathbf{R})^i(\mathrm{d}\mathbf{R})^j = g</em>{ij}\mathbf{d}u^i\mathbf{d}u^j$。（其中$(\mathrm{d}\mathbf{R})^i = \nabla u^i\cdot\mathrm{d}\mathbf{R} = \mathbf du^i$），这告诉我们度规也蕴含了曲线坐标系中的线元长度。</p>
+\end{aligned}</script><p>特别地，$\mathrm{d}\mathbf{R}\cdot\mathbf{dR} = g_{ij}(\mathrm{d}\mathbf{R})^i(\mathrm{d}\mathbf{R})^j = g_{ij}\mathbf{d}u^i\mathbf{d}u^j$。（其中$(\mathrm{d}\mathbf{R})^i = \nabla u^i\cdot\mathrm{d}\mathbf{R} = \mathbf du^i$），这告诉我们度规也蕴含了曲线坐标系中的线元长度。</p>
 <p>对矢量的叉乘：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
@@ -434,7 +434,7 @@ g^{ij}=\mathbf e^i\cdot\mathbf e^j = \nabla u^i\cdot\nabla u^j \tag{2.4.2}</scri
         \\ \frac{\partial x}{\partial u^2} & \frac{\partial y}{\partial u^2} & \frac{\partial z}{\partial u^2}
         \\ \frac{\partial x}{\partial u^3} & \frac{\partial y}{\partial u^3} & \frac{\partial z}{\partial u^3}
     \end{vmatrix}
-\end{aligned}</script><p>为Jacobi行列式。把度规的分量$g<em>{ij}$写成矩阵，发现其元素$g</em>{ij}=\sum_{q=1}^{3}\frac{\partial \mathbf R^q}{\partial u^i}\cdot\frac{\partial \mathbf R^q}{\partial u^j}$，可以写成上面的Jacobi矩阵与其转置的积，那么我们有：</p>
+\end{aligned}</script><p>为Jacobi行列式。把度规的分量$g_{ij}$写成矩阵，发现其元素$g_{ij}=\sum_{q=1}^{3}\frac{\partial \mathbf R^q}{\partial u^i}\cdot\frac{\partial \mathbf R^q}{\partial u^j}$，可以写成上面的Jacobi矩阵与其转置的积，那么我们有：</p>
 <script type="math/tex; mode=display">g=det(g_{ij})=J^2</script></body></html>
     </div>
 

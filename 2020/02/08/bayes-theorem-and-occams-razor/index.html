@@ -345,10 +345,10 @@
 </ul>
 <p>一般情况下贝叶斯公式会被用作估计模型的参数的后验分布$P(M,\boldsymbol{\theta}|D)$，这时上面的$P(M)$可以看做$P(M,\boldsymbol{\theta})$把参数$\boldsymbol{\theta}$积分掉的边缘分布。</p>
 <p>现在我们假设有了数据$D$，模型$M_1$和$M_2$都可以用于解释它。对$M_1$和$M_2$我们没有主观的偏好，因此取相同的先验$P(M_1)=P(M_2)$。它们的<strong>概率比</strong>(odds ratio)就成为：</p>
-<script type="math/tex; mode=display">O_{21}=\frac{P(M_2|D)}{P(M_1|D)}=\frac{P(D|M_2)}{P(D|M_1)}</script><p>如果模型$M<em>1$只有一个参数$\mu$，可以取$\mu$的先验为在$-\Delta</em>{\mu}/2$到$\Delta<em>{\mu}/2$之间的均匀分布。假设似然函数可以用中心为使似然取最大值的$\mu=\mu^0$，方差为$\sigma</em>\mu^2$的高斯分布来描述。一般情况下先验只能给出一个大致的范围，而数据能告诉我们更多关于参数的信息，也就是说$\sigma<em>{\mu}\ll\Delta</em>{\mu}$。我们就有：</p>
+<script type="math/tex; mode=display">O_{21}=\frac{P(M_2|D)}{P(M_1|D)}=\frac{P(D|M_2)}{P(D|M_1)}</script><p>如果模型$M_1$只有一个参数$\mu$，可以取$\mu$的先验为在$-\Delta_{\mu}/2$到$\Delta_{\mu}/2$之间的均匀分布。假设似然函数可以用中心为使似然取最大值的$\mu=\mu^0$，方差为$\sigma_\mu^2$的高斯分布来描述。一般情况下先验只能给出一个大致的范围，而数据能告诉我们更多关于参数的信息，也就是说$\sigma_{\mu}\ll\Delta_{\mu}$。我们就有：</p>
 <script type="math/tex; mode=display">P(D|M_1)=\int P(D|M_1,\mu)p(\mu) \mathrm{d}\mu \sim L^0(M_1)\frac{\sigma_\mu}{\Delta_\mu}</script><p>这里$L^0(M_1)=\max(P(D|M_1,\mu))$。</p>
-<p>注意到$\sigma<em>\mu/\Delta</em>\mu \ll 1$，这表明我们<strong>每在模型中增加一个独立参数，都会在$P(D|M)$中乘上一个远小于1的系数</strong>。如果$M_2$有两个独立参数$p$和$q$，那么：</p>
-<script type="math/tex; mode=display">O_{21} \sim \frac{L^0(M_2)}{L^0(M_1)}\frac{(\sigma_p/\Delta_p)(\sigma_q/\Delta_q)}{\sigma_\mu/\Delta_\mu}</script><p>如果$M<em>1$和$M_2$对数据的解释能力相近，即$L^0(M_1)\sim L^0(M_2)$，那么就有$O</em>{21}\ll 1$，我们就有很大把握选择$M_1$而拒绝$M_2$。</p>
+<p>注意到$\sigma_\mu/\Delta_\mu \ll 1$，这表明我们<strong>每在模型中增加一个独立参数，都会在$P(D|M)$中乘上一个远小于1的系数</strong>。如果$M_2$有两个独立参数$p$和$q$，那么：</p>
+<script type="math/tex; mode=display">O_{21} \sim \frac{L^0(M_2)}{L^0(M_1)}\frac{(\sigma_p/\Delta_p)(\sigma_q/\Delta_q)}{\sigma_\mu/\Delta_\mu}</script><p>如果$M_1$和$M_2$对数据的解释能力相近，即$L^0(M_1)\sim L^0(M_2)$，那么就有$O_{21}\ll 1$，我们就有很大把握选择$M_1$而拒绝$M_2$。</p>
 <p>这一原则可以被简单地概括为，<strong>对同样能解释观测到的现象的模型，我们总是选择所作的假设更少的的那个</strong>。或者说，“若非必要，勿增实体”——没错，这正是大名鼎鼎的<strong>奥卡姆剃刀</strong>。</p>
 <p>现在回到标题，为什么我们不该相信阴谋论？答案不证自明——阴谋论并没有提供更符合的解释，却凭空多出了相当多的假设，这也就使它的后验概率变得低得多。阴谋论最多做到自圆其说，但这并不是终点，为了质疑而产生的质疑也不会更能解释问题。</p>
 </body></html>
