@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="2021于我在各方面上都是变化巨大的一年，本科毕业来到上海又有了新的体验和新的要适应的生活节奏。因此毕业前后（正好是前半年和后半年）对我来说也是个很显著的转折点，在下面的段中我也会以此为界限分开来写。 学业和科研从妮可毕业了。前半年被叫来上海干了两个月活，毕业论文也是在上海写完的。毕业论文是半个月速成的很无聊也没啥用的东西，唯一可说的就是趁此机会稍微了解了下Fisher矩阵做引力波参数估计的数学基">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021年度总结">
+<meta property="og:url" content="https://michiyamakaren.github.io/2022/02/07/2021-review/index.html">
+<meta property="og:site_name" content="道山神連的博客">
+<meta property="og:description" content="2021于我在各方面上都是变化巨大的一年，本科毕业来到上海又有了新的体验和新的要适应的生活节奏。因此毕业前后（正好是前半年和后半年）对我来说也是个很显著的转折点，在下面的段中我也会以此为界限分开来写。 学业和科研从妮可毕业了。前半年被叫来上海干了两个月活，毕业论文也是在上海写完的。毕业论文是半个月速成的很无聊也没啥用的东西，唯一可说的就是趁此机会稍微了解了下Fisher矩阵做引力波参数估计的数学基">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://michiyamakaren.github.io/2022/02/07/2021-review/my-github-contribution.png">
+<meta property="og:image" content="https://michiyamakaren.github.io/2022/02/07/2021-review/butainoue.jpg">
+<meta property="article:published_time" content="2022-02-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-07T19:02:57.295Z">
+<meta property="article:author" content="道山神連">
+<meta property="article:tag" content="总结">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://michiyamakaren.github.io/2022/02/07/2021-review/my-github-contribution.png">
+
+<link rel="canonical" href="https://michiyamakaren.github.io/2022/02/07/2021-review/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+<!-- from: https://www.cnblogs.com/wstong/p/12874732.html -->
+<!-- Live2DCubismCore script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/live2dcubismcore.js"></script>
+<!-- Build script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/bundle.js"></script>
+<canvas id="live2d" width="400" height="600" class="live2d" style="position: fixed; opacity: 0.8; left: -70px; bottom: -250px; z-index: 99999; pointer-events: none;"></canvas>
+
+<script type="text/javascript">
+    var resourcesPath = '/live2d_models/'; // 指定资源文件（模型）保存的路径
+    var backImageName = ''; // 指定背景图片
+    var modelDir = ['AijoKaren']; // 指定需要加载的模型
+    initDefine(resourcesPath, backImageName, modelDir); // 初始化模型
+</script>
+  <title>2021年度总结 | 道山神連的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">道山神連的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook" rel="section"><i class="fa fa-fw fa-comments"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies" rel="section"><i class="fa fa-fw fa-film"></i>电影</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://michiyamakaren.github.io/2022/02/07/2021-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/kirin.gif">
+      <meta itemprop="name" content="道山神連">
+      <meta itemprop="description" content="宇宙的最不可理解之处在于它是可以被理解的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="道山神連的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2021年度总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-07 00:00:00" itemprop="dateCreated datePublished" datetime="2022-02-07T00:00:00+08:00">2022-02-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-08 03:02:57" itemprop="dateModified" datetime="2022-02-08T03:02:57+08:00">2022-02-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%80%BB%E7%BB%93/" itemprop="url" rel="index">
+                    <span itemprop="name">总结</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/02/07/2021-review/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/02/07/2021-review/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body></body></html><html><head></head><body><p>2021于我在各方面上都是变化巨大的一年，本科毕业来到上海又有了新的体验和新的要适应的生活节奏。因此毕业前后（正好是前半年和后半年）对我来说也是个很显著的转折点，在下面的段中我也会以此为界限分开来写。</p>
+<h2 id="学业和科研"><a href="#学业和科研" class="headerlink" title="学业和科研"></a>学业和科研</h2><p>从妮可毕业了。前半年被叫来上海干了两个月活，毕业论文也是在上海写完的。毕业论文是半个月速成的很无聊也没啥用的东西，唯一可说的就是趁此机会稍微了解了下Fisher矩阵做引力波参数估计的数学基础。毕业前回妮可待了一个月处理答辩和毕业的一堆的事，这最后一个月和这五年一样平淡，想记录下来却不知从何处说起，也只好作罢。</p>
+<p>来交大后确实感觉到博士生的工作节奏快了不少，上了半年我也没法说能完全适应了，当然也有一部分是因为20年开始的这两年都过于闲了。研究生课的量和难度都提升了一大截，选修课从功能上来讲也不是本科的打基础，而是和实际科研工作挂钩，所以不可避免有很多繁杂的东西在里面，之前一直是在打数理基础的我就不那么容易抓住内容。再加上一直有很难长时间集中注意力的毛病以及早上还爱打瞌睡，很多东西都没follow下来。科研上也是如此，组会讲文章的时候因为听不懂难以集中注意力，然后就更没法听懂，陷入这样的恶性循环。总之就是读了半年还没掌握一个博士生该掌握的能力，或许是适应不了大脑高强度运转的节奏，也可能是我根本就不适合科研，也可能两者都是。</p>
+<p>差不多一整年都在做一个课题，但是还没做完。内容不是很复杂：引力波源的位置可以用于示踪大尺度结构，要做的是通过数值方法计算由探测器效应引入的各向异性。但进展属实是挺慢，原因在于我对引力波天文不够熟悉，以及一边要上课一边干活的情况下工作效率也确实不咋高，到年末那阵具体的方向才终于比较明朗。具体上我做的还只是埋头写代码跑程序，就算做完了也很难说对里面的物理能更了解一些，唯一一点成就感来源是我写代码重构代码的时候才有一点，所以这活干得也是比较难受，不知后面能不能习惯的了。</p>
+<h2 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h2><p>前半年在上海快乐独居，一周去学校里旁听三天课，和老板讨论一次，其余时间因为没有工位就在租的房间里待着。这段时间和20年前半年在家独居一样，要干的活不多，听课也没什么压力，有充足时间可以用来看动画摸鱼，还可以规律作息，每周末去旁边商场买菜顺便溜达溜达，过得相当安逸。唯一不同的一点是那段时间有机会自己做饭，所以尝试节食，几乎每天都吃水煮青菜荞麦面，真的没啥味道……</p>
+<p>后半年又回归宿舍生活了，宿舍、理科楼、食堂都挨得很近，所以没啥事每天都只在这一小块区域活动。好处是每天可以赖床到上课前20分钟再出门，坏处是运动量趋近于零。每天在办公室不知不觉就待到12点才回去，不只是因为活多，更主要的是吃完晚饭回来好长时间进入不了高效工作状态，导致压缩夜晚时间。回宿舍之后想放松放松却只能刷刷浪费时间的东西，每天还睡得很晚，留给自己的时间不剩多少。想一想这个压力和工作量确实和之前的情况都不一样，加上这两年又都是极其的闲，所以之前比较随意的时间管理（就是不管理）接着用就确实是比较痛苦。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="阅读"><a href="#阅读" class="headerlink" title="阅读"></a>阅读</h3><p>读了《编写可读代码的艺术》。顾名思义，介绍的是写出好看代码的技巧和思想。我认为这种教人写规范一点的代码还是很重要的，自己摸索一段时间之后就该更系统一点的了解一下了，里面介绍的一些原则也可以作为面对比较复杂的逻辑时组织代码的参考。另外是我发现书里说的很多和我自己写代码时想的都能对上，还是比较开心的。</p>
+<p>读了《数学之美》。严格的说不是2021年读的，是今年年初在回家的飞机上一口气读完的。介绍的是离我们比较近的领域（比如搜索引擎、输入法等）用到的一些机器学习算法，大致让我了解了统计机器学习的思想，见识了很多神经网络以外的机器学习，对我来说还是想当有意思的。作为科普也是相当不错的，算是我理想的那种“不卑不亢”的科普，让没有学科基础的读者能读懂的同时又不会强行用生活中的例子做不怎么相似类比或者刻意避免数学公式，而是很好地分隔开了可以简单讲出来的思想和没必要说的细节。不过要我说的话比起数学之美这本书体现的更多是技术之美，因为里面涉及的数学知识几乎都是些很基本的东西（主要是概率论），而真正有趣的如何是将它们巧妙地应用在解决实际问题上，而将我们司空见惯的理论知识应用到现实实际上是技术要干的事。</p>
+<p>读了一半《Head First设计模式》。暑假期间读的，但没读完。之前仅仅是在学C++的时候了解了面向对象编程的一些基本概念和用法，并不知道有这些固定的设计模式。了解了设计模式之后虽然还没遇到要用到的场合，但对面向对象编程的了解更深了一点，对自己写的大一点的软件要怎么组织也有一些头绪了。</p>
+<p>读了一半《分析哲学导论》。也是暑假期间读的，一直想要了解一点的东西。但读得比较艰难，可能是还不太适合哲学的思维模式，但想明白了这些讨论也确实是很有意思。之后有时间的话会捡起来读完。</p>
+<h3 id="ACG"><a href="#ACG" class="headerlink" title="ACG"></a>ACG</h3><p>单独写在了<a href="/2022/02/07/2021-review-ACG/" title="2021年度总结——ACG部分">2021年度总结——ACG部分</a>。</p>
+<h3 id="声优偶像"><a href="#声优偶像" class="headerlink" title="声优偶像"></a>声优偶像</h3><p>比20年好那么一点，21年少歌还有个完整的舞台剧#3，不过也就只有这个线下活动了。可以庆幸的是#3和前两部舞台剧不一样确实挺好看的，买配信的时候只是想久违的看看九九组，结果舞台本身也不错还有点感觉惊喜。因为#3观影还加了后来的怪话群，这对我来说也是一个非常大的收获了。另外一个重大事件就是剧场版的上映了。在剧场版BD发售之前我焦虑了半年，想看又不想被剧透，只能不看不听不搜熬到发售，但看到之后的我可以说这一切都是值得的。剧场版有多优秀无需多言，它带给了我的更是未曾体会到的满足感，这份满足让我有勇气面对自己和自己将要遇到的事情，我想这也是我从动画和偶像之中能期望的最多的了。</p>
+<p>加推了爱美（作为个人），最初不是从邦邦而是从TeamY（再精确一点是翻唱夜に駆ける那个视频）开始关注的，很喜欢她极富感染力的笑容。21年歌手再出道发表的ReStarting和Mayday两首歌的歌词都很触动我，想象到作词包含自己的情感就更让我动容了（然后光速下单买了专辑）。虽然比较遗憾没d到一个她所在的企划，不过也顺势听了不少破琵琶的歌，今后还会继续关注。</p>
+<h3 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h3><p><img src="my-github-contribution.png" alt=""></p>
+<p align="center"> 今年也没赶上地铁瓷砖 </p>
+
+<p>和上面阅读那段一样，自学了一小点开发方面的知识，对于写出漂亮一点的代码还是挺有用的。即使是写成屎也没人关心的课题的代码我也要求自己写的尽量好看，虽然这就要花不少时间重构，不过还是比较有成就感的。另外毕业前和开学中间隔了好几个月，回来看自己的代码还能看懂也是这个的功劳。</p>
+<p>写了转推bot。不是什么项目，两边调接口就实现的东西，不过也是构思了一段时间，写出来之后又迭代了一两次才找到比较合适的抽象。到现在是平稳运行，而且做到了各模块相分离，以后完善功能也应该方便，多亏了面向对象。写代码这事有时还是要用些想象力的，某种程度上确实是创作。</p>
+<p>学了些web编程的基础，也是一直想了解的。并为少歌剧场版观影会写了个很简陋的缴费记录系统，作为我的第一个web项目（算是机缘巧合，奇妙）。现在的状态是了解一些最基础的web三件套的东西，但现代web用的技术和框架等还完全没看过，还有待以后继续了解（肯定会继续了解的）。</p>
+<p>最后是拿树莓派搭了个NAS，虽然没学到啥新技术，但是我觉得真的很酷。</p>
+<h3 id="产出"><a href="#产出" class="headerlink" title="产出"></a>产出</h3><p>从MAD变成沙雕整活了，因为严肃方向的创作我确实没多少灵感。不过即使是整活也很需要能力的，自己开始做了才明白这点，构思一个好笑的视频并没有看起来那么容易，我自己的以为好活想法最后剪出来发现也只是个烂活。不过确实也有一些好活有过千播放的。发现自己有时有一点把自己或看的人逗乐的能力也是很让人高兴的一件事，虽然比我会整得多的比比皆是，但看着自己的视频可以得到回应感觉也挺不错。</p>
+<h2 id="关于自己"><a href="#关于自己" class="headerlink" title="关于自己"></a>关于自己</h2><p>2021年是我的外部环境发生了很大改变的一年，但我不知道我自己有多少改变。我还是悲观消极爱焦虑，临毕业焦虑毕业论文，暑假焦虑开始读博就没得自己的时间，开学了又焦虑转行失败找不到工作——总之就是总有办法折磨自己。</p>
+<p>前半年的时候倒是没想太多，独居又活不重的生活是真的舒服，一天要做的事可以刚好填满一天，不会忙到没时间放松也不会闲到成天胡思乱想。暑假期间我的情况就是后者了，虽然是最后的属于我的两个月的纯自由时间，但并没有享受的很彻底，只因为在焦虑这段时间结束了该怎么办。本来规划了很久的毕业旅行由于疫情没发出发对我来说也是一个相当大的打击，差不多半年的期待和一个月的规划在仅仅一天之内就完全泡汤，理所当然得就好像是事情本就没有第二种可能一样。因为这个我差不多之后的一个月都在自己持续发酵负面情绪，当时甚至时常会感觉我期待的东西一定因为一些原因不会得到，总之对我来说是十分糟糕的体会。</p>
+<p>后半年对我来说重要的事是在少歌怪话群里被逐渐眼熟。这也是有多方面因素，如果没有写转推bot和整活让我这些在B站被群友提前认识的工作的话，我肯定是和之前加的其他群一样不敢在里面说话的，但我也知道被群友认识并不是因为我之前做的什么，而是因为对方愿意意识到我，更是因为我们被同一个东西吸引。不过我还是将其看作某种程度上是凭我自己（而不是什么随机的安排）找到并建立的关系，这是除了同好交流本身就很快乐之外这个群带给我的正面意义的东西。所以我很感谢怪话群认识的群友们，在这里我获得另外一种自信，虽然我仍然觉得自己一无是处，但是我却一定程度上可以相信即便如此我也有能力建立与他人的联系，也因此我的心态多少健康了一些，甚至连<a target="_blank" rel="noopener" href="https://t.bilibili.com/616274527910426079">参与组织观影会</a>这种之前想都不敢想的事也做了。某种程度上，我大概也可以向好的方向每日进化中。</p>
+<h2 id="展望"><a href="#展望" class="headerlink" title="展望"></a>展望</h2><p>去年的flag差不多都倒了（除了什么也不做就实现的那些），打上了疫苗但是也没法出国，有空了但是也没利用上多学东西……倒也可以预料到。不过该立的还是要立的，没准呢。</p>
+<ul>
+<li>希望手上的课题能赶紧做完，别再出新的幺蛾子了</li>
+<li>希望能更擅长点时间管理，多空出来点属于自己的时间，至少留下来时间看动画</li>
+<li>同上，作息更规律些，身体健康别出毛病</li>
+<li>希望能更适应科研一点，虽然我应该确实不是这块料，但至少要拿到学位</li>
+<li>如果上面那条没能实现，希望自己至少心态不要崩</li>
+<li>如果上面那条还没能实现，希望至少能成功转硕拿个硕士学位</li>
+<li>希望多学些有意思的技术，能写一些酷的东西出来</li>
+<li>希望有时间让我培养点自己的人文素养</li>
+<li>希望2022年也能遇到优秀的动画</li>
+<li>希望少歌能有生气一点，多点活动，多发点歌，新冠少捣点乱</li>
+<li>希望我推可以多接到点活</li>
+<li>希望2022年也能活下去</li>
+</ul>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><blockquote>
+<p>飛び出そう　思い切り踏み出して　いつになっても　始まりはきらめくよ</p>
+</blockquote>
+<p>（网易云没版权放不了外链了，不过毫无疑问是那首歌）</p>
+<p><img src="butainoue.jpg" alt=""></p>
+</body></html>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%80%BB%E7%BB%93/" rel="tag"># 总结</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2022/01/22/202201-NAS-on-raspi/" rel="next" title="在树莓派上搭建NAS——教程和踩坑合集">
+                  <i class="fa fa-chevron-left"></i> 在树莓派上搭建NAS——教程和踩坑合集
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2022/02/07/2021-review-ACG/" rel="prev" title="2021年度总结——ACG部分">
+                  2021年度总结——ACG部分 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E4%B8%9A%E5%92%8C%E7%A7%91%E7%A0%94"><span class="nav-number">1.</span> <span class="nav-text">学业和科研</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%B4%BB"><span class="nav-number">2.</span> <span class="nav-text">生活</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%85%E8%AF%BB"><span class="nav-number">3.1.</span> <span class="nav-text">阅读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACG"><span class="nav-number">3.2.</span> <span class="nav-text">ACG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E4%BC%98%E5%81%B6%E5%83%8F"><span class="nav-number">3.3.</span> <span class="nav-text">声优偶像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF"><span class="nav-number">3.4.</span> <span class="nav-text">技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A7%E5%87%BA"><span class="nav-number">3.5.</span> <span class="nav-text">产出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E8%87%AA%E5%B7%B1"><span class="nav-number">4.</span> <span class="nav-text">关于自己</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%95%E6%9C%9B"><span class="nav-number">5.</span> <span class="nav-text">展望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="道山神連"
+    src="/images/kirin.gif">
+  <p class="site-author-name" itemprop="name">道山神連</p>
+  <div class="site-description" itemprop="description">宇宙的最不可理解之处在于它是可以被理解的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Li-mz" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;Li-mz" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5566902218" title="Weibo &amp;rarr; https:&#x2F;&#x2F;weibo.com&#x2F;5566902218" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/13024288" title="Bilibili &amp;rarr; https:&#x2F;&#x2F;space.bilibili.com&#x2F;13024288" rel="noopener" target="_blank"><i class="fa fa-fw fa-"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">道山神連</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.4.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22077,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'GMC8JlmcdEXQuVhez2nFHNag-gzGzoHsz',
+    appKey: 'mICrom67f9LiUrnuDD9DOh7I',
+    placeholder: "Just go go",
+    avatar: 'identicon',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
