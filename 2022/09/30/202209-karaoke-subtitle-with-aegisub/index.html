@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="使用Aegisub内置的卡拉OK字幕模板渲染器，生成经典的双行字幕效果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Aegisub制作卡拉OK字幕">
+<meta property="og:url" content="https://michiyamakaren.github.io/2022/09/30/202209-karaoke-subtitle-with-aegisub/index.html">
+<meta property="og:site_name" content="道山神連的博客">
+<meta property="og:description" content="使用Aegisub内置的卡拉OK字幕模板渲染器，生成经典的双行字幕效果">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-30T04:27:18.965Z">
+<meta property="article:author" content="道山神連">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://michiyamakaren.github.io/2022/09/30/202209-karaoke-subtitle-with-aegisub/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+<!-- from: https://www.cnblogs.com/wstong/p/12874732.html -->
+<!-- Live2DCubismCore script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/live2dcubismcore.js"></script>
+<!-- Build script -->
+<script src="https://cdn.jsdelivr.net/gh/wangstong/live2dm3/live2d/js/bundle.js"></script>
+<canvas id="live2d" width="400" height="600" class="live2d" style="position: fixed; opacity: 0.8; left: -70px; bottom: -250px; z-index: 99999; pointer-events: none;"></canvas>
+
+<script type="text/javascript">
+    var resourcesPath = '/live2d_models/'; // 指定资源文件（模型）保存的路径
+    var backImageName = ''; // 指定背景图片
+    var modelDir = ['AijoKaren']; // 指定需要加载的模型
+    initDefine(resourcesPath, backImageName, modelDir); // 初始化模型
+</script>
+  <title>用Aegisub制作卡拉OK字幕 | 道山神連的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">道山神連的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook" rel="section"><i class="fa fa-fw fa-comments"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies" rel="section"><i class="fa fa-fw fa-film"></i>电影</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://michiyamakaren.github.io/2022/09/30/202209-karaoke-subtitle-with-aegisub/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/kirin.gif">
+      <meta itemprop="name" content="道山神連">
+      <meta itemprop="description" content="宇宙的最不可理解之处在于它是可以被理解的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="道山神連的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用Aegisub制作卡拉OK字幕
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-09-30 00:00:00 / 修改时间：12:27:18" itemprop="dateCreated datePublished" datetime="2022-09-30T00:00:00+08:00">2022-09-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/09/30/202209-karaoke-subtitle-with-aegisub/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/09/30/202209-karaoke-subtitle-with-aegisub/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">使用Aegisub内置的卡拉OK字幕模板渲染器，生成经典的双行字幕效果</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body></body></html><html><head></head><body><p>Aegisub对制作卡拉OK字幕——包括打K轴和自定义卡拉OK字幕样式——提供了原生的支持，但网络上几乎没有经典的上下两行、由纯色覆盖唱过的部分的模板，反而都是特效模板。我搜索到了B站上的视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1CZ4y1s7br">BV1CZ4y1s7br</a>和同up主发表的<a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv4489963">专栏</a>，从中获取了双行字幕样式的模板，并进行了一些小改动，修复了存在假名标注时的错误行为，使其可以适应歌词时间重叠的情况，并允许对覆盖色进行自定义设置。</p>
+<h2 id="卡拉OK字幕模板与使用方式"><a href="#卡拉OK字幕模板与使用方式" class="headerlink" title="卡拉OK字幕模板与使用方式"></a>卡拉OK字幕模板与使用方式</h2><p>首先，下载安装<a target="_blank" rel="noopener" href="https://github.com/MichiyamaKaren/aegisub-set-karaoke-style">Set Karaoke Style</a>插件。</p>
+<p>将下面的模板中的样式和字幕模板分别复制到字幕文件中，前者决定了最终显示的字幕样式（注意安装相应字体），后者定义了渲染模板的具体行为并包含一些个性化配置。<br></p><figure class="highlight pgsql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[V4+ Styles]</span><br><span class="line"><span class="keyword">Format</span>: <span class="type">Name</span>, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, <span class="keyword">Encoding</span></span><br><span class="line">Style: K1,Noto Serif JP Black,<span class="number">110</span>,&amp;H00FFFFFF,&amp;H00FF0000,&amp;H00000000,&amp;H80000000,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">120</span>,<span class="number">30</span>,<span class="number">220</span>,<span class="number">1</span></span><br><span class="line">Style: K2,Noto Serif JP Black,<span class="number">110</span>,&amp;H00FFFFFF,&amp;H00FF0000,&amp;H00000000,&amp;H80000000,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">30</span>,<span class="number">120</span>,<span class="number">40</span>,<span class="number">1</span></span><br><span class="line"></span><br><span class="line">[Events]</span><br><span class="line"><span class="keyword">Format</span>: Layer, <span class="keyword">Start</span>, <span class="keyword">End</span>, Style, <span class="type">Name</span>, MarginL, MarginR, MarginV, Effect, <span class="type">Text</span></span><br><span class="line"><span class="keyword">Comment</span>: <span class="number">0</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,K1,,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,code once,remember("color_table", {}); remember("default_color", "&amp;HFF0000&amp;"); remember("style_table", {K1=<span class="keyword">true</span>,K2=<span class="keyword">true</span>});</span><br><span class="line"><span class="keyword">Comment</span>: <span class="number">0</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,K1,,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,code once,<span class="keyword">function</span> get_color(actor) <span class="keyword">local</span> color=recall("color_table")[actor]; <span class="keyword">if</span> <span class="keyword">not</span> color <span class="keyword">then</span> color=recall("default_color"); <span class="keyword">end</span> <span class="keyword">return</span> color; <span class="keyword">end</span></span><br><span class="line"><span class="keyword">Comment</span>: <span class="number">0</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,K1,,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,code syl <span class="keyword">all</span>,fxgroup.kara=syl.inline_fx=="" <span class="keyword">and</span> (<span class="keyword">not</span> <span class="keyword">not</span> recall("style_table")[<span class="type">line</span>.styleref.name])</span><br><span class="line"><span class="keyword">Comment</span>: <span class="number">1</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,K1,overlay,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">template</span> syl noblank <span class="keyword">all</span> fxgroup kara,!retime("line",<span class="number">-100</span>,<span class="number">500</span>)!{\pos($center,$middle)\an5\shad0\<span class="number">1</span>c!get_color(<span class="type">line</span>.actor)!\<span class="number">3</span>c&amp;HFFFFFF&amp;\clip(!$sleft<span class="number">-3</span>!,<span class="number">0</span>,!$sleft<span class="number">-3</span>!,<span class="number">1080</span>)\t($sstart,$send,\clip(!$sleft<span class="number">-3</span>!,<span class="number">0</span>,!$sright+<span class="number">3</span>!,<span class="number">1080</span>))\bord5}</span><br><span class="line"><span class="keyword">Comment</span>: <span class="number">0</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,K1,,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">template</span> syl <span class="keyword">all</span> fxgroup kara,!retime("line",<span class="number">-500</span>,<span class="number">500</span>)!{\pos($center,$middle)\an5}</span><br><span class="line"><span class="keyword">Comment</span>: <span class="number">1</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">18.65</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">20.65</span>,K1,overlay,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">template</span> furi <span class="keyword">all</span>,!retime("line",<span class="number">-100</span>,<span class="number">500</span>)!{\pos($center,!$middle+<span class="number">10</span>!)\an5\shad0\<span class="number">1</span>c!get_color(<span class="type">line</span>.actor)!\<span class="number">3</span>c&amp;HFFFFFF&amp;\clip(!$sleft<span class="number">-3</span>!,<span class="number">0</span>,!$sleft<span class="number">-3</span>!,<span class="number">1080</span>)\t($sstart,$send,\clip(!$sleft<span class="number">-3</span>!,<span class="number">0</span>,!$sright+<span class="number">3</span>!,<span class="number">1080</span>))\bord5}</span><br><span class="line"><span class="keyword">Comment</span>: <span class="number">0</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,K1,,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">template</span> furi <span class="keyword">all</span>,!retime("line",<span class="number">-500</span>,<span class="number">500</span>)!{\pos($center,!$middle+<span class="number">10</span>!)\an5}</span><br><span class="line"><span class="keyword">Comment</span>: <span class="number">0</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.00</span>,K1,music,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">template</span> fx no_k,!retime("line",<span class="number">-500</span>,<span class="number">500</span>)!{\pos($center,!$middle!)\an5\<span class="number">1</span>c&amp;H505050&amp;\<span class="number">3</span>c&amp;HFFFFFFF&amp;}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<ol>
+<li>打K轴（见Aegisub<a target="_blank" rel="noopener" href="https://aegi.vmoe.info/docs/3.2/Karaoke_Timing_Tutorial/">官方文档</a>），注意要做成卡拉OK字幕显示的行应为同一样式。建议此步结束后<strong>备份</strong>字幕文件。</li>
+<li>运行<code>Set Karaoke Style</code>插件（在<code>自动化</code>菜单中）。</li>
+<li>运行<code>应用卡拉OK模板</code>，生成最终的卡拉OK字幕。</li>
+</ol>
+<h3 id="处理重叠字幕"><a href="#处理重叠字幕" class="headerlink" title="处理重叠字幕"></a>处理重叠字幕</h3><p>在上一节的第二步中，若存在时间重叠的字幕，则<code>Set Karaoke Style</code>插件会生成<code>K1 K2</code>之外的样式（具体行为参见其GitHub页面）。修改模板第一行的代码行，将除了<code>K1</code>和<code>K2</code>的样式也填入<code>style_table</code>中。</p>
+<blockquote>
+<p>示例：若插件设置到了<code>K3 K4</code>样式，则该行的最后一个语句应该为<br><code>remember("style_table", {K1=true,K2=true,K3=true,K4=true});</code></p>
+</blockquote>
+<p>另外，在字幕文件的样式表中定义新增的样式，这里要保证不同层的字幕不要在画面上重叠显示。例如，若要让<code>K3 K4</code>显示在<code>K1 K2</code>的上方，<code>K1</code>和<code>K2</code>的垂直边距分别为40和220，则应复制<code>K1 K2</code>样式重命名为<code>K3 K4</code>，并将垂直边距分别设为580和400。</p>
+<h2 id="个性化设置覆盖色"><a href="#个性化设置覆盖色" class="headerlink" title="个性化设置覆盖色"></a>个性化设置覆盖色</h2><p>本模板允许自定义可变的覆盖色，设置粒度为每行。模板在渲染时会读取每行的说话人，并查找<code>color_table</code>变量中存储的颜色，若该行的说话人不在这个表的key中则将颜色设置为<code>default_color</code>。这两个变量均在模板第一行代码行被定义，用户需要手动设置。注意这里的颜色编码要写成ASS样式的，其颜色分量排列顺序与HTML格式的相反，为BGR。例如，颜色<span style="height:10px;background:#F95556;display:inline-block;width:10px"></span><code>#F95556</code>在ASS样式中要写成<code>&amp;H5655F9&amp;</code>。</p>
+</body></html>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2022/05/22/202205-shanghai-lockdown/" rel="next" title="惊恐">
+                  <i class="fa fa-chevron-left"></i> 惊恐
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%A1%E6%8B%89OK%E5%AD%97%E5%B9%95%E6%A8%A1%E6%9D%BF%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">卡拉OK字幕模板与使用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E9%87%8D%E5%8F%A0%E5%AD%97%E5%B9%95"><span class="nav-number">1.1.</span> <span class="nav-text">处理重叠字幕</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E6%80%A7%E5%8C%96%E8%AE%BE%E7%BD%AE%E8%A6%86%E7%9B%96%E8%89%B2"><span class="nav-number">2.</span> <span class="nav-text">个性化设置覆盖色</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="道山神連"
+    src="/images/kirin.gif">
+  <p class="site-author-name" itemprop="name">道山神連</p>
+  <div class="site-description" itemprop="description">宇宙的最不可理解之处在于它是可以被理解的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Li-mz" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;Li-mz" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5566902218" title="Weibo &amp;rarr; https:&#x2F;&#x2F;weibo.com&#x2F;5566902218" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/13024288" title="Bilibili &amp;rarr; https:&#x2F;&#x2F;space.bilibili.com&#x2F;13024288" rel="noopener" target="_blank"><i class="fa fa-fw fa-"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">道山神連</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.4.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22077,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'GMC8JlmcdEXQuVhez2nFHNag-gzGzoHsz',
+    appKey: 'mICrom67f9LiUrnuDD9DOh7I',
+    placeholder: "Just go go",
+    avatar: 'identicon',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

@@ -50,22 +50,17 @@
   };
 </script>
 
-  <meta name="description" content="在HPC集群上使用VSCode Remote">
-<meta property="og:type" content="article">
-<meta property="og:title" content="在HPC集群上使用VSCode Remote">
-<meta property="og:url" content="https://michiyamakaren.github.io/2022/03/03/202203-VSC-remote-on-HPC/index.html">
+  <meta name="description" content="宇宙的最不可理解之处在于它是可以被理解的">
+<meta property="og:type" content="website">
+<meta property="og:title" content="道山神連的博客">
+<meta property="og:url" content="https://michiyamakaren.github.io/archives/2022/09/index.html">
 <meta property="og:site_name" content="道山神連的博客">
-<meta property="og:description" content="在HPC集群上使用VSCode Remote">
+<meta property="og:description" content="宇宙的最不可理解之处在于它是可以被理解的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://michiyamakaren.github.io/2022/03/03/202203-VSC-remote-on-HPC/xshell-tunnel.png">
-<meta property="article:published_time" content="2022-03-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-03T15:27:52.354Z">
 <meta property="article:author" content="道山神連">
-<meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://michiyamakaren.github.io/2022/03/03/202203-VSC-remote-on-HPC/xshell-tunnel.png">
 
-<link rel="canonical" href="https://michiyamakaren.github.io/2022/03/03/202203-VSC-remote-on-HPC/">
+<link rel="canonical" href="https://michiyamakaren.github.io/archives/2022/09/">
 
 
 <script id="page-configurations">
@@ -73,9 +68,9 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true,
+    isPost: false,
     isPage: false,
-    isArchive: false
+    isArchive: true
   };
 </script>
 <!-- from: https://www.cnblogs.com/wstong/p/12874732.html -->
@@ -91,7 +86,7 @@
     var modelDir = ['AijoKaren']; // 指定需要加载的模型
     initDefine(resourcesPath, backImageName, modelDir); // 初始化模型
 </script>
-  <title>在HPC集群上使用VSCode Remote | 道山神連的博客</title>
+  <title>归档 | 道山神連的博客</title>
   
 
 
@@ -235,134 +230,54 @@
           <div class="content">
             
 
-  <div class="posts-expand">
-      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://michiyamakaren.github.io/2022/03/03/202203-VSC-remote-on-HPC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/kirin.gif">
-      <meta itemprop="name" content="道山神連">
-      <meta itemprop="description" content="宇宙的最不可理解之处在于它是可以被理解的">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="道山神連的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          在HPC集群上使用VSCode Remote
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-03-03 00:00:00 / 修改时间：23:27:52" itemprop="dateCreated datePublished" datetime="2022-03-03T00:00:00+08:00">2022-03-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
   
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2022/03/03/202203-VSC-remote-on-HPC/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2022/03/03/202203-VSC-remote-on-HPC/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-            <div class="post-description">在HPC集群上使用VSCode Remote</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <html><head></head><body></body></html><html><head></head><body><p>参考了<a target="_blank" rel="noopener" href="https://www.cnblogs.com/shiyanhe/p/15263183.html">这篇文章</a>。</p>
-<p>系里的服务器是HPC集群，平时用服务器都是在本地测试好后用git把代码同步上去，在上面提交大运算量的任务跑，跑完再把结果文件下载回本地处理。但随着数据量变大，这样做的时空成本都逐渐让人难以承受，因此存在在服务器上就地处理数据的需求。能通过ssh直接连接到的是服务器的登录节点，但较大计算量的任务不宜在登录节点上跑，因此需要转发ssh流量到计算节点上。</p>
-<p>我这里使用XShell作为ssh终端。首先登录到登录节点上，提交一个交互式任务</p>
-<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qsub -<span class="selector-tag">I</span> -<span class="selector-tag">q</span> debug</span><br></pre></td></tr></tbody></table></figure>
-<p>（<code>-q debug</code>表示提交到<code>debug</code>队列）这条命令会打开计算节点的终端，此时可以发现终端已经显示出了计算节点的名字：</p>
-<figure class="highlight angelscript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[xxx@gr36 ~]</span>$</span><br></pre></td></tr></tbody></table></figure>
-<p>这里就是连接上了<code>gr36</code>节点。或者也可以查看<code>$HOSTNAME</code>环境变量得到节点名。</p>
-<p>连接到计算节点后，保持当前窗口不要关闭，再创建一个新的XShell会话，在连接-SSH-隧道按如下方式新建一条转发规则</p>
-<p><img src="xshell-tunnel.png" alt=""></p>
-<p>目标主机是计算节点的主机名的22号端口（因为VSCode Remote使用ssh连接），源主机是localhost，端口号可以任意设，这里设成8888号。创建好后连接到登录节点即可。此时访问本机的8888号端口的ssh流量就被转发到计算节点上。再在本机的<code>~/.ssh/config</code>文件中添加如下的项（和连接登录节点的身份认证部分一致，只是主机和端口设成上面在本机监听的端口），VSCode Remote就可以直接在计算节点上运行了。</p>
-<figure class="highlight gradle"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host HPCNode</span><br><span class="line">  HostName localhost</span><br><span class="line">  Port <span class="number">8888</span></span><br><span class="line">  User xxx</span><br><span class="line">  IdentityFile <span class="regexp">/path/</span>to<span class="regexp">/identity/</span><span class="keyword">file</span></span><br></pre></td></tr></tbody></table></figure>
-<p>需要注意的是断开后再次提交交互式任务可能会分配到不同的计算节点，不同节点的ssh指纹不同，因此会导致连接失败。解决方法就是每次重新连接前到<code>~/.ssh/known_hosts</code>文件中删除<code>localhost:8888</code>的那一项即可。</p>
-</body></html>
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
-          </div>
-
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
         
-  <div class="post-widgets">
-    <div class="wp_rating">
-      <div id="wpac-rating"></div>
+        <span class="collection-header">还行! 目前共计 34 篇日志。 继续努力。</span>
+      </div>
+
+      
+    <div class="collection-year">
+      <h1 class="collection-header">2022</h1>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2022-09-30T00:00:00+08:00"
+              content="2022-09-30">
+          09-30
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2022/09/30/202209-karaoke-subtitle-with-aegisub/" itemprop="url">
+            <span itemprop="name">用Aegisub制作卡拉OK字幕</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+
     </div>
   </div>
-
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/2022/02/08/2021-review/" rel="next" title="2021年度总结">
-                  <i class="fa fa-chevron-left"></i> 2021年度总结
-                </a>
-            </div>
-
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/2022/05/22/202205-shanghai-lockdown/" rel="prev" title="惊恐">
-                  惊恐 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-      </footer>
-    
-  </article>
   
   
   
 
-  </div>
+  
+
 
 
           </div>
           
-    <div class="comments" id="comments"></div>
 
         </div>
           
