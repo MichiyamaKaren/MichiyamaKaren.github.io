@@ -50,17 +50,20 @@
   };
 </script>
 
-  <meta name="description" content="宇宙的最不可理解之处在于它是可以被理解的">
-<meta property="og:type" content="website">
-<meta property="og:title" content="道山神連的博客">
-<meta property="og:url" content="https://michiyamakaren.github.io/archives/2021/08/index.html">
+  <meta name="description" content="V2Ray + Cloudflare WARP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自搭代理服务访问ChatGPT">
+<meta property="og:url" content="https://michiyamakaren.github.io/2023/03/28/202303-accessing-chatgpt/index.html">
 <meta property="og:site_name" content="道山神連的博客">
-<meta property="og:description" content="宇宙的最不可理解之处在于它是可以被理解的">
+<meta property="og:description" content="V2Ray + Cloudflare WARP">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-28T14:53:05.562Z">
 <meta property="article:author" content="道山神連">
+<meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://michiyamakaren.github.io/archives/2021/08/">
+<link rel="canonical" href="https://michiyamakaren.github.io/2023/03/28/202303-accessing-chatgpt/">
 
 
 <script id="page-configurations">
@@ -68,9 +71,9 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
-    isArchive: true
+    isArchive: false
   };
 </script>
 <!-- Pollyfill script -->
@@ -107,7 +110,7 @@
     <canvas id="live2d" class="live2d"></canvas>
     <div class="live2d-tool"></div>
 </div>
-  <title>归档 | 道山神連的博客</title>
+  <title>自搭代理服务访问ChatGPT | 道山神連的博客</title>
   
 
 
@@ -251,74 +254,123 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://michiyamakaren.github.io/2023/03/28/202303-accessing-chatgpt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/kirin.gif">
+      <meta itemprop="name" content="道山神連">
+      <meta itemprop="description" content="宇宙的最不可理解之处在于它是可以被理解的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="道山神連的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自搭代理服务访问ChatGPT
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-28 00:00:00 / 修改时间：22:53:05" itemprop="dateCreated datePublished" datetime="2023-03-28T00:00:00+08:00">2023-03-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">还行! 目前共计 35 篇日志。 继续努力。</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/03/28/202303-accessing-chatgpt/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/03/28/202303-accessing-chatgpt/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">V2Ray + Cloudflare WARP</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2021</h1>
+        <html><head></head><body></body></html><html><head></head><body><p>众所周知，ChatGPT对用户的IP限制非常严格，很多时候即使用便宜梯子翻墙也会因为同一个服务器用的人太多而被限制访问。我之前租了一台服务器给自己翻墙用，但去年某天突然就被封了IP。虽然过了一段时间就放出来了，但那之后我也一直没敢再用这台服务器翻墙，而是另找了别的梯子，直到现在因为要访问ChatGPT才想起来重新把梯子搭起来。整套流程的涉及的步骤比较多，因此特意写篇博客记录一下。</p>
+<p>在开始配置之前，自然需要的是先有一台境外的云服务器（不能是香港的）。我的是在搬瓦工上租的50刀每年的CN2 GIA套餐，有针对国内的网络优化，对于个人来说流量和带宽也够用。不过搬瓦工机房的IP也在openAI的限制列表中，因此后面还需要额外的配置。如果是为了专门访问ChatGPT，更好还是找一个小服务商。</p>
+<p>登上服务器之后首先配置v2ray服务端。为了降低服务器被封的风险，需要运行<a target="_blank" rel="noopener" href="https://v2xtls.org/v2ray%e5%a4%9a%e5%90%88%e4%b8%80%e8%84%9a%e6%9c%ac%ef%bc%8c%e6%94%af%e6%8c%81vmesswebsockettlsnginx%e3%80%81vlesstcpxtls%e3%80%81vlesstcptls%e7%ad%89%e7%bb%84%e5%90%88/">这篇博客</a>中的一键脚本配置v2ray伪装。这一脚本在服务器上安装v2ray和nginx，用nginx做服务端反向代理，将访问伪装域名下某个特定路径的流量转发给v2ray，而伪装域名根路径则会跳转到安装脚本设定的伪装站点。这样在中间人看来v2ray流量就是正常的访问伪装域名的HTTPS流量，而即使对这个域名进行主动探测，因为中间人不知道v2ray对应的路径，也只会跳转到正常的伪装站点。在配置时需要注意的是一键脚本需要root权限运行，但它会调用acme.sh获取letsencrypt的免费证书，而acme.sh又不推荐使用sudo模式，因此为了省事可以直接以root用户运行。</p>
+<p>在服务器上配置好v2ray后，一键脚本会自动生成v2ray链接，将其导入本地的v2ray客户端后即可连接代理实现翻墙。然而在我配置好后尝试访问ChatGPT才发现搬瓦工也被OpenAI屏蔽了。我搜索到了<a target="_blank" rel="noopener" href="https://v2ex.com/t/908392">这篇帖子</a>中对这一问题的解决方案，即使用Cloudflare提供的warp服务。这一服务用Cloudflare的链路传输用户的流量从而加密并优化网络连接，相当于再套了一层代理，从而可以避开针对我们的服务器的IP的屏蔽。同样的手段也被用于解除Netflix的限制。按照<a target="_blank" rel="noopener" href="https://github.com/hausa-han/Cloudflare-WARP-proxy/blob/main/README.md">这篇文章</a>安装并启动warp，并修改v2ray服务端的配置文件，增加一个outbound把访问ChatGPT的流量转发到warp（默认在40000端口）即可。我在配置文件添加的内容如下：<br></p><figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"inbounds"</span>: [{</span><br><span class="line">    <span class="attr">"sniffing"</span>: {</span><br><span class="line">        <span class="attr">"enabled"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"destOverride"</span>: [<span class="string">"http"</span>, <span class="string">"tls"</span>]</span><br><span class="line">    }</span><br><span class="line">  }],</span><br><span class="line">  <span class="attr">"outbounds"</span>: [{</span><br><span class="line">    <span class="attr">"tag"</span>: <span class="string">"warp"</span>,</span><br><span class="line">    <span class="attr">"protocol"</span>: <span class="string">"socks"</span>,</span><br><span class="line">    <span class="attr">"settings"</span>: {</span><br><span class="line">      <span class="attr">"servers"</span>: [</span><br><span class="line">        {</span><br><span class="line">          <span class="attr">"address"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">          <span class="attr">"port"</span>: <span class="number">40000</span></span><br><span class="line">        }</span><br><span class="line">      ]</span><br><span class="line">    }</span><br><span class="line">  }],</span><br><span class="line">  <span class="attr">"routing"</span>: {</span><br><span class="line">    <span class="attr">"rules"</span>: [{</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"field"</span>,</span><br><span class="line">      <span class="attr">"outboundTag"</span>: <span class="string">"warp"</span>,</span><br><span class="line">      <span class="attr">"domain"</span>: [</span><br><span class="line">        <span class="string">"openai.com"</span>,</span><br><span class="line">        <span class="string">"hcaptcha.com"</span>,</span><br><span class="line">        <span class="string">"bing.com"</span>,</span><br><span class="line">        <span class="string">"whoer.net"</span></span><br><span class="line">      ]</span><br><span class="line">    }]</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><br>转发到warp的域名不仅有ChatGPT需要的<code>openai.com</code>和<code>hcaptcha.com</code>，还添加了Bing和IP检测的<code>whoer.net</code>用于测试warp。<p></p>
+</body></html>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-08-24T00:00:00+08:00"
-              content="2021-08-24">
-          08-24
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2021/08/24/deploy-t2b-bot/" itemprop="url">
-            <span itemprop="name">如何部署一个转推bot</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-08-05T00:00:00+08:00"
-              content="2021-08-05">
-          08-05
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2021/08/05/download-eplus-video/" itemprop="url">
-            <span itemprop="name">使用selenium下载eplus直播存档视频</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
     </div>
   </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2022/09/30/202209-karaoke-subtitle-with-aegisub/" rel="next" title="用Aegisub制作卡拉OK字幕">
+                  <i class="fa fa-chevron-left"></i> 用Aegisub制作卡拉OK字幕
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
   
   
   
 
-  
-
+  </div>
 
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
